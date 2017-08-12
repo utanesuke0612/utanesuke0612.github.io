@@ -8,10 +8,11 @@ permalink: /books/
 {:toc}
 
 
-2017书单
+# <i class="fa fa-book" style="font-size:1em;"></i>2017-书单
 -----------------------------------------------------------------
-+ 《python繁琐工作自动化》-duokan
-+ 《程序员思维修炼》-duokan
-+ 《鸟哥的Linux私房菜基础学习篇-第三版》
-+ 《Head first设计模式》
-+ 《算法(第四版)》
+
+
+# <i class="fa fa-video-camera" style="font-size:1em;"></i>2017-视频
+-----------------------------------------------------------------
+
+# <i class="fa fa-file-pdf-o" style="font-size:1em;"></i>2017-其他

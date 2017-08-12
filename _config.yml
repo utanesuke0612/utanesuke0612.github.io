@@ -18,7 +18,12 @@ paginate: 10
 exclude: ['README.md', 'Gemfile.lock', 'Gemfile', 'Rakefile']
 
 github_username: utanesuke0612
-highlighter: Pygments
+#highlighter: Pygments @comment out bylijun
+paginate: 9 #add by @lijun
+paginate_path: "posts/page:num" #add by @lijun
+
+plugins: #add by @lijun
+ - jekyll-paginate #add by @lijun
 
 # Build settings
 markdown: kramdown
