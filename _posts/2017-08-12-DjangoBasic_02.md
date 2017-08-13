@@ -1,7 +1,7 @@
 ---
 layout: post
-title: (未完)DjangoBasi-02-显示出第一个网页
-date: 2017-08-12 11:45:59
+title: DjangoBasi-02-显示出第一个网页
+date: 2017-08-12 12:45:59
 categories: Django
 tags: Django python
 ---
@@ -21,8 +21,8 @@ tags: Django python
 8.  总结-从URL请求到动态HTML内容返回的流程
 
 ---
-
-
+# <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>**注意：**
+Django的 标签导致Jekyll无法编译，都修改为了[%，使用时需要替换！
 
 # 1. 创建应用程序
 
@@ -134,6 +134,12 @@ Superuser created successfully.
 
 ![image](https://user-images.githubusercontent.com/18595935/29241961-25a38318-7fbf-11e7-95d1-599232ae7824.png)
 
+1. 客户端的请求，先经过mysite的url处理，这个是网站的入口，所有的请求最开始都通过它处理。
+2. 然后处理进一步分流，交给blog的urls处理，blog是project下面的一个app模块，blog下的urls.py对URL进行匹配，分配给对应的view(post_list)去处理。
+3. 在view中进行逻辑处理，获取对应的model数据，组织成html文件，返回给客户端。下面的例子中，直接render即渲染了一个静态的html文件。
+
+
+## 2. 添加URL的处理代码
  - 客户请求会先经过mysite/urls.py处理。例如，访问 'http://127.0.0.1:8000/' 的请求转到 blog.urls，并看看那里面有没有进一步的指示。
 
 ```python
@@ -183,11 +189,250 @@ render 方法渲染模板 blog/post_list.html.
 
 ![image](https://user-images.githubusercontent.com/18595935/29242097-68c0372a-7fc1-11e7-96d5-893bf7fcadca.png)
 
-
 # 6. HTML模板文件
+在blog/templates/blog 目录下，创建post_list.html模板文件，并在文件中写入:
+```html
+<html>
+	<p>Hi there!</p>
+	<p>It works!</p>
+</html>
+```
+这样，在上面第5步中就可以找到对应的html文件了。
 
-# 7. 动态数据
+# 7. 【重要】动态数据
+本节讲述Django如何连接到数据库，并将数据存储在里面。
+
+## 1. Django ORM 和 QuerySets（查询集）
+QuerySet 是给定模型的对象列表（list），类似于数据库中的一个Table。允许从数据库中读取数据，对其进行筛选以及排序。
+运行 `(myvenv) ~/djangogirls$ python manage.py shell `可以开启Django shell，输入Django shell命令可以直接操作QuerySets。
+
+```python
+# 导入Post的model，查询所有对象以及创建对象
+>>> from blog.models import Post
+>>> Post.objects.all()
+>>> Post.objects.create(author=me, title='Sample title', text='Test')
+# 上面会出错，因为我们给author传递了变量me，但是没有给me这个user赋值。
+
+# 查询数据库中的用户并获取一个用户实例
+>>> from django.contrib.auth.models import User
+>>> User.objects.all()
+>>> me = User.objects.get(username='ola')
+
+# 接着运行上述Post的create就OK了，类似于SQL的insert
+>>> Post.objects.create(author=me, title='Sample title', text='Test')
+```
+
+## 2. 筛选对象
+```python
+# 筛选出所有ola为user的Post
+>>> Post.objects.filter(author=me)
+
+# 包含在  title  字段标题的所有帖子，返回了上面创建的Post
+>>> Post.objects.filter(title__contains='title')
+<QuerySet [<Post: Sample title>]>
+
+# 如果想尝试获取所有publish的Post
+>>> from django.utils import timezone
+>>> Post.objects.filter(published_date__lte=timezone.now())[]
+# 但是我们上面只是create了Post还没有Publish，故获得的是空集
+
+# 先获取指定对象，在用publish将其发布，就可以获取pulished的Post了
+>>> post = Post.objects.get(title="Sample title")
+>>> post.publish()
+>>> Post.objects.filter(published_date__lte=timezone.now())
+<QuerySet [<Post: Sample title>]>
+
+```
+
+> 注在 title  与  contains  之间有两个下划线字符 ( _ )。 Django 的 ORM 使用此语法来分隔字段名称 （"title"） 和操 作或筛选器 （"contains"）。
+
+
+## 3. 对象排序
+```python
+>>> Post.objects.order_by('created_date')
+
+# 反向排序
+>>> Post.objects.order_by('-created_date')
+
+# 链式组合，先获取再排序
+>>> Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+```
+
+## 4. 使用模板标签展示动态数据
+
+我们最终的目的是，获取一些内容 （保存在数据库中的模型） 然后在我们 的模板中很漂亮的展示。这就是view应该做的，连接模型models和模板html文件。
+
+ - view中获取需要的模型model数据，`blog/views.py` 中添加代码如下。
+
+```python
+from django.shortcuts import render
+from django.utils import timezone
+from .models import Post
+
+def post_list(request):
+    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    return render(request, 'blog/post_list.html', {'posts': posts})
+```
+
+ - html模板文件中解析post模型，并显示。
+
+```python
+<div>
+        <h1><a href="/">Django Girls Blog</a></h1>
+    </div>
+
+  [% for post in posts %}
+        <div>
+            <p>published: {{ post.published_date }}</p>
+            <h1><a href="">{{ post.title }}</a></h1>
+            <p>{{ post.text|linebreaksbr }}</p>
+        </div>
+  [% endfor %}
+```
+
+
+ 1. 用模板标签在HTML中显示变量，` {{ posts }}`。
+ 2. `% for %} 和 % endfor %} `之间的内容将会被Django对象列表中的每个对象所代替。
+ 3. `|linebreaksbr`通过一个过滤器，使得行间隔编程段落。
+
+至此，我们就将model中的数据，呈现到浏览器中了，效果如下：
+
+![image](https://user-images.githubusercontent.com/18595935/29245595-782dddfe-8019-11e7-9611-3ee515a3f4fe.png)
+
+
 
 # 8. 用CSS美化网页
+在blog应用的目录下创建一个名为static的文件夹及子文件夹和css文件，创建后目录结构如下：
 
-# 参考:从url请求到返回动态html文件的流程
+```
+    djangogirls
+    ├── blog
+    │   ├── migrations
+    │   └── static
+    │ 		└─── css
+    │             └─── blog.css
+    └── mysite
+```
+在css中添加sample代码
+```css
+h1 a {
+        color: #FCA205;
+    }
+```
+
+修改对应html文件,body文件没有修改
+```html
+ [% load staticfiles %}
+    <html>
+        <head>
+            <title>Django Girls blog</title>
+            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+            <link rel="stylesheet" href="[% static 'css/blog.css' %}">
+        </head>
+......
+    </html>
+```
+1. 告诉HTML 模板，添加了一些 CSS`[% load staticfiles %}`
+2. head中引入刚才的css文件`<link rel="stylesheet" href="[% static 'css/blog.css' %}">`
+
+最终，继续修改css，添加其他样式，html文件中的body部分修改为如下：
+
+```html
+<div class="content container">
+        <div class="row">
+            <div class="col-md-8">
+                [% for post in posts %}
+                    <div class="post">
+                        <div class="date">
+                            {{ post.published_date }}
+                        </div>
+                        <h1><a href="">{{ post.title }}</a></h1>
+                        <p>{{ post.text|linebreaksbr }}</p>
+                    </div>
+                [% endfor %}
+            </div>
+        </div>
+    </div>
+
+```
+最终呈现如下的效果
+![image](https://user-images.githubusercontent.com/18595935/29245645-b19f8fe0-801b-11e7-8f67-ba94d8ad1d87.png)
+
+# 参考:从url请求到返回动态html文件的流程(MTV结构)
+![image](https://user-images.githubusercontent.com/18595935/29245508-3fddc7ae-8017-11e7-9e0f-6b33bb52c606.png)
+
+MTV结构指: Model / Template / View， Django的工作流程靠着三部分支撑。
+Model存储数据，Template生成html文件，View进行逻辑控制。
+
+对照上图，流程如下：
+
+## ① 用户访问浏览器，输入URL
+
+## ② 寻找对应HTTPServer
+
+网络连接，DNS解析等，最终请求request到达指定IP的HTTPServer
+
+## ③ HTTPServer分配请求
+
+HTTPServer监听到端口的请求，将请求提供给指定的APP
+
+## ④ Middleware(作用不明)
+
+
+## ⑤ 分配request给指定View
+
+到达指定程序的mysite/urls.py入口，解析URL，分配请求给指定View
+
+- 初始解析
+
+```python
+url(r'^admin/', include(admin.site.urls)),
+url(r'', include('blog.urls')),
+```
+
+- 指定app的url解析
+
+```python
+from django.conf.urls import url
+from . import views  #表示从当前目录当如views
+urlpatterns = [
+	url(r'^$', views.post_list, name='post_list'),
+]
+```
+
+## ⑥ 向Model请求数据
+
+
+指定的View收到请求后，向Model请求数据（实际上是获取存储在DB的数据）
+
+```python
+def post_list(request):
+	posts =Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+
+```
+
+## ⑦ 模板文件生成静态html文件
+
+View将获取到的数据传递给Template模板文件，模板通过标签对Model中的数据进行重组，生成静态HTML文件
+
+- 将Model传递给Template
+```python
+ render(request, 'blog/post_list.html', {'posts':posts,'text':"lj"})
+```
+
+- Template中解析数据
+```html
+	 [% for post in posts %}
+	            <div>
+	                <p>published:{{post.published_date}}</p>
+	                <h2><a href="">{{post.title}}</a></h2>
+	                <p>{{post.text|linebreaksbr}}</p>
+	                <p>{{text}}</p>
+	            </div>
+	 [% endfor %}
+```
+
+## ⑧ 返回最终的静态html
+
+View接受到生成的静态HTML文件(用model数据替换了模板中的标签后的html)，并返回给WebServer。
