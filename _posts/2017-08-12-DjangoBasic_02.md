@@ -31,6 +31,8 @@ Django的 标签导致Jekyll无法编译，都修改为了[%，使用时需要�
 
 在第一节中，已经创建了一个django的project，但是这个project中没有任何应用程序，现在我们要在project内部创建应用程序。
 
+>在django中有两个概念需要弄清楚。一个是工程（project）的概念，一个是应用（application）的概念。 它们的关系是：一个工程中包含多个应用。每个应用都是独立的，应用通过setting.py注册到工程中来就可以使用了。 这样可以解耦合，并且好的应用也可以复用。很好的模块化设计！
+
 在命令行中执行以下命令 (从 manage.py  文件所在的 djangogirls  目录)：
 ```
 (myvenv) ~/djangogirls$ python manage.py startapp blog
@@ -50,6 +52,17 @@ Django的 标签导致Jekyll无法编译，都修改为了[%，使用时需要�
 
 接着在  mysite/settings.py 的INSTALLED_APPS 中，在它下面添加一行 'blog'，告诉Django要使用这个app。  
 
+```python
+INSTALLED_APPS = (
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'blog',
+)
+```
 
 
 # 2. 创建文章模型和数据表
@@ -127,8 +140,14 @@ Superuser created successfully.
 ```
 返回到你的浏览器，用你刚才的超级用户来登录，然后你应该能看到Django admin的管理面板。
 
+---
 
-# 4. Django urls
+> django中实现一个功能,只需要三个步骤即可，这里叫它三部曲，即如下的4-6步.
+> 1. 定义urls映射
+> 2. 定义views视图
+> 3. 定义HTML模板文件
+
+# 4. 定义Django urls映射
 
 ## 1. URL在Django中是如何工作的
 
@@ -137,7 +156,6 @@ Superuser created successfully.
 1. 客户端的请求，先经过mysite的url处理，这个是网站的入口，所有的请求最开始都通过它处理。
 2. 然后处理进一步分流，交给blog的urls处理，blog是project下面的一个app模块，blog下的urls.py对URL进行匹配，分配给对应的view(post_list)去处理。
 3. 在view中进行逻辑处理，获取对应的model数据，组织成html文件，返回给客户端。下面的例子中，直接render即渲染了一个静态的html文件。
-
 
 ## 2. 添加URL的处理代码
  - 客户请求会先经过mysite/urls.py处理。例如，访问 'http://127.0.0.1:8000/' 的请求转到 blog.urls，并看看那里面有没有进一步的指示。
@@ -172,7 +190,7 @@ urlpatterns = [
 ![image](https://user-images.githubusercontent.com/18595935/29242063-eb562e52-7fc0-11e7-9dd2-5624ccd5eae3.png)
 
 
-# 5. Django视图
+# 5. 定义view视图
 view是存放应用逻辑的地方。它将从你之前创建的 模型中获取数据，并将它传递给模板(html)。
 视图都被置放在views.py文件中。我们将加入我们自己的views到blog/views.py文件。
 代码如下:
@@ -189,7 +207,7 @@ render 方法渲染模板 blog/post_list.html.
 
 ![image](https://user-images.githubusercontent.com/18595935/29242097-68c0372a-7fc1-11e7-96d5-893bf7fcadca.png)
 
-# 6. HTML模板文件
+# 6. 定义HTML模板文件
 在blog/templates/blog 目录下，创建post_list.html模板文件，并在文件中写入:
 ```html
 <html>
@@ -320,7 +338,11 @@ h1 a {
     }
 ```
 
-修改对应html文件,body文件没有修改
+在使用静态css文件之前，需要在django中配置静态文件，在[DjangoBasi-01-环境部署](https://utanesuke0612.github.io/2017/08/11/DjangoBasic_01/)中，
+服务器部署Django生成project后，已经设定了static文件Root配置。
+
+
+修改对应html文件,body部分。没有修改
 ```html
  [% load staticfiles %}
     <html>
@@ -362,10 +384,17 @@ h1 a {
 # 参考:从url请求到返回动态html文件的流程(MTV结构)
 ![image](https://user-images.githubusercontent.com/18595935/29245508-3fddc7ae-8017-11e7-9e0f-6b33bb52c606.png)
 
-MTV结构指: Model / Template / View， Django的工作流程靠着三部分支撑。
-Model存储数据，Template生成html文件，View进行逻辑控制。
+## django的MTV模式
 
-对照上图，流程如下：
+django的结构，一般我们称之为MTV模式：
+
+ - M 代表模型（Model），即数据存取层。该层处理与数据相关的所有事务：如何存取、如何确认有效性、包含哪些行为以及数据之间的关系等。
+ - T 代表模板(Template)，即表现层。该层处理与表现相关的决定：如何在页面或其他类型文档中进行显示。
+ - V 代表视图（View），即业务逻辑层。该层包含存取模型及调取恰当模板的相关逻辑。你可以把它看作模型与模板之间的桥梁。
+那么通常意义的控制器Controller去哪里了呢，那就是我们上面所讲的urls.py配置文件。
+一句话总结：URLconf+MTV构成了django的总体架构。
+
+结合上图和实际代码，详细的处理流程如下:
 
 ## ① 用户访问浏览器，输入URL
 

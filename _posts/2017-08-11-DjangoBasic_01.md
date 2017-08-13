@@ -23,8 +23,7 @@ tags: Django Git
 ---
 
 
-在IDCF上创建Ubuntu服务器
-====================================
+# 1. 在IDCF上创建Ubuntu服务器
 
 1.  登录IDCF，注册账号，按如下配置生成VM:
  - SSH必要 *(注意保存SSH文件)*
@@ -49,8 +48,7 @@ tags: Django Git
 在IDCF的网站上设定完毕后，就可以通过TeraTerm远程连接服务器了。
 
 
-Ubuntu服务器上部署Django
-====================================
+# 2. Ubuntu服务器上部署Django
 
 1. 安装python，在Ubuntu16中自带了python，不需要另外安装
 ```
@@ -82,6 +80,20 @@ root@utaServer:~/djangogirls# source myvenv/bin/activate
 (myvenv) root@utaServer:~/djangogirls# ls
 manage.py mysite myvenv
 ```
+会自动在djangogirls目录下生成manage.py和mysite文件夹。
+```
+myste
+├───manage.py
+└───mysite
+        settings.py
+        urls.py
+        wsgi.py
+        __init__.py
+```
+ - manage.py是管理网站的脚本，可以使用它来启动一个简单的web服务器，这个对于开发调试非常有用。
+ - setting.py是工程的核心配置文件。
+ - urls.py是路径配置文件，可以配置URL到实际Controller的映射关系。
+
 6. 修改配置,将TIME_ZONE修改为「ASIA/TOKYO」,并追加设定static文件。
 ```
 (myvenv) root@utaServer:~/djangogirls/mysite# vi settings.py
@@ -90,10 +102,22 @@ manage.py mysite myvenv
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')#← 一行を追加
 ```
-7.  生成DB
+
+7.  为我们的博客系统生成DB
 ```
 python manage.py migrate
 ```
+出现如下消息，说明生成成功
+```
+Operations to perform:
+  Apply all migrations: sessions, contenttypes, admin, auth
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying sessions.0001_initial... OK
+```
+
 8. 启动web服务器(确保命令执行的所在目录下有manage.py)
 ```
 python manage.py runserver 0:8000
@@ -105,8 +129,7 @@ ALLOWED_HOSTS = ['210.140.220.13', 'localhost', '127.0.0.1']
 ```
 
 
-Ubuntu服务器与Github关联
-====================================
+# 3. Ubuntu服务器与Github关联
 
 1. 在Ubuntu服务器上安装git，并创建本地仓库
 ```
@@ -145,8 +168,7 @@ root@utaServer:~/djangogirls# git commit -m "comment"
 root@utaServer:~/djangogirls# git push -u origin master
 ```
 
-本地window上部署相同的环境
-====================================
+# 4. 本地window上部署相同的环境
 
 1. 生成专用文件夹
 ```
@@ -201,8 +223,7 @@ python manage.py runserver 0:80
 ```
 
 
-参考: 手动开启端口
-====================================
+# 参考: 手动开启端口
 
 1. 开启和关闭端口
  - ufwのインストール`$ sudo apt-get install uf
