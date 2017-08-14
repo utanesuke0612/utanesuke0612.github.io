@@ -80,9 +80,10 @@ C:\Users\utane>ipconfig /all
 
 3. DNS服务器设置转发
 
-  ![image](https://user-images.githubusercontent.com/18595935/29279383-9102dbe2-8152-11e7-8523-936c44b4a49f.png)
+   ![image](https://user-images.githubusercontent.com/18595935/29279383-9102dbe2-8152-11e7-8523-936c44b4a49f.png)
 
  因www.sohu.com域名在第一步的验证中使用过，有缓存，为了不受上步实验干扰，我们在客户机上192.168.145.12上nslookup www.baidu.com。从图上看，本地DNS把请求转发至192.168.133.10服务器，133.10服务器把得到的IP返回给本地DNS，然后本地DNS再把IP告诉DNS客户机，完成解析。
-![image](https://user-images.githubusercontent.com/18595935/29279398-9daa6702-8152-11e7-8507-fafa93180a19.png)
+
+  ![image](https://user-images.githubusercontent.com/18595935/29279398-9daa6702-8152-11e7-8507-fafa93180a19.png)
 
  >参考 http://369369.blog.51cto.com/319630/812889
