@@ -12,6 +12,7 @@ permalink: /books/
 - ~~程序员思维修炼~~
 - tcpip经典
 - Python繁琐工作自动化
+- 
 
 # <i class="fa fa-video-camera" style="font-size:1em;"></i>2017-视频
 - django 51CTO

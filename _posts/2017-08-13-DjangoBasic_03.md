@@ -82,6 +82,7 @@ Django的 标签导致Jekyll无法编译，都修改为了[%，使用时需要�
 即当点击post_title的时候，跳转到这里指定的href，这里href由 url标签来生成真正的url链接。
 这时如果访问http://127.0.0.1:8000/ ，会得到如下的错误:
 ![image](https://user-images.githubusercontent.com/18595935/29250583-b3283f88-807f-11e7-8ced-bee0bfd91dbf.png)
+
 这是预料之中的，因为我们没有名为post_detail 的 URL 或 视图,在下一部分中会创建名为post_detail的url。
 
 # 3. 创建文章详细页面的URL
@@ -137,3 +138,114 @@ def post_detail(request, pk):
 
 通过上述步骤，最终实现了输入`http://localhost:8000/post/9/`，或是从list的title点击，都可以访问到post_detail页面。如下图
 ![image](https://user-images.githubusercontent.com/18595935/29250847-c53b0c14-8084-11e7-8390-a4788a850b4c.png)
+
+---
+
+# 参考:url扩展处理
+
+![image](https://user-images.githubusercontent.com/18595935/29279230-2cb18a1c-8152-11e7-92f0-319e3ab7a6d9.png)
+
+>这是一个demo程序，实现当点击page页面上的button的时候，执行不同的poweshell脚本，最终输出脚本结果到Result.html页面。
+处理流程如下：
+ 1. 对page上的button创建onclick响应　→　url处理
+ 2. urls.py中添加url的处理　→　view处理
+ 3. view中添加逻辑处理 → 逻辑处理
+ 4. vSansetup.py中添加逻辑处理代码
+ 5. view中接受逻辑处理函数的return，并传递给模板html文件
+
+## 1. 添加button的onclick响应
+```html
+<fieldset>
+       <legend><h2>タスクのカテゴリ名2</h2></legend>
+       [% for tool in toolsList %}
+           [% if tool.Execute == "True"%}
+               <h3>[{ tool.ID}}.{{ tool.Comment }}</h3>
+               <button type="button"
+                       onclick="location.href='[% url 'vSanSetup' Name=tool.Name %}'"
+                       STYLE="color:red; background-color:white">
+                   実行</button>
+               <hr style="border:0;border-top:1px solid blue;">
+           [% endif %}
+       [% endfor %}
+   </fieldset>
+```
+ - 点击后，使用url标签去生成实际的url，这里接住了urls.py去生成。
+ - 为了使urls.py能识别这是它拿过去的请求，添加了`'vSanSetup'`，与urls中的`name='vSanSetup'`对应。
+ - 另外，点击时需要识别点击的是哪个button，需要通过 `Name=tool.Name`传递参数。
+
+## 2. urls.py中添加url处理
+```python
+urlpatterns = [
+   url(r'^$', views.index,name='index'),
+   url(r'^(?P<Name>[a-zA-Z0-9]+)/$', views.vSanSetup,name='vSanSetup'),
+]
+```
+- 通过`name='vSanSetup',点击button后找到这里的url记录，通过`name`变量生成url，并把`name`变量传递给下一个view即vSanSetup中去。
+
+
+## 3. view中添加逻辑处理
+代码如下，通过从urls中传递过来的参数Name，判断该Name并调用对应的处理。
+>如下的三个逻辑处理函数，存在于另一个py文件中，需要预先import。
+
+```python
+def vSanSetup(request,Name):
+    message = ""
+    if Name == "disconnect":
+        message = disconnectHost()
+    elif Name == "updateIP":
+        message = updateHostIP()
+    elif Name == "connect":
+        message = connectHost()
+    else:
+        message = "エラー"
+
+    return render(request, 'tools/result.html', {"message":message})
+
+```
+
+## 4. vSansetup.py中添加逻辑处理代码
+集中进行逻辑处理，注意updateHostIP函数，发挥了python的胶水特性，直接调用了PowerShell脚本。
+```python
+from django.shortcuts import render
+from django.http import HttpResponse
+import subprocess, sys
+
+def disconnectHost():
+    return "タスク1"
+
+def updateHostIP():
+    p = subprocess.Popen(["PowerShell.exe", "MyScripts\\ipcheck.ps1"], stdout=sys.stdout)
+    p.communicate()
+    return "タスク2"
+
+def connectHost():
+    return "タスク3"
+```
+
+## 5. view中接受逻辑处理函数的return，并传递给模板html文件
+参考上述view代码，将逻辑处理的返回值传递给了html模板，模板通过下面的代码进行处理，将标签部分用传递过来的数据进行替换,生成静态html文件。
+```html
+<body>
+  <h1>{{message}}が実行完了</h1>
+</body>
+```
+
+## 补足:
+有两种方式可以跳转到第三步，即转入对应的view进行处理。
+1. 从button点击进入，这时url通过标签去生成，生成的url内容由传递过去的参数name决定。
+2. url由手动输入，例如直接访问`http://localhost:8000/tools/disconnect/`，仍然可以访问到对应的view。将代码修改为如下`html文件`(删除了onclick的动作)
+```html
+<button type="button"
+         onclick=""
+       STYLE="color:red; background-color:white">
+    実行(押す前に、設定ファイルを再確認してください！)</button>
+```
+将 `urls.py`修改为如下(删除name='vSanSetup'，因为不需要被button的onclick匹配了)
+```python
+ url(r'^(?P<Name>[a-zA-Z0-9]+)/$', views.vSanSetup),
+```
+修改为上述后，这里直接通过url匹配到vSanSetup这个view，并传递Name变量过去。注意这个Name变量与view中的接收参数名要一致。
+
+
+## Todo
+ - 如果有不希望访问的link，可以通过url直接这样访问进去，需要考虑根本性的方式禁止，而不是只在page上不显示而已。
