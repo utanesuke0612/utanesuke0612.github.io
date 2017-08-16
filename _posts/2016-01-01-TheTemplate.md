@@ -2,8 +2,8 @@
 layout: post
 title:  markdown模版
 date:   2016-08-27 01:08:00 +0800
-categories: document
-tag: 模板
+categories: 参照
+tag: markdown
 ---
 * content
 {:toc}
@@ -358,6 +358,7 @@ end
 |a|b|c|
 ~~~
 ### 表示例
+
 |header1|header2|header3|
 |:--|--:|:--:|
 |align left|align right|align center|

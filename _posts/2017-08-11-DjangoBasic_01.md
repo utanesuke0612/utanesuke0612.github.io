@@ -2,15 +2,15 @@
 layout: post
 title: DjangoBasi-01-环境部署
 date: 2017-08-11 11:45:59
-categories: Django
-tags: Django Git
+categories: Python
+tags: Web Django Git
 ---
 * content
 {:toc}
 
 >[DjangoGirls tutorial](https://tutorial.djangogirls.org/zh/django_urls/)的入门课程,这个课程非常浅显易懂，完全小白只要参考这个系列，也能做出自己的博客网站。
 
-本系列参考上面的tutorial，进行了部分修改和增补，系列目录如下：
+本系列参考上面的tutorial，进行了部分修改和增补，系列目录如下,代码参考 [here](https://github.com/utanesuke0612/pythonBlog)：
 1.  运行环境部署
 2.  显示出你的第一个网页
 3.  模板扩展-blog详情页面
@@ -18,7 +18,7 @@ tags: Django Git
 5.  添加草稿/发布/删除/编辑功能
 6.  让网站更安全
 7.  给网页添加评论
-8.  总结-从URL请求到动态HTML内容返回的流程
+
 
 ---
 

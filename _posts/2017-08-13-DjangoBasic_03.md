@@ -2,15 +2,15 @@
 layout: post
 title: DjangoBasi-03-模板扩展-blog详情页面
 date: 2017-08-12 22:45:59
-categories: Django
-tags: Django python
+categories: Python
+tags: Web Django
 ---
 * content
 {:toc}
 
 >[DjangoGirls tutorial](https://tutorial.djangogirls.org/zh/django_urls/)的入门课程,这个课程非常浅显易懂，完全小白只要参考这个系列，也能做出自己的博客网站。
 
-本系列参考上面的tutorial，进行了部分修改和增补，系列目录如下：
+本系列参考上面的tutorial，进行了部分修改和增补，系列目录如下,代码参考 [here](https://github.com/utanesuke0612/pythonBlog)：
 1.  运行环境部署
 2.  显示出你的第一个网页
 3.  模板扩展-blog详情页面
@@ -18,7 +18,6 @@ tags: Django python
 5.  添加草稿/发布/删除/编辑功能
 6.  让网站更安全
 7.  给网页添加评论
-8.  总结-从URL请求到动态HTML内容返回的流程
 
 ---
 # <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>**注意：**
@@ -150,7 +149,7 @@ def post_detail(request, pk):
  1. 对page上的button创建onclick响应　→　url处理
  2. urls.py中添加url的处理　→　view处理
  3. view中添加逻辑处理 → 逻辑处理
- 4. vSansetup.py中添加逻辑处理代码
+ 4. vsetup.py中添加逻辑处理代码
  5. view中接受逻辑处理函数的return，并传递给模板html文件
 
 ## 1. 添加button的onclick响应
@@ -161,7 +160,7 @@ def post_detail(request, pk):
            [% if tool.Execute == "True"%}
                <h3>[{ tool.ID}}.{{ tool.Comment }}</h3>
                <button type="button"
-                       onclick="location.href='[% url 'vSanSetup' Name=tool.Name %}'"
+                       onclick="location.href='[% url 'vSetup' Name=tool.Name %}'"
                        STYLE="color:red; background-color:white">
                    実行</button>
                <hr style="border:0;border-top:1px solid blue;">
@@ -170,17 +169,17 @@ def post_detail(request, pk):
    </fieldset>
 ```
  - 点击后，使用url标签去生成实际的url，这里接住了urls.py去生成。
- - 为了使urls.py能识别这是它拿过去的请求，添加了`'vSanSetup'`，与urls中的`name='vSanSetup'`对应。
+ - 为了使urls.py能识别这是它拿过去的请求，添加了`'vSetup'`，与urls中的`name='vSetup'`对应。
  - 另外，点击时需要识别点击的是哪个button，需要通过 `Name=tool.Name`传递参数。
 
 ## 2. urls.py中添加url处理
 ```python
 urlpatterns = [
    url(r'^$', views.index,name='index'),
-   url(r'^(?P<Name>[a-zA-Z0-9]+)/$', views.vSanSetup,name='vSanSetup'),
+   url(r'^(?P<Name>[a-zA-Z0-9]+)/$', views.vSetup,name='vSetup'),
 ]
 ```
-- 通过`name='vSanSetup',点击button后找到这里的url记录，通过`name`变量生成url，并把`name`变量传递给下一个view即vSanSetup中去。
+- 通过`name='vSetup',点击button后找到这里的url记录，通过`name`变量生成url，并把`name`变量传递给下一个view即vSetup中去。
 
 
 ## 3. view中添加逻辑处理
@@ -188,7 +187,7 @@ urlpatterns = [
 >如下的三个逻辑处理函数，存在于另一个py文件中，需要预先import。
 
 ```python
-def vSanSetup(request,Name):
+def vSetup(request,Name):
     message = ""
     if Name == "disconnect":
         message = disconnectHost()
@@ -203,7 +202,7 @@ def vSanSetup(request,Name):
 
 ```
 
-## 4. vSansetup.py中添加逻辑处理代码
+## 4. vSetup.py中添加逻辑处理代码
 集中进行逻辑处理，注意updateHostIP函数，发挥了python的胶水特性，直接调用了PowerShell脚本。
 ```python
 from django.shortcuts import render
@@ -240,11 +239,11 @@ def connectHost():
        STYLE="color:red; background-color:white">
     実行(押す前に、設定ファイルを再確認してください！)</button>
 ```
-将 `urls.py`修改为如下(删除name='vSanSetup'，因为不需要被button的onclick匹配了)
+将 `urls.py`修改为如下(删除name='vSetup'，因为不需要被button的onclick匹配了)
 ```python
- url(r'^(?P<Name>[a-zA-Z0-9]+)/$', views.vSanSetup),
+ url(r'^(?P<Name>[a-zA-Z0-9]+)/$', views.vSetup),
 ```
-修改为上述后，这里直接通过url匹配到vSanSetup这个view，并传递Name变量过去。注意这个Name变量与view中的接收参数名要一致。
+修改为上述后，这里直接通过url匹配到vSetup这个view，并传递Name变量过去。注意这个Name变量与view中的接收参数名要一致。
 
 
 ## Todo
