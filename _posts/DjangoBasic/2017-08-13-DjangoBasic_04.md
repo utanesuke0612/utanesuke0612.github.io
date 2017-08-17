@@ -1,9 +1,9 @@
 ---
 layout: post
-title: DjangoBasi-04-重要-Django表单
+title: DjangoBasic-04-重要-Django表单
 date: 2017-08-15 22:45:59
 categories: Python
-tags: Web Django
+tags: DjangoBasic
 ---
 * content
 {:toc}

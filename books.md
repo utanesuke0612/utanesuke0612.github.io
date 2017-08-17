@@ -22,17 +22,17 @@ permalink: /books/
 
 - vmware 51CTO-谢
 
-- python网络爬虫与信息提取(北理)
+- [python网络爬虫与信息提取(北理)](http://www.icourse163.org/course/BIT-1001870001)
 
-- python科学计算三位可视化(北理)
+- [python科学计算三位可视化(北理)](http://www.icourse163.org/learn/BIT-1001871001?tid=1001964001)
 
-- python数据分析与展示(北理)
+- [python数据分析与展示(北理)](http://www.icourse163.org/learn/BIT-1001870002?tid=1001963001)
 
-- python机器学习应用(北理)
+- [python机器学习应用(北理)](http://www.icourse163.org/learn/BIT-1001872001?tid=1001965001)
 
-- python游戏开发入门(北理)
+- [python游戏开发入门(北理)](http://www.icourse163.org/course/BIT-1001873001)
 
-- python云端系统开发入门(北理)
+- [python云端系统开发入门(北理)](http://www.icourse163.org/course/BIT-1001871002)
 
 
 # <i class="fa fa-file-pdf-o" style="font-size:1em;"></i>2017-其他

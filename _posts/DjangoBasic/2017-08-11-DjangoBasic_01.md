@@ -1,9 +1,9 @@
 ---
 layout: post
-title: DjangoBasi-01-环境部署
+title: DjangoBasic-01-环境部署
 date: 2017-08-11 11:45:59
 categories: Python
-tags: Web Django Git
+tags: DjangoBasic Git
 ---
 * content
 {:toc}
