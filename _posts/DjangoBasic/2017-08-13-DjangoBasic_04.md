@@ -16,9 +16,9 @@ tags: DjangoBasic
 2.  [显示出你的第一个网页](https://utanesuke0612.github.io/2017/08/12/DjangoBasic_02/)
 3.  [模板扩展-blog详情页面](https://utanesuke0612.github.io/2017/08/12/DjangoBasic_03/)
 4.  [Django表单](https://utanesuke0612.github.io/2017/08/15/DjangoBasic_04/)
-5.  [添加草稿/发布/删除/编辑功能](https://utanesuke0612.github.io/2017/08/19/DjangoBasic_05/)
-6.  [让网站更安全](https://utanesuke0612.github.io/2017/08/19/DjangoBasic_06/)
-7.  [给网页添加评论](https://utanesuke0612.github.io/2017/08/19/DjangoBasic_07/)
+5.  [添加草稿/发布/删除/编辑功能](https://utanesuke0612.github.io/2017/08/18/DjangoBasic_05/)
+6.  [让网站更安全](https://utanesuke0612.github.io/2017/08/18/DjangoBasic_06/)
+7.  [给网页添加评论](https://utanesuke0612.github.io/2017/08/18/DjangoBasic_07/)
 
 ---
 # <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>**注意：**
