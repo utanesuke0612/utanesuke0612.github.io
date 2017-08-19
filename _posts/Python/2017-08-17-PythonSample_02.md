@@ -45,7 +45,7 @@ turtle.tracer(True)
 ```
 输出如下:
 
-<img src="https://qiita-image-store.s3.amazonaws.com/0/177240/ec747cb1-75a8-fb29-113a-012f38975e0c.png" width=30%>
+![](https://qiita-image-store.s3.amazonaws.com/0/177240/ec747cb1-75a8-fb29-113a-012f38975e0c.png)
 
 
 # 2. 例:温度转换程序
