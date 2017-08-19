@@ -22,7 +22,7 @@ tags: DjangoBasic
 
 ---
 # <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>**注意：**
-Django的 标签导致Jekyll无法编译，都修改为了[%，使用时需要替换！
+Django的标签导致Jekyll无法编译，都修改为了`[%`和`[{`，使用时需要替换将`[`替换为`{`！
 
 >在第四节中，创建表单，并关联到新建和编辑post的page上，能验证表单正确性，最终保存到数据中。
 
@@ -60,9 +60,9 @@ def post_draft_list(request):
 [% block content %}
     [% for post in posts %}
         <div class="post">
-            <p class="date">created: {{ post.created_date|date:'d-m-Y' }}</p>
-            <h1><a href="[% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
-            <p>{{ post.text|truncatechars:200 }}</p>
+            <p class="date">created: [{ post.created_date|date:'d-m-Y' }}</p>
+            <h1><a href="[% url 'post_detail' pk=post.pk %}">[{ post.title }}</a></h1>
+            <p>[{ post.text|truncatechars:200 }}</p>
         </div>
     [% endfor %}
 [% endblock %}
@@ -79,7 +79,7 @@ def post_draft_list(request):
 ```python
 [% if post.published_date %}
     <div class="date">
-        {{ post.published_date }}
+        [{ post.published_date }}
     </div>
 [% else %}
     <a class="btn btn-default" href="[% url 'post_publish' pk=post.pk %}">Publish</a>

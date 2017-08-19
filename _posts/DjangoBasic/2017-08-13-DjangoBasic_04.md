@@ -22,7 +22,7 @@ tags: DjangoBasic
 
 ---
 # <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>**注意：**
-1. Django的 标签导致Jekyll无法编译，都修改为了[%，使用时需要替换！
+1. Django的标签导致Jekyll无法编译，都修改为了`[%`和`[{`，使用时需要替换将`[`替换为`{`！
 2. **`本节非常重要！`**
 
 >截至到第三节，我们已经将model中的动态数据显示到网页上，并通过点击title实现了查看post详情。在实现方式上，应用了模板和CSS等。通过本节，继续扩展我们的功能，添加post的表单form，实现post的新增和编辑。
@@ -116,13 +116,13 @@ def post_new(request):
     [% block content %}
         <h1>New post</h1>
         <form method="POST" class="post-form">[% csrf_token %}
-            {{ form.as_p }}
+            [{ form.as_p }}
             <button type="submit" class="save btn btn-default">Save</button>
         </form>
     [% endblock %}
 
 ```
-1. 要展示表单，甚至需要一行 `{{ form.as_p }}`
+1. 要展示表单，甚至需要一行 `[{ form.as_p }}`
 2. forms要被 `<form method="POST">...</form>`标签所包含。
 3. 完毕后，通过submit的button提交。
 4. 最后在`<form ...>`标签后，我们需要加上`[% csrf_token %}`。 这个非常重要，因为他会让你的表单变得更安全！

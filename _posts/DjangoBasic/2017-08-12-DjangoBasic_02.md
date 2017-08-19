@@ -21,7 +21,7 @@ tags: DjangoBasic
 
 ---
 # <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>**注意：**
-Django的 标签导致Jekyll无法编译，都修改为了[%，使用时需要替换！
+Django的标签导致Jekyll无法编译，都修改为了`[%`和`[{`，使用时需要替换将`[`替换为`{`！
 
 # 1. 创建应用程序
 
@@ -300,15 +300,15 @@ def post_list(request):
 
   [% for post in posts %}
         <div>
-            <p>published: {{ post.published_date }}</p>
-            <h1><a href="">{{ post.title }}</a></h1>
-            <p>{{ post.text|linebreaksbr }}</p>
+            <p>published: [{ post.published_date }}</p>
+            <h1><a href="">[{ post.title }}</a></h1>
+            <p>[{ post.text|linebreaksbr }}</p>
         </div>
   [% endfor %}
 ```
 
 
- 1. 用模板标签在HTML中显示变量，` {{ posts }}`。
+ 1. 用模板标签在HTML中显示变量，` [{ posts }}`。
  2. `% for %} 和 % endfor %} `之间的内容将会被Django对象列表中的每个对象所代替。
  3. `|linebreaksbr`通过一个过滤器，使得行间隔编程段落。
 
@@ -366,10 +366,10 @@ h1 a {
                 [% for post in posts %}
                     <div class="post">
                         <div class="date">
-                            {{ post.published_date }}
+                            [{ post.published_date }}
                         </div>
-                        <h1><a href="">{{ post.title }}</a></h1>
-                        <p>{{ post.text|linebreaksbr }}</p>
+                        <h1><a href="">[{ post.title }}</a></h1>
+                        <p>[{ post.text|linebreaksbr }}</p>
                     </div>
                 [% endfor %}
             </div>
@@ -453,10 +453,10 @@ View将获取到的数据传递给Template模板文件，模板通过标签对Mo
 ```html
 	 [% for post in posts %}
 	            <div>
-	                <p>published:{{post.published_date}}</p>
-	                <h2><a href="">{{post.title}}</a></h2>
-	                <p>{{post.text|linebreaksbr}}</p>
-	                <p>{{text}}</p>
+	                <p>published:[{post.published_date}}</p>
+	                <h2><a href="">[{post.title}}</a></h2>
+	                <p>[{post.text|linebreaksbr}}</p>
+	                <p>[{text}}</p>
 	            </div>
 	 [% endfor %}
 ```

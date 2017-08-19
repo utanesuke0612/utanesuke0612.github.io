@@ -21,7 +21,7 @@ tags: DjangoBasic
 
 ---
 # <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>**注意：**
-Django的 标签导致Jekyll无法编译，都修改为了[%，使用时需要替换！
+Django的标签导致Jekyll无法编译，都修改为了`[%`和`[{`，使用时需要替换将`[`替换为`{`！
 
 > 本节中，扩展Base模板，实现点击主页面Postlist的标题后进入PostDetail页面。
 
@@ -158,7 +158,7 @@ def post_detail(request, pk):
        <legend><h2>タスクのカテゴリ名2</h2></legend>
        [% for tool in toolsList %}
            [% if tool.Execute == "True"%}
-               <h3>[{ tool.ID}}.{{ tool.Comment }}</h3>
+               <h3>[{ tool.ID}}.[{ tool.Comment }}</h3>
                <button type="button"
                        onclick="location.href='[% url 'vSetup' Name=tool.Name %}'"
                        STYLE="color:red; background-color:white">
@@ -225,7 +225,7 @@ def connectHost():
 参考上述view代码，将逻辑处理的返回值传递给了html模板，模板通过下面的代码进行处理，将标签部分用传递过来的数据进行替换,生成静态html文件。
 ```html
 <body>
-  <h1>{{message}}が実行完了</h1>
+  <h1>[{message}}が実行完了</h1>
 </body>
 ```
 

@@ -22,7 +22,7 @@ tags: DjangoBasic
 
 ---
 # <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>**注意：**
-Django的 标签导致Jekyll无法编译，都修改为了[%，使用时需要替换！
+Django的标签导致Jekyll无法编译，都修改为了`[%`和`[{`，使用时需要替换将`[`替换为`{`！
 
 >第五节中，我们完成了: ①添加了drafts按钮和对应功能 / ②添加了publish按钮和对应功能 / ③添加了delete按钮和对应功能
 
@@ -86,17 +86,17 @@ url(r'^accounts/login/$', views.login, name='login'),
     [% csrf_token %}
         <table>
         <tr>
-            <td>{{ form.username.label_tag }}</td>
-            <td>{{ form.username }}</td>
+            <td>[{ form.username.label_tag }}</td>
+            <td>[{ form.username }}</td>
         </tr>
         <tr>
-            <td>{{ form.password.label_tag }}</td>
-            <td>{{ form.password }}</td>
+            <td>[{ form.password.label_tag }}</td>
+            <td>[{ form.password }}</td>
         </tr>
         </table>
 
         <input type="submit" value="login" />
-        <input type="hidden" name="next" value="{{ next }}" />
+        <input type="hidden" name="next" value="[{ next }}" />
     </form>
 [% endblock %}
 ```
@@ -122,7 +122,7 @@ url(r'^accounts/login/$', views.login, name='login'),
 # 4. 继续改进user登录部分
 在上面 判断了如果是授权用户的分支中，加入欢迎语句和logout功能:
 ```python
-<p class="top-menu">Hello {{ user.username }} <small>(<a href="[% url 'logout' %}">Log out</a>)</small></p>
+<p class="top-menu">Hello [{ user.username }} <small>(<a href="[% url 'logout' %}">Log out</a>)</small></p>
    [% else %}
 ```
 
