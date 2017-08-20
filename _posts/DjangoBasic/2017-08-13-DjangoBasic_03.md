@@ -140,7 +140,7 @@ def post_detail(request, pk):
 
 ---
 
-# 参考:url扩展处理
+# 参考:url扩展处理(胶水:连接外部程序)
 
 ![image](https://user-images.githubusercontent.com/18595935/29279230-2cb18a1c-8152-11e7-92f0-319e3ab7a6d9.png)
 

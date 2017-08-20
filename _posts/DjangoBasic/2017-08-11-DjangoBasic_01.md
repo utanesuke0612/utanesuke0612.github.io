@@ -49,6 +49,9 @@ tags: DjangoBasic Git
 
 
 # 2. Ubuntu服务器上部署Django
+什么是Django？
+Django是基于Python的一个web框架，类似于Java的JavaEE和Spring，能够让你快速写出一个Web应用， 因为它包含了绝大部分的组件，比如认证，表单，ORM，Session，安全，文件上传，页面模板等，避免了重复造轮子。
+
 
 1. 安装python，在Ubuntu16中自带了python，不需要另外安装
 ```
@@ -92,7 +95,12 @@ myste
 ```
  - manage.py是管理网站的脚本，可以使用它来启动一个简单的web服务器，这个对于开发调试非常有用。
  - setting.py是工程的核心配置文件。
- - urls.py是路径配置文件，可以配置URL到实际Controller的映射关系。
+ - urls.py是路径配置文件，可以配置URL到实际Controller的映射关系。Controller指每个app中的urls.py。比如如下的配置，使得对应的url映射到site和blog的app中。
+
+ ```python
+ url(r'^admin/', include(admin.site.urls)),
+ url(r'', include('blog.urls')),
+ ```
 
 6. 修改配置,将TIME_ZONE修改为「ASIA/TOKYO」,并追加设定static文件。
 ```
