@@ -8,7 +8,7 @@ permalink: /books/
 {:toc}
 
 
-# <i class="fa fa-book" style="font-size:1em;"></i>2017-书单
+# <i class="fa fa-book" style="font-size:1em;"></i> 2017-书单
  <i class="fa fa-check-square-o" aria-hidden="true"></i> 程序员思维修炼 -duokan
 
  <i class="fa fa-square-o" aria-hidden="true"></i> tcpip经典 -duokan
@@ -16,7 +16,6 @@ permalink: /books/
  <i class="fa fa-square-o" aria-hidden="true"></i> Python繁琐工作自动化 -duokan
 
 # <i class="fa fa-video-camera" style="font-size:1em;"></i> 2017-视频
- <i class="fa fa-square-o" aria-hidden="true"></i> django 51CTO
 
  <i class="fa fa-square-o" aria-hidden="true"></i> vmware 51CTO-王
 
@@ -36,15 +35,21 @@ permalink: /books/
 
 
 # <i class="fa fa-file-pdf-o" style="font-size:1em;"></i> 2017-其他
+
  <i class="fa fa-check-square" aria-hidden="true"></i> djangogirls 实践及总结
+
+ <i class="fa fa-check-square-o" aria-hidden="true"></i> 自强学堂 Django教程
 
  <i class="fa fa-square-o" aria-hidden="true"></i> VMware写的存储日文版
 
 
 # <i class="fa fa-heart" style="font-size:1em;"></i> 2017-想读
+
  <i class="fa fa-square-o" aria-hidden="true"></i> Python源码剖析(陈儒@电子工业出版社)
 
  <i class="fa fa-square-o" aria-hidden="true"></i> 白话大数据与机器学习 -微信读书
+
+ <i class="fa fa-square-o" aria-hidden="true"></i> Python核心编程（第三版）-@[美] Wesley J. Chun
 
 ---
 

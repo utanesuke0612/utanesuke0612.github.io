@@ -7,25 +7,17 @@ permalink: /reference/
 * content
 {:toc}
 
+# 1. python
+ - [Best Python Resources](https://www.fullstackpython.com/best-python-resources.html)
+ - [Official Django Documents](https://www.fullstackpython.com/best-python-resources.html)
 
-走向架构师之路
-=====================
-[走向架构师之路](http://blog.csdn.net/cutesource/article/details/4901506)
+# 8. 开源库
+ - [ECHARTS 好用的图表库](http://echarts.baidu.com/index.html)
 
-HTTP协议详解
-=====================
-[HTTP协议详解](http://www.jmarshall.com/easy/http/)
 
-Axis 2.0的入门
-=====================
-[曹胜欢][http://blog.csdn.net/csh624366188/article/details/8362696](http://blog.csdn.net/csh624366188/article/details/8362696)
-
-[一线码农]
-=====================
-算法入门和分布式缓存入门
-[http://www.cnblogs.com/huangxincheng/archive/2011/11/14/2249046.html](http://www.cnblogs.com/huangxincheng/archive/2011/11/14/2249046.html)
-
-[雷霄骅]
-=====================
-视音频编解码技术学习方法
-[http://blog.csdn.net/leixiaohua1020/article/details/18893769](http://blog.csdn.net/leixiaohua1020/article/details/18893769)
+# 9. BLog
+ - [熊熊blog](https://www.xncoding.com/tags/)
+ - [自强学堂(Django教程)](http://code.ziqiangxuetang.com/django/django-tutorial.html)
+ - [自强学堂(Django学习资源)](http://code.ziqiangxuetang.com/learn_share/django-learn-resource.html)
+ - [自强学堂(Python学习资源)](http://code.ziqiangxuetang.com/learn_share/python-learn-resource.html)
+ - [廖雪峰官方网站(python/git)](https://www.liaoxuefeng.com/)
