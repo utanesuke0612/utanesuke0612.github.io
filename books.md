@@ -9,7 +9,7 @@ permalink: /books/
 
 
 # <i class="fa fa-book" style="font-size:1em;"></i> 2017-书单
- <i class="fa fa-check-square-o" aria-hidden="true"></i> 程序员思维修炼 -duokan
+ <i class="fa fa-check-square-o" aria-hidden="true"></i> **程序员思维修炼 -duokan**(2017-08-23 to )
 
  <i class="fa fa-square-o" aria-hidden="true"></i> tcpip经典 -duokan
 
@@ -36,9 +36,9 @@ permalink: /books/
 
 # <i class="fa fa-file-pdf-o" style="font-size:1em;"></i> 2017-其他
 
- <i class="fa fa-check-square" aria-hidden="true"></i> djangogirls 实践及总结
+ <i class="fa fa-check-square" aria-hidden="true"></i> ~~djangogirls 实践及总结~~
 
- <i class="fa fa-check-square-o" aria-hidden="true"></i> 自强学堂 Django教程
+ <i class="fa fa-check-square-o" aria-hidden="true"></i> **自强学堂 Django教程**(2017-08-20 to )
 
  <i class="fa fa-square-o" aria-hidden="true"></i> VMware写的存储日文版
 

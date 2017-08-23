@@ -112,7 +112,14 @@ print(pySum())
 
 - ndarray对象的属性
 
-![image](https://user-images.githubusercontent.com/18595935/29492825-860b3c5a-85c3-11e7-98d2-9bbe205379be.png)
+| 属性 | 说明 |
+|:-----------|:-----------|
+| .ndim | 维度 |
+| .shape | ndarray对象的尺度，对于矩阵，n行m列 |
+| .size | ndarray对象元素个数，n*m的值 |
+| .dtype | ndarray对象的元素类型 |
+| .itemsize | ndarray对象中每个元素的大小，字节为单位 |
+
 
 示例如下:
 
