@@ -51,6 +51,7 @@ permalink: /books/
 
  <i class="fa fa-square-o" aria-hidden="true"></i> Python核心编程（第三版）-@[美] Wesley J. Chun
 
+ <i class="fa fa-square-o" aria-hidden="true"></i> 黑客与画家(不看会后悔的书)
 
 # <i class="fa fa-cart-arrow-down" style="font-size:1em;"></i> 在库书
 

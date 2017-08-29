@@ -29,7 +29,7 @@ layout: default
                       <li><a href="#year_{{next_year}}">{{next_year}}</a>
                         <ul class="nav">
                           <li><a href="#month_{{next_year}}_{{next_month}}">{{next_month}}</a></li>
-                    {% else %}    
+                    {% else %}
                       {% if this_month != next_month %}
                           <li><a href="#month_{{next_year}}_{{next_month}}">{{next_month}}</a></li>
                       {% endif %}
@@ -38,8 +38,9 @@ layout: default
                 {% endfor %}
               </ul>
               <div style="height: 200px;width: 200px;">
-                <script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=5ytn1ssq6za&amp;m=0&amp;c=ff0000&amp;cr1=ffffff&amp;f=arial&amp;l=33" async="async"> 
-                </script>
+            <!--    <script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=5ytn1ssq6za&amp;m=0&amp;c=ff0000&amp;cr1=ffffff&amp;f=arial&amp;l=33" async="async">-->
+            <!--    </script>-->
+                
               </div>
             </div>
           </div>
@@ -71,7 +72,7 @@ layout: default
                       <h1 id="year_{{next_year}}">{{next_year}}</h1>
                       <h2 id="month_{{next_year}}_{{next_month}}">{{next_month}}</h2>
                       <ul>
-                    {% else %}    
+                    {% else %}
                       {% if this_month != next_month %}
                         </ul>
                         <h2 id="month_{{next_year}}_{{next_month}}">{{next_month}}</h2>
