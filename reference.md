@@ -14,9 +14,7 @@ permalink: /reference/
 # 8. 开源库
  - [ECHARTS 好用的图表库](http://echarts.baidu.com/index.html)
 
-
 # 9. BLog
- - [熊熊blog](https://www.xncoding.com/tags/)
  - [自强学堂(Django教程)](http://code.ziqiangxuetang.com/django/django-tutorial.html)
  - [自强学堂(Django学习资源)](http://code.ziqiangxuetang.com/learn_share/django-learn-resource.html)
  - [自强学堂(Python学习资源)](http://code.ziqiangxuetang.com/learn_share/python-learn-resource.html)

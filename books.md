@@ -7,13 +7,15 @@ permalink: /books/
 * content
 {:toc}
 
+> 廖雪峰python教程 - python3核心编程 - 统计学基础
+> 
+
+
 
 # <i class="fa fa-book" style="font-size:1em;"></i> 2017-书单
  <i class="fa fa-check-square-o" aria-hidden="true"></i> **程序员思维修炼 -duokan**(2017-08-23 to )
 
  <i class="fa fa-square-o" aria-hidden="true"></i> tcpip经典 -duokan
-
- <i class="fa fa-square-o" aria-hidden="true"></i> Python繁琐工作自动化 -duokan
 
 # <i class="fa fa-video-camera" style="font-size:1em;"></i> 2017-视频
 
