@@ -2,8 +2,8 @@
 layout: post
 title: DjangoBasic-05-添加草稿/发布/删除/编辑功能
 date: 2017-08-18 22:45:59
-categories: Python
-tags: DjangoBasic
+categories: Django
+tags: Django
 ---
 * content
 {:toc}

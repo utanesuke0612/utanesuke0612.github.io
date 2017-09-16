@@ -2,8 +2,8 @@
 layout: post
 title: DjangoBasic-02-显示出第一个网页
 date: 2017-08-12 12:45:59
-categories: Python
-tags: DjangoBasic
+categories: Django
+tags: Django
 ---
 * content
 {:toc}

@@ -2,8 +2,8 @@
 layout: post
 title: DjangoSample-02-应用ACE模板(html/css/javascript)-01
 date: 2017-09-01 22:45:59
-categories: Python
-tags: Django
+categories: Django
+tags: Django总结
 ---
 * content
 {:toc}

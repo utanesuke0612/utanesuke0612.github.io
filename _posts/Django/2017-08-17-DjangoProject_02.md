@@ -2,8 +2,8 @@
 layout: post
 title: DjangoProject-01-Models模型入门(2)(Introduction to models)
 date: 2017-08-16 22:46:59
-categories: Python
-tags: Django
+categories: Django
+tags: Django官方文档
 ---
 * content
 {:toc}

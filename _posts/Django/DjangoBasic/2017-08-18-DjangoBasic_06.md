@@ -2,8 +2,8 @@
 layout: post
 title: DjangoBasic-06-让网站更安全(login处理)
 date: 2017-08-18 23:46:59
-categories: Python
-tags: DjangoBasic
+categories: Django
+tags: Django
 ---
 * content
 {:toc}

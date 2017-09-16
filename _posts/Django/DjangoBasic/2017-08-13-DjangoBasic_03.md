@@ -2,8 +2,8 @@
 layout: post
 title: DjangoBasic-03-模板扩展-blog详情页面
 date: 2017-08-12 22:45:59
-categories: Python
-tags: DjangoBasic
+categories: Django
+tags: Django
 ---
 * content
 {:toc}

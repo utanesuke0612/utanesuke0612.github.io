@@ -2,8 +2,8 @@
 layout: post
 title: DjangoSample-01-Models数据在html的显示
 date: 2017-08-16 22:45:59
-categories: Python
-tags: Django
+categories: Django
+tags: Django总结
 ---
 * content
 {:toc}
