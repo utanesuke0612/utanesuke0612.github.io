@@ -8,6 +8,14 @@ tag:
 * content
 {:toc}
 
+# 0. 前期准备
+
+## 0.1 数据分析进阶(2017-09-27 / )
+
+### 1. 9/27日之前完成:
+- 北京理工Mooc - Python数据分析与展示(2017-09-17 / )
+- 统计思维 - 程序员数据之概率统计
+
 
 # 1. 先修知识及要求
 > 参考[优达:无人驾驶车工程师](https://cn.udacity.com/course/self-driving-car-engineer--nd013#requirements)
