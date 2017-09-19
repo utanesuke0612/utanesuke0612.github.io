@@ -16,6 +16,5 @@ permalink: /reference/
 
 # 9. BLog
  - [自强学堂(Django教程)](http://code.ziqiangxuetang.com/django/django-tutorial.html)
- - [自强学堂(Django学习资源)](http://code.ziqiangxuetang.com/learn_share/django-learn-resource.html)
- - [自强学堂(Python学习资源)](http://code.ziqiangxuetang.com/learn_share/python-learn-resource.html)
+ - [阮一峰的网络日志](http://www.ruanyifeng.com/blog/)
  - [廖雪峰官方网站(python/git)](https://www.liaoxuefeng.com/)
