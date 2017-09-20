@@ -1,20 +1,40 @@
-import matplotlib.pyplot as plt
 import numpy as np
-
-a = np.arange(0.0,5.0,0.02)
-plt.plot(a,np.cos(2*np.pi*a),'r--')
-plt.ylabel('纵轴(值)',fontproperties='SimHei',fontsize=20,color='green')
-plt.xlabel('横轴(值)',fontproperties='SimHei',fontsize=20)
-
-# $是一种Latex语法
-plt.title(r'正弦波示例 $y=cos(2\pi x)$',fontproperties='SimHei',fontsize=25)
-plt.annotate(r'$\mu=100$',xy=(2,1),xytext=(3,1.5),arrowprops=dict(facecolor='blue',shrink=0.1,width=2))
-
-# 使数字前的负号能正确显示
-plt.rcParams['axes.unicode_minus'] = False 
-
-plt.axis([-1,6,-2,2])
-
-plt.grid(True)
-
+import matplotlib.pyplot as plt
+from scipy.io import wavfile
+ 
+rate_h, hstrain= wavfile.read(r"H1_Strain.wav","rb")
+rate_l, lstrain= wavfile.read(r"L1_Strain.wav","rb")
+#reftime, ref_H1 = np.genfromtxt('GW150914_4_NR_waveform_template.txt').transpose()
+reftime, ref_H1 = np.genfromtxt('wf_template.txt').transpose() #使用python123.io下载文件
+ 
+htime_interval = 1/rate_h
+ltime_interval = 1/rate_l
+fig = plt.figure(figsize=(12, 6))
+ 
+# 丢失信号起始点
+htime_len = hstrain.shape[0]/rate_h
+htime = np.arange(-htime_len/2, htime_len/2 , htime_interval)
+plth = fig.add_subplot(221)
+plth.plot(htime, hstrain, 'y')
+plth.set_xlabel('Time (seconds)')
+plth.set_ylabel('H1 Strain')
+plth.set_title('H1 Strain')
+ 
+ltime_len = lstrain.shape[0]/rate_l
+ltime = np.arange(-ltime_len/2, ltime_len/2 , ltime_interval)
+pltl = fig.add_subplot(222)
+pltl.plot(ltime, lstrain, 'g')
+pltl.set_xlabel('Time (seconds)')
+pltl.set_ylabel('L1 Strain')
+pltl.set_title('L1 Strain')
+ 
+pltref = fig.add_subplot(212)
+pltref.plot(reftime, ref_H1)
+pltref.set_xlabel('Time (seconds)')
+pltref.set_ylabel('Template Strain')
+pltref.set_title('Template')
+fig.tight_layout()
+ 
+plt.savefig("Gravitational_Waves_Original.png")
 plt.show()
+plt.close(fig)
