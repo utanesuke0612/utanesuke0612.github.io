@@ -27,10 +27,9 @@ tags: Python Udacity DataAnalysis
 - 建立了一个以account_key为索引，以engagement中记录为values的字典
 ```python
 from collections import defaultdict
+# 创建基于 student 对 engagement 进行分组的字典，字典的键为帐号（account key），值为包含互动记录的列表
 
-# 使用默认dict，如果通过一个key在defaultdict中找不到的话，返回一个空的list
 engagement_by_account = defaultdict(list)
-
 for engagement_record in paid_engagement_in_first_week:
     account_key = engagement_record['account_key']
     engagement_by_account[account_key].append(engagement_record)
@@ -60,50 +59,41 @@ In[117]: engagement_by_account['2']
 
 - 将每个学生的时间记录起来
 ```python
-# 将可能是空字符串或字符串类型的数据转为 整型 或 None。
-def parse_maybe_int(i):
-    if i == '':
-        return None
-    else:
-        return int(i)
-
-# 建立一个记录时间的字典，以account_key为索引，一周内的总时间为value
+# 创建一个包含学生在第1周在教室所花总时间和字典。键为帐号（account key），值为数字（所花总时间）
 total_minutes_by_account = {}
-
-for account_key,engagement_for_student in engagement_by_account.items():
+for account_key, engagement_for_student in engagement_by_account.items():
     total_minutes = 0
     for engagement_record in engagement_for_student:
-        total_minutes += parse_maybe_int(float(engagement_record['total_minutes_visited']))
+          total_minutes += engagement_record['total_minutes_visited']
     total_minutes_by_account[account_key] = total_minutes
-
 ```
 
 - 统计
 
 ```python
-total_minutes = total_minutes_by_account.values()
-
 import numpy as np
 
-print 'mean:',np.mean(total_minutes)
-print 'Standard deviation:',np.std(total_minutes)
-print 'Minimum',np.min(total_minutes)
-print 'Maximum',np.max(total_minutes)
+# 汇总和描述关于教室所花时间的数据
+total_minutes = total_minutes_by_account.values()
+print 'Mean:', np.mean(total_minutes)
+print 'Standard deviation:', np.std(total_minutes)
+print 'Minimum:', np.min(total_minutes)
+print 'Maximum:', np.max(total_minutes)
 
 ```
 输出如下：
 
 ```python
-mean: 642.870611836
-Standard deviation: 1123.12784614
-Minimum 0
-Maximum 10535
+Mean: 647.590173826
+Standard deviation: 1129.27121042
+Minimum: 0.0
+Maximum: 10568.1008673
 
 ```
 
 # 2. 找问题
-上面有个学生的时间长度为10535分钟，即180小时左右，显然不正常，需要调查。
-- 首先要找出异常数据的account_key，都是输出`(u'183', 10535)`，即account_key和总时间长度
+上面有个学生的时间长度为10568分钟，即180小时左右，显然不正常，需要调查。
+- 首先要找出异常数据的account_key，都是输出(u'108', 10568.100867332541)，即account_key和总时间长度
 
 ```python
 # 方法1，使用lambda表达式取最大值
@@ -128,5 +118,56 @@ def within_one_week(join_date, engagement_date):
 def within_one_week(join_date, engagement_date):
     time_delta =parse_date(engagement_date) - parse_date(join_date)
     return time_delta.days < 7
+```
+因为注册之后再注销，反复多次，就造成了join_date可能晚于engagement_date。
+
+## 2.1  找出 `第一周内完成的课程`
+
+在之前的代码中，完成了第一周内时间数的统计，这一类是非常常见的操作，最好将其封装为函数，将要统计的属性作为参数名传递过去。
+重构之前的代码，重构后：
+
+```python
+from collections import defaultdict
+
+def group_data(data, key_name):
+    grouped_data = defaultdict(list)
+    for data_point in data:
+        key = data_point[key_name]
+        grouped_data[key].append(data_point)
+    return grouped_data
+
+engagement_by_account = group_data(paid_engagement_in_first_week,
+                                   'account_key')
+
+def sum_grouped_items(grouped_data, field_name):
+    summed_data = {}
+    for key, data_points in grouped_data.items():
+        total = 0
+        for data_point in data_points:
+            total += data_point[field_name]
+        summed_data[key] = total
+    return summed_data
+
+total_minutes_by_account = sum_grouped_items(engagement_by_account,
+                                             'total_minutes_visited')
+
+import numpy as np
+
+def describe_data(data):
+    print 'Mean:', np.mean(data)
+    print 'Standard deviation:', np.std(data)
+    print 'Minimum:', np.min(data)
+    print 'Maximum:', np.max(data)
+
+describe_data(total_minutes_by_account.values())
 
 ```
+
+- 调用上面的函数，来分析第一周完成的课程，如下所示：
+```python
+lessons_completed_by_account = sum_grouped_items(engagement_by_account,
+                                                 'lessons_completed')
+describe_data(lessons_completed_by_account.values())
+```
+
+> 未完待续

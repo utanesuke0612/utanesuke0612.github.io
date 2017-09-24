@@ -76,7 +76,7 @@ csv是一组以`,`分隔的一维数组，纯文本文件。
 import unicodecsv
 
 enrollments=[]
-f = open('unit1\enrollments.csv','rb')
+f = open('enrollments.csv','rb')
 reader = unicodecsv.DictReader(f)
 
 for row in reader:
@@ -105,7 +105,7 @@ enrollments[0]
 import unicodecsv
 
 enrollments=[]
-with open('unit1\enrollments.csv','rb') as f:
+with open('enrollments.csv','rb') as f:
     reader = unicodecsv.DictReader(f)
     enrollments = list(reader)
 
@@ -121,7 +121,6 @@ enrollments[0]
      u'is_udacity': u'True',
      u'join_date': u'2014-11-10',
      u'status': u'canceled'}
-
 ```
 
 如下是练习中的答案：
@@ -137,22 +136,85 @@ def read_csv(filename):
         return list(reader)
 
 enrollments = read_csv('enrollments.csv')
-daily_engagement = read_csv('daily_engagement.csv')
-project_submissions = read_csv('project_submissions.csv')
+daily_engagement = read_csv('daily-engagement.csv')
+project_submissions = read_csv('project-submissions.csv')
 ```
 
-## 3.2 获取学生数目
+## 3.2 清理数据
+可以看到上面所有输出数据的格式都是String，但是如果要进行处理，有一部分要变成int，一部分需要变成date类型，或True/False的bool。
+注意`int(float(engagement_record['lessons_completed']))`，因为在csv中数据为`0.0`，这种字符串直接转变为int会报错，需要先转为float。
+
+```python
+from datetime import datetime as dt
+
+# 将字符串格式的时间转为 Python datetime 类型的时间。
+# 如果没有时间字符串传入，返回 None
+
+def parse_date(date):
+    if date == '':
+        return None
+    else:
+        return dt.strptime(date, '%Y-%m-%d')
+
+# 将可能是空字符串或字符串类型的数据转为 整型 或 None。
+
+def parse_maybe_int(i):
+    if i == '':
+        return None
+    else:
+        return int(i)
+
+# 清理 enrollments 表格中的数据类型
+
+for enrollment in enrollments:
+    enrollment['cancel_date'] = parse_date(enrollment['cancel_date'])
+    enrollment['days_to_cancel'] = parse_maybe_int(enrollment['days_to_cancel'])
+    enrollment['is_canceled'] = enrollment['is_canceled'] == 'True'
+    enrollment['is_udacity'] = enrollment['is_udacity'] == 'True'
+    enrollment['join_date'] = parse_date(enrollment['join_date'])
+
+enrollments[0]
+
+# 清理 engagement 的数据类型
+for engagement_record in daily_engagement:
+    engagement_record['lessons_completed'] = int(float(engagement_record['lessons_completed']))
+    engagement_record['num_courses_visited'] = int(float(engagement_record['num_courses_visited']))
+    engagement_record['projects_completed'] = int(float(engagement_record['projects_completed']))
+    engagement_record['total_minutes_visited'] = float(engagement_record['total_minutes_visited'])
+    engagement_record['utc_date'] = parse_date(engagement_record['utc_date'])
+
+daily_engagement[0]
+
+# 清理 submissions 的数据类型
+for submission in project_submissions:
+    submission['completion_date'] = parse_date(submission['completion_date'])
+    submission['creation_date'] = parse_date(submission['creation_date'])
+
+project_submissions[0]
+
+
+```
+
+现在输出的数据为，变成了我们理想的数据格式，便于后续的处理:
+
+```python
+{u'account_key': u'448',
+ u'cancel_date': datetime.datetime(2015, 1, 14, 0, 0),
+ u'days_to_cancel': 65,
+ u'is_canceled': True,
+ u'is_udacity': True,
+ u'join_date': datetime.datetime(2014, 11, 10, 0, 0),
+ u'status': u'canceled'}
+```
+
+
+## 3.3 获取学生数目
 
 - 找出每个csv中记录的数目和学生的数目
 - 一个学生可能选重复的课程，所以将将学生的key去重复
 
 ```python
-import unicodecsv
-
-def read_csv(filename):
-    with open(filename, 'rb') as f:
-        reader = unicodecsv.DictReader(f)
-        return list(reader)
+## 计算每张表中的总行数，和独立学生（拥有独立的 account keys）的数量
 
 def get_unique_account_set(attri_list,key):
     account_set = set()
@@ -161,11 +223,6 @@ def get_unique_account_set(attri_list,key):
         account_set.add(attri[key])
 
     return account_set
-
-enrollments = read_csv('/datasets/ud170/udacity-students/enrollments.csv')
-daily_engagement = read_csv('/datasets/ud170/udacity-students/daily_engagement.csv')
-project_submissions = read_csv('/datasets/ud170/udacity-students/project_submissions.csv')
-
 
 enrollment_num_rows = len(enrollments)           
 enrollment_num_unique_students = len(get_unique_account_set(enrollments,'account_key'))
@@ -190,16 +247,17 @@ submission_num_unique_students = len(get_unique_account_set(project_submissions,
 ```
 
 
-## 3.3 数据中的问题
+## 3.4 数据中的问题
 1. 为什么注册的学生数，比参与课程的学生数要多？
 2. 同一个属性的字段，在各个表中的index名不同，两个表中为`account_key`，一个表中为`acct`。
 
 - 下面的代码中先添加一个列`account_key`，用已有的`acct`赋值给它，再将原始的列删除。
 
 ```python
-for engagement_record in daily_engagement:
-    engagement_record['account_key'] = engagement_record['acct']
-    del[engagement_record['acct']]
+## 将 daily_engagement 表中的 "acct" 重命名为 ”account_key"
+for daily_engagement_record in daily_engagement:
+    daily_engagement_record['account_key'] = daily_engagement_record['acct']
+    del(daily_engagement_record['acct'])
 ```
 
 - 分析为什么学生数目不一致
@@ -210,6 +268,9 @@ for engagement_record in daily_engagement:
 3. 解决问题 Fix any problems you find
 
 ```python
+## 找到任意一个 enrollments 中的学生，但不在 daily engagement 表中。
+## 打印出这条 enrollments 记录。
+
 for enrollment in enrollments:
     student = enrollment['account_key']
     if student not in get_unique_account_set(daily_engagement,'account_key'):
@@ -222,7 +283,6 @@ for enrollment in enrollments:
 ```python
 {u'status': u'canceled', u'is_udacity': u'True', u'is_canceled': u'True', u'join_date': u'2015-01-10', u'account_key': u'1304', u'cancel_date': u'2015-03-10', u'days_to_cancel': u'59'}
 {u'status': u'canceled', u'is_udacity': u'True', u'is_canceled': u'True', u'join_date': u'2015-03-10', u'account_key': u'1304', u'cancel_date': u'2015-06-17', u'days_to_cancel': u'99'}
-{u'status': u'canceled', u'is_udacity': u'False', u'is_canceled': u'True', u'join_date': u'2015-01-11', u'account_key': u'1010', u'cancel_date': u'2015-01-11', u'days_to_cancel': u'0'}
 {u'status': u'canceled', u'is_udacity': u'False', u'is_canceled': u'True', u'join_date': u'2014-11-12', u'account_key': u'841', u'cancel_date': u'2014-11-12', u'days_to_cancel': u'0'}
 
 ```
@@ -230,15 +290,17 @@ for enrollment in enrollments:
 从上面结果发现，几乎都是当前注册当天就取消了。但是也有例外，例外的条数为3，即3条数据不是当天取消的:
 
 ```python
-i = 0
+## 计算无众不同的数据点条数（在 enrollments 中存在，但在 engagement 表中缺失）
+
+num_problem_students = 0
 for enrollment in enrollments:
     student = enrollment['account_key']
-    if student not in get_unique_account_set(daily_engagement,'account_key'):
-        if enrollment['days_to_cancel'] != '0':
-            i += 1
-            print enrollment
+    if (student not in get_unique_account_set(daily_engagement,'account_key') and
+            enrollment['join_date'] != enrollment['cancel_date']):
+        print enrollment
+        num_problem_students += 1
 
-print i
+num_problem_students
 ```
 
 输出结果为:
@@ -252,16 +314,15 @@ print i
 
 为什么会出现这种情况，因为其`u'is_udacity': u'True'`，说明这个是测试用账号。
 
-## 3.4 解决数据中的问题
+## 3.5 解决数据中的问题
 - 先将测试帐号抽取出来，输出为`6`：
 
 ```python
+# 为所有 Udacity 测试帐号建立一组 set
 udacity_test_accounts = set()
 for enrollment in enrollments:
-    student = enrollment['account_key']
-    if enrollment['is_udacity'] == 'True':
-        udacity_test_accounts.add(student)
-
+    if enrollment['is_udacity']:
+        udacity_test_accounts.add(enrollment['account_key'])
 len(udacity_test_accounts)
 ```
 
@@ -269,17 +330,17 @@ len(udacity_test_accounts)
 
 ```python
 # 重新生成了一个非测试账号的数据集
-def remove_udacity_account(data):
+# 通过 account_key 删除所有 Udacity 的测试帐号
+def remove_udacity_accounts(data):
     non_udacity_data = []
     for data_point in data:
         if data_point['account_key'] not in udacity_test_accounts:
             non_udacity_data.append(data_point)
-
     return non_udacity_data
 
-non_udacity_enrollments = remove_udacity_account(enrollments)
-non_udacity_engagement = remove_udacity_account(daily_engagement)
-non_udacity_submissions = remove_udacity_account(project_submissions)
+non_udacity_enrollments = remove_udacity_accounts(enrollments)
+non_udacity_engagement = remove_udacity_accounts(daily_engagement)
+non_udacity_submissions = remove_udacity_accounts(project_submissions)
 
 print len(non_udacity_enrollments) # 输出 1622
 print len(non_udacity_engagement) # 输出 135656
@@ -287,7 +348,7 @@ print len(non_udacity_submissions) # 输出 3634
 
 ```
 
-## 3.5 : 分析更多数据-提炼问题
+## 3.6 : 分析更多数据-提炼问题
 
 抽取具有如下条件的学生:
 - 没有cancel的
@@ -297,18 +358,19 @@ print len(non_udacity_submissions) # 输出 3634
 
 
 ```python
-# 创建一个空的字典
+## 创建一个叫 paid_students 的字典，并在字典中存储所有还没有取消或者注册时间超过7天的学生。
+## 字典的键为帐号（account key），值为学生注册的时间。
+
 paid_students = {}
-# 遍历非测试帐号
 for enrollment in non_udacity_enrollments:
-    if enrollment['is_canceled'] == 'False' or int(float(enrollment['days_to_cancel'])) > 7:
+    if (not enrollment['is_canceled'] or
+            enrollment['days_to_cancel'] > 7):
         account_key = enrollment['account_key']
         enrollment_date = enrollment['join_date']
-        # 説明①
         if (account_key not in paid_students or
-               enrollment_date > paid_students[account_key]):
+                enrollment_date > paid_students[account_key]):
             paid_students[account_key] = enrollment_date
-print len(paid_students)
+len(paid_students)
 
 ```
 
@@ -333,22 +395,16 @@ ZeroDivisionError: integer division or modulo by zero
 
 ```
 
-## 3.6 获取一周的数据
+## 3.7 获取一周的数据
 
 ```python
-# 将字符串格式的时间转为 Python datetime 类型的时间。
-# 如果没有时间字符串传入，返回 None
-from datetime import datetime as dt
-def parse_date(date):
-    if date == '':
-        return None
-    else:
-        return dt.strptime(date, '%Y-%m-%d')
+# 基于学生的加入日期和特定一天的互动记录，若该互动记录发生在学生加入1周内，则反回 True
 
 def within_one_week(join_date, engagement_date):
-    time_delta =parse_date(engagement_date) - parse_date(join_date)
+    time_delta = engagement_date - join_date
     return time_delta.days < 7
 
+## 创建一个 engagement 记录的列表，该列表只包括付费学生以及加入的前7天的学生的记录
 def remove_free_trial_cancels(data):
     new_data = []
     for data_point in data:
@@ -356,7 +412,6 @@ def remove_free_trial_cancels(data):
             new_data.append(data_point)
     return new_data
 
-# 提取出上面没有取消，以及7天后取消的数据
 paid_enrollments = remove_free_trial_cancels(non_udacity_enrollments)
 paid_engagement = remove_free_trial_cancels(non_udacity_engagement)
 paid_submissions = remove_free_trial_cancels(non_udacity_submissions)
@@ -365,7 +420,7 @@ print len(paid_enrollments)
 print len(paid_engagement)
 print len(paid_submissions)
 
-
+## 输入符合要求的行数
 paid_engagement_in_first_week = []
 for engagement_record in paid_engagement:
     account_key = engagement_record['account_key']
@@ -376,6 +431,5 @@ for engagement_record in paid_engagement:
         paid_engagement_in_first_week.append(engagement_record)
 
 len(paid_engagement_in_first_week)
-
 
 ```
