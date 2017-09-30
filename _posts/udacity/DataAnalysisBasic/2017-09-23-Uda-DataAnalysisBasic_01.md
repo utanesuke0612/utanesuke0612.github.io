@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Uda-DataAnalysisBasic-01-数据分析过程(2)
+title: Uda-DataAnalysisBasic-01-数据分析过程(1)
 date: 2017-09-23 00:00:00
 categories: 数据分析
 tags: Python Udacity DataAnalysis
@@ -348,13 +348,12 @@ print len(non_udacity_submissions) # 输出 3634
 
 ```
 
-## 3.6 : 分析更多数据-提炼问题
+## 3.6 分析更多数据-提炼问题
 
 抽取具有如下条件的学生:
 - 没有cancel的
 - 超过7天(试用期外)cancel
 - keys:account_key values:enrollement_date
-
 
 
 ```python

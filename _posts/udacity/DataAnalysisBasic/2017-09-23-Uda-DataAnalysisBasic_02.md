@@ -25,6 +25,7 @@ tags: Python Udacity DataAnalysis
 
 
 - 建立了一个以account_key为索引，以engagement中记录为values的字典
+
 ```python
 from collections import defaultdict
 # 创建基于 student 对 engagement 进行分组的字典，字典的键为帐号（account key），值为包含互动记录的列表
@@ -58,6 +59,7 @@ In[117]: engagement_by_account['2']
 ```
 
 - 将每个学生的时间记录起来
+
 ```python
 # 创建一个包含学生在第1周在教室所花总时间和字典。键为帐号（account key），值为数字（所花总时间）
 total_minutes_by_account = {}
@@ -164,10 +166,12 @@ describe_data(total_minutes_by_account.values())
 ```
 
 - 调用上面的函数，来分析第一周完成的课程，如下所示：
+
 ```python
 lessons_completed_by_account = sum_grouped_items(engagement_by_account,
                                                  'lessons_completed')
 describe_data(lessons_completed_by_account.values())
 ```
 
-> 未完待续
+> 未完待续，待这个系列完毕后，再总结！总结的目的是为了升华理解，而不是memo记忆！
+> 代码的notebook可以放到slack上去，数据分析的思路总结在这里
