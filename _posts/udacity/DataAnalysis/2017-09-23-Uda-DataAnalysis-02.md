@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Uda-DataAnalysis-01-数据提取基础
+title: Uda-DataAnalysis-02-数据提取基础
 date: 2017-09-30 00:00:00
 categories: Uda-数据分析进阶
 tags: Python Udacity DataAnalysis
