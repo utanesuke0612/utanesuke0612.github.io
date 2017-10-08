@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Uda-DataAnalysis-15-the-little-mongodb-book
+title: Uda-DataAnalysis-15-[扩展]-the-little-mongodb-book
 date: 2017-10-4 00:00:00
 categories: Uda-数据分析进阶
-tags: Python Udacity DataAnalysis 
+tags: MongoDB Udacity DataAnalysis 
 ---
 * content
 {:toc}
@@ -122,7 +122,7 @@ db.unicorns.update({name: 'Roooooodles'},
 	{$set: {weight: 590}})
 ```
 
-## 3.2 ` $inc`增加正/负值，`$push `追加值
+## 3.2 `$inc`增加正/负值，`$push `追加值
 
 - 变更前
 
@@ -243,7 +243,3 @@ db.unicorns.count({vampires: {$gt: 50}})
 db.unicorns.find({vampires: {$gt: 50}}).count()
 
 ```
-
-
-# 5. 数据建模
-未完待续...
