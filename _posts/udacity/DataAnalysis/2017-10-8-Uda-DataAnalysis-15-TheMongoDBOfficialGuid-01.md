@@ -207,7 +207,7 @@ switched to db examples
 >
 ```
 
-##3.1 `$group` -> `$match`
+## 3.1 `$group` -> `$match`
 
 通过state分组，并输出每个state的人口总数，最后输出人口总数大于1千万的state。
 

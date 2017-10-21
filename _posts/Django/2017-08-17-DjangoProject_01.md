@@ -231,7 +231,8 @@ class Group(models.Model):
 ```
 
 
- ### ③ 1：1 关系
+### ③ 1：1 关系
+
 使用`OneToOneField`去进行定义，将它看作一个field处理。例如下面代码，一个Restaurant有一个Place，一个Place也只有一个Restaurantself。
 > 只是不太明白为什么这样使用？ 纯粹只是想将model变小么？将原本一个model中按类型，分成几个不同类型的model？
 
