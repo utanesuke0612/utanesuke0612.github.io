@@ -40,3 +40,53 @@ swirl()
 
 ## 9.2 运行`demystifying.R`
 
+自带的一个示例程序，通过这个示例程序能大致了解R语言。
+
+- 创建一个向量vector，vector是R中的一种数据类型，vector中的元素数据类型必须相同。
+
+```python
+udacious <- c("Chris Saden", "Lauren Castellano",
+              "Sarah Spikes","Dean Eckles",
+              "Andy Brown", "Moira Burke",
+              "Kunal Chawla")
+```
+
+- 类似的，也可以创建number数值类型的vector
+
+```python
+> numbers <- c(1:10)
+> numbers
+ [1]  1  2  3  4  5  6  7  8  9 10
+> 
+> numbers <- c(numbers, 11:20)
+> numbers
+ [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20
+```
+
+- 下面用`=`赋值，为什么？是两者都可以使用么？
+
+```python
+ > udacious <- c("Chris Saden", "Lauren Castellano",
++               "Sarah Spikes","Dean Eckles",
++               "Andy Brown", "Moira Burke",
++               "Kunal Chawla", "lijun")
+> mystery = nchar(udacious)
+> mystery
+[1] 11 17 12 11 10 11 12  5
+```
+
+- 用`==`比较vector中的每个元素
+
+```python
+> mystery
+[1] 11 17 12 11 10 11 12  5
+> mystery == 11
+[1]  TRUE FALSE FALSE  TRUE FALSE  TRUE FALSE FALSE
+```
+
+- 通过这种方式取出了所有长度为11的元素
+
+```python
+> udacious[mystery == 11]
+[1] "Chris Saden" "Dean Eckles" "Moira Burke"
+```
