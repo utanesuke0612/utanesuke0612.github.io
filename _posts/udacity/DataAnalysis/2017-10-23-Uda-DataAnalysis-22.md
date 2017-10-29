@@ -37,7 +37,6 @@ swirl()
 
 ## 9.1 使用swirl()
 
-
 ## 9.2 运行`demystifying.R`
 
 自带的一个示例程序，通过这个示例程序能大致了解R语言。
@@ -90,3 +89,130 @@ udacious <- c("Chris Saden", "Lauren Castellano",
 > udacious[mystery == 11]
 [1] "Chris Saden" "Dean Eckles" "Moira Burke"
 ```
+
+- 加载数据集`mtcars`
+
+```python
+data(mtcars)
+```
+
+- 取得数据集的名称 `names()`
+
+```python
+> names(mtcars)
+ [1] "mpg"  "cyl"  "disp" "hp"   "drat" "wt"   "qsec" "vs"   "am"   "gear" "carb"
+```
+
+-  获得帮助`?mtcars`，将在上图的第四部分显示帮助信息
+
+-  打印数据集合概要信息`str()`
+
+```python
+> str(mtcars)
+'data.frame':   32 obs. of  11 variables:
+ $ mpg : num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
+ $ cyl : num  6 6 4 6 8 6 8 4 4 6 ...
+ $ disp: num  160 160 108 258 360 ...
+ $ hp  : num  110 110 93 110 175 105 245 62 95 123 ...
+ $ drat: num  3.9 3.9 3.85 3.08 3.15 2.76 3.21 3.69 3.92 3.92 ...
+ $ wt  : num  2.62 2.88 2.32 3.21 3.44 ...
+ $ qsec: num  16.5 17 18.6 19.4 17 ...
+ $ vs  : num  0 0 1 1 0 1 0 1 1 1 ...
+ $ am  : num  1 1 1 0 0 0 0 0 0 0 ...
+ $ gear: num  4 4 4 3 3 3 3 4 4 4 ...
+ $ carb: num  4 4 1 1 2 1 4 2 2 4 ...
+```
+
+- 获取数据集维度信息 `dim()`
+
+```python
+> dim(mtcars)
+[1] 32 11
+```
+
+- 获取数据集的行的名称 `row.names()`,要取得帮助信息`？row.names()`
+
+```python
+> row.names(mtcars)
+ [1] "Mazda RX4"           "Mazda RX4 Wag"       "Datsun 710"          "Hornet 4 Drive"     
+ [5] "Hornet Sportabout"   "Valiant"             "Duster 360"          "Merc 240D"          
+ [9] "Merc 230"            "Merc 280"            "Merc 280C"           "Merc 450SE"         
+[13] "Merc 450SL"          "Merc 450SLC"         "Cadillac Fleetwood"  "Lincoln Continental"
+[17] "Chrysler Imperial"   "Fiat 128"            "Honda Civic"         "Toyota Corolla"     
+[21] "Toyota Corona"       "Dodge Challenger"    "AMC Javelin"         "Camaro Z28"         
+[25] "Pontiac Firebird"    "Fiat X1-9"           "Porsche 914-2"       "Lotus Europa"       
+[29] "Ford Pantera L"      "Ferrari Dino"        "Maserati Bora"       "Volvo 142E"
+
+# 赋予新的行名称
+> row.names(mtcars) <- c(1:32)
+>     
+```
+
+- 查看数据集的若干条`head(mtcars,10)`，`tail(mtcars,3)`,默认是6条
+
+- `mtcars$mpg` 取得数据集的指定行
+
+- `mean(mtcars$mpg)`，指定行的平均值
+
+
+# 11. 阅读并将数据子集化
+
+```python
+# 获取当前目录，设定当前目录
+getwd()
+setwd("C:/Users/utane/OneDrive/udacity/22-R basic")
+
+# 读取数据集
+statesInfo <- read.csv("stateData.csv")
+str(statesInfo)
+
+# 数据集的前6条数据
+head(statesInfo)
+
+# 方法1：获取数据集子集
+subset(statesInfo,state.region == 1)
+
+# 方法2：获取数据集子集
+statesInfo[statesInfo$state.region == 1, ]
+```
+
+
+
+# 12. 练习: R Markdown 文档
+
+使用` demystifyingR2.Rmd `练习。
+
+## 12.1 获取数据集的概要`str()`和`summary()`
+
+## 12.2 获取满足某个条件的额数据子集 `efficient <- subset(mtcars,mpg >= 23)`
+
+## 12.3 更多复合条件查询数据子集
+
+```python
+subset(mtcars, mpg > 30 & hp > 100)
+
+subset(mtcars, mpg < 14 | disp > 390)
+
+```
+
+
+## 12.4 给数据集新增一列
+
+```python
+mtcars$year <- 1974
+```
+
+## 12.5 删除数据集中指定的列
+
+```python
+mtcars <- subset(mtcars, select = -year)
+```
+
+## 12.6 通过vector给指定列赋值
+
+给各个行的year列，依次赋值1974,1975,1976,1977，依次循环。
+
+```python
+mtcars$year <- c(1974, 1975,1976,1977)
+```
+

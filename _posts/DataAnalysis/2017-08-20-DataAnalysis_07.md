@@ -310,7 +310,6 @@ DataFrame是一个表格类型的数据类型，每列值类型可以不同，�
 - 其他DataFrame类型
 
 ```python
-
 # 注意下面的out中，最左边和最上边都是index
 In [79]: pd.DataFrame(np.arange(9).reshape(3,3))
 Out[79]:
@@ -335,7 +334,6 @@ d  NaN    6
 ```
 
 ```python
-
 # 从列表类型的字典创建
 In [85]: d1 = {'one':[1,2,3,4],'two':[9,8,7,6]}
 
@@ -378,6 +376,7 @@ array([[1, 9],
 ```
 
 - 索引数据
+
 ```python
 # 列索引去数据
 In [101]: d['one']
