@@ -531,6 +531,3 @@ bwplot(schtyp.f ~ read | ses.f, data = combo, layout = c(2, 2))
 ```
 
 ![image](https://user-images.githubusercontent.com/18595935/33079929-2b12d2f4-cf1a-11e7-9cd2-ad445571686e.png)
-
-
-# 16. 
