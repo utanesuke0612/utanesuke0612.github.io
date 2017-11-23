@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Uda-DataAnalysis-22-[扩展]-R语言实战(第二版)
+title: Uda-DataAnalysis-22-[扩展]-R语言实战(第二版)-(1)入门与基本方法
 date: 2017-10-21 01:00:01
 categories: Uda-数据分析进阶
 tags: R Udacity DataAnalysis 
@@ -69,3 +69,13 @@ tags: R Udacity DataAnalysis
 ### 3.5 图形尺寸和边界尺寸
 
 ## 4. 添加文本，自定义坐标轴和图例
+
+# [第4章 基本数据管理]()
+
+
+# [第5章 高级数据管理]()
+
+
+# [第6章 基本图形]()
+
+# [第7章 基本统计分析]()
