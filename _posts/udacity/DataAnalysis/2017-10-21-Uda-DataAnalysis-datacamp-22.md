@@ -10,6 +10,8 @@ tags: R Udacity DataAnalysis
 
 >根据Quick R的推荐，先使用[R tutorial by datacamp](https://www.datacamp.com/courses/free-introduction-to-r)入门。
 
+笔记参考 [notebook](http://www.utanesuke.shop/03-R-action/tutorial-datacamp.nb.html)
+
 # 1. Intro to basics
 
 ## 1.1 Arithmetic with R
