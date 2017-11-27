@@ -2,8 +2,8 @@
 layout: post
 title: 程序员思维修炼-(1)概要
 date: 2017-08-25 22:45:59
-categories: 读书笔记
-tags: 自我实现
+categories: 其他
+tags: 其他
 ---
 * content
 {:toc}
