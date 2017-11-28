@@ -24,7 +24,7 @@ pf <- read.csv("pseudo_facebook.tsv",sep='\t')
 
 - 绘图
 
-```{r Scatterplots}
+```{r}
 qplot(x = age,y = friend_count,data=pf)
 ```
 
@@ -40,7 +40,7 @@ summary(pf$age)
 
 - 使用ggplot画图
 
-```{r ggplot Syntax}
+```{r}
 ggplot(aes(x=age,y=friend_count),data = pf) + geom_point() + 
   xlim(13,113)
 ```
@@ -59,7 +59,7 @@ ggplot(aes(x=age,y=friend_count),data = pf) + geom_point() +
 
 下图的分布与[19. 练习：用户年龄](http://localhost:4000/2017/11/22/Uda-DataAnalysis-23/#19-练习用户年龄)中吻合
 
-```{r Overplotting}
+```{r}
 ggplot(aes(x=age,y=friend_count),data = pf) + 
   geom_point(alpha = 1/20) + 
   xlim(13,113)
