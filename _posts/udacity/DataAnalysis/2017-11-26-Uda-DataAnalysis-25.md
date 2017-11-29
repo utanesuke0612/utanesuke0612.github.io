@@ -81,7 +81,7 @@ ggplot(aes(x=age,y=friend_count),data = pf) +
 
 # 6. 练习：coord_trans()
 
-```{r Coord_trans()}
+```python
 ggplot(aes(x=age,y=friend_count),data = pf) + 
   geom_point(alpha = 1/20) + 
   xlim(13,113) + coord_trans(y = "sqrt")
@@ -95,7 +95,7 @@ ggplot(aes(x=age,y=friend_count),data = pf) +
 
 - 自己的实现，使用facet_wrap进行了分面，区分的男和女的情况
 
-```{r}
+```python
 ggplot(aes(x=age,y=friendships_initiated),data = pf) +
   geom_jitter(alpha = 1/20) +
 xlim(13,113) + facet_wrap(~gender,ncol = 2)
@@ -106,7 +106,7 @@ xlim(13,113) + facet_wrap(~gender,ncol = 2)
 
 - 课程示例，上面的6说明了jitter的情况下不能使用sqrt分层，如果使用下面的形式，可以使得sqrt下使用抖动：
 
-```{r}
+```python
 ggplot(aes(x=age,y=friendships_initiated),data = pf) +
   geom_point(alpha = 1/10,position = position_jitter( h = 0 )) +
 coord_trans(y="sqrt")
