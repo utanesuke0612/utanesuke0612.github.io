@@ -81,3 +81,39 @@ ggplot(aes(x=age,y=friend_count),data = pf) +
 
 # 6. 练习：coord_trans()
 
+```{r Coord_trans()}
+ggplot(aes(x=age,y=friend_count),data = pf) + 
+  geom_point(alpha = 1/20) + 
+  xlim(13,113) + coord_trans(y = "sqrt")
+```
+
+![image](https://user-images.githubusercontent.com/18595935/33380299-f6ad76a0-d55d-11e7-9d94-751625fe09a1.png)
+
+因为使用了sqrt函数，图中不能加入jitter抖动了，抖动后会使得y产生负数，那如果负数使用sqrt的话就会成为虚数。。。
+
+# 7. Alpha 和 Jitter
+
+- 自己的实现，使用facet_wrap进行了分面，区分的男和女的情况
+
+```{r}
+ggplot(aes(x=age,y=friendships_initiated),data = pf) +
+  geom_jitter(alpha = 1/20) +
+xlim(13,113) + facet_wrap(~gender,ncol = 2)
+  
+```
+
+![image](https://user-images.githubusercontent.com/18595935/33380823-a932d328-d55f-11e7-9608-2c34861e30e7.png)
+
+- 课程示例，上面的6说明了jitter的情况下不能使用sqrt分层，如果使用下面的形式，可以使得sqrt下使用抖动：
+
+```{r}
+ggplot(aes(x=age,y=friendships_initiated),data = pf) +
+  geom_point(alpha = 1/10,position = position_jitter( h = 0 )) +
+coord_trans(y="sqrt")
+
+```
+
+![image](https://user-images.githubusercontent.com/18595935/33381163-8fdc93ae-d560-11e7-8f71-2f7464b04b43.png)
+
+
+- 8. 
