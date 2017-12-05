@@ -116,4 +116,150 @@ coord_trans(y="sqrt")
 ![image](https://user-images.githubusercontent.com/18595935/33381163-8fdc93ae-d560-11e7-8f71-2f7464b04b43.png)
 
 
-- 8. 
+# 9. 条件均值
+
+本节中使用dplyr包，需要另外安装：
+
+
+```{r}
+install.packages("dplyr")
+library("dplyr")
+```
+
+- 有下面两种方式对数据重新组织，最终都得到相同的结果集：
+
+```{r}
+age_groups <- group_by(pf,age)
+pf.fc_by_age <- summarise(age_groups,
+                          friend_count_mean = mean(friend_count),
+                          friend_count_median = median(friend_count),
+                          n = n())
+head(pf.fc_by_age,10)
+```
+
+
+
+```{r}
+pf.fc_by_age <- pf %>%
+  group_by(age) %>%
+  summarise(friend_count_mean = mean(friend_count),
+            friend_count_median = median(friend_count),
+            n = n()) %>%
+  arrange(age)
+head(pf.fc_by_age,100)
+  
+```
+
+
+![image](https://user-images.githubusercontent.com/18595935/33609400-4773995a-da0b-11e7-9982-17c61c8d7460.png)
+
+
+- 练习：
+
+
+```{r}
+ggplot(aes(x=age,y=friend_count_mean),data = pf.fc_by_age) + 
+  geom_line() 
+```
+
+
+![image](https://user-images.githubusercontent.com/18595935/33609432-713a25a6-da0b-11e7-9324-6f31f44f8671.png)
+
+
+
+# 10. 练习: 将摘要与原始数据叠加
+
+将多个图叠加到一起了：
+
+```{r}
+ggplot(aes(x=age,y=friend_count),data=pf) + 
+   coord_cartesian(xlim = c(13, 90)) + 
+  geom_point(alpha = 0.05,
+             position = position_jitter(h=0),
+             color="orange") +
+  coord_trans(y="sqrt") + 
+  geom_line(stat = "summary",fun.y = mean) + 
+  geom_line(stat = "summary",fun.y = quantile,fun.args = list(probs = .1),
+            linetype = 2,color = "red") + 
+  geom_line(stat = "summary",fun.y = quantile,fun.args = list(probs = .5),
+            color = "green") + 
+  geom_line(stat = "summary",fun.y = quantile,fun.args = list(probs = .9),
+            linetype = 2,color = "blue")
+```
+
+
+![image](https://user-images.githubusercontent.com/18595935/33610927-1d3cc206-da10-11e7-91b6-5045ef9f7822.png)
+
+
+注意`coord_cartesian`函数也可以添加ylim的值范围。
+
+
+# 12. 相关性
+
+默认使用pearson相关：
+
+```{r}
+cor(pf$age,pf$friend_count)
+```
+
+结果为`-0.02740737`。
+
+视频中使用的是另一种方式，先查看对应的帮助：
+
+```{r}
+?cor.test
+```
+
+
+```{r}
+cor.test(x, ...)
+
+## Default S3 method:
+cor.test(x, y,
+         alternative = c("two.sided", "less", "greater"),
+         method = c("pearson", "kendall", "spearman"),
+         exact = NULL, conf.level = 0.95, continuity = FALSE, ...)
+```
+
+
+```{r}
+cor.test(pf$age,pf$friend_count,method="pearson")
+```
+
+或
+
+```{r}
+with(pf,cor.test(age,friend_count,method="pearson"))
+```
+
+得到相同的结果：
+
+```{r}
+-0.02740737 
+```
+
+
+# 13. 子集相关性
+
+观察上面的图形，年龄与好友数量的关系并不是线性的，在70岁之后呈现上涨趋势，可能是错误数据，如果要计算70岁以下数据集的相关性，
+
+
+```{r}
+with(subset(pf,pf$age <= 70),cor.test(age,friend_count,method="pearson"))
+```
+
+得到相同的结果：
+
+```{r}
+-0.1712144  
+```
+
+# 15. 创建散点图
+
+```{r}
+ggplot(aes(x=www_likes_received,y=likes_received),data = pf) + geom_point()
+```
+
+![image](https://user-images.githubusercontent.com/18595935/33612209-378b8a3a-da14-11e7-8f02-7453a05cc4c2.png)
+
+
