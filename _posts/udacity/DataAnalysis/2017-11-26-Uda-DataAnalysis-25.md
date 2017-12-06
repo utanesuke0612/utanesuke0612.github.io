@@ -263,3 +263,70 @@ ggplot(aes(x=www_likes_received,y=likes_received),data = pf) + geom_point()
 ![image](https://user-images.githubusercontent.com/18595935/33612209-378b8a3a-da14-11e7-8f02-7453a05cc4c2.png)
 
 
+# 16. 强相关
+
+
+```{r}
+ggplot(aes(x=www_likes_received,y=likes_received),data = pf) +
+  geom_point() + 
+  xlim(0,quantile(pf$www_likes_received,0.95)) +
+  ylim(0,quantile(pf$likes_received,0.95)) +
+  geom_smooth(method="lm",color="red")
+```
+
+
+![image](https://user-images.githubusercontent.com/18595935/33666055-2c0b2080-dadc-11e7-8300-d772f257d62a.png)
+
+
+```{r}
+with(pf,
+     cor.test(www_likes_received,likes_received,method="pearson"))
+```
+
+结果为` 0.9479902 `。
+
+# 18. 相关系数的更多注意事项
+
+- 先安装对应的包，并查看示例数据的帮助
+
+```{r}
+install.packages("alr3")
+library(alr3)
+```
+
+
+```{r}
+data(Mitchell)
+?Mitchell
+```
+
+
+```{r}
+ggplot(aes(x=Month,y=Temp),data = Mitchell) +
+  geom_point() 
+```
+
+
+![image](https://user-images.githubusercontent.com/18595935/33667086-36c7408c-dadf-11e7-95eb-9b9208464b12.png)
+
+
+# 19. 噪声散点图
+
+查看月份与温度的相关度：
+
+```{r}
+with(Mitchell,
+     cor.test(Month,Temp,method="pearson"))
+```
+
+# 20. 理解数据
+
+```{r}
+ggplot(aes(x=Month,y=Temp),data = Mitchell) +
+  geom_point() + scale_x_continuous(breaks = seq(0,203,12))
+```
+
+
+![image](https://user-images.githubusercontent.com/18595935/33667196-9658c9d0-dadf-11e7-8a3e-802b2fb7b6e6.png)
+
+
