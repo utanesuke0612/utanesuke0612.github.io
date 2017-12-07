@@ -265,6 +265,8 @@ ggplot(aes(x=www_likes_received,y=likes_received),data = pf) + geom_point()
 
 # 16. 强相关
 
+忽略了x和y轴上的前5%的数据。
+相关系数在 X 或 Y 的线性转换下是不变的，并且当 X 和 Y 都被转换为 z 分数时，回归线的斜率就是相关系数。
 
 ```{r}
 ggplot(aes(x=www_likes_received,y=likes_received),data = pf) +
@@ -329,4 +331,95 @@ ggplot(aes(x=Month,y=Temp),data = Mitchell) +
 
 ![image](https://user-images.githubusercontent.com/18595935/33667196-9658c9d0-dadf-11e7-8a3e-802b2fb7b6e6.png)
 
+
+# 21. 新的视角
+
+将每一年的数据相互叠加，构建出一个清晰的常规正弦曲线图。你可以在代码中使用 R 的模数运算符 %% 来这样做。尝试运行以下代码！
+
+```{r}
+ggplot(aes(x=Month%%12,y=Temp),data = Mitchell) +
+  geom_point() + scale_x_continuous(breaks = seq(0,203,12))
+```
+
+![image](https://user-images.githubusercontent.com/18595935/33715520-34b6df3e-db96-11e7-9378-20108deeda49.png)
+
+
+# 22. 练习: 了解噪声：年龄到月龄
+
+之前的图形中，只有age，现在讲月份考虑进去：
+
+```{r}
+pf$age_with_months <- pf$age + (1 - pf$dob_month / 12) 
+head(pf$age_with_months)
+```
+
+# 23. 练习: 带有月均值的年龄
+
+通过上面22的代码，已经给pf追加了新的属性`age_with_months`，pf的当前结构如下：
+
+```{r}
+names(pf)
+```
+
+[1] "userid"                "age"                   "dob_day"               "dob_year"              "dob_month"            
+ [6] "gender"                "tenure"                "friend_count"          "friendships_initiated" "likes"                
+[11] "likes_received"        "mobile_likes"          "mobile_likes_received" "www_likes"             "www_likes_received"   
+[16] "age_with_months"   
+
+
+- 练习：产生新的dataframe
+
+```{r}
+age_month_groups <- group_by(pf, age_with_months) 
+
+pf.fc_by_age_months <- summarise(age_month_groups, 
+    friend_count_mean = mean(friend_count), 
+    friend_count_median = median(friend_count), 
+    n = n()) 
+
+pf.fc_by_age_months <- arrange(pf.fc_by_age_months, age_with_months) 
+
+head(pf.fc_by_age_months)
+
+```
+
+![image](https://user-images.githubusercontent.com/18595935/33717039-cee365b4-db9b-11e7-956e-1ef015eb709f.png)
+
+
+
+# 24. 练习: 条件均值中的噪声
+
+
+
+```{r}
+ggplot(aes(x=age_with_months,y=friend_count_mean),data=subset(pf.fc_by_age,age_with_months <= 70)) + 
+  geom_line()
+```
+
+
+![image](https://user-images.githubusercontent.com/18595935/33717256-96b3bd82-db9c-11e7-9034-4ef14287f01d.png)
+
+
+# 25. 平滑化条件均值
+
+```{r}
+
+p1 <- ggplot(aes(x=age,y=friend_count_mean),data=subset(pf.fc_by_age,age<71)) + 
+  geom_line()+ geom_smooth()
+
+
+p2 <- ggplot(aes(x=age_with_months,y=friend_count_mean),data=subset(pf.fc_by_age_months,age_with_months <= 71)) + 
+  geom_line() + geom_smooth()
+
+p3 <- ggplot(aes(x=round(age/5)*5,y=friend_count_mean),data=subset(pf.fc_by_age,age<71)) + 
+  geom_line(stat = "summary",fun.y=mean)
+
+library(gridExtra)
+
+grid.arrange(p2,p1,p3,ncol=1)
+
+```
+
+
+![image](https://user-images.githubusercontent.com/18595935/33717877-e64f9ff8-db9e-11e7-87b4-a06260f472f2.png)
 
