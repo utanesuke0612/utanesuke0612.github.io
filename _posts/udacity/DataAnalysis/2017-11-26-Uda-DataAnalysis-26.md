@@ -109,9 +109,155 @@ sample estimates:
 
 # 12. 练习: 调整 - 价格与体积
 
+```{r}
+ggplot(aes(x=volumn,y=price),data=subset(diamonds,diamonds$volumn > 0 & diamonds$volumn <= 800)) + geom_point(alpha = 1/20) + geom_smooth()
+```
+
+![image](https://user-images.githubusercontent.com/18595935/33767033-6934f278-dc63-11e7-88ad-c22937a84aaa.png)
+
+
+# 13. 练习: 平均价格 - 净度
+
+Use the function dplyr package to create a new data frame containing info on diamonds by clarity.
+- Name the data frame diamondsByClarity
+- The data frame should contain the following,variables in this order.
+(1) mean_price
+(2) median_price
+(3) min_price
+(4) max_price
+(5) n
+- where n is the number of diamonds in each level of clarity.
+
+
+- 方案1
+
+```{r}
+suppressMessages(library(ggplot2))
+suppressMessages(library(dplyr))
+
+data(diamonds)
+diamonds.diamondsByClarity <- diamonds %>%
+  group_by(clarity) %>%
+  summarise(mean_price = mean(price),
+            median_price = median(price),
+            min_price = min(price),
+            max_price = max(price),
+            n = n()) %>%
+  arrange(clarity)
+head(diamonds.diamondsByClarity,100)
+```
+
+- 方案2
+
+```{r}
+suppressMessages(library(ggplot2))
+suppressMessages(library(dplyr))
+
+data(diamonds)
+clarity_groups <- group_by(diamonds,clarity)
+diamonds.diamondsByClarity <- summarise(clarity_groups,
+                          mean_price = mean(price),
+            median_price = median(price),
+            min_price = min(price),
+            max_price = max(price),
+            n = n())
+head(diamonds.diamondsByClarity,10)
+```
+
+- 最终得到相同的数据集：通过clarity分组，然后计算各组的描述统计量：
+
+![image](https://user-images.githubusercontent.com/18595935/33788852-f56dcf18-dcb7-11e7-9c79-f7f6523d23cd.png)
+
+
+# 14. 练习: 平均价格柱状图
+
+We’ve created summary data frames with the mean price　by clarity and color. You can run the code in R to　verify what data is in the variables diamonds_mp_by_clarity　and diamonds_mp_by_color.
+
+Your task is to write additional code to create two bar plots　on one output image using the grid.arrange() function from the package　gridExtra.
 
 
 
+```{r}
+diamonds_by_clarity <- group_by(diamonds, clarity)
+diamonds_mp_by_clarity <- summarise(diamonds_by_clarity, mean_price = mean(price))
+
+diamonds_by_color <- group_by(diamonds, color)
+diamonds_mp_by_color <- summarise(diamonds_by_color, mean_price = mean(price))
+
+```
+
+通过上面的代码，将数据进行分组，上面数据是如下的构成：
+
+![image](https://user-images.githubusercontent.com/18595935/33789172-18e39c3c-dcba-11e7-92a6-a4d43c9dce8e.png)
+
+通过上面的group_by后没有改变原始数据的行数和列数，只是在其中追加了一些变量，为后面的summarise做准备：
+
+![image](https://user-images.githubusercontent.com/18595935/33789326-1a67bde4-dcbb-11e7-9407-7e559d90cc12.png)
 
 
+最终得到的分组汇总后数据如下：
+
+![image](https://user-images.githubusercontent.com/18595935/33789368-54c18b28-dcbb-11e7-9ada-6cfe9ade7b8d.png)
+
+- 练习：
+
+```{r}
+p1 <- ggplot(aes(x=clarity,y=mean_price),data=diamonds_mp_by_clarity) + geom_boxplot()
+p2 <- ggplot(aes(x=color,y=mean_price),data=diamonds_mp_by_color) + geom_boxplot()
+
+library(gridExtra)
+grid.arrange(p1,p2,ncol=1)
+```
+
+![image](https://user-images.githubusercontent.com/18595935/33789397-72828720-dcbb-11e7-9da0-75d867eb4c76.png)
+
+
+# 15. 练习: 平均价格的趋势
+
+We think something odd is going here. These trends seem to go against our intuition.
+Mean price tends to decrease as clarity improves. The same can be said for color.
+We encourage you to look into the mean price across cut.
+
+
+```{r}
+diamonds_by_cut <- group_by(diamonds, cut)
+diamonds_mp_by_cut <- summarise(diamonds_by_cut, mean_price = mean(price))
+ggplot(aes(x=cut,y=mean_price),data=diamonds_mp_by_cut) + geom_boxplot()
+```
+
+
+![image](https://user-images.githubusercontent.com/18595935/33789532-686fddc2-dcbc-11e7-9331-8e0fffbb16d0.png)
+
+感觉还是哪里不对，为什么最好成分的钻石其价格还不是最高呢？可能跟克拉数有关，按照钻石成分对克拉数做个分析：
+
+```{r}
+diamonds_by_cut <- group_by(diamonds, cut)
+diamonds_mp_by_cut <- summarise(diamonds_by_cut, mean_carat = mean(carat))
+ggplot(aes(x=cut,y=mean_carat),data=diamonds_mp_by_cut) + geom_boxplot()
+```
+
+![image](https://user-images.githubusercontent.com/18595935/33789577-dfa9e4be-dcbc-11e7-88ce-cbb2e3973716.png)
+
+
+果然，成分最好的钻石克拉数少，而Fair成分最差的钻石其克拉数多，所以价格呈现上面一幅图的状态。
+
+
+# 16. 练习: 重访 Gapminder
+
+The Gapminder website contains over 500 data sets with information about the world's population. Your task is to continue the investigation you did at the end of Problem Set 3 or you can start fresh and choose a different data set from Gapminder.
+
+If you’re feeling adventurous or want to try some data munging see if you can find a data set or scrape one from the web.
+
+In your investigation, examine pairs of variable and create 2-5 plots that make use of the techniques from Lesson 4.
+
+You can find a link to the Gapminder website in the Instructor Notes.
+
+Once you've completed your investigation, create a post in the discussions that includes:
+
+1. the variable(s) you investigated, your observations, and any summary statistics
+2. snippets of code that created the plots
+3. links to the images of your plots
+
+
+`略`
 

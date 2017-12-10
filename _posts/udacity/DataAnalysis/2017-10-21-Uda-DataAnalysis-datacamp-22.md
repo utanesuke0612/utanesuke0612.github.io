@@ -22,6 +22,9 @@ tags: R Udacity DataAnalysis
 - Division: `/`
 - Exponentiation 幂运算: `^`
 - Modulo 取余: `%%`, `如 5 %% 3 is 2.`
+- x %/% y，如`7 %/% 3 = 2`
+
+![image](https://user-images.githubusercontent.com/18595935/33800511-3812a42a-dd84-11e7-8a86-9e94fc512aac.png)
 
 ## 1.2 Variable assignment
 
