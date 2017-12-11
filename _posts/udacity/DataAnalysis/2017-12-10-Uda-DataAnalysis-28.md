@@ -90,3 +90,76 @@ ggplot(aes(x=price,y=table),data=diamonds) + geom_point(aes(color=cut)) +
 # 'div' was used to color the scatterplot using
 # scale_color_brewer(type = 'div')
 ```
+
+```{r}
+diamonds$volumn <- diamonds$x * diamonds$y * diamonds$z
+
+ggplot(aes(x=diamonds$volumn,y=log10(price)),data=diamonds) + 
+  geom_point(aes(color=clarity)) + 
+  xlim(0,quantile(diamonds$volumn,0.99))
+```
+
+![image](https://user-images.githubusercontent.com/18595935/33833528-445c44da-dec3-11e7-9629-c0355162a528.png)
+
+
+
+# 5. 练习：新建友谊的比例 (使用`ifelse`)
+
+```{r}
+# Your task is to create a new variable called 'prop_initiated'
+# in the Pseudo-Facebook data set. The variable should contain
+# the proportion of friendships that the user initiated.
+```
+
+```{r}
+pf$prop_initiated <- ifelse(pf$friend_count>0,pf$friendships_initiated / pf$friend_count,0)
+summary(pf$prop_initiated)
+```
+
+![image](https://user-images.githubusercontent.com/18595935/33834730-43db3274-dec7-11e7-8ea4-d03427dace44.png)
+
+
+# 6. 练习: Prop_initiated 与使用时长
+
+```python
+# Create a line graph of the median proportion of
+# friendships initiated ('prop_initiated') vs.
+# tenure and color the line segment by
+# year_joined.bucket.
+
+# Recall, we created year_joined.bucket in Lesson 5
+# by first creating year_joined from the variable tenure.
+# Then, we used the cut function on year_joined to create
+# four bins or cohorts of users.
+
+# (2004, 2009]
+# (2009, 2011]
+# (2011, 2012]
+# (2012, 2014]
+
+# The plot should look something like this.
+# http://i.imgur.com/vNjPtDh.jpg
+# OR this
+# http://i.imgur.com/IBN1ufQ.jpg
+```
+
+
+```{r}
+tenure_groups <- group_by(subset(pf,!is.na(tenure)), tenure) 
+
+pf.fc_by_tenure <- summarise(tenure_groups,
+                             median_prop = median(prop_initiated),
+                             n=n())
+
+
+pf.fc_by_tenure$year_joined <- 2014 - ceiling(pf.fc_by_tenure$tenure / 365)
+pf.fc_by_tenure$year_joined.bucket <- cut(pf.fc_by_tenure$year_joined,breaks = c(2004,2009,2011,2012,2014))
+
+
+ggplot(aes(x=tenure,y=median_prop),data=pf.fc_by_tenure) + 
+  geom_line(aes(color=pf.fc_by_tenure$year_joined.bucket)) +
+  scale_x_continuous(breaks = seq(0, 3500, 500))
+```
+
+
+![image](https://user-images.githubusercontent.com/18595935/33856893-f5788028-df0c-11e7-8571-978717757ef2.png)
