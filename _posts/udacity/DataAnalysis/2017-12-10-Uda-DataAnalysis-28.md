@@ -145,21 +145,97 @@ summary(pf$prop_initiated)
 
 
 ```{r}
+library("dplyr")
+
+# ①　按照tenure分组数据
 tenure_groups <- group_by(subset(pf,!is.na(tenure)), tenure) 
 
+# ②　针对tenure_groups数据集，重新组织数据，注意这里不要使用`pf$prop_initiated`.
 pf.fc_by_tenure <- summarise(tenure_groups,
                              median_prop = median(prop_initiated),
                              n=n())
 
-
+# 根据tenure天数，计算加入的年份
 pf.fc_by_tenure$year_joined <- 2014 - ceiling(pf.fc_by_tenure$tenure / 365)
+
+# ③ 切断数据
 pf.fc_by_tenure$year_joined.bucket <- cut(pf.fc_by_tenure$year_joined,breaks = c(2004,2009,2011,2012,2014))
 
 
 ggplot(aes(x=tenure,y=median_prop),data=pf.fc_by_tenure) + 
   geom_line(aes(color=pf.fc_by_tenure$year_joined.bucket)) +
-  scale_x_continuous(breaks = seq(0, 3500, 500))
+  scale_x_continuous(breaks = seq(0, 3500, 500)) +
+  theme(legend.text=element_text(size=10),legend.title=element_text(size=10)) + theme(legend.position="top")
+```
+
+![image](https://user-images.githubusercontent.com/18595935/33889036-406ea488-df92-11e7-800c-486eff3e3b1f.png)
+
+
+- ①　按照tenure分组数据,比较分组后的数据和pf原始数据，分组后的数据再pf原始数据上增加了一些属性：
+
+```
+tenure_groups <- group_by(subset(pf,!is.na(tenure)), tenure) 
+```
+
+![image](https://user-images.githubusercontent.com/18595935/33889550-c465bffa-df93-11e7-8589-2342aa7b5f58.png)
+
+
+- ②　针对tenure_groups数据集，重新组织数据
+
+`prop_initiated` 参考上面一个问题
+
+```
+pf$prop_initiated <- ifelse(pf$friend_count>0,pf$friendships_initiated / pf$friend_count,0)
+```
+
+```
+pf.fc_by_tenure <- summarise(tenure_groups,
+                             median_prop = median(prop_initiated),
+                             n=n())
+
+head(pf.fc_by_tenure,1000)
 ```
 
 
-![image](https://user-images.githubusercontent.com/18595935/33856893-f5788028-df0c-11e7-8571-978717757ef2.png)
+![image](https://user-images.githubusercontent.com/18595935/33889802-a264ac12-df94-11e7-84eb-ea75f425a5df.png)
+
+
+- ③ 切断数据
+
+经过下面的数据后，数据结构变成：
+
+```
+pf.fc_by_tenure$year_joined <- 2014 - ceiling(pf.fc_by_tenure$tenure / 365)
+pf.fc_by_tenure$year_joined.bucket <- cut(pf.fc_by_tenure$year_joined,breaks = c(2004,2009,2011,2012,2014))
+head(pf.fc_by_tenure,1000)
+```
+
+![image](https://user-images.githubusercontent.com/18595935/33889873-da245bf2-df94-11e7-9a72-48d35137a47f.png)
+
+
+# 7. 平滑化 prop_initiated 与使用时长
+
+
+```python
+# Smooth the last plot you created of
+# of prop_initiated vs tenure colored by
+# year_joined.bucket. You can bin together ranges
+# of tenure or add a smoother to the plot.
+```
+
+基于前一部分产生的数据，使用如下代码得到一个平滑线：
+
+
+```{r}
+ggplot(aes(x=tenure,y=median_prop),data=pf.fc_by_tenure) + 
+ 
+  scale_x_continuous(breaks = seq(0, 3500, 500)) +
+  theme(legend.text=element_text(size=10),legend.title=element_text(size=10)) + theme(legend.position="top") +
+  geom_smooth(aes(color = year_joined.bucket))
+```
+
+
+![image](https://user-images.githubusercontent.com/18595935/33890144-b344cf84-df95-11e7-86b6-f384d1d8253b.png)
+
+
+
