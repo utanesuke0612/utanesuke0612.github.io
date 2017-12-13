@@ -239,3 +239,33 @@ ggplot(aes(x=tenure,y=median_prop),data=pf.fc_by_tenure) +
 
 
 
+# 10. 经过分组、分面和填色的价格/克拉
+
+
+```python
+# Create a scatter plot of the price/carat ratio
+# of diamonds. The variable x should be
+# assigned to cut. The points should be colored
+# by diamond color, and the plot should be
+# faceted by clarity.
+
+# Note: In the link, a color palette of type
+# 'div' was used to color the histogram using
+# scale_color_brewer(type = 'div')
+
+```
+
+```{r}
+ggplot(aes(x=cut,y=price/carat),data=diamonds) + 
+  geom_point(aes(color=color)) + 
+  scale_color_brewer(type = 'div') +
+  facet_wrap(~clarity) +
+  theme(legend.position="right") 
+ggsave("mtcars.png")
+```
+
+![image](https://user-images.githubusercontent.com/18595935/33940616-03a819dc-e053-11e7-9876-26c1e86c18a3.png)
+
+# 11. Gapminder 多变量分析
+
+`略`
