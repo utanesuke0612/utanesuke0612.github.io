@@ -178,3 +178,91 @@ ggplot(aes(x = carat,price),data=diamonds) +
 
 ![image](https://user-images.githubusercontent.com/18595935/33997973-805c8edc-e129-11e7-9e10-2038c46959c0.png)
 
+# 11. 练习: 复习过度绘制
+
+观察上面一个图形，由于所有的点都堆积在一起，无法看出分布规律，调整一下绘图方式：
+
+```{r}
+ggplot(aes(x = carat,price),data=diamonds) + 
+  geom_point(alpha=0.1,size=0.75,position ="jitter") + 
+  scale_x_continuous(limits = c(0.2,3),
+                     breaks = c(0.2,0.5,1,2,3)) +
+  scale_y_continuous(limits = c(350,15000),
+                     breaks = c(350,1000,5000,10000,15000)) +
+  scale_y_log10() +
+  ggtitle("Price (log10) by Cube-Root of Carat")
+```
+
+![image](https://user-images.githubusercontent.com/18595935/34045123-fa706da8-e1ea-11e7-804f-5c5d3ee3e9b4.png)
+
+通过上面的图就能看到关键区域和疏密程度了。
+
+# 13. 练习: 价格与克拉和净度
+
+上面考察了克拉与价格的关系，价格除了与克拉有关系外，与净度也有关系，下面使用净度来上色：
+
+
+```{r}
+ggplot(aes(x = carat,price),data=diamonds) + 
+  geom_point(alpha=0.5,size=0.75,position ="jitter",aes(color=diamonds$clarity)) + 
+  scale_color_brewer(type="div",
+                     guide = guide_legend(title="Clarity",reverse = TRUE,
+                                          override.aes = list(alpha=1,size=2))) +
+  scale_x_continuous(limits = c(0.2,3),
+                     breaks = c(0.2,0.5,1,2,3)) +
+  scale_y_continuous(limits = c(350,15000),
+                     breaks = c(350,1000,5000,10000,15000)) +
+  scale_y_log10() +
+  ggtitle("Price (log10) by Cube-Root of Carat") + 
+  theme(legend.position="right") 
+```
+
+
+![image](https://user-images.githubusercontent.com/18595935/34045532-9e5a4a82-e1ec-11e7-8f46-5b8778cfe175.png)
+
+
+
+# 15. 价格与克拉和切工
+
+- 与上面的绘制方式完全一致，只是将净度控制颜色换成了cut即切工控制颜色。
+
+```{r}
+ggplot(aes(x = carat,price),data=diamonds) + 
+  geom_point(alpha=0.5,size=0.75,position ="jitter",aes(color=diamonds$cut)) + 
+  scale_color_brewer(type="div",
+                     guide = guide_legend(title="Clarity",reverse = TRUE,
+                                          override.aes = list(alpha=1,size=2))) +
+  scale_x_continuous(limits = c(0.2,3),
+                     breaks = c(0.2,0.5,1,2,3)) +
+  scale_y_continuous(limits = c(350,15000),
+                     breaks = c(350,1000,5000,10000,15000)) +
+  scale_y_log10() +
+  ggtitle("Price (log10) by Cube-Root of Cut") + 
+  theme(legend.position="right") 
+```
+
+![image](https://user-images.githubusercontent.com/18595935/34046023-d2f63be6-e1ee-11e7-9114-5f22d5ab7496.png)
+
+# 17. 价格与克拉和颜色
+
+```{r}
+ggplot(aes(x = carat,price),data=diamonds) + 
+  geom_point(alpha=0.5,size=0.75,position ="jitter",aes(color=diamonds$color)) + 
+  scale_color_brewer(type="div",
+                     guide = guide_legend(title="Clarity",reverse = TRUE,
+                                          override.aes = list(alpha=1,size=2))) +
+  scale_x_continuous(limits = c(0.2,3),
+                     breaks = c(0.2,0.5,1,2,3)) +
+  scale_y_continuous(limits = c(350,15000),
+                     breaks = c(350,1000,5000,10000,15000)) +
+  scale_y_log10() +
+  ggtitle("Price (log10) by Cube-Root of color") + 
+  theme(legend.position="right") 
+```
+
+![image](https://user-images.githubusercontent.com/18595935/34046185-86af1414-e1ef-11e7-84bc-6369d4ddefdf.png)
+
+# 20. 构建线性模型
+
+
+
