@@ -11,7 +11,6 @@ tags: R Udacity DataAnalysis
 > 相关notebook参考[here](https://1drv.ms/f/s!Ald1cKESY1BDgcg-AQXXJXEfpQG9Ag)
 
 > 上面课本的学习笔记
-> 
 
 # [第13章 广义线性模型]()
 

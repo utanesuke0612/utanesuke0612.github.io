@@ -264,5 +264,74 @@ ggplot(aes(x = carat,price),data=diamonds) +
 
 # 20. 构建线性模型
 
+参照資料：[R 中的线性模型和运算符](http://data.princeton.edu/R/linearModels.html)
+
+```{r}
+m1 <- lm(I(log(price)) ~ I(carat^(1/3)),data = diamonds)
+m2 <- update(m1,~ . + carat)
+m3 <- update(m2,~ . + cut)
+m4 <- update(m3,~ . + color)
+m5 <- update(m4,~ . + clarity)
+
+mtable(m1,m2,m3,m4,m5)
+```
+
+- 输出：
+
+```
+Calls:
+m1: lm(formula = I(log(price)) ~ I(carat^(1/3)), data = diamonds)
+m2: lm(formula = I(log(price)) ~ I(carat^(1/3)) + carat, data = diamonds)
+m3: lm(formula = I(log(price)) ~ I(carat^(1/3)) + carat + cut, data = diamonds)
+m4: lm(formula = I(log(price)) ~ I(carat^(1/3)) + carat + cut + color, 
+    data = diamonds)
+m5: lm(formula = I(log(price)) ~ I(carat^(1/3)) + carat + cut + color + 
+    clarity, data = diamonds)
+```
+
+![image](https://user-images.githubusercontent.com/18595935/34074513-26fa1e14-e2f4-11e7-8a92-40cc8d613a98.png)
 
 
+# 22. 练习: 更大、更好的数据集
+
+从  https://github.com/solomonm/diamonds-data   下载 ，然后加载`load("BigDiamonds.rda")`。
+过滤了1万美元以上的，以及限定鉴定机构为GIA。
+
+```{r}
+diamondsbig$logprice = log(diamondsbig$price)
+
+
+m1 <- lm(logprice ~ I(carat^(1/3)),
+  data=diamondsbig[diamondsbig$price<10000 & 
+                     diamondsbig$cert == "GIA",]
+)
+m2 <- update(m1,~ . + carat)
+m3 <- update(m2,~ . + cut)
+m4 <- update(m3,~ . + color)
+m5 <- update(m4,~ . + clarity)
+
+suppressMessages(library(lattice))
+suppressMessages(library(MASS))
+suppressMessages(library(memisc))
+mtable(m1, m2, m3, m4, m5)
+```
+
+`结果输出略`
+
+# 23. 预测
+
+```{r}
+thisDiamond = data.frame(carat = 1.00,cut="V.Good",
+                         color="I",clarity="VS1")
+
+modelEstimate = predict(m5,newdata = thisDiamond,
+                        interval = "prediction",level=.95)
+
+exp(modelEstimate)
+```
+
+- 输出：
+
+fit 1 5040.436 
+lwr 3730.34 
+upr 6810.638
