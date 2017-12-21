@@ -292,6 +292,13 @@ m5: lm(formula = I(log(price)) ~ I(carat^(1/3)) + carat + cut + color +
 ![image](https://user-images.githubusercontent.com/18595935/34074513-26fa1e14-e2f4-11e7-8a92-40cc8d613a98.png)
 
 
+最终构建的模型如下：
+
+![image](https://user-images.githubusercontent.com/18595935/34260810-711cce24-e6aa-11e7-9f52-2c54adcfb003.png)
+
+
+最后一个参数是误差。
+
 # 22. 练习: 更大、更好的数据集
 
 从  https://github.com/solomonm/diamonds-data   下载 ，然后加载`load("BigDiamonds.rda")`。
