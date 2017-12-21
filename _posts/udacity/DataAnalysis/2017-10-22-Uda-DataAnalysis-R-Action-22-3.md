@@ -2,7 +2,7 @@
 layout: post
 title: Uda-DataAnalysis-22-[扩展]-R语言实战(第二版)-(3)高级方法
 date: 2017-10-21 03:00:00
-categories: Uda-数据分析进阶
+categories: 数据分析
 tags: R Udacity DataAnalysis 
 ---
 * content

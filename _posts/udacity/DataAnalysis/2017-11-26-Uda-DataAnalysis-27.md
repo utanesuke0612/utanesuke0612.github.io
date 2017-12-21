@@ -2,7 +2,7 @@
 layout: post
 title: Uda-DataAnalysis-27--探索多个变量
 date: 2017-12-9 03:00:01
-categories: Uda-数据分析进阶
+categories: 数据分析
 tags: R Udacity DataAnalysis 
 ---
 * content

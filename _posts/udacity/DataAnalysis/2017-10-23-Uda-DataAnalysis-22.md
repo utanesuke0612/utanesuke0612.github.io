@@ -2,7 +2,7 @@
 layout: post
 title: Uda-DataAnalysis-22--R基础
 date: 2017-11-21 02:00:03
-categories: Uda-数据分析进阶
+categories: 数据分析
 tags: R Udacity DataAnalysis 
 ---
 * content

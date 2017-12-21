@@ -2,7 +2,7 @@
 layout: post
 title: DjangoBasic-07-重要-给网页添加评论
 date: 2017-08-18 23:50:59
-categories: Django
+categories: Python
 tags: Django
 ---
 * content

@@ -2,7 +2,7 @@
 layout: post
 title: DjangoBasic-04-重要-Django表单
 date: 2017-08-15 22:45:59
-categories: Django
+categories: Python
 tags: Django
 ---
 * content

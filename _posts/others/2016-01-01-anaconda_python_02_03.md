@@ -2,7 +2,7 @@
 layout: post
 title:  Anaconda中同时安装python2和python3的环境
 date:   2016-01-01 01:08:00 +0800
-categories: 参照
+categories: 其他
 tag: Python
 ---
 * content

@@ -2,7 +2,7 @@
 layout: post
 title: Uda-DataAnalysis-19-案例研究-通过OpenStreetMap了解数据审查清洗
 date: 2017-10-8 08:00:00
-categories: Uda-数据分析进阶
+categories: 数据分析
 tags: MongoDB Udacity DataAnalysis 
 ---
 * content

@@ -2,7 +2,7 @@
 layout: post
 title: Uda-DataAnalysis-15-[扩展]-python中使用MongoDB简介
 date: 2017-10-8 04:00:00
-categories: Uda-数据分析进阶
+categories: 数据分析
 tags: MongoDB Udacity DataAnalysis 
 ---
 * content

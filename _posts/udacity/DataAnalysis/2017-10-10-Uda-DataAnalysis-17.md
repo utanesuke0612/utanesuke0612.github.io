@@ -2,7 +2,7 @@
 layout: post
 title: Uda-DataAnalysis-17-使用MongoDB分析数据
 date: 2017-10-8 07:00:00
-categories: Uda-数据分析进阶
+categories: 数据分析
 tags: MongoDB Udacity DataAnalysis 
 ---
 * content

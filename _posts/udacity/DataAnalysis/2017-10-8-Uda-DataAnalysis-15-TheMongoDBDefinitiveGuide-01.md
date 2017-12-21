@@ -2,7 +2,7 @@
 layout: post
 title: Uda-DataAnalysis-15-[扩展]-MongoDB权威指南(1)-创建更新删除
 date: 2017-10-8 00:00:00
-categories: Uda-数据分析进阶
+categories: 数据分析
 tags: MongoDB Udacity DataAnalysis 
 ---
 * content

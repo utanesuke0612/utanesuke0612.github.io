@@ -2,7 +2,7 @@
 layout: post
 title: Uda-DataAnalysis-PJ01-[扩展]-正则表达式
 date: 2017-10-8 19:00:00
-categories: Uda-数据分析进阶
+categories: 数据分析
 tags: Udacity DataAnalysis 正则表达式
 ---
 * content

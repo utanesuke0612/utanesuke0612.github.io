@@ -2,7 +2,7 @@
 layout: post
 title:  markdown模版
 date:   2016-08-27 01:08:00 +0800
-categories: 参照
+categories: 其他
 tag: markdown
 ---
 * content
