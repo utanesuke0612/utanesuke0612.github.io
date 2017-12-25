@@ -2,8 +2,8 @@
 layout: post
 title: KhanStatistics-01-基本概念及统计图表
 date: 2017-09-16 00:00:01
-categories: 数据分析
-tags: 统计学 可汗学院
+categories: 数学
+tags: 统计学
 ---
 * content
 {:toc}

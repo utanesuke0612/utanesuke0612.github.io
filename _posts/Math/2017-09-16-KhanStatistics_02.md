@@ -2,8 +2,8 @@
 layout: post
 title: KhanStatistics-02-集中趋势与方差
 date: 2017-09-16 00:00:02
-categories: 数据分析
-tags: 统计学 可汗学院
+categories: 数学
+tags: 统计学
 ---
 * content
 {:toc}

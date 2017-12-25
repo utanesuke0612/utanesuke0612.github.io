@@ -2,8 +2,8 @@
 layout: post
 title: KhanStatistics-03-随机变量与二项分布
 date: 2017-09-16 00:00:03
-categories: 数据分析
-tags: 统计学 可汗学院
+categories: 数学
+tags: 统计学
 ---
 * content
 {:toc}
