@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Udacity-描述统计学-4-可变性
+title: Udacity-描述统计学-04-可变性(盒装图,标准偏差,贝塞尔校正,样本标准偏差)
 date: 2017-12-27 04:00:0
 categories: 数学
 tags: 统计学
@@ -35,9 +35,19 @@ tags: 统计学
 
 # 38. 贝塞尔校正
 
-在进行样本选取的时候，通常会选取到居中的值，特别是标准正态分布时，会更加倾向于选取靠近中心的值，这样就会缩小标准偏差，故需要采用贝塞尔校正，即使用n-1而不是n进行平均值计算。
+在进行 `样本sample`选取的时候，通常会选取到居中的值，特别是标准正态分布时，会更加倾向于选取靠近中心的值，这样就会缩小标准偏差，故需要采用`贝塞尔校正`，即使用n-1而不是n进行平均值计算。
+
+关于样本sample与总体population：
+
+-  your sample is the group of individuals who actually participate in your study.
+-  your population is the broader group of people to whom you intend to generalize the results of your study. 
+-  Your sample will always be a subset of your population. 
 
 ![image](https://user-images.githubusercontent.com/18595935/34829901-892cf40e-f725-11e7-9947-fd733d3f4ed0.png)
+
+# 练习10,11,12
+
+![image](https://user-images.githubusercontent.com/18595935/34911603-4002ac18-f911-11e7-9531-06ad059a35fe.png)
 
 # 99. 术语
 
