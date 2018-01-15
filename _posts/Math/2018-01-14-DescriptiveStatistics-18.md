@@ -66,3 +66,22 @@ tags: 统计学
 如上图，每回抛两次骰子，故样本size是2，先求出总体的标准偏差，再根据中心极限定理，求出样本的标准偏差。
 
 另外，样本的均值，与总体的均值相同，都是3.5，与样本的size无关。
+
+# 18. 5次骰子
+
+![image](https://user-images.githubusercontent.com/18595935/34944426-dcace678-fa42-11e7-91f4-020bbddd5855.png)
+
+上图可以看出，样本的size从2变成5，分母变大，标准差变小，分布更窄。
+
+# 24. M&M CLT
+
+有个48个碟子，每个碟子中装了一包MM糖，一包有很多不同颜色的MM糖，从中选择蓝色的MM糖作为研究对象，48碟中蓝色MM糖的均值是11.25，标准差是3.49.
+根据中心极限定理(`Central Limit Theorem`)，每次选择5个碟子，这5个碟子中的蓝色MM糖，重复50次，理论上平均值不变，SE(standard error)为1.56.
+
+![image](https://user-images.githubusercontent.com/18595935/34945108-6fbb04e8-fa45-11e7-965d-141aa66534af.png)
+
+# 29. klout抽样分布(标准偏差)
+
+社交影响力的分布图：
+
+![image](https://user-images.githubusercontent.com/18595935/34946397-0a3d2f74-fa4a-11e7-8037-aa560dff6b62.png)
