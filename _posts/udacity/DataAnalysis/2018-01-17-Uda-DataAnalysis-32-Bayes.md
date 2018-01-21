@@ -170,6 +170,118 @@ P(C|P) = 0.009/0.108 = 0.0833
 
 ![image](https://user-images.githubusercontent.com/18595935/35103715-0a4d1634-fcaa-11e7-8933-bbce12f3537b.png)
 
+# 31. 用于分类的贝叶斯规则
+
+![image](https://user-images.githubusercontent.com/18595935/35180478-a03b6768-fdf4-11e7-8a6f-845cbd6bc043.png)
+
+计算概率:
+
+```
+CHRIS = 0.1 * 0.1 * 0.5 = 0.005
+SARA = 0.3 * 0.3 * 0.5 = 0.03
+```
+
+# 33. 后验概率
+
+![image](https://user-images.githubusercontent.com/18595935/35180495-18929d3a-fdf5-11e7-9fe5-b3cde8138205.png)
+
+根据贝叶斯定理计算:
+
+```python
+P(CHRIS | "LIFE DEAL") = P("LIFE DEAL" | CHRIS)*P(CHRIS) / P("LIFE DEAL")
+
+= P("LIFE DEAL" | CHRIS)*P(CHRIS) / P("LIFE DEAL" | CHRIS)*P(CHRIS) + P("LIFE DEAL" | SARA)*P(SARA)
+
+= 0.08*0.5 / (0.08*0.5 + 0.06*0.5)
+
+= 0.04 / 0.07 =  0.57
+
+```
+
+类似，
+
+![image](https://user-images.githubusercontent.com/18595935/35180507-5728d41a-fdf5-11e7-892d-227e6986ad04.png)
+
+```python
+P(CHRIS |"LOVE DEAL") = P("LOVE DEAL" | CHRIS)*P(CHRIS) / P("LOVE DEAL")
+
+= P("LOVE DEAL" | CHRIS)*P(CHRIS) / P("LOVE DEAL" | CHRIS)*P(CHRIS) + P("LOVE DEAL" | SARA)*P(SARA)
+
+= 0.08*0.5 / (0.08*0.5 + 0.1*0.5)
+
+= 0.04 / 0.09 =  0.44
+
+```
+
+
+# 35. 为什么叫做朴素贝叶斯
+
+![image](https://user-images.githubusercontent.com/18595935/35180489-0562375c-fdf5-11e7-88cc-46c805be1544.png)
+
+Label A和Lable B中，有每个词出现的频率，给定一段文字，计算各个单词出现的概率，比较大小。
+在这个概率的计算中，没有考虑单词的顺序，所以叫做朴素贝叶斯。
+
+
+# 41. 迷你项目 - 准备工作
+
+1. cmd中安装 `pip install scikit-learn` 和 `pip install nltk`
+2. `C:\python2.7`中打开python2.7,使用`import sklearn`和`import nltk`确定是否import成功
+3. 下载`https://github.com/udacity/ud120-projects.git`，基础代码包含所有迷你项目的初始代码。
+4. 进入 tools/ 目录，运行 startup.py。（cmd中操作，需要将python2.7设定为默认python环境，如果要将python环境还原为python3,在环境变量的Path中将python2.7的路径删除），运行比较耗时。
+
+```
+E:\udacity\32-ML\ud120-projects-master\tools>python startup.py
+
+checking for nltk
+checking for numpy
+checking for scipy
+checking for sklearn
+...
+```
+
+# 42. 作者身份准确率
+
+在 naive_bayes/nb_author_id.py 中创建和训练朴素贝叶斯分类器，用其为测试集进行预测。准确率是多少？
+
+```python
+#########################################################
+### your code goes here ###
+from sklearn.naive_bayes import GaussianNB
+
+# 创建分类器
+clf = GaussianNB()
+
+t0 = time()
+# 训练分类器
+clf.fit(features_train,labels_train)
+print "fit training time:", round(time()-t0, 3), "s"
+
+t0 = time()
+# 使用分类器预测
+pred = clf.predict(features_test)
+print "predict training time:", round(time()-t0, 3), "s"
+
+from sklearn.metrics import accuracy_score
+
+# 计算精度
+accuracy = accuracy_score(labels_test, pred)
+
+print accuracy
+
+#########################################################
+```
+
+
+- 得到结果为:
+
+```python
+no. of Chris training emails: 7936
+no. of Sara training emails: 7884
+fit training time: 1.151 s
+predict training time: 0.157 s
+0.973265073948
+```
+
 
 # 98. 参考
 1. [贝叶斯推断及其互联网应用（一）：定理简介](http://www.ruanyifeng.com/blog/2011/08/bayesian_inference_part_one.html)
