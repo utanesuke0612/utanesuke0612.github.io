@@ -161,3 +161,47 @@ def submitAccuracies():
 ```python
 {"message": "{'acc_min_samples_split_50': 0.912, 'acc_min_samples_split_2': 0.908}"}
 ```
+
+# 13. 数据杂质与熵
+
+Entropy(熵)是确定在何处分割数据的概念。
+
+definition: measure of impurity（杂质） in a bunch of examples.
+
+- 定义公式如下，Pi是在某个类i中样本的数量的比例(`该分类数目 / 总样本数目`)。
+
+1. 如果所有样本都属于同一个类，则`entropy = 0`
+2. 如果所有样本,被平均分配到各个类别中，则`entropy = 1`，这是熵的数学最大值。
+
+![image](https://user-images.githubusercontent.com/18595935/35278604-ed32ee38-008d-11e8-91ae-1c6322f33f40.png)
+
+# 16. 熵计算
+
+![image](https://user-images.githubusercontent.com/18595935/35279552-b81e8880-0090-11e8-97c2-7472bed3c45b.png)
+
+最终得到的熵是1.0,即最不纯的状态。
+If we have two class labels,the most impure situation we could have is where the examples are evenly split between the two class labels.（被平均分配到两个class中）
+
+```python
+>>> import math
+>>> -0.5*math.log(0.5,2) - 0.5*math.log(0.5,2)
+1.0
+```
+
+另外，回顾下log的概念，就是求幂的过程：
+
+```python
+>>> math.log(10,10)
+1.0
+>>>
+>>> math.log(10,100)
+0.5
+>>> math.log(100,10)
+2.0
+>>> math.log(0.5,2)
+-1.0
+```
+
+# 21. 信息增益
+
+
