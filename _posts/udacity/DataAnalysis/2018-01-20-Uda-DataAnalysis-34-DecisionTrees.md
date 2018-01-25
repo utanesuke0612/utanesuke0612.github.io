@@ -202,6 +202,40 @@ If we have two class labels,the most impure situation we could have is where the
 -1.0
 ```
 
-# 21. 信息增益
+# 21. 信息增益(information gain)
+
+信息增益的计算公式参考下图。
+
+# 24. 信息增益计算（第 3 部分）
+
+![image](https://user-images.githubusercontent.com/18595935/35336262-1db8c474-015b-11e8-9037-63b4804a92d3.png)
+
+参照上面的定义，该分支下只有一个类别，故熵为0
+
+# 25. 信息增益计算（第 5 部分）
+
+![image](https://user-images.githubusercontent.com/18595935/35336648-69b36dd8-015c-11e8-8e16-629cc4c80a61.png)
 
 
+# 26. 信息增益计算（第 6 部分）
+
+![image](https://user-images.githubusercontent.com/18595935/35336895-1fd0a7f2-015d-11e8-8034-1a044e8a43d8.png)
+
+
+# 29. 信息增益计算（第 8 部分）
+
+![image](https://user-images.githubusercontent.com/18595935/35337103-abe4b97c-015d-11e8-8388-f5d86e08ef4f.png)
+
+类似的，参考上面第16部分，bumpy被平均分配在slow和fast下，熵结果为1，smooth同理。
+
+# 30. 信息增益计算（第 9 部分）
+
+这时计算出来的信息增益为：
+
+`entropy(parent) - [weighted average]entropy(children) = 1 - ( (1/2)*1 + (1/2)*1 ) = 0`
+
+# 31. 信息增益计算（第 10 部分）
+
+![image](https://user-images.githubusercontent.com/18595935/35337521-cbad8972-015e-11e8-8d8a-0175cebe96f5.png)
+
+两个yes都分配在同一个class中，两个no也都分配在同一个class中，所以其熵都是0，所以最后得到的信息增益是1.0，这是最好的信息增益，所以应该在这里进行分割。
