@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Uda-DataAnalysis-34-机器学习-【ing】-DecisionTrees(决策树)
+title: Uda-DataAnalysis-34-机器学习-DecisionTrees(决策树)
 date: 2018-01-16 03:00:01
 categories: 数据分析
 tags: R Udacity DataAnalysis 
@@ -239,3 +239,62 @@ If we have two class labels,the most impure situation we could have is where the
 ![image](https://user-images.githubusercontent.com/18595935/35337521-cbad8972-015e-11e8-8d8a-0175cebe96f5.png)
 
 两个yes都分配在同一个class中，两个no也都分配在同一个class中，所以其熵都是0，所以最后得到的信息增益是1.0，这是最好的信息增益，所以应该在这里进行分割。
+
+# 33. 偏差方差(bias-variance)困境
+
+- 高偏差机器学习算法会忽略数据，无论通过何种方式，它的操作都不会有任何区别。
+
+- 高方差:对数据极度敏感，只能复制曾经见过的东西，新的状况无法处理
+
+机器学习的艺术在于平衡上述的偏差与方差。
+
+决策树的缺点是容易过度拟合，尤其是在有大量特征数据的时候，所以对特征数据的适当选取十分重要。
+
+# 37. 计算准确率和确定特征数量
+
+控制算法复杂度的另一种方法是通过你在训练/测试时用到的特征数量。算法可用的特征数越多，越有可能发生复杂拟合。
+数据中的特征数：` len(features_train[0])`。
+
+```python
+from sklearn import tree
+
+t0 = time()
+clf = tree.DecisionTreeClassifier(min_samples_split=40)
+print "fit training time:", round(time()-t0, 3), "s"
+
+clf = clf.fit(features_train, labels_train)
+pred = clf.predict(features_test)
+print "predict training time:", round(time()-t0, 3), "s"
+
+from sklearn.metrics import accuracy_score
+acc = accuracy_score(pred, labels_test)
+
+print acc
+print len(features_train[0])
+```
+
+输出为：
+
+```python
+fit training time: 0.0 s
+predict training time: 37.511 s
+0.977815699659
+3785
+```
+
+# 39. 更改特征数量
+
+进入 ../tools/email_preprocess.py，然后找到类似此处所示的一行代码： 
+
+```python
+selector = SelectPercentile(f_classif, percentile=10)
+```
+
+将百分位数从 10 改为 1，然后运行 dt_author_id.py，输出为如下，其特征数量减少为了1/10，另外训练时间也大大减少，但是精度变小：
+
+```python
+fit training time: 0.0 s
+predict training time: 3.22 s
+0.967007963595
+379
+```
