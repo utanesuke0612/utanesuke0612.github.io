@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Uda-DataAnalysis-36-机器学习-【ing】-数据集与问题
+title: Uda-DataAnalysis-36-机器学习-数据集与问题
 date: 2018-01-16 06:00:01
 categories: 数据分析
 tags: R Udacity DataAnalysis 
@@ -66,14 +66,14 @@ print enron_data["PRENTICE JAMES"]["total_stock_value"]
 
 # 28. 字典到数组的转换
 
-```python
+
 不能将 python 字典直接读入到 sklearn 分类或回归算法中；它其实需要一个 numpy 数组，或者一个由列表组成的列表（此列表本身是一个列表，它的每个元素都是数据点，而较小列表的元素是该点的特征）。
 
 我们编写了一些辅助函数（tools/feature_format.py 中的 featureFormat() 和 targetFeatureSplit()），它们可以获取特征名的列表和数据字典，然后返回 numpy 数组。
 
 如果特征没有某个特定人员的值，此函数还会用 0（零）替换特征值。
 
-
+```python 	
 import numpy as np
 
 def featureFormat( dictionary, features, remove_NaN=True, remove_all_zeroes=True, remove_any_zeroes=False, sort_keys = False):
