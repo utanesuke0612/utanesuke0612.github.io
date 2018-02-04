@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Uda-DataAnalysis-38-机器学习-【ing】-异常值
+title: Uda-DataAnalysis-38-机器学习-异常值
 date: 2018-01-16 08:00:01
 categories: 数据分析
 tags: R Udacity DataAnalysis 
@@ -191,9 +191,6 @@ new train score test: 0.983189455396
 
 
 ```python
-
-
-
 #!/usr/bin/python
 
 import pickle
@@ -226,7 +223,7 @@ print bonus
 
 ```
 
-- 16. 第一个显然是因为数据录入错误，将TOTAL作为一个员工了，而实际上是总计的金额。
+- 第一个显然是因为数据录入错误，将TOTAL作为一个员工了，而实际上是总计的金额。
 - 通过` dictionary.pop( key, 0 )` 可以移除异常值。
 
 
