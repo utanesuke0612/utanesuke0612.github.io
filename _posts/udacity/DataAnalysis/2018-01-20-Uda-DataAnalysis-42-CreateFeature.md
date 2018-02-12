@@ -220,3 +220,175 @@ sklearn 中有两大单变量特征选择工具：`SelectPercentile` 和 `Select
 
 # 10. TfIdf 向量器中的特征选择
 
+```python
+vectorizer = TfidfVectorizer(sublinear_tf=True,max_df=0.5,
+								stop_words="english")
+features_train_transformed = vectorizer.fit_transform(features_train)
+features_test_transformed = vectorizer.transform(features_test)
+
+# 只选取10%的特征
+selector = SelectPercentile(f_classif,percentile=10)
+selector.fit(features_train_transformed,labels_train)
+features_train_transformed = selector.transform(features_train_transformed).toarray()
+features_test_transformed = selector.transform(features_test_transformed).toarray()
+```
+
+# 11. 偏差、方差和特征数量
+
+||high bias(高偏差)|high variance(高方差)|
+|:--|--:|:--:|
+||pays little attention to data,oversimplified|pays too much attention to data(does not generelize well),overfits|
+||low r**2, large SSE|much higher error on test set than on training set|
+
+- 如果选取特征过简，会导致高偏差，最终模型质量很差
+- 如果选取特征过多，会导致高方差，而使得模型无法处理新数据(对样本数据的预测会很好)
+
+关于偏差与方差，参考[知乎的回答-偏差方差的区别](https://www.zhihu.com/question/20448464)
+- 偏差：描述的是预测值（估计值）的期望与真实值之间的差距。偏差越大，越偏离真实数据，如下图第二行所示。
+- 方差：描述的是预测值的变化范围，离散程度，也就是离其期望值的距离。方差越大，数据的分布越分散，如下图右列所示。
+
+![image](https://user-images.githubusercontent.com/18595935/35919405-54ff0b16-0c58-11e8-9dab-427b999d941f.png)
+
+# 13. 肉眼过拟合
+
+![image](https://user-images.githubusercontent.com/18595935/35919622-122d3fdc-0c59-11e8-986a-9e6af18fb01c.png)
+
+上面的曲线，就是因为选取了过多的特征，造成了过拟合，最终会使得新数据在该模型无法正确预测，图中的红色斜线是正常的拟合曲线。
+
+# 14. 带有特征数量的平衡误差
+
+如下是选取的特征数量，与模型质量之间的分布曲线，找到中间的最佳质量时的特征的过程，叫做正则化。
+
+![image](https://user-images.githubusercontent.com/18595935/35920384-0fee9e58-0c5b-11e8-80ea-372fb82f7d23.png)
+
+# 15. 正则化
+
+![image](https://user-images.githubusercontent.com/18595935/35920880-7ed9fe56-0c5c-11e8-9697-3df4c2eff642.png)
+
+考虑了两个因素SSE和由特征产生的惩罚误差，如果特征增多那么SSE即最小平方差会变小，但是由特征产生的惩罚误差变大，这是一个相互影响的过程。
+
+
+# 16. 套索回归
+
+参考[sklearn.linear_model.Lasso](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Lasso.html)
+
+- 示例，`fit(X, y[, check_input])	Fit model with coordinate descent.`：
+
+```python
+>>> from sklearn import linear_model
+>>> clf = linear_model.Lasso(alpha=0.1)
+>>> clf.fit([[0,0],[1,1],[2,2]],[0,1,2])
+Lasso(alpha=0.1, copy_X=True, fit_intercept=True, max_iter=1000,
+   normalize=False, positive=False, precompute=False, random_state=None,
+   selection='cyclic', tol=0.0001, warm_start=False)
+
+# 回归模型的斜率（回归系数）
+>>> print clf.coef_
+[ 0.85  0.  ]
+
+# 回归模型的截距
+>>> print clf.intercept_
+0.15
+
+# 预测
+>>> print clf.predict([2,4])
+[ 1.85]
+```
+
+因为是一个回归模型，所以输入的参数为feature和label，才能进行训练。
+
+# 23. 过拟合决策树
+
+决策树作为传统算法非常容易过拟合，获得过拟合决策树最简单的一种方式就是使用小型训练集和大量特征。
+
+如果决策树被过拟合，那么：
+- 测试集的准确率会很低
+- 训练集的准确率会很高
+
+# 24. 特征数量和过拟合
+
+过拟合算法的一种传统方式是使用大量特征和少量训练数据。在示例代码`feature_selection/find_signature.py`中选取了150个训练数据：
+
+后续练习的代码如下：
+
+```python
+#!/usr/bin/python
+
+import pickle
+import numpy
+numpy.random.seed(42)
+
+### The words (features) and authors (labels), already largely processed.
+### These files should have been created from the previous (Lesson 10)
+### mini-project.
+words_file = "../text_learning/your_word_data.pkl" 
+authors_file = "../text_learning/your_email_authors.pkl"
+word_data = pickle.load( open(words_file, "r"))
+authors = pickle.load( open(authors_file, "r") )
+
+### test_size is the percentage of events assigned to the test set (the
+### remainder go into training)
+### feature matrices changed to dense representations for compatibility with
+### classifier functions in versions 0.15.2 and earlier
+from sklearn import cross_validation
+features_train, features_test, labels_train, labels_test = cross_validation.train_test_split(word_data, authors, test_size=0.1, random_state=42)
+
+from sklearn.feature_extraction.text import TfidfVectorizer
+vectorizer = TfidfVectorizer(sublinear_tf=True, max_df=0.5,
+                             stop_words='english')
+features_train = vectorizer.fit_transform(features_train)
+features_test  = vectorizer.transform(features_test).toarray()
+
+### a classic way to overfit is to use a small number
+### of data points and a large number of features;
+### train on only 150 events to put ourselves in this regime
+features_train = features_train[:150].toarray()
+labels_train   = labels_train[:150]
+
+### your code goes here
+
+# 25. 练习：特征数量
+print "features_train length:",len(features_train)
+
+# 27. 使用 TfIdf 获得最重要的单词
+# 获取特征数量
+vec = vectorizer.get_feature_names()
+print "features length:",len(vec)
+
+from sklearn import tree
+clf = tree.DecisionTreeClassifier()
+clf = clf.fit(features_train, labels_train)
+
+print "feature_importances_ length:",len(clf.feature_importances_)
+
+# 27. 识别最强大特征
+# 27. 使用 TfIdf 获得最重要的单词
+for i in range(len(clf.feature_importances_)):
+	if clf.feature_importances_[i] <> 0:
+		print "   ",clf.feature_importances_[i],"--",vec[i],"--",i
+
+pred = clf.predict(features_test)
+
+# 26. 练习：过拟合决策树的准确率
+from sklearn.metrics import accuracy_score
+acc = accuracy_score(pred, labels_test)
+print "the accuracy_score:",acc
+
+```
+
+- `练习25-28`的结果如下：
+
+```python
+features_train length: 150
+features length: 37874
+feature_importances_ length: 37874
+    0.0263157894737 -- bowen -- 13180
+    0.0749500333111 -- mtaylornsf -- 26872
+    0.764705882353 -- sshacklensf -- 33623
+    0.134028294862 -- street -- 33963
+the accuracy_score: 0.957337883959
+```
+
+- `练习29-31`的结果如下：
+
+另外，通过上面`练习27`的代码，识别出`重要度最高`的特征值(单词)，将这些单词在`text_learning/vectorize_text.py`中删除，与`sara`等单词一样，参考[Uda-DataAnalysis-41-机器学习-文本学习 - 19. 清除“签名文字”](http://road2autodrive.info/2018/01/16/Uda-DataAnalysis-41-TextLearning/)部分，删除两次，得到`练习29` `练习30` `练习31`的结果。

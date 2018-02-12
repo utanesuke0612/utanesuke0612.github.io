@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Uda-DataAnalysis-32-机器学习-朴素贝叶斯
+title: Uda-DataAnalysis-32-机器学习-朴素贝叶斯(Naive Bayesian)
 date: 2018-01-16 01:00:01
 categories: 数据分析
 tags: R Udacity DataAnalysis 
@@ -117,6 +117,9 @@ Here's your output:
 ![image](https://user-images.githubusercontent.com/18595935/35101633-9679094e-fca3-11e7-9058-c3b51d3c7e8b.png)
 
 即如上的公式，推导过程参考[贝叶斯推断及其互联网应用（一）：定理简介](http://www.ruanyifeng.com/blog/2011/08/bayesian_inference_part_one.html)
+
+ 贝叶斯定理之所以有用，是因为我们在生活中经常遇到这种情况：我们可以很容易直接得出P(B|A)，P(A|B)则很难直接得出，但我们更关心P(A|B)，贝叶斯定理就为我们打通从P(B|A)获得P(A|B)的道路。
+ (P(A|B)表示事件B已经发生的前提下，事件A发生的概率，叫做事件B发生下事件A的条件概率)
 
 # 24. 练习: 癌症测试
 
