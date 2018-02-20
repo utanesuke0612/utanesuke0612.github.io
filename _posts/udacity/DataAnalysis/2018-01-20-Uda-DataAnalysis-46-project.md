@@ -179,7 +179,8 @@ score表示的是accuracy，但是由于数据的不平衡，说明accuracy并�
 
 验证是将训练出得模型，用测试数据进行评价的过程，验证中的典型错误是没有将数据分成训练和测试两部分，从而导致过拟合。
 
-在交叉验证的时候，因为数据的不平衡性，选用Stratified Shuffle Split的方式将数据分为验证集和测试集，在这里使用交叉验证`train_test_split()`函数，将数据的30%作为测试数据，得到最终得评价结果如下：
+在交叉验证的时候，因为数据的不平衡性，选用StratifiedShuffle Split，StratifiedShuffleSplit是一种交叉验证的方式，通过对数据进行多次洗牌和分割，能够确保训练集和测试集中POI与非POI的比例，比较适合于该数据。
+最终得到评价结果如下：
 
 ||GaussianNB|Decision Tree|SVM|RandomForest|AdaBoost|
 |:--|--:|:--:|:--:|:--:|:--:|
