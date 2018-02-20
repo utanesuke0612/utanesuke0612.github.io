@@ -22,7 +22,7 @@ tags: R Udacity DataAnalysis
 
 >1.作为答案的部分，提供一些数据集背景信息以及这些信息如何用于回答项目问题。
 
-本数据集中，包含了146条记录，每条记录中包含了雇员的财务和邮件相关信息，另外数据中包含21个特征。进一步分析数据中的每条记录的`poi`特征，发现共有18条记录可能是嫌疑人。
+本数据集中，包含了146条记录，每条记录中包含了雇员的财务和邮件相关信息，另外数据中包含20个特征。进一步分析数据中的每条记录的`poi`特征，发现共有18条记录可能是嫌疑人。
 
 >1.你在获得数据时它们是否包含任何异常值，你是如何进行处理的？
 
@@ -132,6 +132,10 @@ tags: R Udacity DataAnalysis
 
 >3.不同算法之间的模型性能有何差异？
 
+- 时间消耗
+
+从下表的时间消耗上看，`GaussianNB`算法速度最快。
+
 |算法|耗时(s)|
 |:--|--:|
 |GaussianNB|0.021|
@@ -140,15 +144,30 @@ tags: R Udacity DataAnalysis
 |RandomForest|54.018|
 |AdaBoost|7.314|
 
+- 评分
+
+参考scikit-learn.org上的定义`score(X, y, sample_weight=None)：Returns the mean accuracy on the given test data and labels.`，
+score表示的是accuracy，但是由于数据的不平衡，说明accuracy并不是很好的评估指标，选择precision和recall及F1更好一些。
+
+|算法|Score|
+|:--|--:|
+|GaussianNB|0.857142857143|
+|Decision Tree|0.868131868132|
+|SVM|0.879120879121|
+|RandomForest|1.0|
+|AdaBoost|0.901098901099|
+
 ## 4.1 最终选定的算法
 
 >3.你最终使用了什么算法？
 
-通过对上面评分结果(Accuracy,Recall,F1,ie.)的分析，判断`GaussianNB classifier`给出了最好的预测结果。
+通过对上面评分结果(Precision,Recall,F1,ie.)的分析，判断`GaussianNB classifier`给出了最好的预测结果。
 
 ## 4.2 调试算法
 
 >4.调整算法的参数是什么意思，如果你不这样做会发生什么？你是如何调整特定算法的参数的？
+
+数据样本比较少，故使用GridSearchCV来进行参数调整，如果较大的数据则会花费较长的时间，可以考虑使用RandomizedSearchCV.
 
 在代码中，使用了`GridSearchCV()`来调试各个算法的参数，另外通过`test_classifier()`测试了算法并给出了判断结果，经过调试最好的结果来自`GaussianNB classifier`。
 
@@ -159,7 +178,8 @@ tags: R Udacity DataAnalysis
 >5.什么是验证，未正确执行情况下的典型错误是什么？你是如何验证你的分析的？
 
 验证是将训练出得模型，用测试数据进行评价的过程，验证中的典型错误是没有将数据分成训练和测试两部分，从而导致过拟合。
-在这里使用交叉验证`train_test_split()`函数，将数据的30%作为测试数据，得到最终得评价结果如下：
+
+在交叉验证的时候，因为数据的不平衡性，选用Stratified Shuffle Split的方式将数据分为验证集和测试集，在这里使用交叉验证`train_test_split()`函数，将数据的30%作为测试数据，得到最终得评价结果如下：
 
 ||GaussianNB|Decision Tree|SVM|RandomForest|AdaBoost|
 |:--|--:|:--:|:--:|:--:|:--:|
@@ -176,7 +196,7 @@ tags: R Udacity DataAnalysis
 
 >6.给出至少2个评估度量并说明每个的平均性能。解释对用简单的语言表明算法性能的度量的解读。
 
-最终选取的算法是朴素贝叶斯`GaussianNB`，主要基于准确率`Accuracy`,召回率`Recall`和综合评价指标`F1`等进行的判断。
+最终选取的算法是朴素贝叶斯`GaussianNB`，主要基于准确率`Precision`,召回率`Recall`和综合评价指标`F1`等进行的判断。
 
 如下是上述表中最后四个参数的意义：
 
@@ -193,11 +213,11 @@ tags: R Udacity DataAnalysis
 |No|FP|TN|N(实际为NO)|
 |总计|P'(被分为Yes)|N'(被分为No)|P+N|
 
-- 关于准确率`Accuracy`:
-准确率(accuracy)计算公式为： `ACC = (TP+TN) / (TP+TN+FP+FN)`，准确率是我们最常见的评价指标，而且很容易理解，就是被分对的样本数除以所有的样本数，通常来说，正确率越高，分类器越好。 但是在在正负样本不平衡的情况下，准确率这个评价指标有很大的缺陷。本数据集中的数据是不均衡的，所以不能单纯只依靠准确率来评价。
+- 关于精确率`Precision`:
+精确率(Precision)计算公式为： `P = (TP) / (TP+FP)`，表示被分为正例的示例中实际为正例的比例。在本项目中，精确率指的是模型预测出的POI中，真正为POI的比率。
 
 - 关于召回率`Recall`：
-召回率是覆盖面的度量，度量有多个正例被分为正例，`recall=TP/(TP+FN)=TP/P=sensitive`，可以看到召回率与灵敏度是一样的。s
+召回率是覆盖面的度量，度量有多个正例被分为正例，`recall=TP/(TP+FN)=TP/P=sensitive`，可以看到召回率与灵敏度是一样的。在本项目中，指的是所有真正的POI雇员中，有多少被真正的识别出来了。
 
 - 关于综合评价指标`F1`：
 Precision与Recall有时候会出现矛盾，如上表所示，这时就需要综合考虑他们，最常见的方法是F-Measure,F-Measure的计算公式如下：
@@ -206,7 +226,7 @@ Precision与Recall有时候会出现矛盾，如上表所示，这时就需要�
 F = (a**2 + 1)*P*R / a**2(P+R)
 ```
 
-F是Precision与Recall的甲醛调和评价，当a=1时，就是最常见的F1，公式为 `F1 = 2*P*R / (P+R)`，可见F1综合了P和R的结果，当F1较高时则能说明该模型效果不错，上表中也显示`GaussianNB`的F1为其中的最高值，为`0.36177`。
+F是Precision与Recall的加权调和评价，当a=1时，就是最常见的F1，公式为 `F1 = 2*P*R / (P+R)`，可见F1综合了P和R的结果，当F1较高时则能说明该模型效果不错，上表中也显示`GaussianNB`的F1为其中的最高值，为`0.36177`。
 
 
 # 9. 参考

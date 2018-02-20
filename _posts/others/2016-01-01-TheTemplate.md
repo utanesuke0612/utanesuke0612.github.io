@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  markdown模版
-date:   2016-08-27 01:08:00 +0800
+date:   2017-08-27 01:08:00 +0800
 categories: 其他
 tag: markdown
 ---
