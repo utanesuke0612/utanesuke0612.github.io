@@ -238,7 +238,7 @@ F是Precision与Recall的加权调和评价，当a=1时，就是最常见的F1�
 5. [机器学习安然数据集分析报告](http://blog.csdn.net/Einstellung/article/details/78387849)
 6. [机器学习：准确率(Precision)、召回率(Recall)、F值(F-Measure)、ROC曲线、PR曲线](http://blog.csdn.net/quiet_girl/article/details/70830796)
 
-# 10. 参考代码
+# 10. 附录-代码
 
 ## 10.1 全体代码-`poi_id.py`
 
