@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Uda-DataAnalysis-48-机器学习[ing]-D3基础构件
+title: Uda-DataAnalysis-48-机器学习-D3基础构件
 date: 2018-02-18 02:00:00
 categories: 数据分析
 tags: R Udacity DataAnalysis 
@@ -24,7 +24,7 @@ tags: R Udacity DataAnalysis
 
 在chrome中打开任意一个网页，`Ctrl+shift+J`可以打开JavaScript的命令行工具，输入如下代码可载入D3：
 
-```javascript
+```html
 var script = document.createElement("script")
 script.type = "text/javascript"
 script.src = "https://d3js.org/d3.v4.min.js"
@@ -43,7 +43,7 @@ document.head.appendChild(script)
 - 使用`clear()`可以清理屏幕
 - `↑ ↓`可以选择历史命令
 
-```javascript
+```html
 > function add_me(a,b){
  return a + b;
 }
@@ -56,7 +56,7 @@ document.head.appendChild(script)
 
 示例：
 
-```javascript
+```html
 # 返回id为footer的元素
 > document.getElementById("footer")
 < null
@@ -75,7 +75,7 @@ document.head.appendChild(script)
 
 通过上面的函数，如`document.getElementsByTagName`和`document.querySelector`返回的是`dom`对象，该dom对象不能使用d3的方法。要使用d3的方法，就要用到d3 selections。
 
-```javascript
+```html
 > var elem = d3.select(".navbar")
 < undefined
 
@@ -98,14 +98,14 @@ document.head.appendChild(script)
 
 另外，通过`selectAll`能选出所有符号条件的元素：
 
-```javascript
+```html
 > d3.selectAll("img")
 < [Array(4)]
 ```
 
 # 14. 更改标题
 
-```javascript
+```html
 # 通过类名class名
 d3.select(".main-title").html("Gapminder World: China")
 
@@ -125,7 +125,7 @@ d3.select("h1").html("Gapminder World: China")
 
 使用如下的代码：
 
-```javascript
+```html
 > var parent_el = d3.select("#header-logo")
 < undefined
 
@@ -147,7 +147,7 @@ d3.select("h1").html("Gapminder World: China")
 
 - 直接用一行语句实现logo替换：
 
-```javascript
+```html
 > d3.select("#header-logo").select("img").attr("src","./assets/udacity_white.png")
 < [Array(1)]
 
@@ -161,7 +161,7 @@ d3.select("h1").html("Gapminder World: China")
 
 # 17. 运用 D3 删除元素
 
-```javascript
+```html
 # 可以有多种方式，下列方式都可行：
 
 > d3.selectAll(".main").html(null)
@@ -183,7 +183,7 @@ SVG的坐标系与通常的坐标系不同，我们在使用的时候，需要�
 
 # 21. 添加SVG元素
 
-```javascript
+```html
 > d3.select(".main").html("")
 < [Array(1)]
 
@@ -198,7 +198,7 @@ SVG的坐标系与通常的坐标系不同，我们在使用的时候，需要�
 
 # 22. D3 刻度语法
 
-```javascript
+```html
 > var y=d3.scale.linear().domain([15,90]).range([250,0])
 > y(15)
 < 250
@@ -226,7 +226,7 @@ Create a scale for the circles on the Gapminder plot and save it to a variable c
 
 The population of the countries ranges from 52070 in Marshall Islands to 1.38 billion in China. Map the values to a range of 10 pixels to 50 pixels.
 
-```javascript
+```html
 > var r=d3.scale.sqrt().domain([52070,1380000000]).range([10,50]);
 ```
 
@@ -234,7 +234,7 @@ The population of the countries ranges from 52070 in Marshall Islands to 1.38 bi
 
 如下是一个完整的代码：
 
-```javascript
+```html
 # 移除main部分
 > d3.select(".main").html("")
 < [Array(1)]
@@ -274,7 +274,15 @@ The population of the countries ranges from 52070 in Marshall Islands to 1.38 bi
 
 # 28. 服务器请求和 D3
 
-暂略！
+参考下图：
+
+- client-server mode(1)
+
+![image](https://user-images.githubusercontent.com/18595935/36941704-d57e899c-1fa4-11e8-8b07-6b55d7dadafc.png)
+
+- client-server mode(2)
+
+![image](https://user-images.githubusercontent.com/18595935/36941711-1c6e8140-1fa5-11e8-9be1-fe84a011098d.png)
 
 # 29. 一起来制作柱状图
 
@@ -363,5 +371,81 @@ Kwon	42
 - 最终图形：
 
 ![image](https://user-images.githubusercontent.com/18595935/36849372-3eca929c-1da7-11e8-8356-499b888336c1.png)
+
+# 30. 代码结构和 JavaScript
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<style>
+.chart rect {
+  fill: steelblue;
+}
+
+.chart text {
+  fill: white;
+  font: 10px sans-serif;
+  text-anchor: end;
+}
+</style>
+<script>
+function draw(data) {
+  var width = 420,
+  barHeight = 20;
+
+  var x = d3.scale.linear()
+    .range([0, width]);
+
+  var chart = d3.select(".chart")
+      .attr("width", width);
+
+  x.domain([0, d3.max(data, function(d) { return d.value; })]);
+
+  chart.attr("height", barHeight * data.length);
+
+  var bar = chart.selectAll("g")
+      .data(data)
+    .enter().append("g")
+      .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; });
+
+  bar.append("rect")
+      .attr("width", function(d) { return x(d.value); })
+      .attr("height", barHeight - 1);
+
+  bar.append("text")
+      .attr("x", function(d) { return x(d.value) - 3; })
+      .attr("y", barHeight / 2)
+      .attr("dy", ".35em")
+      .text(function(d) { return d.value; });
+}
+</script>
+</head>
+<body>
+  <svg class="chart"></svg>
+  <script type="text/javascript">
+
+  function type(d) {
+    d.value = +d.value; // coerce to number
+    return d;
+  }
+
+  d3.tsv("data.tsv", type, draw);
+
+  </script>
+</body>
+</html>
+```
+
+- 布局和刻度
+- 绑定数据
+- 添加柱和文本
+
+![image](https://user-images.githubusercontent.com/18595935/36941387-4fdc431c-1f9d-11e8-9532-e463a21a54df.png)
+
+
+
 
 
