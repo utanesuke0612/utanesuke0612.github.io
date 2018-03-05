@@ -32,7 +32,7 @@ ggplot(data=pf, aes(x=year, y=number)) + geom_bar(stat="identity")
 
 ![image](https://user-images.githubusercontent.com/18595935/36946193-629dbb2a-1ffc-11e8-9eb3-56a6abdd2a57.png)
 
-# 4. Dimple.js 代码文件
+# 4. Dimple.js代码文件(web服务器)
 
 - 使用 Python 开始一个本地服务器。在终端中导航到包含所有代码文件的文件夹地址，然后输入`python -m SimpleHTTPServer`(python3使用python3 -m http.server)。
 
@@ -70,6 +70,7 @@ Serving HTTP on 0.0.0.0 port 8000 ...
               width = 1400 - margin,
               height = 600 - margin;
 
+          debugger;
           var svg = d3.select("body")
             .append("svg")
               .attr("width", width + margin)
@@ -106,9 +107,25 @@ Serving HTTP on 0.0.0.0 port 8000 ...
 
 # 7. Javascript 调试器
 
-阅读更多关于[回调函数](http://javascriptissexy.com/understand-javascript-callback-functions-and-use-them/)的信息！
-[Chrome 中的 Javascript 调试](https://developers.google.com/web/tools/chrome-devtools/?utm_source=dcc&utm_medium=redirect&utm_campaign=2016q3)
-AJAX 代表“异步 JavaScript 和 XML”，指 web 页面在页面加载后进行 HTTP 请求的过程。你可以[在此](https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX/Getting_Started)阅读更多相关信息。
+- 阅读更多关于[回调函数](http://javascriptissexy.com/understand-javascript-callback-functions-and-use-them/)的信息！
 
+- [Chrome 中的 Javascript 调试](https://developers.google.com/web/tools/chrome-devtools/?utm_source=dcc&utm_medium=redirect&utm_campaign=2016q3)
 
+- AJAX 代表“异步 JavaScript 和 XML”，指 web 页面在页面加载后进行 HTTP 请求的过程。你可以[在此](https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX/Getting_Started)阅读更多相关信息。
+
+# 9. 检查变量和数据
+
+在上面的代码中加入调试用`debugger;`后，用ctrl+shift+J打开JavaScript调试器，重新加载页面，会停在断点处，在console中：
+
+```html
+> data
+< (836)...
+
+> console.table(data)
+ 
+```
+
+最终打印出如下的data的表单：
+
+![image](https://user-images.githubusercontent.com/18595935/36979918-3d5b3a7e-20cc-11e8-9094-1b23fcb26ce6.png)
 
