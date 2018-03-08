@@ -129,3 +129,77 @@ Serving HTTP on 0.0.0.0 port 8000 ...
 
 ![image](https://user-images.githubusercontent.com/18595935/36979918-3d5b3a7e-20cc-11e8-9094-1b23fcb26ce6.png)
 
+# 13. 使用Dimple
+
+![image](https://user-images.githubusercontent.com/18595935/37178951-5e147b02-2367-11e8-9247-ae5481dad479.png)
+
+# 18. 练习:添加 Y 轴
+
+上面的代码中以及添加了`debugger`，启动调试后，在console中输入：
+
+```html
+
+# 数据已经加载成功
+> data
+< (836)
+
+# 但因开启了debugger，故后面的svg定义还没有被执行
+> svg
+< undefined
+
+# 定义svg
+> var svg = d3.select("body")
+            .append("svg")
+              .attr("width", width + margin)
+              .attr("height", height + margin)
+            .append('g')
+                .attr('class','chart');
+< undefined
+
+# 定义chart
+> var myChart = new dimple.chart(svg, data);
+< undefined
+
+# 在chart对象中添加y轴
+> var y = myChart.addMeasureAxis("y", "attendance");
+< undefined
+
+> y
+< dimple.axis {chart: d…e.chart, position: "y", categoryFields: null, measure: "attendance", timeField: undefined, …}
+
+# 在chart对象中添加x轴
+> var x = myChart.addTimeAxis("x", "year"); 
+< undefined
+
+> x
+< dimple.axis {chart: d…e.chart, position: "x", categoryFields: Array(1), measure: null, timeField: "year", …}
+
+> x.chart
+< dimple.chart {svg: Array(1), x: "10%", y: "10%", width: "80%", height: "80%", …}
+
+> y.chart
+< dimple.chart {svg: Array(1), x: "10%", y: "10%", width: "80%", height: "80%", …}
+
+> myChart
+< dimple.chart {svg: Array(1), x: "10%", y: "10%", width: "80%", height: "80%", …}
+```
+
+# 19. 添加序列和绘制图表
+
+> 参考[basic_charts - attendence.html](http://www.utanesuke.shop/d3/dimple/basic_charts - attendence.html)
+
+```html
+# 前面的一个参数stage，表示根据stage进行facet或group
+> myChart.addSeries("stage",dimple.plot.bar)
+< dimple.series {chart: d…e.chart, x: d…e.axis, y: d…e.axis, z: null, c: null, …}
+
+> myChart.draw()
+< dimple.chart {svg: Array(1), x: "10%", y: "10%", width: "80%", height: "80%", …}
+```
+
+最终显示图形如下：
+
+![image](https://user-images.githubusercontent.com/18595935/37180114-36a2dff6-236b-11e8-8368-c8bd0b95c831.png)
+
+
+
