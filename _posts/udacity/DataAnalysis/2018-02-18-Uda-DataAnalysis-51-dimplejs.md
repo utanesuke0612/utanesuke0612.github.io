@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Uda-DataAnalysis-51-机器学习[ing]-Dimple.js
+title: Uda-DataAnalysis-51-机器学习-Dimple.js
 date: 2018-02-18 05:00:00
 categories: 数据分析
 tags: R Udacity DataAnalysis 
@@ -137,8 +137,7 @@ Serving HTTP on 0.0.0.0 port 8000 ...
 
 上面的代码中以及添加了`debugger`，启动调试后，在console中输入：
 
-```html
-
+```
 # 数据已经加载成功
 > data
 < (836)
@@ -188,7 +187,7 @@ Serving HTTP on 0.0.0.0 port 8000 ...
 
 > 参考[basic_charts - attendence.html](http://www.utanesuke.shop/d3/dimple/basic_charts - attendence.html)
 
-```html
+```
 # 前面的一个参数stage，表示根据stage进行facet或group
 > myChart.addSeries("stage",dimple.plot.bar)
 < dimple.series {chart: d…e.chart, x: d…e.axis, y: d…e.axis, z: null, c: null, …}
@@ -201,5 +200,58 @@ Serving HTTP on 0.0.0.0 port 8000 ...
 
 ![image](https://user-images.githubusercontent.com/18595935/37180114-36a2dff6-236b-11e8-8368-c8bd0b95c831.png)
 
+# 23. 更改日期格式
 
+更多具体，参考[日期和时间字符串格式](http://man7.org/linux/man-pages/man3/strftime.3.html)
+
+- 改进后代码如下,这样悬浮后的日期格式与X轴上一样，具体效果可以参考`#31`中的结果:
+
+```html
+          var myChart = new dimple.chart(svg, data);
+          var x = myChart.addTimeAxis("x", "year"); 
+          myChart.addMeasureAxis("y", "attendance");
+
+          x.dateParseFormat = "%Y"
+          x.tickFormat = "%Y"
+          x.timeInterval = 4
+          myChart.addSeries(null, dimple.plot.bar);
+          myChart.draw();
+```
+
+# 31. 定制Dimple图表
+
+> [basic_charts-scatter.html](http://www.utanesuke.shop/d3/dimple/basic_charts-scatter.html)
+
+- 将柱状图修改为点阵+线形图的混合，更能反映变化趋势
+- 修改点的css样式，在鼠标停留后变成红色
+- 添加标题，并将标题居中
+
+```html
+  <style>
+    circle.dimple-series-1{
+      fill:red;
+    }
+    h2{
+      text-align: center;
+    }
+  </style>
+
+  ...
+
+  d3.select("body").append("h2").text("World Cup Attendance")
+
+  ...
+  
+  var myChart = new dimple.chart(svg, data);
+  var x = myChart.addTimeAxis("x", "year"); 
+  myChart.addMeasureAxis("y", "attendance");
+
+  x.dateParseFormat = "%Y"
+  x.tickFormat = "%Y"
+  x.timeInterval = 4
+  myChart.addSeries(null, dimple.plot.scatter);
+  myChart.addSeries(null, dimple.plot.line);
+  myChart.draw();
+
+```
 
