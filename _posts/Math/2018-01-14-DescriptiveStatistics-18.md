@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Udacity-描述统计学-07-【ing】抽样分布
+title: Udacity-描述统计学-07-抽样分布
 date: 2018-01-14 07:00:0
 categories: 数学
 tags: 统计学
@@ -85,3 +85,18 @@ tags: 统计学
 社交影响力的分布图：
 
 ![image](https://user-images.githubusercontent.com/18595935/34946397-0a3d2f74-fa4a-11e7-8037-aa560dff6b62.png)
+
+# 32. 分布中均值的位置
+
+假设这些人的平均 Klout 分数是 40 分，对于其他样本量为 35 的样本的均值分布，该均值会位于何处？
+换句话说，离均值多少个标准偏差？或，Z-值是多少？
+
+![image](https://user-images.githubusercontent.com/18595935/37696128-ae13e07a-2d17-11e8-9723-bff4fcf6fca8.png)
+
+# 33. 获得均值的概率
+
+使用Z表格，计算高于40分的概率：
+
+![image](https://user-images.githubusercontent.com/18595935/37696626-72edee56-2d1b-11e8-9430-6729e68f9468.png)
+
+
