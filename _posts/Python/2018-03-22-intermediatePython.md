@@ -616,9 +616,381 @@ print(add_to2(3))
 
 # 11. __slots__魔法 
 
+> 参考: [42. 面向对象高级编程-使用__slots__](http://road2autodrive.info/2017/12/12/Python3-Liao_05/)
+
+> [Saving 9 GB of RAM with Python’s __slots__](http://tech.oyster.com/save-ram-with-python-slots/)
+
+在进入正文前，先看看python的动态属性和动态方法绑定，即一个对象在创建完毕后，还能给它追加属性和方法。
+实例代码:
+
+```python
+class Student(object):
+    def __init__(self,name):
+        self.name = name
+
+#
+bob = Student("bob")
+bob.age = 24
+
+print("{0}:{1}".format(bob.name,bob.age))
+
+# 
+def showname(name):
+    print("my name is:{}".format(name))
+
+bob.showname = showname
+bob.showname(bob.name)
+
+```
+
+运行后结果:
+
+```
+bob:24
+my name is:bob
+```
+
+默认情况下Python用一个字典来保存一个对象的实例 属性。这非常有用，因为它允许我们在运行时去设置任意的新属性。然而，对于有着已知属性的小类来说，它可能是个瓶颈。这个字典浪费了很多内存。 Python不能在对象创建时直接分配一个固定量的内存来保存所有的属性。因此如果你创建 许多对象（我指的是成千上万个），它会消耗掉很多内存。 
+
+- 使用__slots__来告诉Python不要使 用字典，而且只给一个固定集合的属性分配空间。 
+
+```python
+class Student2(object):
+    __slot__ = ["name"]
+    def __init__(self,name):
+        self.name = name
+
+wangling = Student2("wangling")
+
+wangling.age = 24
+
+print("{0}:{1}".format(wangling.name,wangling.age))
+
+```
+
+输出结果为: `wangling:24`
+
+Python在构建类的时候，会检查__slots__变量是否存在，如果存在，为slots变量建立member_descriptor，并放入tp_dict里面，并且这个类的tp_dictoffset为0，它的实例将不会有自己的__dict__。
+
+
+虽然上面的实例中也有动态的属性追加，但是估计是加到`member_descriptor`中，而不是每个实例中。
+
+既然使用`__slots__`既能减少内存使用，也能实现动态属性追加，那是不是什么情况都需要使用呢？不是!只有在实例非常多的情况下，使用它才最有优势。
+
+**Warning**: Don’t prematurely optimize and use this everywhere! It’s not great for code maintenance, and it really only saves you when you have thousands of instances.
+
 # 12. 虚拟环境
 
 # 13. 容器
+
+python附带一个模块，包含了很多数据类型，名字叫做collections，这里讨论:
+- defaultdict
+- counter
+- deque
+- namedtuple
+- enum.Enum
+
+## defaultdict
+
+我个人使用defaultdict较多，与dict类型不同，你不需要检查key是否存在，所以我 们能这样做： 
+
+```python
+from collections import defaultdict
+
+colors = (
+        ("1","red"),
+        ("2","blue"),
+        ("2","dark blue"),
+        ("3","yellow"),
+        ("3","pink"),
+        )
+
+favourite_colors = defaultdict(list)
+
+for name,color in colors:
+    favourite_colors[name].append(color)
+
+print(favourite_colors)
+```
+输出为:
+
+```
+defaultdict(<class 'list'>, {'1': ['red'], '2': ['blue', 'dark blue'], '3': ['yellow', 'pink']})
+```
+
+
+- 在一个字典中对一个键进行嵌套赋值时，如果这个键不存 在，会触发keyError异常。 defaultdict允许我们用一个聪明的方式绕过这个问题。 
+
+首先分享一个使用dict触发KeyError的例子
+
+```python
+some_dict = {}
+some_dict["colors"]["favourite"] = "yellow"
+```
+
+错误如下:
+
+```
+Traceback (most recent call last):
+  File "pylearn.py", line 3, in <module>
+    some_dict["colors"]["favourite"] = "yellow"
+KeyError: 'colors'
+```
+
+然后提供一个使用defaultdict的解决方案。 
+
+```python
+import collections 
+tree = lambda:collections.defaultdict(tree)
+some_dict = tree()
+some_dict["colors"]["favourite"] = "yellow"
+
+import json 
+print(json.dumps(some_dict))
+```
+
+输出为:`{"colors": {"favourite": "yellow"}}`
+
+
+
+但是如果是非嵌套形式的话，是可以直接赋值的，如下:
+
+```python
+some_dict = {}
+some_dict["colors"] = "yellow"
+print(some_dict)
+```
+
+输出为:`{'colors': 'yellow'}`
+
+## counter
+
+Counter是一个计数器，它可以帮助我们针对某项数据进行计数。比如它可以用来计算每个人喜欢多少种颜色： 
+
+```python
+from collections import Counter
+
+colors = (
+        ("1","red"),
+        ("2","blue"),
+        ("2","blue"),
+        ("3","blue"),
+        ("9","blue"),
+        ("3","pink"),
+        )
+
+favs = Counter((str(color)+"-"+str(num)) for num, color in colors)
+favs2 = Counter(color for num, color in colors)
+
+print(favs)
+print(favs2)
+```
+
+输出如下:
+
+```
+Counter({'blue-2': 2, 'red-1': 1, 'blue-3': 1, 'blue-9': 1, 'pink-3': 1})
+Counter({'blue': 4, 'red': 1, 'pink': 1})
+```
+
+
+我们也可以在利用它统计一个文件，例如： 
+```python
+with open('filename', 'rb') as f:
+    line_count = Counter(f) 
+    print(line_count) 
+```
+
+## deque
+
+deque提供了一个双端队列，可以从头尾两端添加和删除元素。
+示例程序如下:
+
+```python
+from collections import deque
+
+d = deque()
+d.append("1")
+d.append("2")
+
+print(d)
+print(d[1])
+
+print("------------------------")
+
+d1 = deque(range(5))
+print(d1)
+
+x = d1.popleft()
+y = d1.pop()
+
+print("popleft:{0},pop:{1}".format(x,y))
+
+```
+
+输出结果如下:
+
+```
+deque(['1', '2'])
+2
+------------------------
+deque([0, 1, 2, 3, 4])
+popleft:0,pop:4
+```
+
+我们也可以限制这个列表的大小，当超出你设定的限制时，数据会从对队列另一端被挤出 去(pop)。 
+
+```python
+from collections import deque
+
+d = deque(maxlen=8)
+m = [d.append(x) for x in range(8)]
+
+print(m)
+print(d)
+
+print("-----------------")
+
+m = [d.append(x) for x in range(9,12)]
+print(d)
+
+```
+
+输出如下:
+
+```
+[None, None, None, None, None, None, None, None]
+deque([0, 1, 2, 3, 4, 5, 6, 7], maxlen=8)
+-----------------
+deque([3, 4, 5, 6, 7, 9, 10, 11], maxlen=8)
+```
+
+还可以从任一端扩展这个队列中的数据：
+
+```python
+from collections import deque
+
+d = deque([1,2,3,4,5])
+
+d.extendleft(["a","b"])
+print(d)
+
+d.extend(["A","B"])
+print(d)
+```
+
+输出为:
+
+```python
+deque(['b', 'a', 1, 2, 3, 4, 5])
+deque(['b', 'a', 1, 2, 3, 4, 5, 'A', 'B'])
+```
+## namedtuple
+
+介绍命名tuple之前，先看看普通元祖，一个元组是一个不可变的列表，你可以存储一个数据的序列，它和命名元组 (namedtuples)非常像，但有几个关键的不同。 
+主要相似点是都不像列表，你不能修改元组中的数据。为了获取元组中的数据，你需要使 用整数作为索引： 
+
+```python
+tuple1 = ("x",100)
+print(tuple1[1])
+```
+上述代码输出`100`，如果试着修改tuple的话，如`tuple1[1] = 200`，则会出错`TypeError: 'tuple' object does not support item assignment`。
+
+
+那namedtuples是什么呢？它把元组变成一个针对简单任务的容器。你不必使用整数索引来访问一个namedtuples的数据。你可以像字典(dict)一样访问namedtuples， 但namedtuples是不可变的。 
+
+
+```python
+from collections import namedtuple
+Animal = namedtuple("Animal","name age type")
+perry = Animal(name="perry",age=31,type="cat")
+
+print(perry)
+print(perry.name)
+
+```
+
+输出如下:
+
+```
+Animal(name='perry', age=31, type='cat')
+perry
+```
+
+现在可以看到，我们可以用名字对tuple进行访问了，一个命名元组(namedtuple)有两个必须的参数，分别是元组名称和字段名称。
+
+namedtuple的每个实例没有对象字典，所以它们很轻量，与普通的元组比，并不 需要更多的内存。这使得它们比字典更快。但是要记住它是一个元组，属性值在namedtuple中是不可变的。
+
+另外，namedtuple还有两点:
+
+- 本身是元组，仍然可以通过数字下标访问
+- 可以将一个命名元组转换为字典
+
+```python
+from collections import namedtuple
+Animal = namedtuple("Animal","name age type")
+perry = Animal(name="perry",age=31,type="cat")
+
+print(perry)
+print(perry[2])
+print(perry._asdict())
+```
+
+输出如下:
+
+```
+Animal(name='perry', age=31, type='cat')
+cat
+OrderedDict([('name', 'perry'), ('age', 31), ('type', 'cat')])
+```
+
+## enum.Enum (Python 3.4+) 
+
+另一个有用的容器是枚举对象，它属于enum模块，存在于Python 3.4以上版本中。
+
+让我们回顾一下上一个'Animal'命名元组的例子。 它有一个type字段，问题是，type是一个字符串。 那么问题来了，万一程序员输入了Cat，因为他按到了Shift键，或者输入了'CAT'，甚 至'kitten'？ 
+
+枚举可以帮助我们避免这个问题，通过不使用字符串。考虑以下这个例子： 
+
+```python
+from collections import namedtuple
+from enum import Enum
+
+class Species(Enum):
+    cat = 1
+    dog = 2
+    horse = 3
+    owl = 4
+    
+    # 
+    kitten = 1
+    puppy = 2
+
+Animal = namedtuple("Animal","name age type")
+perry = Animal(name="Perry",age=31,type=Species.cat)
+tom = Animal(name="Tom",age=4,type=Species.dog)
+charlie = Animal(name="Charlie",age=2,type=Species.kitten)
+
+print(perry.type == charlie.type)
+print(perry.type)
+
+print(perry.type == tom.type)
+
+
+print("{0}:{1}:{2}".format(Species(1),Species["cat"],Species.cat))
+
+```
+
+
+输出如下:
+
+```
+True
+Species.cat
+False
+Species.cat:Species.cat:Species.cat
+```
+
 
 # 14. 枚举
 
@@ -683,9 +1055,322 @@ C:\Users\61041150\Desktop\20180203\shell\pyData>python pylearn.py
 
 # 15. 对象自省
 
+自省(introspection)，在计算机编程领域里，是指在运行时来判断一个对象的类型的能力。 它是Python的强项之一。Python中所有一切都是一个对象，而且我们可以仔细勘察那些对 象。
+
+- dir
+
+```python
+>>> listA = [1,2,3]
+>>> dir(listA)
+```
+
+上面的自省给了我们一个列表对象的所有方法的名字。当你没法回忆起一个方法的名字， 这会非常有帮助。如果我们运行dir()而不传入参数，那么它会返回当前作用域的所有名 字。 
+
+- type与id
+
+```python
+>>> type(listA)
+<class 'list'>
+>>> type(" ")
+<class 'str'>
+>>> type(2)
+<class 'int'>
+>>> id(listA)
+24097976
+```
+
+- inspect模块
+
+inspect模块也提供了许多有用的函数，来获取活跃对象的信息。比方说，你可以查看一 个对象的成员，只需运行： 
+
+```python
+>>> import inspect
+
+>>> print(inspect.getmembers(str))
+
+```
+
 # 16. 推导式
 
+
+> 参考 [21. 列表生成式](http://road2autodrive.info/2017/09/11/Python3-Liao_02/#21-%E5%88%97%E8%A1%A8%E7%94%9F%E6%88%90%E5%BC%8F)
+
+## 列表推导式（list comprehensions） 
+
+如果我们要生成一个list的平方，可能会用下面for循环的方式，但是如果用列表推倒式，一行就搞定:
+
+```python
+squared1 = []
+for x in range(5):
+    squared1.append(x**2)
+
+print(squared1)
+
+# 
+squared2 = [x**2 for x in range(5)]
+print(squared2)
+
+```
+
+都输出 `[0, 1, 4, 9, 16]`。
+
+同样，通过列表推倒式也可以用于过滤元素，输出`[0, 3, 6, 9, 12]`:
+
+```python
+mul = [i for i in range(15) if i % 3 is 0]
+print(mul)
+```
+
+当然上面的也可以用map和filter来实现，但是列表推倒式还是更简明:
+
+```python
+print(list(filter(lambda x:x%3==0,range(15))))
+print(list(map(lambda x:x**2,range(5))))
+```
+
+分别输出为`[0, 3, 6, 9, 12]`和`[0, 1, 4, 9, 16]`。
+
+## 字典推导式（dict comprehensions） 
+
+示例如下:
+
+```python
+# 1
+mcase = {"a":10,"b":34,"A":7,"z":3,"Z":10}
+mcase_frequency = {k.lower():mcase.get(k.lower(),0) + mcase.get(k.upper(),0) for k in mcase.keys()}
+
+print(mcase_frequency)
+
+# 2
+mcase_change = {v:k for k,v in mcase_frequency.items()}
+print(mcase_change)
+```
+
+上面`# 1`,将同一个字母，但是大小写不同的，其所对应的数字求和了:
+
+- `k.lower()`是生成的字典的key，后面根据key去计算其大小写后取对应的数字，有可能没有对应的大写或是小写，则默认为0
+- `for k in mcase.keys()` 这个是循环器，将字典的key取出来，大写A小写a虽然被计算两次，但因为数据结构是字典，最终只会保留一个
+
+上面的`# 2`，将字典的key和value进行了反转。
+
+
+## 集合推导式（set comprehensions） 
+
+它们跟列表推导式也是类似的。 唯一的区别在于它们使用大括号{}。 举个例子： 
+
+```python
+squared_set = {x**2 for x in range(-5,6)}
+print(squared_set)
+
+squared_list = [x**2 for x in range(-5,6)]
+print(squared_list)
+```
+
+输出如下:
+
+```
+{0, 1, 4, 9, 16, 25}
+[25, 16, 9, 4, 1, 0, 1, 4, 9, 16, 25]
+```
+
 # 17. 异常
+
+最基本的异常处理是  try/except从句，将可能触发异常的代码放到try语句中，而处理异常的代码在except中实现，如下是一个简单的例子:
+
+
+```python
+try:
+    file = open("text.txt","rb")
+except IOError as e:
+    print("An IOError occurred:\n{}".format(e.args[-1]))
+```
+
+当一个文件不存存在时会触发异常，输出结果如下:
+
+```
+An IOError occurred:
+No such file or directory
+```
+
+## 处理多个异常
+
+通常有如下的三种方式来处理异常:
+
+- 将多个异常放在一个元组里面
+
+```python
+try:
+    file = open("text.txt","rb")
+except (IOError,EOFError) as e:
+    print("An Error occurred:\n{}".format(e.args[-1]))
+
+```
+
+- 使用多个except语句
+
+```python
+try:
+    file = open("text.txt","rb")
+except EOFError as e:
+    print("An EOFError occurred.")
+    raise e
+except IOError as e:
+    print("An IOError occurred.")
+    raise e
+```
+
+
+- 不显式指定异常名，捕获所有异常
+
+```python
+try:
+    file = open("text.txt","rb")
+except Exception:
+    print("An error occurred.")
+    raise
+
+```
+
+上面通过`raise`显式引发异常，异常被触发后输出如下:
+
+```python
+An error occurred.
+Traceback (most recent call last):
+  File "pylearn.py", line 2, in <module>
+    file = open("text.txt","rb")
+FileNotFoundError: [Errno 2] No such file or directory: 'text.txt'
+```
+
+
+
+
+## finally从句
+
+
+try...except..finally异常处理从句中，finally中代码是不管异常是否触发都将会被执行，这样可以用在脚本执行完的清理工作。
+
+
+```python
+try:
+    file = open("test.txt","rb")
+    print("Open Successfull!")
+except IOError as e:
+    print("An IOError occurred: {}".format(e.args[-1]))
+finally:
+    print("This would be printed whether or not an exception occurred")
+```
+
+- 没有触发异常，正常打开文件时的输出:
+
+```
+Open Successfull!
+This would be printed whether or not an exception occurred
+```
+
+- 触发异常，没有找到可以打开的文件时的输出:
+
+```
+An IOError occurred: No such file or directory
+This would be printed whether or not an exception occurred
+```
+
+
+## try/else从句
+
+类似于for/else，感觉不是很常用的else语句，如果想在没有触发异常的时候执行一些代码，可以很简单的通过else从句来实现。
+可能会有这样的疑问，既然只是想让代码在没有触发异常时被执行，为什么不直接放在try中呢？答案是如果放在try中这部分代码的异常会被捕获，而放在else中，不会被捕获。
+
+> 实际的使用场景中，不知道什么case需要这样使用。
+
+举例如下:
+
+- 
+try正常执行，没有触发异常，所以else会被执行:
+
+```python
+try:
+    print("try: I am sure no exception is going to occur!")
+    # 1
+    # file = open("test1.txt","rb")
+except Exception as e:
+    print("except: exception")
+else:
+    print("else: This would only run if no exception occurs,and an error would not be caught")
+    # 2
+    # file = open("test1.txt","rb")
+finally:
+    print("finally: This would be printed in every case.")
+
+```
+
+输出为:
+
+```
+try: I am sure no exception is going to occur!
+else: This would only run if no exception occurs,and an error would not be caugh
+t
+finally: This would be printed in every case.
+
+```
+
+- 
+try异常结束，被except捕获异常，else不会被执行:
+
+```python
+try:
+    print("try: I am sure exception is going to occur!")
+    # 1
+    file = open("test1.txt","rb")
+except Exception as e:
+    print("except: exception")
+else:
+    print("else: This would only run if no exception occurs,and an error would not be caught")
+    # 2
+    # file = open("test1.txt","rb")
+finally:
+    print("finally: This would be printed in every case.")
+```
+
+输出如下:
+
+```
+try: I am sure  exception is going to occur!
+except: exception
+finally: This would be printed in every case.
+```
+
+- try正常结束，else被执行，但是else中的异常不会被捕获，而是直接触发异常：
+
+```python
+try:
+    print("try: I am sure no exception is going to occur!")
+    # 1
+    # file = open("test1.txt","rb")
+except Exception as e:
+    print("except: exception")
+else:
+    print("else: This would only run if no exception occurs,and an error would not be caught")
+    # 2
+    file = open("test1.txt","rb")
+finally:
+    print("finally: This would be printed in every case.")
+```
+
+输出如下:
+
+```
+try: I am sure no exception is going to occur!
+else: This would only run if no exception occurs,and an error would not be caught
+finally: This would be printed in every case.
+
+Traceback (most recent call last):
+  File 
+"pylearn.py", line 10, in <module>
+    file = open("test1.txt","rb")
+FileNotFoundError: [Errno 2] No such file or directory: 'test1.txt'
+```
+
+else从句只会在没有异常的情况下执行，而且它会在finally语句之前被执行。
 
 # 18. lambda表达式
 
@@ -790,13 +1475,196 @@ print(list(itertools.chain(*a_list)))
 
 # 20. For - Else
 
+for循环是每个程序语言中最基本的控制语句，但是大部分人不知道在python中for还有一个else子句，else子句会在循环正常结束(即不是被break中断)时被调用。常见的应用场景为，如果我们跑一个循环，查找一个元素，一旦找到就break，这个for循环有两个场景会停止循环:
+
+- 找到元素，break
+- 没找到元素，for循环完毕
+
+如果我们想知道到底是如何停止循环的，即确认到底有没有找到元素，一个方法是做一个标记，在break前标记，另一个方式就是使用else子句，for else结构如下:
+
+```python
+for item in container:
+	if search_something(item):
+		# Found it!
+		process(item)
+		break 
+else:
+	# Didn't find anything..
+	not_found_in_container() 
+```
+
+实例:
+
+```python
+listA = [1,4,5,6]
+myelement = 40
+
+# 方法1
+founder = False
+for i in listA:
+    if i == myelement:
+        founder = True
+
+if founder == False:
+    print("not found!")
+else:
+    print("found!")
+
+#
+print("-------------------")
+
+# 方法2
+for i in listA:
+    if i == myelement:
+        print("found!")
+        break
+else:
+        print("not found!")
+```
+
+输出如下:
+
+```
+not found!
+-------------------
+not found!
+```
+
+上面的例子好像没有什么说服力，看下面的例子，直接将质数一起打印出来:
+
+```python
+for i in range(2,10):
+    for n in range(2,i):
+        if i%n == 0:
+            print("{0}: {0} / {1}".format(i,n))
+            break
+    else:
+        print("  prime:{}".format(i))
+```
+
+输出如下:
+
+```
+  prime:2
+  prime:3
+4: 4 / 2
+  prime:5
+6: 6 / 2
+  prime:7
+8: 8 / 2
+9: 9 / 3
+```
+
 # 21. 使用C扩展
 
-# 22. open函数
+# 22. open函数(文件读取)
+
+参考:[文件读写](http://road2autodrive.info/2017/12/12/Python3-Liao_07/)
+
+下面是一段文件读取的极简代码，存在如下的问题:
+
+- 如果文件open不成功，最后的close就不会被调用，那么这个文件的句柄就不会被释放
+- 需要自己显式的关闭文件
+
+```python
+f = open("photo.jpg","r+")
+jpgdata = f.read()
+f.close()
+```
+
+使用with语句就能避免上述问题，示例如下:
+
+> 如下程序中读取一个文件，检测它是否是JPG（提示：这些文件头部以字节FF D8开始），把对输入文件的描述写入一个文本文件。 
+
+```python
+import io
+
+with open("photo.jpg","rb") as inf:
+    jpgdata = inf.read()
+
+if jpgdata.startswith(b"\xff\xd8"):
+    text = u"This is a JPEG file (%d bytes long) \n"
+else:
+    text = u"This is a random file (%d bytes long) \n"
+
+with io.open("summary.txt","w",encoding="utf-8") as outf:
+    outf.write(text % len(jpgdata))
+```
+
+关于open的第二个参数，有如下常用参数:
+
+- `r`,读取
+- `r+`,读取并写入
+- `w`,覆盖写入文件
+- `a`,文件末尾追加内容
 
 # 23. 目标Python
 
-# 24. 协程 
+# 24. 协程
+
+python中的协程和生成器很相似但又稍有不同，主要区别为:
+
+- 生成器是数据的生产者
+- 协程是数据的消费者
+
+例如下面的例子，这样做不仅快而且不会给内存带来压力，因为我们所需要的值都是动态生成，而不是将他们存储在列表中。
+
+```python
+def fib():
+    a,b = 0,1
+    while a < 100:
+        yield a
+        a,b = b,a+b
+
+for i in fib():
+    print(i)
+```
+
+更概括的说上面的例子中使用yield便可获得一个协程，协程会消费掉发送给它的值。
+
+```python
+def grep(pattern):
+    print("Searching for",pattern)
+    while True:
+        line = (yield)
+        if pattern in line:
+            print(line)
+
+search = grep("coroutine")
+next(search)
+
+search.send("I love you")
+search.send("Dont you love me?")
+search.send("I love coroutine instead")
+
+```
+
+输出结果为:
+
+```
+Searching for coroutine
+I love coroutine instead
+```
+
+在这里yield成了一个协程，它将不再包含任何初始值，相反要从外部传值给它，我们可以通过send()方法向它传值,发送的值会被yield接收。
+
+为什么要运行next()方法呢？这样做正是为了启动一个协程,就像协程中包含的生成器并不是立刻执行，而是通过next()方法来响应send()方 法。因此，你必须通过next()方法来执行yield表达式。 
+
+可以通过调用close()方法来关闭一个协程。像这样： 
+
+```
+search = grep('coroutine')
+search.close() 
+```
+
+如果在close之后继续使用send的话，会出现如下的error:
+
+```python
+Traceback (most recent call last):
+  File "pylearn.py", line 17, in <module>
+    search.send("I love coroutine instead")
+StopIteration
+```
 
 # 25. 函数缓存
 
