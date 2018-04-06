@@ -2,8 +2,8 @@
 layout: post
 title: Uda-DeepLearning-U1-01-课程介绍
 date: 2018-04-01 00:00:00
-categories: 数据分析
-tags: Python Udacity DataAnalysis
+categories: DeepLearning
+tags: Udacity DeepLearning
 ---
 * content
 {:toc}
