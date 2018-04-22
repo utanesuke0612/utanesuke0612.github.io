@@ -12,7 +12,7 @@ tags: R Udacity DataAnalysis
 现在看来效率最高的就是跟着Udacity的节奏走，学习的过程中需要哪块补哪一块，而不是想一开始就把需要的补齐，难度太大也打击积极性。
 下面将第二部分的R进行一个整理:
 
-# [Uda-DataAnalysis-22-[扩展]-free R tutorial by datacamp](http://road2autodrive.info/2017/10/21/Uda-DataAnalysis-datacamp-22/)
+# [Uda-DataAnalysis-22-[扩展]-free R tutorial by datacamp](http://road2ai.info/2017/10/21/Uda-DataAnalysis-datacamp-22/)
 
 介绍R语法的基本概念，包含数据类型，数据结构，以及运算符等。
 
@@ -22,7 +22,7 @@ tags: R Udacity DataAnalysis
 - data frame： `data.frame()`，类似二维矩阵，但是可以混合多种数据类型，从CSV中读取的数据默认为data frame类型
 - list: `list()`，list中可以存储完全不同的数据结构
 
-# [Uda-DataAnalysis-22--R基础](http://road2autodrive.info/2017/11/21/Uda-DataAnalysis-22/)
+# [Uda-DataAnalysis-22--R基础](http://road2ai.info/2017/11/21/Uda-DataAnalysis-22/)
 
 与上面内容有重合，数据集的读取以及根据条件取子集，新增或删除一列,另外最后一节重点扩展了因子变量。
 
@@ -30,9 +30,9 @@ tags: R Udacity DataAnalysis
 - `mtcars <- subset(mtcars, select = -year)` 删除指定列
 - `mtcars$year <- c(1974, 1975,1976,1977)` 通过vector给指定列赋值
 
-# [Uda-DataAnalysis-23--探索单一变量](http://road2autodrive.info/2017/11/22/Uda-DataAnalysis-23/)
+# [Uda-DataAnalysis-23--探索单一变量](http://road2ai.info/2017/11/22/Uda-DataAnalysis-23/)
 
-[练习](http://road2autodrive.info/2017/11/23/Uda-DataAnalysis-24/)
+[练习](http://road2ai.info/2017/11/23/Uda-DataAnalysis-24/)
 
 探讨如何通过单个变量对数据进行分析：
 - 单一变量的直方图，y轴是x在不同范围下的count
@@ -42,9 +42,9 @@ tags: R Udacity DataAnalysis
 - 使用`by(pf$friend_count,pf$gender,summary)`进行分类统计，中间gender是类别变量
 
 
-# [Uda-DataAnalysis-25--探索两个变量](http://road2autodrive.info/2017/11/23/Uda-DataAnalysis-25/)
+# [Uda-DataAnalysis-25--探索两个变量](http://road2ai.info/2017/11/23/Uda-DataAnalysis-25/)
 
-[练习](http://road2autodrive.info/2017/11/23/Uda-DataAnalysis-26/)
+[练习](http://road2ai.info/2017/11/23/Uda-DataAnalysis-26/)
 
 探讨两个变量之间分关系：
 - 散点图`geom_point`，使用`alpha = 1/20`添加透明度避免过度绘制
@@ -58,9 +58,9 @@ tags: R Udacity DataAnalysis
 - x轴变量或y轴变量，截取特定范围 `xlim(0,quantile(diamonds$carat,0.99))`
 - 如何使用`group_by`和`summarise`
 
-# [Uda-DataAnalysis-27--探索多个变量](http://road2autodrive.info/2017/12/09/Uda-DataAnalysis-27/)
+# [Uda-DataAnalysis-27--探索多个变量](http://road2ai.info/2017/12/09/Uda-DataAnalysis-27/)
 
-[练习](http://road2autodrive.info/2017/12/09/Uda-DataAnalysis-28/)
+[练习](http://road2ai.info/2017/12/09/Uda-DataAnalysis-28/)
 
 针对三个以及以上的变量进行分析：
 - 使用`dcast`重塑数据
@@ -75,10 +75,10 @@ tags: R Udacity DataAnalysis
 - 将某一段范围的数据，按照指定的区间段进行切断，`cut`
 - 保存图形 `ggsave`
 
-# [Uda-DataAnalysis-29--钻石与价格预测](http://road2autodrive.info/2017/12/14/Uda-DataAnalysis-29/)
+# [Uda-DataAnalysis-29--钻石与价格预测](http://road2ai.info/2017/12/14/Uda-DataAnalysis-29/)
 
 - `geom_point(fill=I("#F79420"),color=I("blue"),shape=21)` 设置散点图中的颜色和填充色以及大小
 - 对x轴y轴取对数`scale_y_log10()`
 - 构建线性模型 `m1 <- lm(I(log(price)) ~ I(carat^(1/3)),data = diamonds)`
 
-# [项目报告](http://road2autodrive.info/2017/12/14/Uda-DataAnalysis-pj02/)
+# [项目报告](http://road2ai.info/2017/12/14/Uda-DataAnalysis-pj02/)

@@ -391,4 +391,4 @@ the accuracy_score: 0.957337883959
 
 - `练习29-31`的结果如下：
 
-另外，通过上面`练习27`的代码，识别出`重要度最高`的特征值(单词)，将这些单词在`text_learning/vectorize_text.py`中删除，与`sara`等单词一样，参考[Uda-DataAnalysis-41-机器学习-文本学习 - 19. 清除“签名文字”](http://road2autodrive.info/2018/01/16/Uda-DataAnalysis-41-TextLearning/)部分，删除两次，得到`练习29` `练习30` `练习31`的结果。
+另外，通过上面`练习27`的代码，识别出`重要度最高`的特征值(单词)，将这些单词在`text_learning/vectorize_text.py`中删除，与`sara`等单词一样，参考[Uda-DataAnalysis-41-机器学习-文本学习 - 19. 清除“签名文字”](http://road2ai.info/2018/01/16/Uda-DataAnalysis-41-TextLearning/)部分，删除两次，得到`练习29` `练习30` `练习31`的结果。

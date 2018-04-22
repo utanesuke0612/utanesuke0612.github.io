@@ -8,3 +8,11 @@ tags: Udacity DeepLearning
 * content
 {:toc}
 
+# 1. 深度学习应用
+
+略
+
+# 2. Anaconda
+
+
+

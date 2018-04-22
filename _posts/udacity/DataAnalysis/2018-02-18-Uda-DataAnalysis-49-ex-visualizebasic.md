@@ -17,7 +17,7 @@ tags: R Udacity DataAnalysis
 
 # 8. 问题 8 / 问题 9
 
-关于可视化编码对人眼的影响，参考[21. 视觉编码的排序](http://road2autodrive.info/2018/02/18/Uda-DataAnalysis-47-visualizebasic/)
+关于可视化编码对人眼的影响，参考[21. 视觉编码的排序](http://road2ai.info/2018/02/18/Uda-DataAnalysis-47-visualizebasic/)
 
 # 10. 问题 10 / 问题 11
 
