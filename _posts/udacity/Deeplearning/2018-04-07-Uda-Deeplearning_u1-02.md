@@ -14,5 +14,9 @@ tags: Udacity DeepLearning
 
 # 2. Anaconda
 
+略
 
+# 3. Jupyter Notebooks
+
+略
 
