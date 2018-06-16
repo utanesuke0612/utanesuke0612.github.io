@@ -303,3 +303,97 @@ def trainPerceptronAlgorithm(X, y, learn_rate = 0.01, num_epochs = 25):
 
 误差函数(Error Function)可以告诉我们与正确答案之间的差别有多大，借助误差函数能够完成上面泛化感知器的任务。
 
+
+# 13. 对数损失误差函数
+
+关于损失函数，参考[机器学习-损失函数](http://www.csuldw.com/2016/03/26/2016-03-26-loss-function/)
+
+损失函数（loss function）是用来估量你模型的预测值f(x)与真实值Y的不一致程度，它是一个非负实值函数,通常使用L(Y, f(x))来表示，损失函数越小，模型的鲁棒性就越好。损失函数是经验风险函数的核心部分，也是结构风险函数重要组成部分。模型的结构风险函数包括了经验风险项和正则项，通常可以表示成如下式子：
+
+![image](https://user-images.githubusercontent.com/18595935/41298251-ea17771a-6e9b-11e8-966c-ab48deb2f476.png)
+
+其中，前面的均值函数表示的是经验风险函数，L代表的是损失函数，后面的Φ是正则化项（regularizer）或者叫惩罚项（penalty term），它可以是L1，也可以是L2，或者其他的正则函数。整个式子表示的意思是找到使目标函数最小时的θ值。下面主要列出几种常见的损失函数。
+
+# 14. 离散型与连续型
+
+对于优化而言，连续型误差函数比离散型函数更好。为此，我们需要从离散型预测变成连续型预测。
+
+如下图，离散型与连续性函数的预测结果:
+
+![image](https://user-images.githubusercontent.com/18595935/41494278-d97a60c2-714b-11e8-83a2-0ea2afbdc817.png)
+
+离散型与连续性的激活函数:
+
+![image](https://user-images.githubusercontent.com/18595935/41494288-fc51ae02-714b-11e8-933d-d1fbe953c7cf.png)
+
+连续性激活函数，根据x为0时，即介于中介分割线时，两者几率一样，离分割线正无穷大时，几率为1,反之为0.
+
+
+# 15. 多类别分类和 Softmax
+
+将各个动物的得分，通过softmax函数转换成了概率:
+
+![image](https://user-images.githubusercontent.com/18595935/41494454-1e6bf130-714e-11e8-8b39-b928a13d6785.png)
+
+下面是softmax函数，另外softmax函数当个数为2的时候，与上面的sigmoid函数(S曲线函数)是相同的，可以自行推导。
+
+![image](https://user-images.githubusercontent.com/18595935/41494485-74ea61cc-714e-11e8-8a19-99a22f9daf0b.png)
+
+
+```python
+
+import numpy as np
+
+def softmax(L):
+    expL = np.exp(L)
+    sumExpL = sum(expL)
+    result = []
+    for i in expL:
+        result.append(i*1.0/sumExpL)
+    return result
+    
+    # Note: The function np.divide can also be used here, as follows:
+    # def softmax(L):
+    #     expL = np.exp(L)
+    #     return np.divide (expL, expL.sum())
+
+L = np.array([5,6,7,8,9])
+print(softmax(L))
+
+```
+
+输出 `[0.011656230956039607, 0.031684920796124269, 0.086128544436268703, 0.23412165725273665, 0.63640864655883089]`。
+
+
+# 16. One-Hot 编码
+
+参考[机器学习实战：数据预处理之独热编码（One-Hot Encoding）](https://www.cnblogs.com/lzh-cnblogs/p/3764749.html)
+
+独热编码即 One-Hot 编码，又称一位有效编码，其方法是使用N位状态寄存器来对N个状态进行编码，每个状态都由他独立的寄存器位，并且在任意时候，其中只有一位有效。
+
+![image](https://user-images.githubusercontent.com/18595935/41494629-cbab4aec-7150-11e8-906a-b1f46d248927.png)
+
+如上图，各种动物出现的状况，三种动物表示三种状态，用3位状态寄存器编码，任意时候，只有一个寄存器是1，其他都是0.
+
+
+# 17. 最大似然率
+
+参考[最大似然估计(Maximum likelihood estimation)](https://www.cnblogs.com/liliu/archive/2010/11/22/1883702.html)
+
+下面是点颜色的概率分布，中间的线表示模型:
+
+![image](https://user-images.githubusercontent.com/18595935/41494795-0aff0596-7154-11e8-9e8c-d9b71b1c871c.png)
+
+对比另一个模型，计算其最大似然率，显然右边模型更好:
+
+![image](https://user-images.githubusercontent.com/18595935/41494802-35705a96-7154-11e8-83a3-a45eac71f391.png)
+
+# 18. 最大化概率
+
+上面的最大似然率是通过概率的乘积得到，如果存在上千个概率相乘，最终结果会非常小，不便于计算与比较，这里需要将其转换为求和。
+
+利用log(ab) = log(a) + log(b)的特性:
+
+![image](https://user-images.githubusercontent.com/18595935/41494891-57bbb2ce-7156-11e8-9af9-2139bd7fb2ac.png)
+
+交叉熵(Cross Entropy)可以告诉我们模型的好坏，所以我们现在的目标从最大化概率，变成了最小化交叉熵，我们要寻找的误差函数，就是这个交叉熵。
