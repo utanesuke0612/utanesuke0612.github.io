@@ -397,3 +397,79 @@ print(softmax(L))
 ![image](https://user-images.githubusercontent.com/18595935/41494891-57bbb2ce-7156-11e8-9af9-2139bd7fb2ac.png)
 
 交叉熵(Cross Entropy)可以告诉我们模型的好坏，所以我们现在的目标从最大化概率，变成了最小化交叉熵，我们要寻找的误差函数，就是这个交叉熵。
+
+
+# 20. 交叉熵(cross entropy)
+
+概率和误差函数之间肯定有一定的联系，这种联系叫做交叉熵。这个概念在很多领域都非常流行，包括机器学习领域。我们将详细了解该公式，并编写代码！
+
+假设有一系列事件event,以及一系列概率probabilities，这一系列事件发生的概率很大，则交叉熵很小，反之交叉熵很大。
+
+![image](https://user-images.githubusercontent.com/18595935/41495961-ca0f1bb4-716e-11e8-812e-a9acceffdd07.png)
+
+如上图，0.69是最有可能发生的，概率为0.504，而5.12的交叉熵是最不可能发生，概率为0.006.
+
+通过公式计算如下:
+
+![image](https://user-images.githubusercontent.com/18595935/41495998-a0548d6c-716f-11e8-9dc7-22c083dd9319.png)
+
+- 参考代码如下:
+
+```python
+import numpy as np
+
+def cross_entropy(Y, P):
+    Y = np.float_(Y)
+    P = np.float_(P)
+    return -np.sum(Y * np.log(P) + (1 - Y) * np.log(1 - P))
+
+```
+
+计算:
+
+```python
+Y = np.array([1,1,0])
+P = np.array([0.8,0.7,0.1])
+print(cross_entropy(Y,P))
+```
+
+```python
+Y = np.array([0,0,1])
+P = np.array([0.8,0.7,0.1])
+print(cross_entropy(Y,P))
+```
+
+分别为`0.685179010911`和`5.11599580975`。
+
+
+# 21. 多类别交叉熵
+
+![image](https://user-images.githubusercontent.com/18595935/41496382-bd94fc18-7179-11e8-8a94-674f75681877.png)
+
+
+# 22. Logistic 回归
+
+机器学习的基石——对数几率回归算法，基本上是这样的：
+
+- 获得数据
+- 选择一个随机模型
+- 计算误差
+- 最小化误差，获得更好的模型
+
+## 22.1 计算误差函数
+
+下面的Error Function表示所有点在该模型下的误差之和的平均数。
+
+![image](https://user-images.githubusercontent.com/18595935/41542493-0d962b7e-7350-11e8-8917-345563914975.png)
+
+另外上面只是一个二元分类问题，如果有多个类别的分类问题，那么误差将是多类别交叉熵。
+
+![image](https://user-images.githubusercontent.com/18595935/41542673-735b07c2-7350-11e8-8e69-30758bf97709.png)
+
+
+## 22.2 最小化误差函数
+
+首先随机选取权重w和b，构成误差函数，利用梯度下降法，不断调整权重，最后达到一个最合适的位置，即误差最小的模型。
+
+![image](https://user-images.githubusercontent.com/18595935/41543147-5d768a8e-7351-11e8-9a9c-1443877cf55a.png)
+
