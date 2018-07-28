@@ -8,6 +8,13 @@ tags: 统计学
 * content
 {:toc}
 
+# 2. 二维空间里的直线交点
+
+Two pieces of info define a line:
+- basepoint
+- direction vector
+
+![image](https://user-images.githubusercontent.com/18595935/43355844-07b8d418-929f-11e8-9987-6e095ac36fb3.png)
 
 
 
