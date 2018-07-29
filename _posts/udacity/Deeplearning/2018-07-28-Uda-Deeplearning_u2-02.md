@@ -18,12 +18,9 @@ Luis讲述了对数损失函数。除此之外，还有很多其他误差函数�
 
 ![image](https://user-images.githubusercontent.com/18595935/43363900-29299f8c-934a-11e8-9d36-6ba2079c24b5.png)
 
-
 ## 2.2 注意事项
 
 ![image](https://user-images.githubusercontent.com/18595935/43363897-0a47cf80-934a-11e8-9501-72dce184c698.png)
-
-
 
 
 # 3. 梯度下降：数学
