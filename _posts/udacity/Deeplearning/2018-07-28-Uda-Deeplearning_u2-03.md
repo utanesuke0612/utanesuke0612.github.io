@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Uda-DeepLearning-U2-03-训练神经网络
+title: Uda-DeepLearning-U2-03-神经网络-训练神经网络
 date: 2018-05-06 00:00:00
 categories: DeepLearning
 tags: Udacity DeepLearning
