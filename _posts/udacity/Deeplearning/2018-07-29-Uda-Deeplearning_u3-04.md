@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Uda-DeepLearning-U3-04-卷积神经网络-权重初始化
-date: 2018-07-28 00:00:04
+date: 2018-05-28 00:00:04
 categories: DeepLearning
 tags: Udacity DeepLearning
 ---
