@@ -7,3 +7,11 @@ tags: Udacity DeepLearning
 ---
 * content
 {:toc}
+
+# 1. 项目1公开课
+
+Todo List
+1. Forward Pass (Hidden layer / Output layer)
+2. Backward pass (Output error / Back propagated error / Update the weights)
+
+
