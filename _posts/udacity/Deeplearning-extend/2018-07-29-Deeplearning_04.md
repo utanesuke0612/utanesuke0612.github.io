@@ -78,6 +78,8 @@ error2: 0.5975
 
 ![image](https://user-images.githubusercontent.com/18595935/43674498-fdb53ddc-980f-11e8-99f5-69240fca0ad1.png)
 
+k是预测值的个数(比如上面一个手写图片，结果可能为10个数，则k为10)，yk是第k个的计算结果，tk是第k个的标签即正确结果(0或1)。
+
 ```python
 def cross_entropy_error(y, t):
     delta = 1e-7
@@ -488,7 +490,162 @@ plt.show()
 
 ## 4.2 神经网络的梯度
 
+神经网络也要求梯度，这里所说的梯度指损失函数关于权重函数的梯度。
 
+![image](https://user-images.githubusercontent.com/18595935/43776678-834dd3fa-9a8b-11e8-8a1b-b37572403bb0.png)
+
+下面以一个简单的神经网络为例，来实现求解梯度的代码:
+
+### 4.2.1 一个简单的神经网络类
+
+只有一个实例变量，即形状为2*3的权重参数
+
+```python
+import sys,os
+sys.path.append(os.pardir)
+import numpy as np
+from common.functions import softmax,cross_entropy_error
+from common.gradient import numerical_gradient
+
+class simpleNet:
+    def __init__(self):
+        self.W = np.random.randn(2,3)
+        
+    # 预测，将输入矩阵与权重矩阵做点积
+    def predict(self,x):
+        return np.dot(x,self.W)
+    
+    # 求损失值
+    def loss(self,x,t):
+        z = self.predict(x)
+        y = softmax(z)
+        loss = cross_entropy_error(y,t)
+        
+        return loss
+```
+
+- `loss`函数，z是预测结果，softmax是激活函数，最后调用交叉熵误差函数，得到最终误差结果，相关函数如下:
+
+```python
+def softmax(x):
+    if x.ndim == 2:
+        x = x.T
+        x = x - np.max(x, axis=0)
+        y = np.exp(x) / np.sum(np.exp(x), axis=0)
+        return y.T 
+
+    x = x - np.max(x) # 溢出对策
+    return np.exp(x) / np.sum(np.exp(x))
+
+
+def cross_entropy_error(y, t):
+    if y.ndim == 1:
+        t = t.reshape(1, t.size)
+        y = y.reshape(1, y.size)
+        
+    # 监督数据是one-hot-vector的情况下，转换为正确解标签的索引
+    if t.size == y.size:
+        t = t.argmax(axis=1)
+             
+    batch_size = y.shape[0]
+    return -np.sum(np.log(y[np.arange(batch_size), t] + 1e-7)) / batch_size    
+```
+
+### 4.2.2 使用上面的神经网络类
+
+预测并根据标签计算损失值
+
+```python
+# 初始化神经网络
+net = simpleNet()
+print("1. net.W",net.W)
+
+# 输入x，利用神经网络预测
+x = np.array([0.6,0.9])
+p = net.predict(x)
+print("2. predict:",p)
+
+# 得到最大的值的索引
+idx = np.argmax(p)
+print("3. index for max:",idx)
+
+# 根据标签计算损失
+t = np.array([0,0,1])
+loss = net.loss(x,t)
+print("4. loss:",loss)
+```
+
+输出结果如下:
+
+```python
+1. net.W [[ 0.16042481  0.89547429  3.01478025]
+ [-1.68381034 -1.74616755  0.05227519]]
+2. predict: [-1.41917443 -1.03426622  1.85591582]
+3. index for max: 2
+4. loss: 0.0892732979033
+```
+
+### 4.2.3 计算梯度
+
+用两种方式，计算损失函数关于权重参数的梯度:
+
+这里函数f(W)的参数W是一个伪参数，因为`numerical_gradient(f,x)`会在内部执行f(x)，为了与之兼容而定义了f(W).
+`numerical_gradient(f,x)`的参数f是函数，x是传给函数f的参数，因此这里x取net.W，并定义一个计算损失函数的新函数f。
+
+```python
+def f(W):
+    return net.loss(x,t)
+
+dW = numerical_gradient(f,net.W)
+print("5. dW:",dW)
+
+# method2
+f2 = lambda w:net.loss(x,t)
+dW2 = numerical_gradient(f2,net.W)
+print("6. dW2:",dW2)
+```
+
+输出结果如下:
+
+```python
+5. dW: [[ 0.02075041  0.0304923  -0.05124271]
+ [ 0.03112561  0.04573845 -0.07686406]]
+6. dW2: [[ 0.02075041  0.0304923  -0.05124271]
+ [ 0.03112561  0.04573845 -0.07686406]]
+```
+
+上面dw的结果与W权重的形状一致，都是2*3的二维数组，观察上面dw的结果，第一行第一列为0.02，表示如果将w11增加h，那么损失函数值增加0.2h，负数则为减小。
+
+> 参考:
+
+```python
+def gradient_descent(f, init_x, lr=0.01, step_num=100):
+    x = init_x
+    x_history = []
+
+    for i in range(step_num):
+        x_history.append( x.copy() )
+
+        grad = numerical_gradient(f, x)
+        x -= lr * grad
+
+    return x, np.array(x_history)
+```
 
 
 # 5. 学习算法的实现
+
+神经网络存在合适的权重和偏置，调整权重和偏置以便拟合训练数据的过程，成为`学习`，神经网络的学习如下图所示:
+
+![image](https://user-images.githubusercontent.com/18595935/43780253-21e4b188-9a95-11e8-8b25-dc1cf505694e.png)
+
+## 5.1 2层神经网络的类
+
+上面第4节的只有一层神经网络，下面是一个二层神经网络的类
+
+```python
+
+```
+
+
+
