@@ -644,8 +644,261 @@ def gradient_descent(f, init_x, lr=0.01, step_num=100):
 上面第4节的只有一层神经网络，下面是一个二层神经网络的类
 
 ```python
+import sys,os
+sys.path.append(os.pardir)
+from common.functions import *
+from common.gradient import numerical_gradient
 
+class TwoLayerNet:
+    def __init__(self,input_size,hidden_size,output_size,weight_init_std=0.01):
+        # 初始化权重
+        self.params = {}
+        self.params["W1"] = weight_init_std * \
+                            np.random.randn(input_size,hidden_size)
+        self.params["b1"] = np.zeros(hidden_size)
+        self.params["W2"] = weight_init_std * \
+                            np.random.randn(hidden_size,output_size)
+        self.params["b2"] = np.zeros(output_size)        
+        
+    
+    def predict(self,x):
+        W1,W2 = self.params["W1"], self.params["W2"]
+        b1,b2 = self.params["b1"], self.params["b2"]
+        
+        a1 = np.dot(x,W1) + b1
+        z1 = sigmoid(a1)
+        a2 = np.dot(z1,W2)
+        y = softmax(a2)
+        
+        return y
+    
+    # x为输入数据，t为监督数据
+    def loss(self,x,t):
+        y = self.predict(x)
+        
+        return cross_entropy_error(y,t)
+    
+    def accuracy(self,x,t):
+        y = self.predict(x)
+        y = np.argmax(y,axis=1)
+        t = np.argmax(t,axis=1)
+        
+        accuracy = np.sum(y == t) / float(x.shape[0])
+        
+        return accuracy
+    
+    
+    # x输入数据，t为监督数据
+    def numerical_gradient(self,x,t):
+        loss_W = lambda W:self.loss(x,t)
+        
+        grads = {}
+        grads['W1'] = numerical_gradient(loss_W, self.params['W1'])
+        grads['b1'] = numerical_gradient(loss_W, self.params['b1'])
+        grads['W2'] = numerical_gradient(loss_W, self.params['W2'])
+        grads['b2'] = numerical_gradient(loss_W, self.params['b2'])
+        
+        return grads
+```
+
+- TwolayerNet类中使用的变量
+
+|变量|说明|
+|:--|--:|
+|params |保存神经网络的参数的字典性变量(实例变量) |
+| |W1/W2 分别表示第一层第二层的权重，b1/b2表示第一层第二层的偏置 |
+|grads |保存梯度的字典性变量 |
+
+
+- TwoLayerNet类的方法
+
+|变量|说明|
+|:--|--:|
+|__init__(self, input_size, hidden_size, output_size) | 进行初始化，参数分别为输入层，隐藏层，输入层神经元数|
+|predict(self, x) |进行识别，参数X是图像数据，即像素数据 |
+|loss(self, x, t) |计算损失函数的值，参数x是图像数据，t是正确解标签，下同 |
+|accuracy(self, x, t) |计算识别精度 |
+|numerical_gradient(self, x, t) |计算权重参数的梯度 |
+
+- 初始化一个神经网络，查看权重矩阵的维度
+
+```python
+net = TwoLayerNet(input_size=784, hidden_size=100, output_size=10) 
+print("W1:",net.params['W1'].shape)
+print("b1:",net.params['b1'].shape)
+print("W2:",net.params['W2'].shape)
+print("b2:",net.params['b2'].shape)
+```
+
+输出如下，输入图像大小是784(28*28)，输出为10个类别:
+
+```python
+W1: (784, 100)
+b1: (100,)
+W2: (100, 10)
+b2: (10,)
+```
+
+- 根据输入数据，计算梯度
+
+```python
+x = np.random.rand(100, 784) # 伪输入数据（100笔）
+t = np.random.rand(100, 10)  # 伪正确解标签（100笔） 
+grads = net.numerical_gradient(x, t)  # 计算梯度 
+
+print("grads-W1:",grads['W1'].shape)
+print("grads-b1:",grads['b1'].shape)
+print("grads-W2:",grads['W2'].shape)
+print("grads-b2:",grads['b2'].shape)
+```
+
+```python
+grads-W1: (784, 100)
+grads-b1: (100,)
+grads-W2: (100, 10)
+grads-b2: (10,)
+```
+
+## 5.2 mini-batch的实现
+
+从训练数据中随机选择一部分数据，再以这些mini-batch为对象，使用梯度法更新参数的过程，这里mini-batch大小100，需要每次从60000个训练数据中随机取100个数据(图像数据和正确解标签数据)，然后对着100笔数据求梯度，使用随机梯度下降法SGD更新参数。
+
+另外，梯度法的更新次数是1000，每更新一次都对训练数据计算损失函数的值，并把该值添加到数组中。
+
+
+```python
+# coding: utf-8
+import sys, os
+sys.path.append(os.pardir)  # 为了导入父目录的文件而进行的设定
+import numpy as np
+import matplotlib.pyplot as plt
+from dataset.mnist import load_mnist
+from two_layer_net import TwoLayerNet
+
+# 读入数据
+(x_train, t_train), (x_test, t_test) = load_mnist(normalize=True, one_hot_label=True)
+
+network = TwoLayerNet(input_size=784, hidden_size=50, output_size=10)
+
+iters_num = 1000  # 适当设定循环的次数
+train_size = x_train.shape[0]
+batch_size = 100
+learning_rate = 0.1
+
+train_loss_list = []
+train_acc_list = []
+test_acc_list = []
+
+iter_per_epoch = max(train_size / batch_size, 1)
+
+for i in range(iters_num):
+    batch_mask = np.random.choice(train_size, batch_size)
+    x_batch = x_train[batch_mask]
+    t_batch = t_train[batch_mask]
+    
+    # 计算梯度
+    #grad = network.numerical_gradient(x_batch, t_batch)
+    grad = network.gradient(x_batch, t_batch)
+    
+    # 更新参数
+    for key in ('W1', 'b1', 'W2', 'b2'):
+        network.params[key] -= learning_rate * grad[key]
+    
+    # 记录学习过程
+    loss = network.loss(x_batch, t_batch)
+    train_loss_list.append(loss)
+    
+
+# 绘制图形
+markers = {'train': 'o', 'test': 's'}
+x = np.arange(iters_num)
+plt.plot(x, train_loss_list)
+plt.xlabel("loss")
+plt.ylabel("iteration")
+plt.ylim(0, 5)
+plt.show()
 ```
 
 
+![image](https://user-images.githubusercontent.com/18595935/43807609-371e80a2-9ae4-11e8-99bf-3007183e35e9.png)
 
+可以发现随着学习的进行，损失函数的值在不断减小。这是学习正常进行的信号，表示神经网络的权重参数在逐渐拟合数据。也就是 说，神经网络的确在学习！通过反复地向它浇灌（输入）数据，神经网络正在逐渐向最优参数靠近。
+
+## 5.3 基于测试数据的评价
+
+```python
+# coding: utf-8
+import sys, os
+sys.path.append(os.pardir)  # 为了导入父目录的文件而进行的设定
+import numpy as np
+import matplotlib.pyplot as plt
+from dataset.mnist import load_mnist
+from two_layer_net import TwoLayerNet
+
+# 读入数据
+(x_train, t_train), (x_test, t_test) = load_mnist(normalize=True, one_hot_label=True)
+
+network = TwoLayerNet(input_size=784, hidden_size=50, output_size=10)
+
+iters_num = 10000  # 适当设定循环的次数
+train_size = x_train.shape[0]
+batch_size = 100
+learning_rate = 0.1
+
+train_loss_list = []
+train_acc_list = []
+test_acc_list = []
+
+iter_per_epoch = max(train_size / batch_size, 1)
+
+for i in range(iters_num):
+    batch_mask = np.random.choice(train_size, batch_size)
+    x_batch = x_train[batch_mask]
+    t_batch = t_train[batch_mask]
+    
+    # 计算梯度
+    #grad = network.numerical_gradient(x_batch, t_batch)
+    grad = network.gradient(x_batch, t_batch)
+    
+    # 更新参数
+    for key in ('W1', 'b1', 'W2', 'b2'):
+        network.params[key] -= learning_rate * grad[key]
+    
+    loss = network.loss(x_batch, t_batch)
+    train_loss_list.append(loss)
+    
+    if i % iter_per_epoch == 0:
+        train_acc = network.accuracy(x_train, t_train)
+        test_acc = network.accuracy(x_test, t_test)
+        train_acc_list.append(train_acc)
+        test_acc_list.append(test_acc)
+        print("train acc, test acc | " + str(train_acc) + ", " + str(test_acc))
+
+# 绘制图形
+markers = {'train': 'o', 'test': 's'}
+x = np.arange(len(train_acc_list))
+plt.plot(x, train_acc_list, label='train acc')
+plt.plot(x, test_acc_list, label='test acc', linestyle='--')
+plt.xlabel("epochs")
+plt.ylabel("accuracy")
+plt.ylim(0, 1.0)
+plt.legend(loc='lower right')
+plt.show()
+```
+
+输出如下:
+
+![image](https://user-images.githubusercontent.com/18595935/43807298-ca23f9ce-9ae2-11e8-84e0-3f1f914f2a05.png)
+
+
+
+# 6. 小结
+
+本章介绍了神经网络的学习，为了能顺利进行神经网络的学习，导入了损失函数这个指标，以这个损失函数为基准，找出使它的值达到最小的权重参数，就是神经网络学习的目标，为了找到尽可能小的损失函数值，我们使用函数斜率的梯度法。
+
+- 机器学习使用的数据集分为训练数据和测试数据
+- 神经网络用训练数据进行学习，并用测试数据评价学习到的模型的泛化能力
+- 神经网络的学习以损失函数为指标，更新权重参数，以使损失函数的值减少
+- 利用某个给定的微小值的差分求导数的过程，称为数值微分
+- 利用数值微分，可以计算权重参数的梯度
+- 数据微分虽然费时间，但是实现简单
