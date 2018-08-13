@@ -38,14 +38,164 @@ tags: DeepLearning
 
 ![image](https://user-images.githubusercontent.com/18595935/43990269-c2592214-9d94-11e8-89f2-dece6035f46d.png)
 
+将链式法则的计算，用计算图表示出来，如下:
+
+![image](https://user-images.githubusercontent.com/18595935/44035401-63db9462-9f4a-11e8-8c17-4147f5be4a4f.png)
+
 
 # 3. 反向传播
 
-# 4. 简单层的思想
+- 加法节点的反向传播，将上游的值原封不动的输出到下游，因为加法节点的导数为1.
+- 乘法的反向传播会乘以输入信号的翻转值.
 
-# 5. 激活函数层的思想
+加法的反向传播只是将上游的值传给下游，并不需要正向传播的输入信号，但是，乘法的反向传播需要正向传播时的输入信号值。
+因此，**实现乘法节点的反向传播时，要保存正向传播的输入信号**。
+
+![image](https://user-images.githubusercontent.com/18595935/44035940-98266408-9f4b-11e8-9dea-8dd06361a58f.png)
+
+购买苹果的反向传播例子,乘法节点的反向传播会将输入信号翻转后传给下游，加法节点会直接传给下游:
+
+![image](https://user-images.githubusercontent.com/18595935/44036419-b3f77cd4-9f4c-11e8-8746-d3d2ff9a0d3e.png)
+
+# 4. 简单层的实现
+
+## 4.1 乘法层的实现
+
+层的实现中有两个共通的方法forward()和backward()，前者负责正向传播，后面负责反向传播。
+
+![image](https://user-images.githubusercontent.com/18595935/44037396-2eff8500-9f4f-11e8-8463-08ad6626893f.png)
+
+通过下面的代码，实现上面乘法层的前向和反向传播:
+
+```python
+# 一个乘法节点，作为一个类的对象
+class MulLayer:
+    def __init__(self):
+        self.x = None
+        self.y = None
+    
+    # 进行一次前向传播后，对象的x和y被赋值，即输入信号，输出为结果，只有一个值
+    def forward(self,x,y):
+        self.x = x
+        self.y = y
+        out = x * y
+    
+        return out
+    
+    # 反向的话，对应两个输出
+    def backward(self,dout):
+        dx = dout * self.y
+        dy = dout * self.x
+        
+        return dx,dy
+```
+
+- 前向传播,前一层前向传播的结果，作为下一层前向传播的输入信号
+
+```python
+apple = 100
+apple_num = 2
+tax = 1.1
+
+# layer
+mul_apple_layer = MulLayer()
+mul_tax_layer = MulLayer()
+
+# forward
+apple_price = mul_apple_layer.forward(apple,apple_num)
+price = mul_tax_layer.forward(apple_price,tax)
+
+print("forward price:",price)
+```
+
+输出为: `forward price: 220.00000000000003`
+
+- 反向传播, tax和apple的乘法节点中，经过前向传播，节点对象中有x和y，分别为该节点的输入信号。
+
+```python
+# backward
+dprice = 1
+dapple_price,dtax = mul_tax_layer.backward(dprice)
+dapple,dapple_num = mul_apple_layer.backward(dapple_price)
+
+print("dapple:",dapple,",dapple_num:",dapple_num,",dtax:",dtax)
+```
+
+输出为: `dapple: 2.2 ,dapple_num: 110.00000000000001 ,dtax: 200`
+
+## 4.2 加法层的实现
+
+![image](https://user-images.githubusercontent.com/18595935/44036419-b3f77cd4-9f4c-11e8-8746-d3d2ff9a0d3e.png)
+
+如果我要实现上面的乘法层和加法层混合的计算图：
+
+```python
+class AddLayer:
+    # 因为加法的导数，不需要输入信号，即与其他的输入信号无关，故不用保存
+    def __init__(self):
+        pass
+    
+    # 直接相加
+    def forward(self,x,y):
+        out = x + y
+        return out
+    
+    def backward(self,dout):
+        dx = dout * 1
+        dy = dout * 1
+        return dx,dy
+```
+
+```python
+apple = 100
+apple_num = 2
+orange = 150
+orange_num = 3
+tax = 1.1
+
+# layer
+mul_apple_layer = MulLayer()
+mul_orange_layer = MulLayer()
+add_apple_orange_layer = AddLayer()
+mul_tax_layer = MulLayer()
+
+# forward
+apple_price = mul_apple_layer.forward(apple,apple_num)
+orange_price = mul_orange_layer.forward(orange,orange_num)
+all_price = add_apple_orange_layer.forward(apple_price,orange_price)
+price = mul_tax_layer.forward(all_price,tax)
+
+# backward
+dprice = 1
+dall_price,dtax = mul_tax_layer.backward(dprice)
+dapple_price,dorange_price = add_apple_orange_layer.backward(dall_price)
+dorange, dorange_num = mul_orange_layer.backward(dorange_price) 
+dapple, dapple_num = mul_apple_layer.backward(dapple_price)
+
+# 前向传播结果
+print(price)
+
+# 反向传播结果，对应5个输入信号的导数
+print(dapple_num, dapple, dorange, dorange_num, dtax) # 110 2.2 3.3 165 650
+```
+
+
+输出结果如下:
+
+```python
+715.0000000000001
+110.00000000000001 2.2 3.3000000000000003 165.0 650
+```
+
+综上，计算图中层的实现(这里是加法层和乘法层)非常简单，使用这些层可以进行复杂的导数计算。
+
+# 5. 激活函数层的实现
 
 # 6. Affine-Softmax层的实现
+
+# 7. 误差反向传播法的实现
+
+
 
 
 
