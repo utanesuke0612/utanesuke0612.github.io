@@ -243,9 +243,9 @@ ValueError: shapes (3,2) and (3,4) not aligned: 2 (dim 1) != 3 (dim 0)
 
 ## 3.2 神经网络内积
 
-> 内积 (http://road2ai.info/2018/03/22/LinearAlgebra-02/#7-%E5%86%85%E7%A7%AFinner-productsdot-products)[7. 内积(Inner Products/Dot Products)]
+> 内积 [7. 内积(Inner Products/Dot Products)](http://road2ai.info/2018/03/22/LinearAlgebra-02/#7-%E5%86%85%E7%A7%AFinner-productsdot-products)
 
-> 向量积 (http://road2ai.info/2018/03/22/LinearAlgebra-02/#13-%E5%90%91%E9%87%8F%E7%A7%AFcross-products)[13. 向量积(Cross products)]
+> 向量积 [13. 向量积(Cross products](http://road2ai.info/2018/03/22/LinearAlgebra-02/#13-%E5%90%91%E9%87%8F%E7%A7%AFcross-products)
 
 
 ![image](https://user-images.githubusercontent.com/18595935/43671022-34bc76e8-97ce-11e8-99fa-e0931df29ce3.png)
