@@ -3,7 +3,7 @@ layout: post
 title: Udacity-描述统计学-03-集中趋势(均值，众数,中位数)
 date: 2017-12-27 03:00:0
 categories: 数学
-tags: 统计学
+tags: 数学
 ---
 * content
 {:toc}

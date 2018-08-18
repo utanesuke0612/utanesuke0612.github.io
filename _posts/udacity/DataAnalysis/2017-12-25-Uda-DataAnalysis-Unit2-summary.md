@@ -3,7 +3,7 @@ layout: post
 title: Uda-DataAnalysis-Unit2--R统计分析总结
 date: 2017-12-14 06:00:01
 categories: 数据分析
-tags: R Udacity DataAnalysis 
+tags: R DataAnalysis 
 ---
 * content
 {:toc}

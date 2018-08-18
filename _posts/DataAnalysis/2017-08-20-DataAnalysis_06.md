@@ -3,7 +3,7 @@ layout: post
 title: PythonDataAnalysis-05-matplotlib基础绘图函数示例
 date: 2017-08-19 20:49:59
 categories: 数据分析
-tags: Python 北理 DataAnalysis
+tags: DataAnalysis
 ---
 * content
 {:toc}

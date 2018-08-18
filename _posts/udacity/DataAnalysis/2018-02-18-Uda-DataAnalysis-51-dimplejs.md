@@ -3,7 +3,7 @@ layout: post
 title: Uda-DataAnalysis-51-机器学习-Dimple.js(web服务器)
 date: 2018-02-18 05:00:00
 categories: 数据分析
-tags: R Udacity DataAnalysis 
+tags: R DataAnalysis 
 ---
 * content
 {:toc}

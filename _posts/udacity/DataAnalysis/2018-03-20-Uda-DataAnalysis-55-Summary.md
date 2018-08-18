@@ -3,7 +3,7 @@ layout: post
 title: Uda-DataAnalysis-[总结]数据分析进阶
 date: 2018-03-20 09:00:00
 categories: 数据分析
-tags: R Udacity DataAnalysis 
+tags: R DataAnalysis 
 ---
 * content
 {:toc}

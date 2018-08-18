@@ -3,7 +3,7 @@ layout: post
 title: Uda-DeepLearning-U1-01-课程介绍
 date: 2018-04-01 00:00:00
 categories: DeepLearning
-tags: Udacity DeepLearning
+tags: DeepLearning
 ---
 * content
 {:toc}

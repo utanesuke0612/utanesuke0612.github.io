@@ -3,7 +3,7 @@ layout: post
 title: Uda-DataAnalysis-22-[扩展]-free R tutorial by datacamp
 date: 2017-10-21 00:00:00
 categories: 数据分析
-tags: R Udacity DataAnalysis 
+tags: R DataAnalysis 
 ---
 * content
 {:toc}

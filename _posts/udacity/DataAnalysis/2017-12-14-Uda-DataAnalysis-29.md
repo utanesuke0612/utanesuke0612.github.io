@@ -3,7 +3,7 @@ layout: post
 title: Uda-DataAnalysis-29--钻石与价格预测
 date: 2017-12-14 05:00:01
 categories: 数据分析
-tags: R Udacity DataAnalysis 
+tags: R DataAnalysis 
 ---
 * content
 {:toc}

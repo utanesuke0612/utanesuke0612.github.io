@@ -3,7 +3,7 @@ layout: post
 title: Uda-DeepLearning-U3-01-卷积神经网络-云计算
 date: 2018-05-28 00:00:00
 categories: DeepLearning
-tags: Udacity DeepLearning
+tags: DeepLearning
 ---
 * content
 {:toc}

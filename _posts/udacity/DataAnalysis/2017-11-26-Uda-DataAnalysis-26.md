@@ -3,7 +3,7 @@ layout: post
 title: Uda-DataAnalysis-26--练习：探索两个变量
 date: 2017-11-23 03:00:04
 categories: 数据分析
-tags: R Udacity DataAnalysis 
+tags: R DataAnalysis 
 ---
 * content
 {:toc}

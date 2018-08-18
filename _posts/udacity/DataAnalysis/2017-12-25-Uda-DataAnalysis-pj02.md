@@ -3,7 +3,7 @@ layout: post
 title: Uda-DataAnalysis-pj02--红葡萄酒数据质量分析报告
 date: 2017-12-14 06:00:01
 categories: 数据分析
-tags: R Udacity DataAnalysis 
+tags: R DataAnalysis 
 ---
 * content
 {:toc}

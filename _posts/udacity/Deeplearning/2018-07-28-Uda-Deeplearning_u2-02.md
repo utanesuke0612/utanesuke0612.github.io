@@ -3,7 +3,7 @@ layout: post
 title: Uda-DeepLearning-U2-02-神经网络-实现梯度下降
 date: 2018-05-05 00:00:00
 categories: DeepLearning
-tags: Udacity DeepLearning
+tags: DeepLearning
 ---
 * content
 {:toc}

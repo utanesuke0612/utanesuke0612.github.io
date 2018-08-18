@@ -3,7 +3,7 @@ layout: post
 title: Uda-DataAnalysis-48-[扩展]机器学习-Make a Bar Chart
 date: 2018-02-18 02:05:00
 categories: 数据分析
-tags: R Udacity DataAnalysis 
+tags: R DataAnalysis 
 ---
 * content
 {:toc}

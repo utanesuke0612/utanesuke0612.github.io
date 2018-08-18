@@ -3,7 +3,7 @@ layout: post
 title: Uda-DataAnalysis-15-[扩展]-MongoDB官方文档-聚合
 date: 2017-10-8 03:00:00
 categories: 数据分析
-tags: MongoDB Udacity DataAnalysis 
+tags: MongoDB DataAnalysis 
 ---
 * content
 {:toc}

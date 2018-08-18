@@ -3,7 +3,7 @@ layout: post
 title: Uda-DataAnalysis-35-机器学习-选择自己的算法(K近邻,random forest,adaboost)
 date: 2018-01-16 05:00:01
 categories: 数据分析
-tags: R Udacity DataAnalysis 
+tags: R DataAnalysis 
 ---
 * content
 {:toc}

@@ -3,7 +3,7 @@ layout: post
 title: Uda-DataAnalysisBasic-01-数据分析过程(1)
 date: 2017-09-23 00:00:00
 categories: 数据分析
-tags: Python Udacity DataAnalysis
+tags: DataAnalysis
 ---
 * content
 {:toc}

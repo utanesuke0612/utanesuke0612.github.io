@@ -3,7 +3,7 @@ layout: post
 title: PythonDataAnalysis-01-Numpy库入门
 date: 2017-08-19 20:45:59
 categories: 数据分析
-tags: Python 北理 DataAnalysis
+tags: DataAnalysis
 ---
 * content
 {:toc}

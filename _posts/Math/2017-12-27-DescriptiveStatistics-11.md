@@ -3,7 +3,7 @@ layout: post
 title: Udacity-描述统计学-04-可变性(盒装图,标准偏差,贝塞尔校正,样本标准偏差)
 date: 2017-12-27 04:00:0
 categories: 数学
-tags: 统计学
+tags: 数学
 ---
 * content
 {:toc}

@@ -3,7 +3,7 @@ layout: post
 title: Uda-DataAnalysis-06-数据质量
 date: 2017-10-3 00:00:00
 categories: 数据分析
-tags: Python Udacity DataAnalysis
+tags: DataAnalysis
 ---
 * content
 {:toc}

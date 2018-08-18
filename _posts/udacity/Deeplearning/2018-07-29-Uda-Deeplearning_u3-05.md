@@ -3,7 +3,7 @@ layout: post
 title: Uda-DeepLearning-U3-05-卷积神经网络-自编码器
 date: 2018-05-28 00:00:06
 categories: DeepLearning
-tags: Udacity DeepLearning
+tags: DeepLearning
 ---
 * content
 {:toc}

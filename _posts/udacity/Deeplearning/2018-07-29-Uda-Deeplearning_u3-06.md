@@ -3,7 +3,7 @@ layout: post
 title: Uda-DeepLearning-U3-06-卷积神经网络-迁移学习
 date: 2018-05-28 00:00:07
 categories: DeepLearning
-tags: Udacity DeepLearning
+tags: DeepLearning
 ---
 * content
 {:toc}

@@ -3,7 +3,7 @@ layout: post
 title: Udacity-描述统计学-01-研究方法入门(构建/样本/相关与因果/假设与试验)
 date: 2017-12-27 01:00:0
 categories: 数学
-tags: 统计学
+tags: 数学
 ---
 * content
 {:toc}

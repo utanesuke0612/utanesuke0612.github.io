@@ -3,7 +3,7 @@ layout: post
 title: linux-script应用02(空格处理以及循环)
 date: 2018-01-16 00:00:09
 categories: 虚拟化(网络/存储/vmware)
-tags: vmware linux
+tags: linux
 ---
 * content
 {:toc}

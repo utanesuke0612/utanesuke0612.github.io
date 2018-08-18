@@ -3,7 +3,7 @@ layout: post
 title: PythonDataAnalysis-08-Pandas数据特征分析
 date: 2017-08-19 21:50:59
 categories: 数据分析
-tags: Python 北理 DataAnalysis
+tags: DataAnalysis
 ---
 * content
 {:toc}

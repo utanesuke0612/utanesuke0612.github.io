@@ -3,7 +3,7 @@ layout: post
 title: Uda-DataAnalysis-23-【扩展】如何读懂直方图并在 R 中进行使用
 date: 2017-11-22 02:00:03
 categories: 数据分析
-tags: R Udacity DataAnalysis 
+tags: R DataAnalysis 
 ---
 * content
 {:toc}

@@ -3,7 +3,7 @@ layout: post
 title: Udacity-描述统计学-02-数据可视化(频率,直方图,组距,倾斜分布)
 date: 2017-12-27 02:00:0
 categories: 数学
-tags: 统计学
+tags: 数学
 ---
 * content
 {:toc}

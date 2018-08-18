@@ -3,7 +3,7 @@ layout: post
 title: LinuxでDisk追加してPostgresqlDBの保存場所を変更
 date: 2018-01-14 00:00:09
 categories: 虚拟化(网络/存储/vmware)
-tags: vmware linux
+tags: linux
 ---
 * content
 {:toc}

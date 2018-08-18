@@ -3,7 +3,7 @@ layout: post
 title: Udacity-描述统计学-07-抽样分布
 date: 2018-01-14 07:00:0
 categories: 数学
-tags: 统计学
+tags: 数学
 ---
 * content
 {:toc}

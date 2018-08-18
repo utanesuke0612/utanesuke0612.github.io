@@ -3,7 +3,7 @@ layout: post
 title: PythonDataAnalysis-02-Numpy数据存取与函数
 date: 2017-08-19 20:46:59
 categories: 数据分析
-tags: Python 北理 DataAnalysis
+tags: DataAnalysis
 ---
 * content
 {:toc}

@@ -3,7 +3,7 @@ layout: post
 title: Udacity-描述统计学-05-归一化(理论正态分布,Z值,归一化)
 date: 2018-01-14 05:00:0
 categories: 数学
-tags: 统计学
+tags: 数学
 ---
 * content
 {:toc}

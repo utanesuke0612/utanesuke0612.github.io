@@ -3,7 +3,7 @@ layout: post
 title:  Running Log
 date:   2018-01-1 01:08:00 +0800
 categories: 其他
-tag:
+tags:
 ---
 * content
 {:toc}

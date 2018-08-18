@@ -3,7 +3,7 @@ layout: post
 title: PythonSample-01-控制结构/eval函数
 date: 2017-08-16 22:45:59
 categories: Python
-tags: 北理 Python
+tags: Python
 ---
 * content
 {:toc}

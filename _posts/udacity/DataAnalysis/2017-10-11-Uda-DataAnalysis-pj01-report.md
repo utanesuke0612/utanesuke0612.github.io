@@ -3,7 +3,7 @@ layout: post
 title: Uda-DataAnalysis-项目1-分析OpenStreetMap的OSM数据
 date: 2017-10-8 20:00:00
 categories: 数据分析
-tags: MongoDB Udacity DataAnalysis 
+tags: MongoDB DataAnalysis 
 ---
 * content
 {:toc}

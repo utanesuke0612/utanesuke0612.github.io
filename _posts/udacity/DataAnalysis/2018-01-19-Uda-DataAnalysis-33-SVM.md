@@ -3,7 +3,7 @@ layout: post
 title: Uda-DataAnalysis-33-机器学习-SVM(Support vector machine 支持向量机)
 date: 2018-01-16 02:00:01
 categories: 数据分析
-tags: R Udacity DataAnalysis 
+tags: R DataAnalysis 
 ---
 * content
 {:toc}

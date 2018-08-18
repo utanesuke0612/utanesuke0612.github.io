@@ -3,7 +3,7 @@ layout: post
 title: PythonDataAnalysis-07-Panda库入门
 date: 2017-08-19 20:50:59
 categories: 数据分析
-tags: Python 北理 DataAnalysis
+tags: DataAnalysis
 ---
 * content
 {:toc}

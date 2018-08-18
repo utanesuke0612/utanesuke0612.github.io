@@ -3,7 +3,7 @@ layout: post
 title: Uda-DeepLearning-U3-07-卷积神经网络-项目-狗狗品种分类
 date: 2018-05-28 00:00:08
 categories: DeepLearning
-tags: Udacity DeepLearning
+tags: DeepLearning
 ---
 * content
 {:toc}

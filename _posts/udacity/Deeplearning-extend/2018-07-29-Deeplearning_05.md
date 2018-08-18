@@ -387,7 +387,7 @@ Y: [[ 1.08552715  0.62281067  1.06360257]
 
 # 7. 误差反向传播法的实现
 
-
+![image](http://static.zybuluo.com/road2ai/x2amkm6hdt08zeec22ccvmqb/image_1cl6j5i1a1uf861q12ddv7v1muv9.png)
 
 
 

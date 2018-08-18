@@ -3,7 +3,7 @@ layout: post
 title: PythonDataAnalysis-03-图像的手绘效果
 date: 2017-08-19 20:47:59
 categories: 数据分析
-tags: Python 北理 DataAnalysis
+tags: DataAnalysis
 ---
 * content
 {:toc}

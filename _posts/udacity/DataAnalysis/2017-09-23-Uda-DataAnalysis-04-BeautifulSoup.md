@@ -3,7 +3,7 @@ layout: post
 title: Uda-DataAnalysis-04-[扩展]-BeautifulSoup
 date: 2017-10-01 00:03:00
 categories: 数据分析
-tags: Python Udacity DataAnalysis
+tags: DataAnalysis
 ---
 * content
 {:toc}

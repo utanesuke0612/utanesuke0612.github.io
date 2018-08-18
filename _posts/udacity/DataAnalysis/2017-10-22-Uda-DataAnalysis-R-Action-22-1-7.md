@@ -3,7 +3,7 @@ layout: post
 title: Uda-DataAnalysis-22-[扩展]-R语言实战(第二版)-07-基本统计分析
 date: 2017-10-21 01:00:07
 categories: 数据分析
-tags: R Udacity DataAnalysis 
+tags: R DataAnalysis 
 ---
 * content
 {:toc}

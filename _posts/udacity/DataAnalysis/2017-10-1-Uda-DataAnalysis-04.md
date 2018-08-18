@@ -3,7 +3,7 @@ layout: post
 title: Uda-DataAnalysis-04-复杂格式数据提取
 date: 2017-10-01 00:02:00
 categories: 数据分析
-tags: Python Udacity DataAnalysis
+tags: DataAnalysis
 ---
 * content
 {:toc}

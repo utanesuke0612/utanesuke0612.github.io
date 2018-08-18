@@ -3,7 +3,7 @@ layout: post
 title: Uda-DataAnalysis-22-[扩展]-R语言实战(第二版)-19-使用ggplot2进行高级绘图
 date: 2017-10-21 03:00:19
 categories: 数据分析
-tags: R Udacity DataAnalysis 
+tags: R DataAnalysis 
 ---
 * content
 {:toc}

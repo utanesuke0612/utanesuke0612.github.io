@@ -3,7 +3,7 @@ layout: post
 title: PythonDataAnalysis-00-数据分析准备工作
 date: 2017-08-18 08:45:59
 categories: 数据分析
-tags: Python 北理 DataAnalysis
+tags: DataAnalysis
 ---
 * content
 {:toc}

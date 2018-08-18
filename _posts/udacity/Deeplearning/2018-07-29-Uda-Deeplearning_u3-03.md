@@ -3,7 +3,7 @@ layout: post
 title: Uda-DeepLearning-U3-03-卷积神经网络-TensorFlow中的CNN
 date: 2018-05-28 00:00:03
 categories: DeepLearning
-tags: Udacity DeepLearning
+tags: DeepLearning
 ---
 * content
 {:toc}
