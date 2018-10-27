@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Uda-DeepLearning-U1-02-深度学习应用-Anaconda-JupyterNotebooks
-date: 2018-04-03 00:00:00
+date: 2018-05-03 00:02:00
 categories: DeepLearning
 tags: DeepLearning
 ---

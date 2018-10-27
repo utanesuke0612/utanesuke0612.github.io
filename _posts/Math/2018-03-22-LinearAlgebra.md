@@ -8,15 +8,23 @@ tags: 数学
 * content
 {:toc}
 
-# 2. 点和向量
+# 3. 矩阵和状态转换
+
+> []()
+
+# 2. 交点
+
+> []()
+
+# 1. 向量
+
+## 1.1 点和向量
 
 点表示一个绝对位置，向量表示位置上的位移(大小和方向)
 
 ![image](https://user-images.githubusercontent.com/18595935/37912983-bec8d9e4-314e-11e8-86f2-fca736097d6b.png)
 
-
-
-# 3. Vector 模块
+## 1.2 Vector 模块
 
 1. `__init__`初始化程序，根据坐标轴列表输入创建向量，同时设定维度
 2. `__str__`打印输出，定制该class的`print`函数
@@ -66,11 +74,11 @@ True
 False
 ```
 
-# 3. 向量运算
+## 1.3 向量运算
 
 ![image](https://user-images.githubusercontent.com/18595935/37971972-38d6158a-3212-11e8-9af2-22d0973b4d28.png)
 
-# 4. 练习:加减和标量乘法
+## 1.4 练习:加减和标量乘法
 
 - 在上面的示例中追加了三个成员函数，用于进行向量的加减和惩罚
 
@@ -158,7 +166,7 @@ Vector: (12.38211, -7.49892, -2.35638)
 ```
 
 
-# 5. 大小(magnitude)和方向(direction)
+## 1.5 大小(magnitude)和方向(direction)
 
 ![image](https://user-images.githubusercontent.com/18595935/37975113-8cad74c6-3219-11e8-983e-e45ace5229fa.png)
 
@@ -169,7 +177,7 @@ Vector: (12.38211, -7.49892, -2.35638)
 2. A vector's direction can be represented by a unit vector.
 3. Normalization: process of finding a unit vector in the same direction as a given vector.
 
-# 6. 练习: 编写大小和方向函数
+## 1.6 练习: 编写大小和方向函数
 
 ![image](https://user-images.githubusercontent.com/18595935/37976705-0d0a3624-321d-11e8-9bb8-e394435726bf.png)
 
@@ -256,7 +264,7 @@ Vector: (0.9339352140866403, -0.35744232526233)
 Vector: (0.3404012959433014, 0.5300437012984873, -0.7766470449528029)
 ```
 
-# 7. 内积(Inner Products/Dot Products)
+## 1.7 内积(Inner Products/Dot Products)
 
 ![image](https://user-images.githubusercontent.com/18595935/43036134-311713a6-8d36-11e8-8079-b0cd3fcb9782.png)
 
@@ -264,13 +272,13 @@ Vector: (0.3404012959433014, 0.5300437012984873, -0.7766470449528029)
 2. 两个向量的内积，结果是一个标量
 3. V和W的向量内积 = 向量V的大小 * 向量W的大小 * Cos角度
 
-## 7.1 柯西-徐瓦尔兹等式
+### 1.7.1 柯西-徐瓦尔兹等式
 
 ![image](https://user-images.githubusercontent.com/18595935/43036146-7301920a-8d36-11e8-8251-6cb68f59c0bf.png)
 
 ![image](https://user-images.githubusercontent.com/18595935/43036161-c193a9e4-8d36-11e8-81a2-e9e3d2281cc7.png)
 
-## 7.2 练习：编写点积和夹角函数
+### 1.7.2 练习：编写点积和夹角函数
 
 ![image](https://user-images.githubusercontent.com/18595935/43036364-6f39c8a4-8d3b-11e8-89be-72b4b0befe48.png)
 
@@ -381,11 +389,11 @@ print(deg4)
 60.27581120523091
 ```
 
-# 9. 平行和正交向量
+## 1.8 平行和正交向量
 
 ![image](https://user-images.githubusercontent.com/18595935/43036433-e257d438-8d3c-11e8-9e95-8feb4744fe8d.png)
 
-## 9.1 练习: 检查是否平行或正交
+### 1.8.1 练习: 检查是否平行或正交
 
 ![image](https://user-images.githubusercontent.com/18595935/43036534-c63c9700-8d3e-11e8-9b7c-6070de839f25.png)
 
@@ -530,7 +538,7 @@ True
 True
 ```
 
-# 11. 向量投影
+## 1.9 向量投影
 
 ![image](https://user-images.githubusercontent.com/18595935/43083654-005f9b50-8ed2-11e8-8039-474c346dcde9.png)
 
@@ -538,7 +546,7 @@ True
 
 
 
-# 12. 练习:编写向量投影函数
+## 1.10 练习:编写向量投影函数
 
 ![image](https://user-images.githubusercontent.com/18595935/43354416-37f23e66-9287-11e8-8e5c-7d75ec018316.png)
 
@@ -589,7 +597,7 @@ Vector: (-8.350081043195763, 3.376061254287722, -1.4337460427811841)
 ```
 
 
-# 13. 向量积(Cross products)
+## 1.11 向量积(Cross products)
 
 向量积，数学中又称外积、叉积，物理中称矢积、叉乘，是一种在向量空间中向量的二元运算。与点积不同，它的运算结果是一个向量而不是一个标量。并且两个向量的叉积与这两个向量和垂直。其应用也十分广泛，通常应用于物理学光学和计算机图形学中。
 
@@ -603,7 +611,7 @@ Vector: (-8.350081043195763, 3.376061254287722, -1.4337460427811841)
 
 ![image](https://user-images.githubusercontent.com/18595935/43355371-f41326ec-9295-11e8-9b3c-b0ef177ab2ca.png)
 
-# 14. 练习: 编写向量积函数
+## 1.12 练习: 编写向量积函数
 
 ![image](https://user-images.githubusercontent.com/18595935/43355492-e50a1366-9297-11e8-9460-d7f006fe1ab8.png)
 
@@ -643,11 +651,11 @@ Vector: (54.647600000000004, -30.829836999999998, 57.534829)
 42.56493739941894
 ```
 
-# 15. 总结:
+## 1.13 总结:
 
 本节目标:能更熟悉向量算法，并了解向量代数的几何原理。在下面的几节课中，我们将开始学习如何利用这些基本运算解决不同类型的问题。
 
-## 15.1 本节代码
+### 1.13.1 本节代码
 
 ```python
 from math import sqrt,acos,degrees,pi
@@ -784,6 +792,6 @@ class Vector(object):
             pass
 ```
 
-## 15.2 各个符号的含义：
+### 1.13.2 各个符号的含义：
 
 ![image](https://user-images.githubusercontent.com/18595935/43355647-d5d80760-929a-11e8-9f44-6fd3f6c0cf1a.png)

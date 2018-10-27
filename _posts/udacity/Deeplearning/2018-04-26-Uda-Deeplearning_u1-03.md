@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Uda-DeepLearning-U1-03-矩阵数学和NumPy复习
-date: 2018-04-26 00:00:00
+date: 2018-05-03 00:03:00
 categories: DeepLearning
 tags: DeepLearning
 ---
