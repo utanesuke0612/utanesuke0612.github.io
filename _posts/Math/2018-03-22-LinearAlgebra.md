@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Udacity-基础线性代数LinearAlgebra-02-向量
+title: Udacity-基础线性代数LinearAlgebra
 date: 2018-03-22 00:02:00
 categories: 数学
 tags: 数学
