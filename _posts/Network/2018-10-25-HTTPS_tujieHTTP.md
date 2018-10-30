@@ -15,4 +15,13 @@ tags: 其他
 ![image](https://user-images.githubusercontent.com/18595935/47615520-2061f980-daf3-11e8-9643-ecf04af0558f.png)
 
 
-> 详细笔记参考 []()
+
+# 第01-03章总结
+
+> 参考 [[01-03 章]图解HTTP](https://www.zybuluo.com/road2ai/note/1325274)
+
+# 第04-06章总结
+
+# 第07-09章总结
+
+# 第10-11章总结
