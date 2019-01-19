@@ -1,12 +1,17 @@
 ---
 layout: post
-title: 深度学习入门-01-Python入门
+title: 【书】深度学习入门-01-Python入门
 date: 2018-07-28 00:00:01
 categories: DeepLearning
 tags: DeepLearning
 ---
 * content
 {:toc}
+
+
+# 0. 目录结构
+
+![image](https://user-images.githubusercontent.com/18595935/51423672-d32f8880-1c06-11e9-9dbf-7f373f5606b2.png)
 
 # 1. 书籍简介
 
@@ -143,6 +148,49 @@ B*C(维度不同，广播后相乘):
 ![image](https://user-images.githubusercontent.com/18595935/43466403-6aa349fa-951a-11e8-988d-8be9f182eb45.png)
 
 
+**关于元素获取:**
+> 这些技巧经常用到，所以需要掌握
+
+```python
+X = np.array([[41,33],[33,45],[0,4]])
+print(X[0])
+```
+[41 33]
+
+```python
+for row in X:
+    print(row)
+```
+[41 33]
+[33 45]
+[0 4]
+
+将多维数组变成平的一维数组：
+
+```python
+X = X.flatten()
+print(X)
+```
+[41 33 33 45  0  4]
+
+获取对应索引号的元素:
+
+```python
+X[np.array([0,5,1])]
+```
+array([41,  4, 33])
+
+下面这个操作非常常见：
+
+```python
+print(X>15)
+print(X[X>15])
+```
+[ True  True  True  True False False]
+[41 33 33 45]
+
+
+
 
 # 4. Matplotlib
 
@@ -193,3 +241,9 @@ plt.show()
 ```
 
 ![image](https://user-images.githubusercontent.com/18595935/43468605-66265444-951f-11e8-8f00-596293163d49.png)
+
+# 5. 总结
+
+本章简要的介绍了python，实际在应用中所需要的python知识远不止此，具体关于python可以参考廖雪峰的书籍。
+
+python虽然号称简单好用的编程语言，要真的用好它并非易事，在应用中熟悉python吧。
