@@ -310,12 +310,21 @@ C: (1, 3)
 
 # 4. 3层数据网络的实现
 
+下面以三层神经网络为对象，实现从输入到输出的前向处理：
+
+- 输入层(第0层)有两个神经元，第1个隐藏层(第1层)有三个神经元，第2个隐藏层(第2层)有两个神经元
+- 输出层(第3层)有两个神经元
+
+![image](https://user-images.githubusercontent.com/18595935/51433636-8d200680-1c92-11e9-99a2-bbcd0276d13c.png)
+
 ## 4.1 符号确认:
 
 ![image](https://user-images.githubusercontent.com/18595935/43671099-2ae0199e-97cf-11e8-8e50-3ecdb1d3955a.png)
 
 
 ## 4.2 第一层神经信号的计算
+
+下面是从输入层到第1层的第一个神经元的信号传递过程:
 
 ![image](https://user-images.githubusercontent.com/18595935/43671248-5cbd44e4-97d1-11e8-9647-f430f768549e.png)
 
@@ -351,7 +360,14 @@ Z1: [ 0.57444252  0.66818777  0.75026011]
 Z1: (3,) 
 ```
 
+上述代码分为两步:
+
+1. 计算隐藏层的加权和(加权信号和偏置的和)，用A1表示：**A1 = np.dot(X,W1) + B1**。
+2. 该隐藏层的加权和，被激活函数转换后的信号，用Z1表示:**Z1 = sigmoid(A1)**。
+
 ## 4.3 第二层神经信号的计算
+
+第一层的输出(Z1)，变成了第二层的输入，其实现过程与第一层完全一样。
 
 ![image](https://user-images.githubusercontent.com/18595935/43671323-98dd3366-97d2-11e8-8b31-2f3c7b4c386d.png)
 
@@ -379,6 +395,11 @@ Z2: (2,)
 
 ## 4.4 输出层信号计算
 
+最后是第2层到输出层的信号传递，输出层的实现也与之前类似，不同的是激活函数与之前的隐藏层不同，这里使用**identity_function(A3)**，这是一个恒等函数，会将输入按原样输出。
+
+输出层的激活函数用σ()表示，不同于隐藏层的激活函数h()。
+
+
 ![image](https://user-images.githubusercontent.com/18595935/43671358-42e5f5e6-97d3-11e8-857d-6913e4afddb6.png)
 
 ```python
@@ -403,12 +424,7 @@ Y: [ 0.31682708  0.69627909]
 Y: (2,) 
 ```
 
-上面定义了一个函数`identity_function`，这是输出层的激活函数，输出层激活函数用`σ()`表示，不同于隐藏层的激活函数`h()`.
 
-**输出层所用的激活函数，要根据特定问题性质决定**
-- 一般回归问题(预测明天气温)用恒等函数
-- 二元分类问题(预测婚否)用sigmoid函数
-- 多元分类问题(预测猫狗鼠等)用softmax函数
 
 ## 4.5 代码小结
 
@@ -452,16 +468,28 @@ y = forward(network,x)
 print("Y:",Y)
 ```
 
+- `network = init_network()`: 该函数进行权重和偏置的初始化，并将其保存到字典变量network中。
+- `x = np.array([1.0,0.5])`：给定输入信号。
+- `y = forward(network,x)`：根据输入信号和权重参数，将输入信号转换为输出信号。
+
 输出为`Y: [ 0.31682708  0.69627909]`
 
 # 5. 输出层的设计
 
 神经网络可以用在回归问题和分类问题上，要根据情况改变输出层的激活函数，一般而已，回归问题用恒等函数，分类问题用softmax函数。
 
+**输出层所用的激活函数，要根据特定问题性质决定**
+- 一般回归问题(预测明天气温)用恒等函数
+- 二元分类问题(预测婚否)用sigmoid函数
+- 多元分类问题(预测猫狗鼠等)用softmax函数
+
+> 机器学习的问题，大致可以分为**分类问题**和**回归问题**，分类问题属于哪一个类别的问题，比如区分男女，而回归委托是根据某个输入预测一个连续数值的问题，比如根据图像预测体重，就是回归问题。
+
 ![image](https://user-images.githubusercontent.com/18595935/43671624-826b55a8-97d8-11e8-81a8-64f0d290e236.png)
 
-可以看出，使用softmax的输出层的各个神经元，都受到上一层输入信号的影响。(因为分母是所有神经元的总和)
-而恒等函数不会受到上一层输入信号的影响，输入信号被原封不动的输出。
+可以看出：
+1. 使用softmax的输出层的各个神经元，都受到上一层输入信号的影响。(因为分母是所有神经元的总和)
+2. 恒等函数不会受到上一层输入信号的影响，输入信号被原封不动的输出。
 
 ## 5.1 softmax函数
 
@@ -492,7 +520,7 @@ print("y:",softmax(a))
 
 ```python
 def softmax(a):
-    c = -0#np.max(a)
+    c = np.max(a)
     exp_a = np.exp(a - c)
     sum_exp_a = np.sum(exp_a)
     y = exp_a / sum_exp_a
@@ -503,13 +531,32 @@ a = np.array([1010, 1000, 990])
 print("y:",softmax(a))
 ```
 
-输出结果为`y: [  9.99954600e-01   4.53978686e-05   2.06106005e-09]`，如果用之前没有C的函数，输出为` [ nan  nan  nan] `
+输出结果为`y: [  9.99954600e-01   4.53978686e-05   2.06106005e-09]`，如果用之前没有C的函数，输出为` [ nan  nan  nan] `，即如下代码的输出：
 
+```python
+def softmax(a):
+    c = 0
+    exp_a = np.exp(a - c)
+    sum_exp_a = np.sum(exp_a)
+    y = exp_a / sum_exp_a
+    
+    return y
+
+a = np.array([1010, 1000, 990]) 
+print("y:",softmax(a))
+```
 
 **softmax函数的特征**
 
-- softmax函数的输出值总和是1，输出总和是1是softmax函数的一个重要性质，所以可以把softmax函数的输出解释为概率。
-- 即便有了softmax函数，因为指数函数`y=exp(x)`是单调递增函数，所以`y与x`的大小关系没有变化。
+- softmax函数的输出值总和是1，输出总和是1是softmax函数的一个重要性质，所以可以把softmax函数的输出解释为**概率**。
+- 即便有了softmax函数，因为指数函数`y=exp(x)`是单调递增函数，各个输入信号的大小关系没有变化，比如输入信号a的最大值是第2个元素，y输出信号的最大值也会是第2个元素。
+
+> 一般来说，神经网络只把输出值最大的神经元所对应的类别作为识别结果，并且，即使使用softmax函数，输出值最大神经元位置也不会变，因此，神经网络在分类时，输出层softmax函数可以省略。(指数函数运算量也很大)
+
+> 求解机器学习问题的步骤，可以分为**学习**和**推理**：
+- **学习**：在学习阶段进行模型的学习，即用训练数据自动调整参数的过程。
+- **推理**：然后，在推理阶段，用学到的模型对未知的数据进行推理分类
+在推理阶段一般会省略输出层的softmax函数，在输出层使用softmax函数是因为它和神经网络的学习有关系。
 
 ## 5.2 输出层的神经元数量
 
@@ -521,9 +568,17 @@ print("y:",softmax(a))
 
 # 6. 手写数字识别
 
+下面试着解决实际问题，这里我们进行手写数字图像的分类，假设前面的学习阶段已经结束，我们使用学习到的参数，先实现神经网络的**推理处理**。
+
 本书自带程序中有文件夹，`dataset`，导入该文件夹，使用mnist.py脚本下载MNIST数据集，并将数据转换成Numpy数组。
 
-- ##读取数据并查看，代码##
+> MINIST数据集是手写数字的图像集，由0-9数字图像构成，训练图像6万多张，测试图像1万多张，这些图像用来学习和推理，Minist数据集的一般使用方式为:
+1. 先用训练图像进行学习
+2. 再用学习到的模型，衡量能多大程度上对图像进行正确的分类
+
+MINIST图像数据是28*28像素的灰度图像，各个像素取值在0-255之间，每个图像数据也有对应的1,2,3等标签。
+
+- **读取数据并查看：**
 
 ```python
 # coding: utf-8
@@ -538,6 +593,7 @@ def img_show(img):
     pil_img = Image.fromarray(np.uint8(img))
     pil_img.show()
 
+# (训练图像，训练标签),(测试图像，测试标签)
 (x_train, t_train), (x_test, t_test) = load_mnist(flatten=True, normalize=False)
 
 # 输出各个数据的形状 
@@ -583,7 +639,7 @@ img_show(img)
 
 要实现的神经网络结构如下:
 
-- 输入层有784个神经元，这个784个神经元来自图像大小28*28 = 784 像素。
+- 输入层信号:即一个图像数据，该数据有784个神经元，这个784个神经元来自图像大小28*28 = 784 像素。
 - 输出层的10个神经元，这个数字来源于10类别分类。
 - 这个神经网络有2个隐藏层，第一个隐藏层有50个神经元，第二个隐藏层有100个神经元。
 
@@ -599,14 +655,12 @@ import pickle
 from dataset.mnist import load_mnist
 #from common.functions import sigmoid, softmax
 
-
 def get_data():
     (x_train, t_train), (x_test, t_test) = load_mnist(normalize=True, flatten=True, one_hot_label=False)
     return x_test, t_test
 
-
 def init_network():
-    with open("sample_weight.pkl", 'rb') as f:
+    with open("./ch03/sample_weight.pkl", 'rb') as f:
         network = pickle.load(f)
         
     return network
@@ -624,7 +678,6 @@ def predict(network, x):
     y = softmax(a3)
 
     return y
-
 
 x, t = get_data()
 network = init_network()
@@ -645,6 +698,11 @@ print("Accuracy:" + str(float(accuracy_cnt) / len(x)))
 
 最终计算索引号与标签匹配的个数，并得到识别精度。
 
+最终得到的结果是 `Accuracy:0.9352`，下一步要花精力在神经网络的结构和学习方法上，思考如何进一步提高精度。
+
+在上面的代码中，使用预处理，预处理在神经网络(深度学习)中非常实用，这个例子中：
+
+我们把load_mnist函数的参数normalize设置为了True，函数内部会进行转换，将图像的各个像素除255，使得数据值在0.0-1.0范围内。
 
 ## 6.2 批处理
 
@@ -673,9 +731,22 @@ for i in range(0,len(x),batch_size):
 print("Accuracy:" + str(float(accuracy_cnt) / len(x)))
 ```
 
+输出结果与上面相同。
+
+与上面单独处理的代码比较:
+
+![image](https://user-images.githubusercontent.com/18595935/51434364-4934fd80-1ca2-11e9-9131-5bea87d38c16.png)
+
+上面的能处理单个元素的函数，也同样能处理多个元素的，下面逐个解释这部分代码:
+
+1. **range()**，若range()函数指定为range(start,end)，则会生成一个由start到end-1的整数构成的列表。
+2. **x_batch = x[i:i+batch_size]**，通过这个取得第i个到第i+batch_n个之间的数据。
+3. **argmax()**，获取值最大的元素的索引，这里指定了axis=1，指定了在100*10数组中，沿着第1维方向找到值最大的元素的索引。
+
+
 # 7. 小结
 
-本章介绍了神经网络的前向传播，神经网络与感知器在信号的层传递上是相同的，但是向下一个神经元发送信号时改变信号的激活函数有很大差异。
+本章介绍了神经网络的前向传播，神经网络与感知器在信号的层传递上是相同的，但是**向下一个神经元发送信号时改变信号的激活函数**有很大差异。
 
 - 神经网络中使用的是平滑变化的sigmoid函数
 - 感知机中使用的是信号急剧变化的阶跃函数
@@ -685,9 +756,30 @@ print("Accuracy:" + str(float(accuracy_cnt) / len(x)))
 - 神经网络中的激活函数使用平滑变化的sigmoid函数或ReLU函数
 - 通过巧妙地使用Numpy多维数组，可以高效实现神经网络
 - 机器学习大体分为回归问题(预测年龄)和分类问题(判断性别)
-- 关于输出层的激活函数，回归问题中一般使用恒等函数，分类问题中一般用softmax函数
+- 关于输出层的激活函数，回归问题中一般使用恒等函数，分类问题中一般用softmax函数(二元分类问题用sigmoid函数，多元分类使用softmax函数)
 - 分类问题中，输出层的神经元数量设置为要分类的类别数
 - 输入数据的集合称为批，通过以批为单位进行推理处理，能够实现高速运算
+- 下面是几个激活函数的示例代码：
 
+```python
+# sigmoid函数
+def sigmoid(x):
+    return 1 / (1 + np.exp(-x))
 
+# Softmax函数
+def softmax(a):
+    exp_a = np.exp(a)
+    sum_exp_a = np.sum(exp_a)
+    y = exp_a / sum_exp_a
+    
+    return y
+
+# 恒等函数
+def identity_function(x):
+    return x
+
+# ReLU函数，大于0，则输出X，否则输出0
+def relu(x):
+    return np.maximum(0,x)
+```
 
