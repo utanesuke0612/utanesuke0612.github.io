@@ -305,7 +305,6 @@ y2 = tf2(x)
 tf3 = tangent_line(function_1, 10)
 y3 = tf3(x)
 
-
 plt.plot(x, y)
 plt.plot(x, y2)
 plt.plot(x, y3)
@@ -318,12 +317,16 @@ plt.show()
 
 注意上面的`tangent_line`函数返回的是一个lambda表达式。
 
+- 蓝色曲线，表示function_1(x)函数
+- 绿色曲线，表示在该函数在x为5的切线
+- 黄色曲线，表示在该函数在x为10的切线
+
+
 ## 3.2 偏导数
 
 上面的导数只有一个计算参数，下面有两个变量:
 
 ![image](https://user-images.githubusercontent.com/18595935/43684951-ee6df154-98e4-11e8-9cbf-7ffef4a0e3b1.png)
-
 
 ```python
 def function_2(x):
@@ -339,6 +342,8 @@ def function_2(x):
 ![image](https://user-images.githubusercontent.com/18595935/43685011-2c6c1c14-98e6-11e8-8dd5-78fe98c5c713.png)
 
 偏导数和单变量的导数一样，都是求某个地方的斜率，不过偏导数需要将多个变量中的某一个变量定为目标变量，并将其他变量固定为某个值，得到一个新函数，然后对新定义的函数应用了之前的求数值微分的函数，得到偏导数。
+
+比如下面，求解x0=3，x1=4时，x0的偏导数时，就是将x1的值代入函数，然后求解x0的普通导数。
 
 多个变量，如两个变量的情况下，是一个三维图像，三维空间某个地点，求解在不同方向(x0或x1)上的切线斜率:
 
@@ -358,19 +363,40 @@ def numerical_gradient(f,x):
         # f(x+h)的计算
         x[idx] = tmp_val + h
         fxh1 = f(x)
+        print("x + h :",x)
+        print("fxh1 :",fxh1)
         
         #f(x-h)的计算
         x[idx] = tmp_val - h
         fxh2 = f(x)
+        print("x - h :",x)
+        print("fxh2 :",fxh2)
         
         grad[idx] = (fxh1 - fxh2) / (2*h)
         x[idx] = tmp_val
+        
+        print("------")
         
     return grad
 ```
 
 ```python
 numerical_gradient(function_2, np.array([3.0, 4.0])) 
+```
+
+输出如下，可以看到循环计算x数组内的元素时，另一个元素是固定的值，当前求导数的值被加上了h(0.0001)：
+
+```python
+x + h : [ 3.0001  4.    ]
+fxh1 : 25.00060001
+x - h : [ 2.9999  4.    ]
+fxh2 : 24.99940001
+------
+x + h : [ 3.      4.0001]
+fxh1 : 25.00080001
+x - h : [ 3.      3.9999]
+fxh2 : 24.99920001
+------
 ```
 
 结果为`array([ 6.,  8.])`，为了更好的理解，我们把`f(x0+x1) = x0**2 + x1**2`的梯度画在图上，代码如下:
