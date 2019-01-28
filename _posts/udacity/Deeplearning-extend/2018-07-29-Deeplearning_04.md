@@ -87,7 +87,9 @@ error2: 0.5975
 
 除了上面的均方误差外，交叉熵误差经常被用作损失函数
 
-![image](https://user-images.githubusercontent.com/18595935/43674498-fdb53ddc-980f-11e8-99f5-69240fca0ad1.png)
+![image](https://user-images.githubusercontent.com/18595935/51816392-b4697a00-2309-11e9-88c1-80b08906b54a.png)
+
+yk是神经网络的输出，tk是正确的解标签。
 
 k是预测值的个数(比如上面一个手写图片，结果可能为10个数，则k为10)，yk是第k个的计算结果，tk是第k个的标签即正确结果(0或1)。
 
