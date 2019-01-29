@@ -987,8 +987,8 @@ for i in range(iters_num):
     t_batch = t_train[batch_mask]
     
     # 计算梯度
-    #grad = network.numerical_gradient(x_batch, t_batch)
-    grad = network.gradient(x_batch, t_batch)
+    grad = network.numerical_gradient(x_batch, t_batch) # 数值微分法
+    #grad = network.gradient(x_batch, t_batch) # 反向传播法
     
     # 更新参数
     for key in ('W1', 'b1', 'W2', 'b2'):
@@ -1048,9 +1048,9 @@ for i in range(iters_num):
     x_batch = x_train[batch_mask]
     t_batch = t_train[batch_mask]
     
-    # 计算梯度
-    #grad = network.numerical_gradient(x_batch, t_batch)
-    grad = network.gradient(x_batch, t_batch)
+    # 计算梯度,这里使用数值微分法
+    grad = network.numerical_gradient(x_batch, t_batch) # 数值微分法
+    #grad = network.gradient(x_batch, t_batch) # 反向传播法
     
     # 更新参数
     for key in ('W1', 'b1', 'W2', 'b2'):
@@ -1080,8 +1080,27 @@ plt.show()
 
 输出如下:
 
-![image](https://user-images.githubusercontent.com/18595935/43807298-ca23f9ce-9ae2-11e8-84e0-3f1f914f2a05.png)
+```python
+0.1043 , 0.1041
+0.904633333333 , 0.9079
+0.921 , 0.9236
+0.9321 , 0.9338
+0.9436 , 0.9426
+0.95025 , 0.9494
+0.956133333333 , 0.9531
+0.960166666667 , 0.9564
+0.9638 , 0.959
+0.965933333333 , 0.9607
+0.9682 , 0.9619
+0.970266666667 , 0.9621
+0.97075 , 0.9641
+0.973583333333 , 0.9669
+0.974083333333 , 0.9663
+0.975666666667 , 0.9664
+0.9777 , 0.9683
+```
 
+![image](https://user-images.githubusercontent.com/18595935/51892759-36c76c00-23e6-11e9-9a50-3d26f3242b75.png)
 
 # 6. 小结
 
