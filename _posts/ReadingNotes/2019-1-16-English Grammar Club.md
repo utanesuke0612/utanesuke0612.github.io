@@ -46,27 +46,27 @@ tags: 其他
 
 尤其是关于补语的两类句型，一直是模棱两可。
 
-## 1. 主语 S + 动词 V
+## 1.1. 主语 S + 动词 V
 
 最简单的句型，动词是不及物动词，既可以独立发生，不牵涉别人和物。
 
 - He died in World War Two.
 > 后面in world war two是介词短语，依附在动词上做修饰语
 
-## 2. 主语 S + 动词 V + 宾语 O
+## 1.2. 主语 S + 动词 V + 宾语 O
 
 后面要加宾语的动词，是及物动词，用宾语来接收动作。
 
 - He killed three enemy soldiers.
 
-## 3. 主语 S + 动词 V + 宾语 O + 宾语 O
+## 1.3. 主语 S + 动词 V + 宾语 O + 宾语 O
 
 有一种动词，后面可以接两个宾语，这两个宾语一个是给的对象，一个是给的东西，都是名词，但是不相等。
 
 - John's father gave him a dog.
 > 注意：要与**主语 S + 动词 V + 宾语 O + 补语 C**区分开，例如：John's father called him a dog，这里dog是him的补语，存在“等于是”的意思。
 
-## 4. 主语 S + 动词 V + 补语 C
+## 1.4. 主语 S + 动词 V + 补语 C
 
 补语前的动词，可以解释为“是”的动词，这个动词是空的，没有意义，只能扮演引导叙述的角色。
 
@@ -77,18 +77,16 @@ tags: 其他
 
 下面这些都是连缀动词，需要补语补足句子获得完整意思。
 
-```python
-look：看起来是
-seem：似乎是
-appear：显得是
-sound：听起来是
-feel：摸起来是
-taste：尝起来是
-turn：转变为
-prove：证实为
-become：成为
-make：做为
-```
+- look：看起来是
+- seem：似乎是
+- appear：显得是
+- sound：听起来是
+- feel：摸起来是
+- taste：尝起来是
+- turn：转变为
+- prove：证实为
+- become：成为
+- make：做为
 
 常见例句如下：
 
@@ -104,7 +102,7 @@ make：做为
 
 > 补语的词类是名词和形容词，用于修饰对应的主语或宾语
 
-## 5. 主语 S + 动词 V + 宾语 O + 补语 C
+## 1.5. 主语 S + 动词 V + 宾语 O + 补语 C
 
 上面**主语 S + 动词 V + 补语 C**，使用补语告诉读者主语是什么，而这个类似，是用补语告诉宾语是什么，例句如下：
 
@@ -119,7 +117,7 @@ make：做为
 9. Most people consider a nurse a good wife. 大多数人认为护士会是称职的太太
 
 
-## 6. 练习
+## 1.6. 练习
 
 **1. 主语 S + 动词 V**
 - The President __has gone(动词)__ abroad on a visit.
@@ -156,6 +154,122 @@ make：做为
 - Do you call me a liar?
 
 # 2 名词词组与冠词
+
+本章探讨名词短语，尤其是冠词的用法。
+
+## 2.1 名词短语
+
+先看如下几个例子：
+
+- a new book
+- many good students
+- his beautiful wife
+- the best answer
+- those sweet roses 那些芳香的玫瑰花
+
+上面几个名词短语都由三个部分组成：
+1. 限定词(a,many,his)，这个限定词决定了第三个词即名词部分的范围
+2. 中间的部分，形容词(new,good,best)，依附在名词上的修饰语
+3. 最后的部分，名词短语的主体
+
+上面的名词短语中，三个部分每个部分都可以被省略，比如：
+1. Of these answers, this one is **the best**. (省略第三部分的名词 answer) 这些答案中，这个最好。
+2. I want those.(我要那种，省略了 sweet roses)
+
+## 2.2 何时可以不用限定词(a)
+
+1. 名词复数前，不要加限定词
+
+**Unmarried men** are a rare species(/'spiʃiz/) these days.
+
+2. 抽象名词(honesty)和不可数名词(water,food)，不要加限定词
+
+- **Honesty(/'ɑnəsti/ )** is not necessarily(/,nɛsə'sɛrəli/ ) the best policy. 诚实不一定是上策。
+- **Fresh water** is a precious resource in Saudi Arabia. 淡水是沙特阿拉伯的珍贵资源。
+
+## 2.3 专有名词与补语位置
+
+1. 人名(Genghis khan 成吉思汗)，地名(Taibei) 等都是专有名词，它所代表的对象只有一个，不适合加a(an)。
+> 如果一个名词不能加-s，那么它就不能加a(an).
+
+- There are five Sundays this month.(这个月有五个星期日)
+> 这时不算专有名词，因为一个月有多个星期日，不唯一
+
+- I have an appointment on Sunday.(我星期日有约)
+> 上面是唯一的一天，算是专有名词
+
+2. 用作补语的专有名词，因为补语和主语(或宾语)有对等关系，主语是专有名词，那么它的补语也是。
+
+- Mr. Elson was president of the high school. 埃尔森先生曾是这所高中的校长
+> Elson是人名，而且没有第二个存在，所以不能加-s，也不能加a
+
+**下面是两种不同的case，需要注意**
+- Some say he was a better president than Mr.Robert.
+> 因为有better做比较，所以有前后两任校长，就不唯一了
+
+- Mr.Elson is also a member of the Council(/'kaʊnsl/ ) of the city. 埃尔森先生也是该城市政会委员、
+
+**同位语是补语时，注意是否为专有名词：**
+- Mattin Wales, **Head of the football team**, at the time,wore a mustache.马丁威尔斯，当时的足球队长，留有小胡子
+> 句中 Head of the football team 一般称为同位语，其实就是 who was Head of the football team at the time 这个形容词从句的省略，who是主语Mattin，Head是主语补语，与Mattin对等，所以仍然是专有名词，不必要限定词
+
+**宾语补语的情况：**
+
+Clinton made Gorle **campaign partner** of the Presidential election. 克林顿选戈尔为总统大选的竞选搭档。
+> campaign partner 没有限定词，当专有名词使用，因为它是戈尔的宾语补语。
+
+## 2.4 定冠词the的用法
+
+凡是上下文有明指或暗示时，也就是有“那个”的指示功能时，便要用定冠词the，比较：
+1. I need **a** book to read on my trip.
+2. I have finished **the** book you lent me.
+3. **The** history of recent China is a sorry record. 中国近代史是部伤心史。
+4. He should be home,I saw a light in his house.
+> 我看见他家亮灯了。没有特定的指哪个灯。
+
+5. Turn off the portal light. 把门口的灯关掉
+> 特指门口的灯
+
+另外，虽然没有明确指出来，但是有清楚的暗示，仍然要用定冠词 the.
+1. I'm going to the office now.(先生对太太说，虽没有明指，但就是自己的办公室)
+2. Do you mind if I open the window?
+
+## 2.5 定冠词与专有名词
+
+1. 专有名词：只有一个对象存在的名词，像Genghis khan和Taibei
+2. 定冠词：虚词，用在名词的前面，帮助指明名词的含义。区别于不定冠词，定冠词具有确定的意思，用以特指人或事物，表示名词所指的人或事物是同类中的特定的一个，以别于同类中其他的人或事物，相当于汉语中的“那个”或“这个”的意思，the。
+
+专有名词与定冠词有冲突不能并存，如果加了the，就表示这个东西有两个以上，也就不是专有名词了。
+
+- This is not the John Smith I know.这不是我认识的约翰史密斯
+> 暗示还有其他叫约翰史密斯的人存在，这里不是专有名词
+
+- This is a photography show of the Taibei 50 years ago.这是表现50年前台北的摄影展
+> 跟上面一样，50年前的台北，和今日的台北，有两个台北，故不是专有名词时的台北。
+
+**"特殊"的专有名词：**
+
+- the Pacific (Ocean) 太平洋
+- the Atlantic (Ocean) 大西洋
+- the Indian Ocean 印度洋
+- the Mediterranean (Sea) 地中海
+- the Dead Sea 死海
+
+上面的词感觉是专有名词，但是有定冠词，那这感觉跟前面结论有冲突啊，其实不然，将Pacific,Atlantic看作是修饰Ocean的形容词就好理解了。
+
+the 真正限定的是后面的Ocean名词，下面也是同理：
+
+- the Mississippi (River) 密西西比河
+- the Titanic (Ship) 泰坦尼克号
+- the Hilton (Hotel) 希尔顿饭店
+
+## 2.6 总结
+
+1. 名词短语中包括 限定词，形容词，名词
+2. 如果名词短语中不用限定词，是因为该名词不适合加a(an)
+3. a(an)是one的弱化结果，而the是that/those的弱化结果
+
+**在看文章的时候，请留心名词短语，尤其是冠词的用法，就是最好的练习**
 
 # 3 动词时态
 
