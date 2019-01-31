@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 【书】深度学习入门-06-与学习有关的技巧(ing)
+title: 【书】深度学习入门-06-与学习有关的技巧
 date: 2018-07-28 00:00:06
 categories: DeepLearning
 tags: DeepLearning
@@ -436,9 +436,11 @@ plt.show()
 如果将标准差修改为0.01，呈集中在0.5附近的分布，激活值的分布有所偏向，说明在表现力上会有很大问题。
 
 - 标准差修改为0.01时的分布：
+
 ![image](https://user-images.githubusercontent.com/18595935/51970810-2c2ad680-24bb-11e9-8f02-758159a0cef9.png)
 
 - 标准差修改为0.1时的分布：
+
 ![image](https://user-images.githubusercontent.com/18595935/51970821-3220b780-24bb-11e9-8559-88d6ba481f0c.png)
 
 **Xavier初始值：**
@@ -460,10 +462,15 @@ w = np.random.randn(node_num, node_num) * np.sqrt(1.0 / node_num)
 如果激活函数是ReLU函数，下面是几种标准差值的分布对比：
 
 - 标准差0.01
+
 ![image](https://user-images.githubusercontent.com/18595935/51972869-c2f99200-24bf-11e9-9b0a-e9ad560bbab0.png)
+
 - 标准差 Xavier初始值
+
 ![image](https://user-images.githubusercontent.com/18595935/51972891-cbea6380-24bf-11e9-821a-5280a5b7e589.png)
+
 - 标准差 He初始值（标准差为 sqrt(2/n)）
+
 ![image](https://user-images.githubusercontent.com/18595935/51972907-d7d62580-24bf-11e9-8330-7c468c96b760.png)
 
 He初始值使用的代码为：
@@ -702,6 +709,8 @@ bn_network = MultiLayerNetExtend(input_size=784, hidden_size_list=[100, 100, 100
                                     weight_init_std=weight_init_std, use_batchnorm=True)
 ```
 
+## 3.3 MultiLayerNetExtend类
+
 MultiLayerNetExtend类的代码示例如下：
 
 ```python
@@ -872,18 +881,481 @@ class MultiLayerNetExtend:
 
 # 4. 正则化
 
+机器学习中，**过拟合**是一个很常见的问题，过拟合指的是只能拟合训练数据，但不能拟合训练数据意外的其他数据。
+
 ## 4.1 过拟合
+
+发生过拟合的原因，主要有两个：
+
+1. 模型有大量的参数，表现力强(神经网络复杂，神经元多，网络层数多)
+2. 训练数据少
+
+针对上述条件，从数据样本中选取少量(300)的训练数据，为了增减网络复杂度，使用7层网络(每层100个神经元，使用ReLU激活)
+
+代码如下：
+
+```python
+# coding: utf-8
+import os
+import sys
+
+sys.path.append(os.pardir)  # 为了导入父目录的文件而进行的设定
+import numpy as np
+import matplotlib.pyplot as plt
+from dataset.mnist import load_mnist
+from common.multi_layer_net import MultiLayerNet
+from common.optimizer import SGD
+
+(x_train, t_train), (x_test, t_test) = load_mnist(normalize=True)
+
+# 为了再现过拟合，减少学习数据
+x_train = x_train[:300]
+t_train = t_train[:300]
+
+# weight decay（权值衰减）的设定 =======================
+weight_decay_lambda = 0 # 不使用权值衰减的情况
+#weight_decay_lambda = 0.1
+# ====================================================
+
+network = MultiLayerNet(input_size=784, hidden_size_list=[100, 100, 100, 100, 100, 100], output_size=10,
+                        weight_decay_lambda=weight_decay_lambda)
+optimizer = SGD(lr=0.01)
+
+max_epochs = 201
+train_size = x_train.shape[0]
+batch_size = 100
+
+train_loss_list = []
+train_acc_list = []
+test_acc_list = []
+
+iter_per_epoch = max(train_size / batch_size, 1)
+epoch_cnt = 0
+
+for i in range(1000000000):
+    batch_mask = np.random.choice(train_size, batch_size)
+    x_batch = x_train[batch_mask]
+    t_batch = t_train[batch_mask]
+
+    grads = network.gradient(x_batch, t_batch)
+    optimizer.update(network.params, grads)
+
+    if i % iter_per_epoch == 0:
+        train_acc = network.accuracy(x_train, t_train)
+        test_acc = network.accuracy(x_test, t_test)
+        train_acc_list.append(train_acc)
+        test_acc_list.append(test_acc)
+
+        print("epoch:" + str(epoch_cnt) + ", train acc:" + str(train_acc) + ", test acc:" + str(test_acc))
+
+        epoch_cnt += 1
+        if epoch_cnt >= max_epochs:
+            break
+
+
+# 3.绘制图形==========
+markers = {'train': 'o', 'test': 's'}
+x = np.arange(max_epochs)
+plt.plot(x, train_acc_list, marker='o', label='train', markevery=10)
+plt.plot(x, test_acc_list, marker='s', label='test', markevery=10)
+plt.xlabel("epochs")
+plt.ylabel("accuracy")
+plt.ylim(0, 1.0)
+plt.legend(loc='lower right')
+plt.show()
+```
+
+![image](https://user-images.githubusercontent.com/18595935/52024677-04805080-2545-11e9-83ff-831b0618fc23.png)
+
+可以看到上面过了100个epoch后，训练数据的精度达到了100%,而测试数据精度则不行，这是一个典型的过拟合。
 
 ## 4.2 权值衰减
 
+权值衰减是一直以来经常用于抑制过拟合的方法，该方法通过在学习过程中对大的权重进行惩罚来抑制过拟合。
+
+为损失函数加上权重的平方范数，这样可以抑制权重变大，如果将权重记为W，L2范数的权值衰减就是`1/2*λW*W`，然后将这个`1/2*λW*W`加到损失函数上，因此，在求权重梯度的计算中，要为之前的误差反向传播法的结果加上正则化项的导入`λW`。(`1/2*λW*W`的导数是`λW`)
+
+这里`λ`是控制正则化强度的**超参数**，设置得越大，对大的权重施加的惩罚就越重。实现代码如下(修改上面的部分代码)：
+
+```python
+# weight decay（权值衰减）的设定 =======================
+#weight_decay_lambda = 0 # 不使用权值衰减的情况
+weight_decay_lambda = 0.1 # 使用权值衰减的情况
+
+network = MultiLayerNet(input_size=784, hidden_size_list=[100, 100, 100, 100, 100, 100], output_size=10,
+                        weight_decay_lambda=weight_decay_lambda)
+
+
+```
+
+MultiLayerNet类中，关于loss函数的实现如下：
+
+1. weight_decay_lambda 为0 的时候，下面的函数中weight_decay也为0，所以相当于没有变化。
+2. weight_decay_lambda为0.1时，最终会加上weight_decay，这个值在反向传播求导后，结果为(-W)，相当于减去一个值。
+
+```python
+    def loss(self, x, t, train_flg=False):
+        """求损失函数
+        参数x是输入数据，t是教师标签
+        """
+        y = self.predict(x, train_flg)
+
+        weight_decay = 0
+        for idx in range(1, self.hidden_layer_num + 2):
+            W = self.params['W' + str(idx)]
+            weight_decay += 0.5 * self.weight_decay_lambda * np.sum(W**2)
+
+        return self.last_layer.forward(y, t) + weight_decay
+```
+
+![image](https://user-images.githubusercontent.com/18595935/52025345-4d390900-2547-11e9-8963-3043d7e77882.png)
+
 ## 4.3 Dropout
+
+Dropout是一种在学习的过程中随机删除神经元的方法，训练时，随机选出隐藏层的神经元，然后将其删除，被删除的神经元不再进行信号的传递。
+
+![image](https://user-images.githubusercontent.com/18595935/52025511-e23c0200-2547-11e9-91a6-a176e979aa61.png)
+
+使用Dropout的验证代码如下：
+
+```python
+# coding: utf-8
+import os
+import sys
+sys.path.append(os.pardir)  # 为了导入父目录的文件而进行的设定
+import numpy as np
+import matplotlib.pyplot as plt
+from dataset.mnist import load_mnist
+from common.multi_layer_net_extend import MultiLayerNetExtend
+from common.trainer import Trainer
+
+(x_train, t_train), (x_test, t_test) = load_mnist(normalize=True)
+
+# 为了再现过拟合，减少学习数据
+x_train = x_train[:300]
+t_train = t_train[:300]
+
+# 设定是否使用Dropuout，以及比例 ========================
+use_dropout = True  # 不使用Dropout的情况下为False
+dropout_ratio = 0.2
+# ====================================================
+
+network = MultiLayerNetExtend(input_size=784, hidden_size_list=[100, 100, 100, 100, 100, 100],
+                              output_size=10, use_dropout=use_dropout, dropout_ration=dropout_ratio)
+trainer = Trainer(network, x_train, t_train, x_test, t_test,
+                  epochs=301, mini_batch_size=100,
+                  optimizer='sgd', optimizer_param={'lr': 0.01}, verbose=True)
+trainer.train()
+
+train_acc_list, test_acc_list = trainer.train_acc_list, trainer.test_acc_list
+
+# 绘制图形==========
+markers = {'train': 'o', 'test': 's'}
+x = np.arange(len(train_acc_list))
+plt.plot(x, train_acc_list, marker='o', label='train', markevery=10)
+plt.plot(x, test_acc_list, marker='s', label='test', markevery=10)
+plt.xlabel("epochs")
+plt.ylabel("accuracy")
+plt.ylim(0, 1.0)
+plt.legend(loc='lower right')
+plt.show()
+```
+
+![image](https://user-images.githubusercontent.com/18595935/52025766-f03e5280-2548-11e9-910f-fdf88ca5b6d9.png)
+
+上图是使用了Dropout的图形，训练数据和测试数据的识别精度差距变小了。
+
+### 1. Dropout的实现代码：
+
+每次正向传播时，self.mask中都会以False的形式保存要删除的神经元，self.mask会随机生成和x形状相同的数组，并将值比dropout_ratio大的元素设为True。
+
+```python
+class Dropout:
+    """
+    http://arxiv.org/abs/1207.0580
+    """
+    def __init__(self, dropout_ratio=0.5):
+        self.dropout_ratio = dropout_ratio
+        self.mask = None
+
+    def forward(self, x, train_flg=True):
+        if train_flg:
+            self.mask = np.random.rand(*x.shape) > self.dropout_ratio
+            return x * self.mask
+        else:
+            return x * (1.0 - self.dropout_ratio)
+
+    def backward(self, dout):
+        return dout * self.mask
+```
+
+## 4.4 Trainer类
+
+上面的代码中，使用了Trainer类，这个类将前面所有的网络学习都包括了:
+
+```python
+# coding: utf-8
+import sys, os
+sys.path.append(os.pardir)  # 为了导入父目录的文件而进行的设定
+import numpy as np
+from common.optimizer import *
+
+class Trainer:
+    """进行神经网络的训练的类
+    """
+    def __init__(self, network, x_train, t_train, x_test, t_test,
+                 epochs=20, mini_batch_size=100,
+                 optimizer='SGD', optimizer_param={'lr':0.01}, 
+                 evaluate_sample_num_per_epoch=None, verbose=True):
+        self.network = network
+        self.verbose = verbose
+        self.x_train = x_train
+        self.t_train = t_train
+        self.x_test = x_test
+        self.t_test = t_test
+        self.epochs = epochs
+        self.batch_size = mini_batch_size
+        self.evaluate_sample_num_per_epoch = evaluate_sample_num_per_epoch
+
+        # optimzer
+        optimizer_class_dict = {'sgd':SGD, 'momentum':Momentum, 'nesterov':Nesterov,
+                                'adagrad':AdaGrad, 'rmsprpo':RMSprop, 'adam':Adam}
+        self.optimizer = optimizer_class_dict[optimizer.lower()](**optimizer_param)
+        
+        self.train_size = x_train.shape[0]
+        self.iter_per_epoch = max(self.train_size / mini_batch_size, 1)
+        self.max_iter = int(epochs * self.iter_per_epoch)
+        self.current_iter = 0
+        self.current_epoch = 0
+        
+        self.train_loss_list = []
+        self.train_acc_list = []
+        self.test_acc_list = []
+
+    def train_step(self):
+        batch_mask = np.random.choice(self.train_size, self.batch_size)
+        x_batch = self.x_train[batch_mask]
+        t_batch = self.t_train[batch_mask]
+        
+        grads = self.network.gradient(x_batch, t_batch)
+        self.optimizer.update(self.network.params, grads)
+        
+        loss = self.network.loss(x_batch, t_batch)
+        self.train_loss_list.append(loss)
+        if self.verbose: print("train loss:" + str(loss))
+        
+        if self.current_iter % self.iter_per_epoch == 0:
+            self.current_epoch += 1
+            
+            x_train_sample, t_train_sample = self.x_train, self.t_train
+            x_test_sample, t_test_sample = self.x_test, self.t_test
+            if not self.evaluate_sample_num_per_epoch is None:
+                t = self.evaluate_sample_num_per_epoch
+                x_train_sample, t_train_sample = self.x_train[:t], self.t_train[:t]
+                x_test_sample, t_test_sample = self.x_test[:t], self.t_test[:t]
+                
+            train_acc = self.network.accuracy(x_train_sample, t_train_sample)
+            test_acc = self.network.accuracy(x_test_sample, t_test_sample)
+            self.train_acc_list.append(train_acc)
+            self.test_acc_list.append(test_acc)
+
+            if self.verbose: print("=== epoch:" + str(self.current_epoch) + ", train acc:" + str(train_acc) + ", test acc:" + str(test_acc) + " ===")
+        self.current_iter += 1
+
+    def train(self):
+        for i in range(self.max_iter):
+            self.train_step()
+
+        test_acc = self.network.accuracy(self.x_test, self.t_test)
+
+        if self.verbose:
+            print("=============== Final Test Accuracy ===============")
+            print("test acc:" + str(test_acc))
+```
 
 # 5. 超参数的验证
 
+神经网络中，除了权重和偏置，**超参数(hyper-parameter)**也经常出现，这里所说的超参数是指：
+- 神经元数量
+- batch大小
+- 参数更新时的学习率或权值衰减
+
+在决定超参数的过程中，一般会伴随很多的试错。
+
 ## 5.1 验证数据
+
+调整超参数时，必须使用超参数专用的确认数据。根据不同的数据集，有的会事先分成训练数据，验证数据，测试数据三部分。
+- **训练数据**：用于参数(权重和偏置)的学习
+- **验证数据**：用于超参数的性能评估
+- **测试数据**：最后使用(比较理想的是只用一次)，用于确认泛化能力
+
+分割数据代码如下：
+
+```python
+(x_train, t_train), (x_test, t_test) = load_mnist(normalize=True)
+
+# 分割验证数据
+validation_rate = 0.20
+validation_num = x_train.shape[0] * validation_rate
+x_train, t_train = shuffle_dataset(x_train, t_train)
+x_val = x_train[:validation_num]
+t_val = t_train[:validation_num]
+x_train = x_train[validation_num:]
+t_train = t_train[validation_num:]
+```
+
+上面用到了shuffle_dataset类，用于打乱数据：
+
+```python
+def shuffle_dataset(x, t):
+    """打乱数据集
+
+    Parameters
+    ----------
+    x : 训练数据
+    t : 监督数据
+
+    Returns
+    -------
+    x, t : 打乱的训练数据和监督数据
+    """
+    permutation = np.random.permutation(x.shape[0])
+    x = x[permutation,:] if x.ndim == 2 else x[permutation,:,:,:]
+    t = t[permutation]
+
+    return x, t
+```
 
 ## 5.2 超参数的最优化
 
+进行超参数的最优化时，逐渐缩小参数的好值的存在范围非常重要。在超参数的最优化中，要注意的是深度学习需要很长时间，在超参数的搜索中，需要尽早放弃那些不符合逻辑的超参数，于是在超参数的优化中，减少学习的epoch，缩短一次评估所需要的时间是不错的办法。
+
+超参数的最优化方法，简单归纳如下：
+
+1. 设定超参数的范围
+2. 从设定的超参数范围中随机采样
+3. 使用步骤1采样的超参数值进行学习，通过验证数据评估识别精度
+4. 重复上面1和2(100次)，根据他们的识别精度结果，缩小超参数的范围
+
 ## 5.3 超参数最优化的实现
 
+现在使用MNIST数据集进行超参数的最优化，这里我们将学习率和控制衰减强度的系数作为对象，下面将超参数的随机采样范围限定到：
+
+- 学习率初始范围是 `10**(-6)到10**(-2)`之间
+- 权值衰减系数初始范围是 `10**(-8)到10**(-4)`之间
+
+代码如下：
+
+```python
+    # 指定搜索的超参数的范围===============
+    weight_decay = 10 ** np.random.uniform(-8, -4)
+    lr = 10 ** np.random.uniform(-6, -2)
+    # ================================================
+```
+
+像这样进行随机采样后，再使用那些值进行学习，实现代码如下：
+
+```python
+# coding: utf-8
+import sys, os
+sys.path.append(os.pardir)  # 为了导入父目录的文件而进行的设定
+import numpy as np
+import matplotlib.pyplot as plt
+from dataset.mnist import load_mnist
+from common.multi_layer_net import MultiLayerNet
+from common.util import shuffle_dataset
+from common.trainer import Trainer
+
+(x_train, t_train), (x_test, t_test) = load_mnist(normalize=True)
+
+# 为了实现高速化，减少训练数据
+x_train = x_train[:500]
+t_train = t_train[:500]
+
+# 分割验证数据
+validation_rate = 0.20
+validation_num = int(x_train.shape[0] * validation_rate)
+print(validation_num )
+x_train, t_train = shuffle_dataset(x_train, t_train)
+x_val = x_train[:validation_num]
+t_val = t_train[:validation_num]
+x_train = x_train[validation_num:]
+t_train = t_train[validation_num:]
+
+def __train(lr, weight_decay, epocs=50):
+    network = MultiLayerNet(input_size=784, hidden_size_list=[100, 100, 100, 100, 100, 100],
+                            output_size=10, weight_decay_lambda=weight_decay)
+    trainer = Trainer(network, x_train, t_train, x_val, t_val,
+                      epochs=epocs, mini_batch_size=100,
+                      optimizer='sgd', optimizer_param={'lr': lr}, verbose=False)
+    trainer.train()
+
+    return trainer.test_acc_list, trainer.train_acc_list
+
+# 超参数的随机搜索======================================
+optimization_trial = 100
+results_val = {}
+results_train = {}
+for _ in range(optimization_trial):
+    # 指定搜索的超参数的范围===============
+    weight_decay = 10 ** np.random.uniform(-8, -4)
+    lr = 10 ** np.random.uniform(-6, -2)
+    # ================================================
+
+    val_acc_list, train_acc_list = __train(lr, weight_decay)
+    print("val acc:" + str(val_acc_list[-1]) + " | lr:" + str(lr) + ", weight decay:" + str(weight_decay))
+    key = "lr:" + str(lr) + ", weight decay:" + str(weight_decay)
+    results_val[key] = val_acc_list
+    results_train[key] = train_acc_list
+
+# 绘制图形========================================================
+print("=========== Hyper-Parameter Optimization Result ===========")
+graph_draw_num = 20
+col_num = 5
+row_num = int(np.ceil(graph_draw_num / col_num))
+i = 0
+
+for key, val_acc_list in sorted(results_val.items(), key=lambda x:x[1][-1], reverse=True):
+    print("Best-" + str(i+1) + "(val acc:" + str(val_acc_list[-1]) + ") | " + key)
+
+    plt.subplot(row_num, col_num, i+1)
+    plt.title("Best-" + str(i+1))
+    plt.ylim(0.0, 1.0)
+    if i % 5: plt.yticks([])
+    plt.xticks([])
+    x = np.arange(len(val_acc_list))
+    plt.plot(x, val_acc_list)
+    plt.plot(x, results_train[key], "--")
+    i += 1
+
+    if i >= graph_draw_num:
+        break
+
+plt.show()
+
+```
+
+```
+=========== Hyper-Parameter Optimization Result ===========
+Best-1(val acc:0.82) | lr:0.008601187445014789, weight decay:4.142947393287626e-06
+Best-2(val acc:0.8) | lr:0.008284953249444884, weight decay:1.3047654928102771e-08
+Best-3(val acc:0.79) | lr:0.00797182644121508, weight decay:4.530264809019064e-07
+Best-4(val acc:0.77) | lr:0.006358159795538981, weight decay:4.753737847569889e-06
+Best-5(val acc:0.77) | lr:0.005930410669775257, weight decay:1.1280065697356176e-07
+```
+
+![image](https://user-images.githubusercontent.com/18595935/52027393-9f315d00-254e-11e9-8123-5bd38905b9ab.png)
+
+从上面结果可以看出，学习率在0.001到0.01、权值衰减系数在`10**(-8)到10**(-6)`之间时，学习可以顺利进行。然后在这个缩小的范围中重复相同的操作，这样就能缩小到合适的超参数存在范围，然后再某个阶段，选择一个最终的超参数的值。
+
 # 6. 小结
+
+本章涉及到了神经网络学习的各个影响因素：
+
+- 参数(权值和偏置)的更新方法，有SGD/Momentum/AdaGrad/Adam方法，各有优缺点
+- 权重初始值的赋值方法，当激活函数是sigmoid/tanh等S型曲线函数时，初始值使用Xavier初始值，激活函数使用ReLU时，权重初始值使用He初始值。
+- Batch Normalization，调整各个层中激活值的分布，为此要向神经网络的每个数据输出后，添加对数据分布进行正规化的层，即BatchNormalization层，可以加速学习，并且对初始值变得健壮。
+- 正则化，通过**权值衰减**和**Dropout**抑制过拟合，过拟合产生的原因主要是训练数据少以及神经网络过于复杂。 通过**权值衰减**可以惩罚那些过大的权值，使其减小；通过**Dropout**可以随机删除一些神经元。
+- 超参数的取得，超参数(学习率，权值衰减率)等对神经网络的学习也有很大的影响，通过逐渐缩小“好值”存在的范围，是搜索超参数的一个有效方法。
+
+
