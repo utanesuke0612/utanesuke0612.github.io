@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 【全书】 一流的记忆方法(まだ)
+title: 【全书】 一流的记忆方法(ing)
 date: 2018-12-2 04:04:00
 categories: 读书笔记
 tags: 其他
