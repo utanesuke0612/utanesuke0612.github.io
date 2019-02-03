@@ -178,18 +178,18 @@ tags: 其他
 
 ## 2.2 何时可以不用限定词(a)
 
-1. 名词复数前，不要加限定词
+**名词复数前，不要加限定词**
 
-**Unmarried men** are a rare species(/'spiʃiz/) these days.
+- **Unmarried men** are a rare species(/'spiʃiz/) these days.
 
-2. 抽象名词(honesty)和不可数名词(water,food)，不要加限定词
+**抽象名词(honesty)和不可数名词(water,food)，不要加限定词**
 
 - **Honesty(/'ɑnəsti/ )** is not necessarily(/,nɛsə'sɛrəli/ ) the best policy. 诚实不一定是上策。
 - **Fresh water** is a precious resource in Saudi Arabia. 淡水是沙特阿拉伯的珍贵资源。
 
 ## 2.3 专有名词与补语位置
 
-1. 人名(Genghis khan 成吉思汗)，地名(Taibei) 等都是专有名词，它所代表的对象只有一个，不适合加a(an)。
+**人名(Genghis khan 成吉思汗)，地名(Taibei) 等都是专有名词，它所代表的对象只有一个，不适合加a(an)。**
 > 如果一个名词不能加-s，那么它就不能加a(an).
 
 - There are five Sundays this month.(这个月有五个星期日)
@@ -198,7 +198,7 @@ tags: 其他
 - I have an appointment on Sunday.(我星期日有约)
 > 上面是唯一的一天，算是专有名词
 
-2. 用作补语的专有名词，因为补语和主语(或宾语)有对等关系，主语是专有名词，那么它的补语也是。
+**用作补语的专有名词，因为补语和主语(或宾语)有对等关系，主语是专有名词，那么它的补语也是。**
 
 - Mr. Elson was president of the high school. 埃尔森先生曾是这所高中的校长
 > Elson是人名，而且没有第二个存在，所以不能加-s，也不能加a
@@ -215,7 +215,7 @@ tags: 其他
 
 **宾语补语的情况：**
 
-Clinton made Gorle **campaign partner** of the Presidential election. 克林顿选戈尔为总统大选的竞选搭档。
+- Clinton made Gorle **campaign partner** of the Presidential election. 克林顿选戈尔为总统大选的竞选搭档。
 > campaign partner 没有限定词，当专有名词使用，因为它是戈尔的宾语补语。
 
 ## 2.4 定冠词the的用法
@@ -236,10 +236,13 @@ Clinton made Gorle **campaign partner** of the Presidential election. 克林顿�
 
 ## 2.5 定冠词与专有名词
 
-1. 专有名词：只有一个对象存在的名词，像Genghis khan和Taibei
-2. 定冠词：虚词，用在名词的前面，帮助指明名词的含义。区别于不定冠词，定冠词具有确定的意思，用以特指人或事物，表示名词所指的人或事物是同类中的特定的一个，以别于同类中其他的人或事物，相当于汉语中的“那个”或“这个”的意思，the。
+**专有名词：**
+只有一个对象存在的名词，像Genghis khan和Taibei
 
-专有名词与定冠词有冲突不能并存，如果加了the，就表示这个东西有两个以上，也就不是专有名词了。
+**定冠词：**
+虚词，用在名词的前面，帮助指明名词的含义。区别于不定冠词，定冠词具有确定的意思，用以特指人或事物，表示名词所指的人或事物是同类中的特定的一个，以别于同类中其他的人或事物，相当于汉语中的“那个”或“这个”的意思，the。
+
+**专有名词与定冠词有冲突不能并存，如果加了the，就表示这个东西有两个以上，也就不是专有名词了。**
 
 - This is not the John Smith I know.这不是我认识的约翰史密斯
 > 暗示还有其他叫约翰史密斯的人存在，这里不是专有名词
@@ -255,7 +258,8 @@ Clinton made Gorle **campaign partner** of the Presidential election. 克林顿�
 - the Mediterranean (Sea) 地中海
 - the Dead Sea 死海
 
-上面的词感觉是专有名词，但是有定冠词，那这感觉跟前面结论有冲突啊，其实不然，将Pacific,Atlantic看作是修饰Ocean的形容词就好理解了。
+上面的词感觉是专有名词，但是有定冠词，那这感觉跟前面结论有冲突啊。
+其实不然，将Pacific,Atlantic看作是修饰Ocean的形容词就好理解了。
 
 the 真正限定的是后面的Ocean名词，下面也是同理：
 
