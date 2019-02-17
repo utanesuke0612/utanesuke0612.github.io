@@ -272,4 +272,4 @@ print("程序运行时间 %-5.5ss"%clock())
 1. `x,y = random(),random()`,可以给两个赋值。
 2. 同步赋值：例如交换 x 和 y的值，一般方法要使用临时变量t，在python 中直接如下方式交换：`x,y = y,x`,解析实例图：
 
- ![image](https://qiita-image-store.s3.amazonaws.com/0/177240/3ada275c-31b6-2085-da17-60247cac4fb7.png)
+![image](https://qiita-image-store.s3.amazonaws.com/0/177240/3ada275c-31b6-2085-da17-60247cac4fb7.png)
