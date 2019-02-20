@@ -10,6 +10,12 @@ tags: self-driving Coursera
 
 # 0. 课程概要
 
+The self-driving car is the sleeping giant which can change everything; road safety, mobility for everyone, while dramatically reducing the costs of driving. 
+
+This specialization will teach you what you need to know to kick start a career in the autonomous driving industry. Whether you're coming from academia or industry, these courses will provide you with the foundational knowledge and practical skills you need to help build a new future with self-driving cars.
+
+Throughout the courses, we'll show you real-world data and scenarios from our research, and from our own self-driving car or what we call the autonomous.
+
 本套自动驾驶学习课程，共有4个单元:
 
 1. [**Introduction to Self-Driving Cars**](https://www.coursera.org/learn/intro-self-driving-cars/home/welcome)
@@ -34,13 +40,15 @@ tags: self-driving Coursera
 	- Apply feature detection algorithms for localization and mapping 在定位和匹配中应用特征检测
 	- Develop an train neural networks for object detection and semantic segmentation 为物体检测和语义分割设计神经网络
 4. Motion Planning for Self-Driving Cars **无人车的运动规划**
-	- Devise trajectory rollout motion planning
-	- Calculate the time to collision 计算冲突事件
+	- Devise trajectory rollout motion planning 设计轨迹来展示运动规划
+	- Calculate the time to collision 计算冲突时间
 	- Define high-level vehicle behaviours
-	- Develop kinematically feasible paths through environments
+	- Develop kinematically feasible paths(动态可行路径) through environments 
 	- Compute velocity profiles
 	- Plan behaviours and execute maneuvers to navigate through the world
 	- Gain valuable experience in debugging and testing in the Carla simulator
+
+Autonomous driving is a constantly evolving and changing field. So, keeping up not only with self-driving knowledge but also robotics, AI, and deep learning will help you keep your technical skills sharp. 
 
 本章，也就是上面第一个部分**Introduction to Self-Driving Cars**，分为如下章节(每周一个章节)：
 - Module 0: Welcome to the Self-Driving Cars Specialization!
@@ -95,7 +103,7 @@ A method of control utilizing full state feedback. The method seeks to optimize 
 
 - **MPC: Model Predictive Control(模型预测控制)**
 
-A method of control whose control input optimizes a user defined cost function over a finite time horizon. A common form of MPC is finite horizon LQR (linear quadratic regulation).
+A method of control whose control input optimizes(优化) a user defined cost function over a finite time horizon(有限的时间范围). A common form of MPC is finite horizon LQR (linear quadratic regulation).
 
 - **NHTSA: National Highway Traffic Safety Administration(国家公路交通安全管理局)**
 
