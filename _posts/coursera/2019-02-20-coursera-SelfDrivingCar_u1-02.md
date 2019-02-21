@@ -12,7 +12,6 @@ tags: self-driving Coursera
 
 ![image](https://user-images.githubusercontent.com/18595935/53143891-544eb680-35dd-11e9-8ce8-14ecdab3031c.png)
 
-
 # 1. Module 2: Self-Driving Hardware and Software Architectures
 
 无人驾驶的系统结构非常的多样化，至今没有出现一个标准的解决方案。本章介绍了通常使用的软硬件结构，以及在成本/可靠性/性能/复杂性之间的一些折衷，这些因素都会影响到无人车的设计。
@@ -124,7 +123,7 @@ Let’s learn how to place these sensors to aggregate a complete view of the env
 在继续讨论之前，先定义一些参数：
 1. Aggressive deceleration = `5m/(s**2)`，比较激进的减速度
 2. Comfortable deceleration = `2m/(s**2)`,比较温和的减速度
-3. Stopping distance = `d = (v**2)/(2*a)`，刹车所需要的距离
+3. Stopping distance = `d = (v**2)/(2*a)`，刹车所需要的距离，a是加速度
 
 另外还有比如系统反应时间，道路的摩擦系数等先暂且不考虑。
 
