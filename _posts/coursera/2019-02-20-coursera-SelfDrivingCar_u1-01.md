@@ -10,7 +10,7 @@ tags: self-driving Coursera
 
 # 0. 小结
 
-# 1. Module 0: Welcome to the Self-Driving Cars Specialization!
+# 1. M0: 无人车专题
 
 介绍一些主要概念和这个课程的结构，讨论近二十年内这个领域内的主要进步，重点介绍了几家大公司在安全和性能等方面的最新进展。
 
@@ -19,7 +19,7 @@ tags: self-driving Coursera
 2. Review the main projects offered in this course
 3. Examine the state of the self-driving industry
 
-# 2. Module 0-1：Introduction to Self-Driving Cars
+# 2. M0-1：无人车入门
 
 **By the end of this course, you will：**
 
@@ -30,11 +30,11 @@ tags: self-driving Coursera
 ers to do speed regulation(速度控制), path following(路径跟踪)
 - Use these concepts to help navigate a self driving car in CARLA
 
-# 3. Module 0-2：Meet the Self-Driving Car Experts
+# 3. M0-2：Meet the Self-Driving Car Experts
 
 上面两个部分的video中，介绍无人车历史以及从业人员的访谈，里面的很多句子可以背下来，面试的时候可以用。两个老师的英语简直不能更清晰了，非常棒！
 
-# 4. Module 1: The Requirements for Autonomy
+# 4. M1: The Requirements for Autonomy
 
 ![image](https://user-images.githubusercontent.com/18595935/53082475-426b0600-3540-11e9-8d19-60948eb6d517.png)
 
@@ -44,9 +44,9 @@ ers to do speed regulation(速度控制), path following(路径跟踪)
 - Breakdown the task of driving into elemental decisions and actions
 - Assess the effects of driving conditions on the driving task
 
-# 5. Module 1-1: Driving Taxonomy, Perception, and Driving Decisions
+# 5. M1-1: 驾驶分类,感知与决策
 
-## Lesson 1: Taxonomy of Driving
+## L1: 驾驶分类
 
 介绍无人车的主要构成，以及技术要求，无人车分级。
 
@@ -92,7 +92,7 @@ Clearly defining the operating conditions for which a self-driving car is design
 - leve4:高度自动驾驶，汽车能够处理紧急情况，虽然有时可能会需要向驾驶员确认。
 - level5:无条件自动驾驶，无需人工干预
 
-## Lesson2: Requirements for Perception 感知
+## L2: 感知
 
 分析一个驾驶任务是如何被完成的，介绍什么是感知，感知的目标是什么，以及感知现在的挑战是什么。
 
@@ -134,7 +134,7 @@ Clearly defining the operating conditions for which a self-driving car is design
 1. Radar are primarily used for dynamic object detection.雷达主要用于动态物体的检测
 2. ACC Adaptive Cruise Control  自适应巡航控制：adaptive cruise control detects vehicles ahead to control speed and to maintain safe driving distances.
 
-## Lesson3: Driving Decisions and Actions 决策
+## L3: 驾驶决策
 
 上一课讲了感知，这部分是感知后的决策，以及决策后的执行。
 
@@ -172,7 +172,7 @@ We predict where other objects on the road will be in the future before we make 
 
 这种方式依赖于预测的准确性，所以也就增加了感知perception的复杂性。
 
-# 6. Module 1-2: Learn from Industry Experts
+# 6. M1-2: Learn from Industry Experts
 
-# 7. Module 1-3: Weekly Assignment
+# 7. M1-3: Weekly Assignment
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Coursera-Self-Driving Cars-U1-02-Self-Driving Hardware and Software Architectures
+title: Coursera-Self-Driving Cars-U1-02-Self-Driving Hardware and Software Architectures(无人车软硬件架构)
 date: 2019-02-20 01:02:00
 categories: self-driving(自動運転)
 tags: self-driving Coursera
@@ -12,7 +12,7 @@ tags: self-driving Coursera
 
 ![image](https://user-images.githubusercontent.com/18595935/53143891-544eb680-35dd-11e9-8ce8-14ecdab3031c.png)
 
-# 1. Module 2: Self-Driving Hardware and Software Architectures
+# 1. M2: 无人车软硬件架构
 
 无人驾驶的系统结构非常的多样化，至今没有出现一个标准的解决方案。本章介绍了通常使用的软硬件结构，以及在成本/可靠性/性能/复杂性之间的一些折衷，这些因素都会影响到无人车的设计。
 
@@ -21,7 +21,7 @@ tags: self-driving Coursera
 2. Describe the basic architecture of a typical self-driving software system
 3. Break down the mapping requirements for self-driving cars based on their intended uses(预期用途).
 
-# 2. Module 2-1: Autonomous Vehicle Hardware, Software and Environment Representation
+# 2. M2-1: 无人车软硬件与环境表现
 
 **本章包括：**
 1. 感知相关的传感器
@@ -30,7 +30,7 @@ tags: self-driving Coursera
 4. 系统结构
 5. 环境表现(Environment representation for self-driving)
 
-## 2.1 Lesson1 感知需要的传感器和计算单元
+## 2.1 L1 感知需要的传感器和计算单元
 
 **本节包括：**
 1. 传感器型号和特性
@@ -104,7 +104,7 @@ tags: self-driving Coursera
 
 GPS上有着非常精确的时钟，其他模块可以将其作为参照。
 
-## 2.2 Lesson2 Hardware Configuration Design 硬件配置设计
+## 2.2 L2 硬件配置设计
 
 Let’s learn how to place these sensors to aggregate a complete view of the environment.
 1. 在不同场景下的传感器覆盖范围的要求，比如高速场景和市区场景
@@ -209,7 +209,7 @@ Let’s learn how to place these sensors to aggregate a complete view of the env
 
 ![image](https://user-images.githubusercontent.com/18595935/53139499-2c575700-35cd-11e9-8b85-c7161d8219b8.png)
 
-## 2.3 Lesson3 Software Architecture
+## 2.3 L3 软件架构
 
 本章描述无人车软件的基本结构，包含5个部分，如下图，环境感知/环境地图构建/运动规划/汽车控制/系统监视。
 
@@ -304,7 +304,7 @@ Let’s learn how to place these sensors to aggregate a complete view of the env
 
 ![image](https://user-images.githubusercontent.com/18595935/53140533-59f1cf80-35d0-11e9-9008-fbfed15eb0d5.png)
 
-## 2.4 Lesson4 环境表现(Environment Representation)
+## 2.4 L4 环境表现(Environment Representation)
 
 上面的环境地图模块中提到，会创建如下的三种地图：
 
@@ -329,6 +329,6 @@ Let’s learn how to place these sensors to aggregate a complete view of the env
 2. Fully offline - 事先制作好地图，也就是高精度地图
 3. Created Offline and Updated Online
 
-# 3. Module 2-2: Learn from Industry Experts
+# 3. M2-2: Learn from Industry Experts
 
-# 4. Module 2-3: Weekly Assignment
+# 4. M2-3: Weekly Assignment

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Coursera-Self-Driving Cars-U1-03-Safety Assurance for Autonomous Vehicles
+title: Coursera-Self-Driving Cars-U1-03-Safety Assurance for Autonomous Vehicles(无人车安全保证)
 date: 2019-02-20 01:03:00
 categories: self-driving(自動運転)
 tags: self-driving Coursera
@@ -10,7 +10,18 @@ tags: self-driving Coursera
 
 # 0. 小结
 
-# 1. Module 3: Safety Assurance for Autonomous Vehicles
+本章主要介绍无人车的安全课题，主要是一些理论知识，在udacity上有更详细的讲解，参考如下：
+
+- [Nano01(自動運転)-Extend-Additional Content-L07-Introduction to Functional Safety](http://road2ai.info/2019/02/14/Nano_Extend_01_07/)
+- [Nano01(自動運転)-Extend-Additional Content-L08-Functional Safety:safety plan](http://road2ai.info/2019/02/14/Nano_Extend_01_08/)
+- [Nano01(自動運転)-Extend-Additional Content-L09-Functional Safety:Hazard Analysis and Risk Assessment](http://road2ai.info/2019/02/14/Nano_Extend_01_09/)
+- [Nano01(自動運転)-Extend-Additional Content-L10-Functional Safety:Functional Safety Concept](http://road2ai.info/2019/02/14/Nano_Extend_01_10/)
+- [Nano01(自動運転)-Extend-Additional Content-L11-Functional Safety:Technical Safety Concept](http://road2ai.info/2019/02/14/Nano_Extend_01_11/)
+- [Nano01(自動運転)-Extend-Additional Content-L12-Functional Safety at the software and Hardware Levels](http://road2ai.info/2019/02/14/Nano_Extend_01_12/)
+
+![image](https://user-images.githubusercontent.com/18595935/53161335-297c5680-360d-11e9-9a53-4d08359ad592.png)
+
+# 1. M3: 无人车安全保证
 
 随着自动驾驶技术的不断成熟，公道上的驾驶安全性显得更加重要。在不可控的公共道路环境下，保证无人车的安全驾驶，这是一个需要解决的巨大挑战。
 > 翻译得比较糊弄，原句： You will evaluate the challenges and approaches employed to date to tackle the immense challenge of assuring the safe operation of autonomous vehicles in an uncontrolled public road driving environment.
@@ -22,7 +33,7 @@ tags: self-driving Coursera
 4. Describe analytical(解析的) and empirical(经验主义的) approaches to safety assessment.
 
 
-# 2. Module 3-1: Safety for Self-Driving Cars
+# 2. M3-1: 无人车安全
 
 本章中：
 1. Autonomous vehicle crash reports
@@ -31,7 +42,7 @@ tags: self-driving Coursera
 4. Industry perspectives on safety
 5. Safety frameworks for self driving
 
-## 2.1 Lesson1:Safety Assurance for Self-Driving Cars
+## 2.1 L1:无人车安全保证
 
 本节讲述:
 1. Autonomous driving crashes
@@ -39,7 +50,7 @@ tags: self-driving Coursera
 3. Major hazard sources
 4. Safety requirements
 
-### 1. Autonomous driving crashes
+### 1. 无人车碰撞事故
 
 最有名的就是去年uber无人驾驶车致死事件，后来经调查有多重原因：
 1. 当时安全员没有监视系统，在看hulu视频
@@ -50,13 +61,13 @@ tags: self-driving Coursera
 
 每一个环节出错都有可能出现致命的错误。
 
-### 2. Basic Safety Term
+### 2. 安全相关术语
 
 ![image](https://user-images.githubusercontent.com/18595935/53149362-dd231d80-35f0-11e9-987f-d3d28af73693.png)
 
 Safety is the process of avoiding **UNREASONABLE RISK** of harm to a living thing. For example, driving into an intersection when the traffic signal is red would be unsafe, as it leads to unreasonable risk of harm to the occupants of the vehicle and the other vehicles moving through the intersection.
 
-### 3. Major Hazard Sources
+### 3. 主要危险来源
 
 ![image](https://user-images.githubusercontent.com/18595935/53149453-0fcd1600-35f1-11e9-89ff-da5520a0cf74.png)
 
@@ -93,7 +104,7 @@ Safety is the process of avoiding **UNREASONABLE RISK** of harm to a living thin
 
 > **这一节有很好的附加材料，需要学习**
 
-## 2.2 Lesson2:Industry Methods for Safety Assurance and Testing
+## 2.2 L2:无人车安全与驾驶(工业解决方案)
 
 ### 1. Waymo
 
@@ -172,7 +183,7 @@ Ensuring the system works in theory and meets safety requirements found by hazar
 Safety guarantee due to the fact that the system has performed autonomously without fail on the roads for a very large number of kms. 通过大量的实际路测保证系统安全
 
 
-## 2.3 Lesson3:Safety Frameworks for Self-Driving
+## 2.3 L3:无人驾驶的安全框架
 
 本节讨论：
 1. 通用安全框架(Fault Trees,FMEA,HAZOP)
@@ -238,7 +249,7 @@ FMEA步骤如下：
  - V-shaped process
  - Employs HARA
 
-# 3. Module 3-2: Learn from Industry Experts
+# 3. M3-2: Learn from Industry Experts
 
 # 4. Weekly Assignment
 
