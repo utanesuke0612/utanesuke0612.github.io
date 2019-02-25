@@ -427,7 +427,89 @@ for (in your control loop) {
 
 ## 3.2 运动学自行车模型
 
+作为一种自行车模型，运动学自行车模型也假定车辆是一辆自行车，整个的**控制量**可以简化为(a, δf), a是车辆加速度，δf是方向盘转角。
 
+然后我们定义模型中的**状态量**，运动学自行车模型使用四个状态量来描述车辆状态：
 
+- `x`:车辆当前x坐标
+- `y`:车辆当前y坐标
+- `ψ`：车辆当前的偏航角度
+- `v`：车辆的速度
+
+下面是一个简单的运动学自行车模型：
+
+![image](https://user-images.githubusercontent.com/18595935/53316237-6d6fa400-390a-11e9-8c71-92bee0f80463.png)
+
+其中：lf和lr是前轮后轮到车辆重心的距离。
+
+运动学自行车模型中的各个状态量更新公式如下：
+
+![image](https://user-images.githubusercontent.com/18595935/53316357-ebcc4600-390a-11e9-973d-9f1d7d812f29.png)
+
+那么基于这个简单的运动学自行车模型，在给定了一个时刻的控制输入后，我们可以计算得到dt时间以后的车辆状态信息，如**坐标**,**偏航角**,**速度**，那么这个模型就可以作为我们模型预测控制下的**基础车辆模型**了。
 
 # 4. 动力学自行车模型-Dynamic Bicycle Model
+
+前面的车辆运动学自行车模型基于一个重要的假设：**车前轮的方向即是车辆当前的速度方向**，在实际车辆运动过程中，当车辆以相对高速行驶时，**车轮的方向并不一定是车辆当前速度方向**。
+
+车辆动力学模型通过对轮胎和路面之间的复杂作用来描述车辆的运动，在一个动力模型中，我们需要考虑各种力的作用，大致可以分为：
+1. 纵向力(Longitudinal force):使车辆前后移动的力量
+2. 侧向力(Lateral force):促使车辆在横向移动的力量
+
+仍然以上图为例子，考虑一个简单的动力学模型，这个模型的各个状态量为如下:
+
+![image](https://user-images.githubusercontent.com/18595935/53317248-43b87c00-390e-11e9-8ab4-d1d0d6b4693e.png)
+
+- 上面的x和y，表示的是车身的纵向和侧向速度
+- 第3个表示的是偏航角速度
+- (X,Y)表示车身的当前坐标
+
+这些状态量在时间尺度上的微分方程如下：
+
+![image](https://user-images.githubusercontent.com/18595935/53317352-a6aa1300-390e-11e9-878e-ac5a57baa731.png)
+
+- m和I(z)分别表示车辆的质量，偏航惯性
+- F(c,f)和F(c,r)分别表示前后轮胎受到的侧向力，他们可以通过具体的轮胎模型求得：
+
+![image](https://user-images.githubusercontent.com/18595935/53317427-e2dd7380-390e-11e9-963b-25212183b0dd.png)
+
+- 其中ai是轮胎的偏转角，这个偏转角是指轮胎当前的朝向和当前速度的夹角
+- Cai被称为轮胎偏滚刚度(tier cornering stiffness)
+
+# 5. 运动学自行车模型的python实现
+
+我们使用Python代码简单实现一个运动学自行车模型类，作为后期我们使用模型预测控制的车辆模型。
+
+```python
+from __future__ import print_function
+
+import math
+
+
+class KinematicModel(object):
+    def __init__(self, x, y, psi, v, f_len, r_len):
+        self.x = x
+        self.y = y
+        self.psi = psi
+        self.v = v
+
+        self.f_len = f_len
+        self.r_len = r_len
+
+    def get_state(self):
+        return self.x, self.y, self.psi, self.v
+
+    def update_state(self, a, delta, dt):
+        beta = math.atan((self.r_len / (self.r_len + self.f_len)) * math.tan(delta))
+
+        self.x = self.x + self.v * math.cos(self.psi * beta) * dt
+        self.y = self.y + self.v * math.sin(self.psi * beta) * dt
+        self.psi = self.psi + (self.v / self.f_len) * math.sin(beta) * dt
+        self.v = self.v + a * dt
+        return self.x, self.y, self.psi, self.v
+```
+
+这个简易的车辆模型中，我们的控制量包含了一个前胎的转角和一个加速度a，由于受车辆机械的限制，车辆本身有很多动作是实现不了的，比如说加速度a的值不可能过大，轮胎的转角也会有极限，我们称这种性质叫做**模型非完整性（model nonholonomic）**。
+
+
+

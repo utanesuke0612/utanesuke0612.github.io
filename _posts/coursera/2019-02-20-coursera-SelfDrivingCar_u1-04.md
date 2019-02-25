@@ -12,13 +12,13 @@ tags: self-driving Coursera
 
 # 1. Module 4: Vehicle Dynamic Modeling
 
-1. Basics of kinematic and coordinates
-2. Kinematic model development of a bicycle
-3. Basics of dynamic modeling
-4. Vehicle longitudinal dynamics and modeling
-5. Vehicle lateral dynamics and modeling
-6. Vehicle actuation system
-7. Tire slips and modeling
+1. Basics of kinematic and coordinates 运动学与坐标基础
+2. Kinematic model development of a bicycle 自行车运动学模型开发
+3. Basics of dynamic modeling 动力学建模基础
+4. Vehicle longitudinal dynamics and modeling车辆纵向动力学建模
+5. Vehicle lateral dynamics and modeling车辆横向动力学建模
+6. Vehicle actuation system汽车驱动系统
+7. Tire slips and modeling轮胎滑移及模型
 
 
 **学习目标：**
@@ -31,7 +31,7 @@ tags: self-driving Coursera
 
 # 3. Lesson2：The Kinematic Bicycle Model运动学自行车模型
 
-# 4. Lesson3：Dynamic Modeling in 2D二维动态建模
+# 4. Lesson3：Dynamic Modeling in 2D二维动力学建模
 
 # 5. Lesson4：Longitudinal Vehicle Modeling纵向车辆建模
 
