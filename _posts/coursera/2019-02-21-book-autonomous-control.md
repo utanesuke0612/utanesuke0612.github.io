@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 【书】-无人驾驶汽车运动控制
-date: 2019-02-20 01:04:00
+date: 2019-02-16 01:04:00
 categories: self-driving(自動運転)
 tags: self-driving Coursera
 ---
