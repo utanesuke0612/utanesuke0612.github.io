@@ -98,7 +98,14 @@ tags: self-driving Coursera
 1. 前轮方向决定车的方向
 2. 车在2D方向移动
 
+**2D自行车模型：**
 ![image](https://user-images.githubusercontent.com/18595935/53389729-c2c3b800-39d3-11e9-9b04-bd341b0df9f0.png)
+
+**后轮为参考点时：**
+
+![image](https://user-images.githubusercontent.com/18595935/53471840-574c1a00-3aa9-11e9-8132-7e4e9cc67b25.png)
+
+**分别将参考点放在：后轮/前轮/中心：**
 
 ![image](https://user-images.githubusercontent.com/18595935/53390467-952c3e00-39d6-11e9-8e21-04d396e272e2.png)
 
