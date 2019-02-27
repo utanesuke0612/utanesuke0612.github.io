@@ -226,10 +226,150 @@ tags: self-driving Coursera
 ![image](https://user-images.githubusercontent.com/18595935/53401548-5c4e9200-39f3-11e9-8461-6cbc25326b8c.png)
 ![image](https://user-images.githubusercontent.com/18595935/53401554-607aaf80-39f3-11e9-9096-622f9cfe509b.png)
 
-
 # 7. Lesson6：Vehicle Actuation 车辆驱动
 
+本节目标：
+1. 为主要的车辆驱动系统建模：转向/油门/刹车
+2. 将这些模型，关联到纵向横向的车辆动力系统上
+
+**联结横向和纵向：**
+- 通过方向盘控制转向角 -> 横向动力学 -> 横向的力 -> 横向运动学 -> 最后变成角速度
+- 通过油门和刹车 -> 纵向动力学 -> 纵向的力 -> 纵向运动学 -> 最后变成向前的速度
+
+控制的最终目的：以理想的速度让车行驶在设定好的路径上
+
+![image](https://user-images.githubusercontent.com/18595935/53415573-f1ae4e00-3a14-11e9-87c7-e1e55326d929.png)
+
+# 7.1. 转向
+
+![image](https://user-images.githubusercontent.com/18595935/53416081-10611480-3a16-11e9-83ed-cf205ca8aca0.png)
+
+**简单的转向模型：**
+
+方向盘的角度，与最终轮胎的角度有线性关系：
+
+![image](https://user-images.githubusercontent.com/18595935/53416089-1656f580-3a16-11e9-834d-5c92f323fe53.png)
+
+**实际转向系统：**
+
+当然实际的转向系统，比之前简单的模拟要更复杂：
+
+![image](https://user-images.githubusercontent.com/18595935/53416101-1bb44000-3a16-11e9-8df0-24aa7326ed0f.png)
+
+## 7.2 动力传动系统
+
+车辆的动力传动系统会影响汽车向前的速度，在自动挡汽车中，有两个输入可以加速减速汽车：油门和刹车。
+
+油门和刹车影响力矩的平衡，力在车辆中的传递为:
+
+- 动力引擎 -> 通过油门踏板位置的变化产生力矩 -> 力矩传递给Transmission system,即变速箱 -> 然后基于操作模式和理想的速度,变速箱改变其齿轮位置 -> 然后将力矩传递给车轮 -> 最终产生一个向前的驱动力
+
+当前这个前驱力，必须要大于阻力摩擦力等，才能让车向前加速
+
+![image](https://user-images.githubusercontent.com/18595935/53416117-2242b780-3a16-11e9-9b57-bb86cff7be24.png)
+
+## 7.3 油门(加速)：
+
+![image](https://user-images.githubusercontent.com/18595935/53416125-27a00200-3a16-11e9-89f6-2b8ffbaa1625.png)
+
+**加速模型：**
+
+![image](https://user-images.githubusercontent.com/18595935/53416258-6f268e00-3a16-11e9-8102-1f48435a9551.png)
+
+**特征图：**
+
+![image](https://user-images.githubusercontent.com/18595935/53416264-751c6f00-3a16-11e9-9b3b-2646fba209f5.png)
+
+**汽油引擎的典型扭矩曲线：**
+
+semi-empirical model：半经验模型
+
+![image](https://user-images.githubusercontent.com/18595935/53416268-7b125000-3a16-11e9-8363-58ea68ef1670.png)
+
+## 7.4 刹车(减速)：
+
+![image](https://user-images.githubusercontent.com/18595935/53416275-7fd70400-3a16-11e9-8c5d-62142a5e45bb.png)
+
+**刹车模型：**
+
+与上面油门类似，在刹车力矩与刹车板位置之间存在线性匹配关系：
+
+![image](https://user-images.githubusercontent.com/18595935/53416287-85cce500-3a16-11e9-9f11-938396d39e7f.png)
+
+**刹车系统：**
+
+刹车的基本功能包括：
+1. 缩短停止距离
+2. 通过ABS系统，在刹车过程中保持可操纵性
+3. 刹车过程中保持稳定性，防止翻车
+
 # 8. Lesson7：Tire slip and modeling 轮胎滑移建模
+
+本节学习：
+1. 轮胎滑动角度以及轮胎滑动系数
+2. 给轮胎产生的力进行建模：linear and pacejka tire models
+
+**轮胎建模的重要性：**
+
+轮胎是车辆与道路间的接口，所以需要一个好的轮胎模型，来捕获其产生的力。
+
+![image](https://user-images.githubusercontent.com/18595935/53418608-8caa2680-3a1b-11e9-8ba0-fb2935e9d124.png)
+
+## 8.1 车辆滑动角：
+
+滑动角β是车辆实际运动方向，与车辆正方向之间的夹角，如下图：
+
+![image](https://user-images.githubusercontent.com/18595935/53418645-9895e880-3a1b-11e9-88ea-b0ba4a74e674.png)
+
+![image](https://user-images.githubusercontent.com/18595935/53418663-a0ee2380-3a1b-11e9-8de5-128eae4317b3.png)
+
+**轮胎滑动角：**
+
+轮胎的滑动角，是车轮朝向的方向，与车轮行驶方向的夹角：
+
+![image](https://user-images.githubusercontent.com/18595935/53418675-a8adc800-3a1b-11e9-92ac-b2da82ca2238.png)
+
+**滑差系数：**
+
+> 滑差率是对轮胎打滑的一个数字上的表现。汽车在行驶过程中，轮胎也在持续不断的滑动（slip)，弹射起步、急刹车、过弯过程中时常会听到轮胎撕咬地面的声音，这就是轮胎在滑动。
+> 如果一个轮胎周长2米，它完成一次旋转，轮胎前进的距离是2米的话，我们就称轮胎滑差率为0%，而当它完成一次旋转，仅前进1米的话，我们就称轮胎滑差率为50%。
+
+![image](https://user-images.githubusercontent.com/18595935/53418762-e01c7480-3a1b-11e9-82ed-4eba6424eb37.png)
+
+## 8.2 轮胎建模：
+
+![image](https://user-images.githubusercontent.com/18595935/53418776-e874af80-3a1b-11e9-9b6b-61309798c5f6.png)
+
+我们可以将这些轮胎模型分为三大类：
+
+- Analytical - Brush,Fiala,Liner 分析型
+	+ Tire pysical parameters are explicitly employed
+	+ Low precision,but simple
+
+- Numerical 数值型
+	+ look up tables instead of mathematical equations
+	+ No explicit mathmatical form
+	+ Geometry and material property of tire are considered
+
+- Parameterized - Linear,Pacejka,Dugoff 参数型
+	+ Need experiments for each specific tire
+	+ Formed by fitting model with experimental data
+	+ Match experimental data very well
+	+ Used widely for vehicle dynamics simulation studies and control design
+
+**1. 线性轮胎模型：**
+
+![image](https://user-images.githubusercontent.com/18595935/53418821-fc201600-3a1b-11e9-9e43-1a4c7382c34d.png)
+
+**2. Pacejka 轮胎模型：**
+
+更复杂也更广泛使用的控制模型
+
+![image](https://user-images.githubusercontent.com/18595935/53418847-06421480-3a1c-11e9-8362-4a65a028cf24.png)
+
+**力与滑动：**
+
+![image](https://user-images.githubusercontent.com/18595935/53418863-0d692280-3a1c-11e9-8128-49d54b9466fa.png)
 
 # 9. Experts:Challenges for the industry
 
