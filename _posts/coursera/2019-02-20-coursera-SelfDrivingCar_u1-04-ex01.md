@@ -8,6 +8,8 @@ tags: self-driving Coursera
 * content
 {:toc}
 
+> 这个练习忒TM难了，画不出来8字，暂时先pass
+
 # 1. 任务
 
 在此notebook中要实现自行车运动模型，模型接收速度和转向角作为输入，逐步实现自行车运动模型的各个公式。
@@ -50,4 +52,33 @@ class Bicycle():
         self.theta = 0
         self.delta = 0
         self.beta = 0
+```
+
+通过下面的函数，将除8以外的都画出来了，8怎么也画不出来...
+
+```python
+class Bicycle(Bicycle):
+    def step(self, v, w):
+        # ==================================
+        #  Implement kinematic model here
+        # ==================================
+        
+        # 0. update the delta
+        self.delta = self.delta + w*self.sample_time
+        if(self.delta > self.w_max):   #limits the steer angle to the fisical limit
+            self.delta = self.w_max
+        if(self.delta < -self.w_max):
+            self.delta = -self.w_max
+
+        # 1. update the beta
+        tan_delta = np.tan(self.delta)
+        self.beta = np.arctan((tan_delta*(self.lr))/(self.L))
+        
+        # 2. update the theta
+        self.theta = ((v*(np.cos(self.beta))*(np.tan(self.delta))) / self.L)*self.sample_time + self.theta
+        
+        # 3. update the x and y
+        theta_plus_beta = self.beta + self.theta
+        self.xc = (v*(np.cos(theta_plus_beta)))*self.sample_time + self.xc
+        self.yc = (v*(np.sin(theta_plus_beta)))*self.sample_time + self.yc
 ```

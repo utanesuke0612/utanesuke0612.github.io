@@ -22,7 +22,6 @@ tags: self-driving Coursera
 6. Vehicle actuation system汽车驱动系统
 7. Tire slips and modeling轮胎滑移及模型
 
-
 **学习目标：**
 1. Develop a kinematic bicycle model of a car with velocity and steering angle inputs - 建立带有速度和转向角输入的运动学自行车模型
 2. Develop a dynamic bicycle models of a car with velocity and steering angle inputs - 建立带有速度和转向角输入的动力学自行车模型
