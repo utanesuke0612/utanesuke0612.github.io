@@ -18,4 +18,24 @@ tags: DeepLearning Coursera
 
 
 
+# 0. 小结
 
+# 1. 训练/验证/测试数据集
+
+# 2. 偏差与方差
+
+# 3. basic recipe for ML
+
+# 4. 正则化
+
+# 5. 为什么正则化能减少过拟合
+
+# 6. Dropout Regularization
+
+# 7. 理解Dropout
+
+# 8. 其他的正则化方式
+
+# 9. 输入数据正规化
+
+# 10. 

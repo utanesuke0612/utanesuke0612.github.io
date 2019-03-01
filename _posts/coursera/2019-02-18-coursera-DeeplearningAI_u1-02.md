@@ -130,9 +130,27 @@ def cross_entropy_error(y, t):
 
 # 8. 计算图求导
 
+与上面类似，使用链式法则，某个值如b或c改变后，对J的影响有多大，这个影响通过链式法则可以传递：
+
+![image](https://user-images.githubusercontent.com/18595935/53621685-a6758480-3c3a-11e9-8fd7-64b40e305d0f.png)
+
 # 9. 逻辑回归梯度下降
 
-# 10. 梯度下降例子
+介绍在实现逻辑回归时，如何计算导数来实现梯度下降。
+
+![image](https://user-images.githubusercontent.com/18595935/53621940-94481600-3c3b-11e9-9ea9-07b7d7bcbe42.png)
+
+- y是sigmoid函数求出的概率
+- L(a,y)即损失函数，这里就是要修改参数w和b来减少损失函数
+
+现在介绍如何反向计算导数：
+
+![image](https://user-images.githubusercontent.com/18595935/53623235-ce1b1b80-3c3f-11e9-91ec-ab4464a71f9e.png)
+
+注意上面da/dz 等于 a(1-a)是因为这里激活函数是sigmoid函数，故其导数为`a(1-a)`。最后使用求得的导数，去逐步更新权重w和偏置b。
+
+
+# 10. 梯度下降例子(多个训练数据)
 
 # 11. 向量化
 
