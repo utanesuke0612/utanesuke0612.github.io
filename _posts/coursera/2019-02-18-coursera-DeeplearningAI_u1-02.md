@@ -686,7 +686,6 @@ softmax(x) = [[  9.80897665e-01   8.94462891e-04   1.79657674e-02   1.21052389e-
     8.01252314e-04]]
 ```
 
-<font color='blue'>
 **What you need to remember:**
 - np.exp(x) works for any np.array x and applies the exponential function to every coordinate
 - the sigmoid function and its gradient
@@ -839,7 +838,6 @@ print("L2 = " + str(L2(yhat,y)))
 
 输出`L2 = 0.43`
 
-<font color='blue'>
 **What to remember:**
 - Vectorization is very important in deep learning. It provides computational efficiency and clarity.
 - You have reviewed the L1 and L2 loss.
@@ -1343,3 +1341,11 @@ d = model(train_set_x, train_set_y, test_set_x, test_set_y, num_iterations = 200
 1. Preprocessing the dataset is important.
 2. You implemented each function separately: initialize(), propagate(), optimize(). Then you built a model().
 3. Tuning the learning rate (which is an example of a "hyperparameter") can make a big difference to the algorithm. You will see more examples of this later in this course!
+
+## 7 - Test with your own image (optional/ungraded exercise) 
+
+Congratulations on finishing this assignment. You can use your own image and see the output of your model. To do that:
+    1. Click on "File" in the upper bar of this notebook, then click "Open" to go on your Coursera Hub.
+    2. Add your image to this Jupyter Notebook's directory, in the "images" folder
+    3. Change your image's name in the following code
+    4. Run the code and check if the algorithm is right (1 = cat, 0 = non-cat)!
