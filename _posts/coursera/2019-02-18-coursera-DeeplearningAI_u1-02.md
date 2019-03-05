@@ -846,7 +846,7 @@ print("L2 = " + str(L2(yhat,y)))
 - You are familiar with many numpy functions such as np.sum, np.dot, np.multiply, np.maximum, etc...
 
 
-# 练习2：ogistic Regression with a Neural Network mindset
+# 练习2：Logistic Regression with a Neural Network mindset
 
 In this notebook you will build your first image recognition algorithm. You will build a cat classifier that recognizes cats with 70% accuracy!
 
@@ -855,5 +855,491 @@ As you keep learning new techniques you will increase it to 80+ % accuracy on ca
 - Learn how to minimize the cost function.
 - Understand how derivatives of the cost are used to update parameters.
 
+**Instructions:**
+- Do not use loops (for/while) in your code, unless the instructions explicitly ask you to do so.
+
+**You will learn to:**
+- Build the general architecture of a learning algorithm, including:
+    - Initializing parameters
+    - Calculating the cost function and its gradient
+    - Using an optimization algorithm (gradient descent) 
+- Gather all three functions above into a main model function, in the right order.
+
+## 1 - Packages ##
+
+First, let's run the cell below to import all the packages that you will need during this assignment. 
+- [numpy](www.numpy.org) is the fundamental package for scientific computing with Python.
+- [h5py](http://www.h5py.org) is a common package to interact with a dataset that is stored on an H5 file.
+- [matplotlib](http://matplotlib.org) is a famous library to plot graphs in Python.
+- [PIL](http://www.pythonware.com/products/pil/) and [scipy](https://www.scipy.org/) are used here to test your model with your own picture at the end.
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+import h5py
+import scipy
+from PIL import Image
+from scipy import ndimage
+from lr_utils import load_dataset
+
+%matplotlib inline
+```
+
+## 2 - Overview of the Problem set ##
+
+**Problem Statement**: You are given a dataset ("data.h5") containing:
+    - a training set of m_train images labeled as cat (y=1) or non-cat (y=0)
+    - a test set of m_test images labeled as cat or non-cat
+    - each image is of shape (num_px, num_px, 3) where 3 is for the 3 channels (RGB). Thus, each image is square (height = num_px) and (width = num_px).
+
+我们将创建一个图片识别算法，能够识别图片是猫或不是。
 
 
+```python
+# Loading the data (cat/non-cat)
+train_set_x_orig, train_set_y, test_set_x_orig, test_set_y, classes = load_dataset()
+```
+
+1. `_orig`表示待处理的数据，处理完毕后，去掉这个后缀。
+2. `train_set_x_orig`或`test_set_x_orig`的每一行是一个表示图片数组。
+
+```python
+# Example of a picture
+index = 25
+plt.imshow(train_set_x_orig[index])
+print ("y = " + str(train_set_y[:, index]) + ", it's a '" + classes[np.squeeze(train_set_y[:, index])].decode("utf-8") +  "' picture.")
+```
+输出：
+y = [1], it's a 'cat' picture.
+![image](https://user-images.githubusercontent.com/18595935/53784546-f749ed80-3f58-11e9-9102-10185b5c5574.png)
+
+很多深度学习中的bug，都是因为矩阵或是向量的维度不匹配导致的，如果能保持这个维度正确，将减少很多bug。
+
+**Exercise:** Find the values for:
+    - m_train (number of training examples)
+    - m_test (number of test examples)
+    - num_px (= height = width of a training image)
+Remember that `train_set_x_orig` is a numpy-array of shape (m_train, num_px, num_px, 3). For instance, you can access `m_train` by writing `train_set_x_orig.shape[0]`.
+
+```python
+### START CODE HERE ### (≈ 3 lines of code)
+m_train = len(train_set_x_orig)
+m_test = len(test_set_x_orig)
+num_px = train_set_x_orig[0].shape[0]
+### END CODE HERE ###
+
+print ("Number of training examples: m_train = " + str(m_train))
+print ("Number of testing examples: m_test = " + str(m_test))
+print ("Height/Width of each image: num_px = " + str(num_px))
+print ("Each image is of size: (" + str(num_px) + ", " + str(num_px) + ", 3)")
+print ("train_set_x shape: " + str(train_set_x_orig.shape))
+print ("train_set_y shape: " + str(train_set_y.shape))
+print ("test_set_x shape: " + str(test_set_x_orig.shape))
+print ("test_set_y shape: " + str(test_set_y.shape))
+```
+
+输出为：
+
+```
+Number of training examples: m_train = 209
+Number of testing examples: m_test = 50
+Height/Width of each image: num_px = 64
+Each image is of size: (64, 64, 3)
+train_set_x shape: (209, 64, 64, 3)
+train_set_y shape: (1, 209)
+test_set_x shape: (50, 64, 64, 3)
+test_set_y shape: (1, 50)
+```
+
+下一步，为了方便计算，我们需要把形状为`(num_px, num_px, 3)`图片，reshape为`(num_px * num_px * 3, 1)`. 
+这样处理后，每一列数据就表示一副拉平的图片，数据将是m_train列。
+
+Exercise: Reshape the training and test data sets so that images of size `(num_px, num_px, 3)` are flattened into single vectors of shape `(num_px * num_px * 3, 1)`。
+
+A trick when you want to flatten a matrix X of shape `(a,b,c,d)` to a matrix X_flatten of shape `(b*c*d, a)` is to use: 
+
+```python
+X_flatten = X.reshape(X.shape[0], -1).T      # X.T is the transpose of X
+```
+
+```python
+# Reshape the training and test examples
+
+### START CODE HERE ### (≈ 2 lines of code)
+train_set_x_flatten = train_set_x_orig.reshape(train_set_x_orig.shape[0],-1).T
+test_set_x_flatten = test_set_x_orig.reshape(test_set_x_orig.shape[0],-1).T
+### END CODE HERE ###
+
+print ("train_set_x_flatten shape: " + str(train_set_x_flatten.shape))
+print ("train_set_y shape: " + str(train_set_y.shape))
+print ("test_set_x_flatten shape: " + str(test_set_x_flatten.shape))
+print ("test_set_y shape: " + str(test_set_y.shape))
+print ("sanity check after reshaping: " + str(train_set_x_flatten[0:5,0]))
+```
+
+```python
+209
+train_set_x_flatten shape: (12288, 209)
+train_set_y shape: (1, 209)
+test_set_x_flatten shape: (12288, 50)
+test_set_y shape: (1, 50)
+sanity check after reshaping: [17 31 56 22 33]
+```
+
+将数据集的值进行正规化处理：
+
+```python
+train_set_x = train_set_x_flatten/255.
+test_set_x = test_set_x_flatten/255.
+```
+
+<font color='blue'>
+**What you need to remember:**
+
+Common steps for pre-processing a new dataset are:
+- Figure out the dimensions and shapes of the problem `(m_train, m_test, num_px, ...)`
+- Reshape the datasets such that each example is now a vector of size `(num_px * num_px * 3, 1)`
+- "Standardize" the data
+
+## 3 - General Architecture of the learning algorithm ##
+
+It's time to design a simple algorithm to distinguish cat images from non-cat images.
+
+You will build a Logistic Regression, using a Neural Network mindset. The following Figure explains why **Logistic Regression is actually a very simple Neural Network!**
+
+![image](https://user-images.githubusercontent.com/18595935/53785561-33328200-3f5c-11e9-9289-97e3c2c02acc.png)
+
+## 4 - Building the parts of our algorithm ## 
+
+The main steps for building a Neural Network are:
+1. Define the model structure (such as number of input features) 
+2. Initialize the model's parameters
+3. Loop:
+    - Calculate current loss (forward propagation)
+    - Calculate current gradient (backward propagation)
+    - Update parameters (gradient descent)
+
+You often build 1-3 separately and integrate them into one function we call `model()`.
+
+### 4.1 - Helper functions
+
+```python
+# GRADED FUNCTION: sigmoid
+
+def sigmoid(z):
+    ### START CODE HERE ### (≈ 1 line of code)
+    s = 1/(1+np.exp(-z))
+    ### END CODE HERE ###
+    
+    return s
+
+print ("sigmoid([0, 2]) = " + str(sigmoid(np.array([0,2]))))
+```
+
+输出`sigmoid([0, 2]) = [ 0.5         0.88079708]`
+
+### 4.2 - Initializing parameters
+
+**Exercise:** Implement parameter initialization in the cell below. You have to initialize w as a vector of zeros. If you don't know what numpy function to use, look up np.zeros() in the Numpy library's documentation.
+
+```python
+# GRADED FUNCTION: initialize_with_zeros
+
+def initialize_with_zeros(dim):    
+    ### START CODE HERE ### (≈ 1 line of code)
+    w = np.zeros((dim,1))
+    b = 0
+    ### END CODE HERE ###
+
+    assert(w.shape == (dim, 1))
+    assert(isinstance(b, float) or isinstance(b, int))
+    
+    return w, b
+```
+
+```python
+dim = 2
+w, b = initialize_with_zeros(dim)
+print ("w = " + str(w))
+print ("b = " + str(b))
+```
+
+```
+w = [[ 0.]
+ [ 0.]]
+b = 0
+```
+
+### 4.3 - Forward and Backward propagation
+
+Now that your parameters are initialized, you can do the "forward" and "backward" propagation steps for learning the parameters.
+
+**Exercise:** Implement a function `propagate()` that computes the cost function and its gradient.
+
+![image](https://user-images.githubusercontent.com/18595935/53786059-cddf9080-3f5d-11e9-9729-84b6d84f9244.png)
+
+```python
+# GRADED FUNCTION: propagate
+
+def propagate(w, b, X, Y):
+    """
+    Implement the cost function and its gradient for the propagation explained above
+
+    Arguments:
+    w -- weights, a numpy array of size (num_px * num_px * 3, 1)
+    b -- bias, a scalar
+    X -- data of size (num_px * num_px * 3, number of examples)
+    Y -- true "label" vector (containing 0 if non-cat, 1 if cat) of size (1, number of examples)
+
+    Return:
+    cost -- negative log-likelihood cost for logistic regression
+    dw -- gradient of the loss with respect to w, thus same shape as w
+    db -- gradient of the loss with respect to b, thus same shape as b
+    
+    Tips:
+    - Write your code step by step for the propagation. np.log(), np.dot()
+    """
+    
+    m = X.shape[1]
+    
+    # FORWARD PROPAGATION (FROM X TO COST)
+    ### START CODE HERE ### (≈ 2 lines of code)
+    A = sigmoid(np.dot(w.T,X) + b)                # compute activation
+    cost = np.sum(Y*np.log(A) + (1-Y)*np.log(1-A)) * (-1) / m                                 # compute cost
+    ### END CODE HERE ###
+    
+    # BACKWARD PROPAGATION (TO FIND GRAD)
+    ### START CODE HERE ### (≈ 2 lines of code)
+    dw = np.dot(X,(A-Y).T) / m
+    db = np.sum(A-Y) / m
+    ### END CODE HERE ###
+
+    assert(dw.shape == w.shape)
+    assert(db.dtype == float)
+    cost = np.squeeze(cost)
+    assert(cost.shape == ())
+    
+    grads = {"dw": dw,
+             "db": db}
+    
+    return grads, cost
+```
+
+```python
+w, b, X, Y = np.array([[1.],[2.]]), 2., np.array([[1.,2.,-1.],[3.,4.,-3.2]]), np.array([[1,0,1]])
+grads, cost = propagate(w, b, X, Y)
+print ("dw = " + str(grads["dw"]))
+print ("db = " + str(grads["db"]))
+print ("cost = " + str(cost))
+```
+
+输出：
+
+```python
+dw = [[ 0.99845601]
+ [ 2.39507239]]
+db = 0.00145557813678
+cost = 5.80154531939
+```
+
+### 4.4 - Optimization
+- You have initialized your parameters.
+- You are also able to compute a cost function and its gradient.
+- Now, you want to update the parameters using gradient descent.
+
+**Exercise:** Write down the optimization function. The goal is to learn  w and  b  by minimizing the cost function  J . For a parameter  θ , the update rule is  θ=θ−α*dθ , where  α  is the learning rate.
+
+```python
+# GRADED FUNCTION: optimize
+
+def optimize(w, b, X, Y, num_iterations, learning_rate, print_cost = False):
+
+    
+    costs = []
+    
+    for i in range(num_iterations):
+        
+        
+        # Cost and gradient calculation (≈ 1-4 lines of code)
+        ### START CODE HERE ### 
+        grads, cost = propagate(w, b, X, Y)
+        ### END CODE HERE ###
+        
+        # Retrieve derivatives from grads
+        dw = grads["dw"]
+        db = grads["db"]
+        
+        # update rule (≈ 2 lines of code)
+        ### START CODE HERE ###
+        w = w - dw * learning_rate
+        b = b - db * learning_rate
+        ### END CODE HERE ###
+        
+        # Record the costs
+        if i % 100 == 0:
+            costs.append(cost)
+        
+        # Print the cost every 100 training iterations
+        if print_cost and i % 100 == 0:
+            print ("Cost after iteration %i: %f" %(i, cost))
+    
+    params = {"w": w,
+              "b": b}
+    
+    grads = {"dw": dw,
+             "db": db}
+    
+    return params, grads, costs
+```
+
+```python
+params, grads, costs = optimize(w, b, X, Y, num_iterations= 100, learning_rate = 0.009, print_cost = False)
+
+print ("w = " + str(params["w"]))
+print ("b = " + str(params["b"]))
+print ("dw = " + str(grads["dw"]))
+print ("db = " + str(grads["db"]))
+```
+
+```python
+w = [[ 0.19033591]
+ [ 0.12259159]]
+b = 1.92535983008
+dw = [[ 0.67752042]
+ [ 1.41625495]]
+db = 0.219194504541
+```
+
+**使用w和b进行预测：**
+
+![image](https://user-images.githubusercontent.com/18595935/53787037-dd140d80-3f60-11e9-832b-2e1febea2ad1.png)
+
+```python
+# GRADED FUNCTION: predict
+
+def predict(w, b, X):
+    '''
+    Predict whether the label is 0 or 1 using learned logistic regression parameters (w, b)
+    
+    Arguments:
+    w -- weights, a numpy array of size (num_px * num_px * 3, 1)
+    b -- bias, a scalar
+    X -- data of size (num_px * num_px * 3, number of examples)
+    
+    Returns:
+    Y_prediction -- a numpy array (vector) containing all predictions (0/1) for the examples in X
+    '''
+    
+    m = X.shape[1]
+    Y_prediction = np.zeros((1,m))
+    w = w.reshape(X.shape[0], 1)
+    
+    # Compute vector "A" predicting the probabilities of a cat being present in the picture
+    ### START CODE HERE ### (≈ 1 line of code)
+    A = sigmoid(np.dot(w.T,X) + b)
+    ### END CODE HERE ###
+    
+    for i in range(A.shape[1]):
+        
+        # Convert probabilities A[0,i] to actual predictions p[0,i]
+        ### START CODE HERE ### (≈ 4 lines of code)
+        if(A[0,i] > 0.5):
+            Y_prediction[0,i] = 1
+        else:
+            Y_prediction[0,i] = 0
+        ### END CODE HERE ###
+    
+    assert(Y_prediction.shape == (1, m))
+    
+    return Y_prediction
+```
+
+```python
+w = np.array([[0.1124579],[0.23106775]])
+b = -0.3
+X = np.array([[1.,-1.1,-3.2],[1.2,2.,0.1]])
+print ("predictions = " + str(predict(w, b, X)))
+```
+
+输出：`predictions = [[ 1.  1.  0.]]`
+
+### **What to remember:**
+You've implemented several functions that:
+- Initialize (w,b)
+- Optimize the loss iteratively to learn parameters (w,b):
+    - computing the cost and its gradient 
+    - updating the parameters using gradient descent
+- Use the learned (w,b) to predict the labels for a given set of examples
+
+
+## 5 - Merge all functions into a model
+
+You will now see how the overall model is structured by putting together all the building blocks (functions implemented in the previous parts) together, in the right order.
+
+**Exercise:** Implement the model function. Use the following notation:
+    - Y_prediction_test for your predictions on the test set
+    - Y_prediction_train for your predictions on the train set
+    - w, costs, grads for the outputs of optimize()
+
+```python
+# GRADED FUNCTION: model
+
+def model(X_train, Y_train, X_test, Y_test, num_iterations = 2000, learning_rate = 0.5, print_cost = False):
+    """
+    Builds the logistic regression model by calling the function you've implemented previously
+    
+    Arguments:
+    X_train -- training set represented by a numpy array of shape (num_px * num_px * 3, m_train)
+    Y_train -- training labels represented by a numpy array (vector) of shape (1, m_train)
+    X_test -- test set represented by a numpy array of shape (num_px * num_px * 3, m_test)
+    Y_test -- test labels represented by a numpy array (vector) of shape (1, m_test)
+    num_iterations -- hyperparameter representing the number of iterations to optimize the parameters
+    learning_rate -- hyperparameter representing the learning rate used in the update rule of optimize()
+    print_cost -- Set to true to print the cost every 100 iterations
+    
+    Returns:
+    d -- dictionary containing information about the model.
+    """
+    
+    ### START CODE HERE ###
+    
+    # initialize parameters with zeros (≈ 1 line of code)
+    w, b = np.zeros((train_set_x.shape[0],train_set_x.shape[1])),0
+
+    # Gradient descent (≈ 1 line of code)
+    parameters, grads, costs = optimize(w, b, X_train, Y_train, num_iterations, learning_rate, print_cost = False)
+    
+    # Retrieve parameters w and b from dictionary "parameters"
+    w = parameters["w"]
+    b = parameters["b"]
+    
+    # Predict test/train set examples (≈ 2 lines of code)
+    Y_prediction_test = predict(w, b, X_test)
+    Y_prediction_train = predict(w, b, X_train)
+
+    ### END CODE HERE ###
+
+    # Print train/test Errors
+    print("train accuracy: {} %".format(100 - np.mean(np.abs(Y_prediction_train - Y_train)) * 100))
+    print("test accuracy: {} %".format(100 - np.mean(np.abs(Y_prediction_test - Y_test)) * 100))
+
+    
+    d = {"costs": costs,
+         "Y_prediction_test": Y_prediction_test, 
+         "Y_prediction_train" : Y_prediction_train, 
+         "w" : w, 
+         "b" : b,
+         "learning_rate" : learning_rate,
+         "num_iterations": num_iterations}
+    
+    return d
+```
+
+```python
+d = model(train_set_x, train_set_y, test_set_x, test_set_y, num_iterations = 2000, learning_rate = 0.005, print_cost = True)
+```
+
+**What to remember from this assignment:**
+1. Preprocessing the dataset is important.
+2. You implemented each function separately: initialize(), propagate(), optimize(). Then you built a model().
+3. Tuning the learning rate (which is an example of a "hyperparameter") can make a big difference to the algorithm. You will see more examples of this later in this course!
