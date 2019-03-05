@@ -10,6 +10,53 @@ tags: DeepLearning Coursera
 
 # 0. 小结
 
+1. 线性回归主要用来解决连续值预测的问题，逻辑回归用来解决分类的问题，输出的属于某个类别的概率。
+2. sigmoid函数用于将结果处理成概率，最终得到0-1的值。
+3. 损失函数针对单个数据集，预测结果与理想结果的偏离。
+4. 代价函数，针对所有数据集，求其损失函数的平均值，反映的是其参数w和b成本，要找到合适的参数w和b，使得代价函数值最小。
+5. 梯度下降是一种方法，通过梯度下降找到代价函数值最低的点，代价函数是凸函数，即只有一最低点，通过不断迭代求导数，更新w和b可以最终得到最低点值。
+6. 导数就是函数的斜率，如果是线性函数则导数恒定，如果是非线性，则需要考虑x所在位置，比如抛物线。
+7. numpy中的向量化与广播，可以加快运行速度。
+8. 逻辑回归实现：
+ - 获取训练,验证数据集，并探索(数据量，数据维度等)
+ - 改变数据维度，方便后续计算`X_flatten = X.reshape(X.shape[0], -1).T`
+ - 数据正规化处理`train_set_x = train_set_x_flatten/255.`
+ - 求最合适的w和b `optimize(w, b, X, Y, num_iterations, learning_rate, print_cost = False):`
+   - 反向传播求梯度和损失值 `propagate(w, b, X, Y)`
+   - 根据梯度更新w和b
+   - 循环完毕定义的叠加次数，最终得到w和b
+ - 根据上面的w和b进行预测 `predict(w, b, X)`
+
+
+# 0-1. 关于点积与叉积
+
+向量是由n个实数组成的一个n行1列（n*1）或一个1行n列（1*n）的有序数组；
+
+- 向量的点乘,也叫向量的内积、数量积，对两个向量执行点乘运算，就是对这两个向量对应位一一相乘之后求和的操作，点乘的结果是一个标量。
+- 两个向量的叉乘，又叫向量积、外积、叉积，叉乘的运算结果是一个向量而不是一个标量。并且两个向量的叉积与这两个向量组成的坐标平面垂直。
+
+```python
+import numpy as np
+
+x1 = np.array([1,2])
+x2 = np.array([3,4])
+
+dot = np.dot(x1,x2)
+mul = np.multiply(x1,x2)
+mul2 = x1 * x2
+
+print(dot)
+print(mul)
+print(mul2)
+```
+
+```
+11
+[3 8]
+[3 8]
+```
+
+
 # 1. 二元分类
 
 二元分类问题中，结果是一个离散的值，比如肿瘤是良性还是恶性。
@@ -378,22 +425,13 @@ Welcome to your first assignment. This exercise gives you a brief introduction t
 **Instructions:**
 - You will be using Python 3.
 - Avoid using for-loops and while-loops, unless you are explicitly told to do so.
-- Do not modify the (# GRADED FUNCTION [function name]) comment in some cells. Your work would not be graded if you change this. Each cell containing that comment should only contain one function.
-- After coding your function, run the cell right below it to check if your result is correct.
 
-**After this assignment you will:**
-- Be able to use iPython Notebooks
-- Be able to use numpy functions and numpy matrix/vector operations
-- Understand the concept of "broadcasting"
-- Be able to vectorize code
 
-Let's get started!
-
-## 1 - Building basic functions with numpy ##
+## 1. 使用numpy完成基本功能
 
 Numpy is the main package for scientific computing in Python. It is maintained by a large community (www.numpy.org). In this exercise you will learn several key numpy functions such as np.exp, np.log, and np.reshape. You will need to know how to use these functions for future assignments.
 
-### 1.1 - sigmoid function, np.exp() ###
+### 1.1. sigmoid function, np.exp()
 
 Before using np.exp(), you will use math.exp() to implement the sigmoid function. You will then see why np.exp() is preferable to math.exp().
 
@@ -405,16 +443,6 @@ Before using np.exp(), you will use math.exp() to implement the sigmoid function
 import math
 
 def basic_sigmoid(x):
-    """
-    Compute sigmoid of x.
-
-    Arguments:
-    x -- A scalar
-
-    Return:
-    s -- sigmoid(x)
-    """
-    
     ### START CODE HERE ### (≈ 1 line of code)
     s = 1 / (1 + math.exp(-x))
     ### END CODE HERE ###
@@ -453,20 +481,9 @@ print (x + 3)
 ![image](https://user-images.githubusercontent.com/18595935/53780472-070d0600-3f48-11e9-9ac7-4e352eae13d8.png)
 
 ```python
-# GRADED FUNCTION: sigmoid
-
-import numpy as np # this means you can access numpy functions by writing np.function() instead of numpy.function()
+import numpy as np 
 
 def sigmoid(x):
-    """
-    Compute the sigmoid of x
-
-    Arguments:
-    x -- A scalar or numpy array of any size
-
-    Return:
-    s -- sigmoid(x)
-    """
     
     ### START CODE HERE ### (≈ 1 line of code)
     s = s = 1 / (1 + np.exp(-x))
@@ -482,7 +499,7 @@ sigmoid(x)
 array([ 0.73105858,  0.88079708,  0.95257413])
 ```
 
-### 1.2 - Sigmoid gradient
+### 1.2 - Sigmoid 梯度
 
 As you've seen in lecture, you will need to compute gradients to optimize loss functions using backpropagation. Let's code your first gradient function.
 
@@ -492,20 +509,9 @@ As you've seen in lecture, you will need to compute gradients to optimize loss f
 # GRADED FUNCTION: sigmoid_derivative
 
 def sigmoid_derivative(x):
-    """
-    Compute the gradient (also called the slope or derivative) of the sigmoid function with respect to its input x.
-    You can store the output of the sigmoid function into variables and then use it to calculate the gradient.
-    
-    Arguments:
-    x -- A scalar or numpy array
-
-    Return:
-    ds -- Your computed gradient.
-    """
-    
     ### START CODE HERE ### (≈ 2 lines of code)
     s = sigmoid(x)
-    ds = s*(1-s)
+    ds = s*(1-s) # Your computed gradient.
     ### END CODE HERE ###
     
     return ds
@@ -520,7 +526,7 @@ print ("sigmoid_derivative(x) = " + str(sigmoid_derivative(x)))
 sigmoid_derivative(x) = [ 0.19661193  0.10499359  0.04517666]
 ```
 
-### 1.3 - Reshaping arrays ###
+### 1.3 - Reshaping arrays
 
 Two common numpy functions used in deep learning are [np.shape](https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.shape.html) and [np.reshape()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.reshape.html). 
 - X.shape is used to get the shape (dimension) of a matrix/vector X. 
@@ -635,7 +641,8 @@ normalizeRows(x) = [[ 0.          0.6         0.8       ]
  [ 0.13736056  0.82416338  0.54944226]]
 ```
 
-### 1.5 - Broadcasting and the softmax function ####
+### 1.5 - Broadcasting and the softmax function 
+
 A very important concept to understand in numpy is "broadcasting". It is very useful for performing mathematical operations between arrays of different shapes. For the full details on broadcasting, you can read the official [broadcasting documentation](http://docs.scipy.org/doc/numpy/user/basics.broadcasting.html).
 
 **Exercise**: Implement a softmax function using numpy. You can think of softmax as a normalizing function used when your algorithm needs to classify two or more classes. You will learn more about softmax in the second course of this specialization.
@@ -846,8 +853,6 @@ print("L2 = " + str(L2(yhat,y)))
 
 # 练习2：Logistic Regression with a Neural Network mindset
 
-In this notebook you will build your first image recognition algorithm. You will build a cat classifier that recognizes cats with 70% accuracy!
-
 As you keep learning new techniques you will increase it to 80+ % accuracy on cat vs. non-cat datasets. By completing this assignment you will:
 - Work with logistic regression in a way that builds intuition relevant to neural networks.
 - Learn how to minimize the cost function.
@@ -863,7 +868,7 @@ As you keep learning new techniques you will increase it to 80+ % accuracy on ca
     - Using an optimization algorithm (gradient descent) 
 - Gather all three functions above into a main model function, in the right order.
 
-## 1 - Packages ##
+## 1 - Packages
 
 First, let's run the cell below to import all the packages that you will need during this assignment. 
 - [numpy](www.numpy.org) is the fundamental package for scientific computing with Python.
@@ -883,7 +888,7 @@ from lr_utils import load_dataset
 %matplotlib inline
 ```
 
-## 2 - Overview of the Problem set ##
+## 2 - Overview of the Problem set
 
 **Problem Statement**: You are given a dataset ("data.h5") containing:
     - a training set of m_train images labeled as cat (y=1) or non-cat (y=0)
@@ -998,7 +1003,7 @@ Common steps for pre-processing a new dataset are:
 - Reshape the datasets such that each example is now a vector of size `(num_px * num_px * 3, 1)`
 - "Standardize" the data
 
-## 3 - General Architecture of the learning algorithm ##
+## 3 - General Architecture of the learning algorithm
 
 It's time to design a simple algorithm to distinguish cat images from non-cat images.
 
