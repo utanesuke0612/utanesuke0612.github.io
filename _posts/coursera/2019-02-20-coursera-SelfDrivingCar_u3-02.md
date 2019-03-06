@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Coursera-Self-Driving Cars-U3-02-Detection, Description and Matching
+title: Coursera-Self-Driving Cars-U3-02-Detection, Description and Matching 检测,描述和匹配
 date: 2019-02-20 023:02:00
 categories: self-driving(自動運転)
 tags: self-driving Coursera

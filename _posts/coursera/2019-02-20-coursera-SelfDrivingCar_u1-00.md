@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Coursera-Self-Driving Cars-U1-00-第一部分 无人车入门
+title: Coursera-Self-Driving Cars-课程概要
 date: 2019-02-20 01:00:00
 categories: self-driving(自動運転)
 tags: self-driving Coursera
@@ -18,12 +18,12 @@ Throughout the courses, we'll show you real-world data and scenarios from our re
 
 本套自动驾驶学习课程，共有4个单元:
 
-1. [**Introduction to Self-Driving Cars**](https://www.coursera.org/learn/intro-self-driving-cars/home/welcome)
+1. [Introduction to Self-Driving Cars](https://www.coursera.org/learn/intro-self-driving-cars/home/welcome)
 2. [State Estimation and Localization for Self-Driving Cars](https://www.coursera.org/learn/state-estimation-localization-self-driving-cars/home/welcome)
 3. [Visual Perception for Self-Driving Cars](https://www.coursera.org/learn/visual-perception-self-driving-cars)
 4. [Motion Planning for Self-Driving Cars](https://www.coursera.org/learn/motion-planning-self-driving-cars)
 
-通过上面的系列课程，达到如下目的：
+**通过上面的系列课程，达到如下目的**：
 
 1. Introduction to Self-Driving Cars **无人车入门**
 	- Design a basic hardware system
@@ -50,15 +50,10 @@ Throughout the courses, we'll show you real-world data and scenarios from our re
 
 Autonomous driving is a constantly evolving and changing field. So, keeping up not only with self-driving knowledge but also robotics, AI, and deep learning will help you keep your technical skills sharp. 
 
-本章，也就是上面第一个部分**Introduction to Self-Driving Cars**，分为如下章节(每周一个章节)：
-- Module 0: Welcome to the Self-Driving Cars Specialization!
-- Module 1: The Requirements for Autonomy 
-- Module 2: Self-Driving Hardware and Software Architectures 无人车的硬件软件架构 
-- Module 3: Safety Assurance for Autonomous Vehicles 无人车的安全保障
-- Module 4: Vehicle Dynamic Modeling 车辆动态建模
-- Module 5: Vehicle Longitudinal Control 车辆纵向控制
-- Module 6: Vehicle Lateral Control 车辆横向控制
-- Module 7: Putting it all together
+**课程目录：**
+
+![image](https://user-images.githubusercontent.com/18595935/53847896-c7045c80-3ff5-11e9-9cc4-554ecedacf47.png)
+
 
 # 1. 专业术语
 
