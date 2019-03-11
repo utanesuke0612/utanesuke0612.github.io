@@ -21,6 +21,8 @@ tags: DeepLearning Coursera
 
 # 2. 神经网络的表现
 
+在神经网络中带有监督学习的训练集，带有输入的X值，输出Y值。在输入和输出中间的是隐藏层。
+
 ![image](https://user-images.githubusercontent.com/18595935/53811160-1322b300-3f9c-11e9-8ac8-6721d326c64c.png)
 
 # 3. 计算神经网络的输出
@@ -29,8 +31,6 @@ tags: DeepLearning Coursera
 ![image](https://user-images.githubusercontent.com/18595935/53811226-377e8f80-3f9c-11e9-8572-90eaeeba44d8.png)
 ![image](https://user-images.githubusercontent.com/18595935/53811255-45341500-3f9c-11e9-86e2-51e348a7fd95.png)
 ![image](https://user-images.githubusercontent.com/18595935/53811274-50874080-3f9c-11e9-96c7-daa00ea9c98d.png)
-
-
 
 # 4. 多样本向量化
 
