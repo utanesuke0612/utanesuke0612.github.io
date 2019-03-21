@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Coursera-DeepLearning-U5-01-递归神经网络
-date: 2019-05-18 05:01:00
+date: 2019-05 まだ-18 05:01:00
 categories: DeepLearning
 tags: DeepLearning Coursera
 ---

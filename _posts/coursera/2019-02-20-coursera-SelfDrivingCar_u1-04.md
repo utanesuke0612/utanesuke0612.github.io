@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Coursera-Self-Driving Cars-U1-04-Vehicle Dynamic Modeling(车辆动态建模)
-date: 2019-05-20 01:04:10
+date: 2019-05 まだ-20 01:04:10
 categories: self-driving(自動運転)
 tags: self-driving Coursera
 ---

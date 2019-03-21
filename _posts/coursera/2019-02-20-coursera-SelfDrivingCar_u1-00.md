@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Coursera-Self-Driving Cars-课程概要
-date: 2019-05-20 01:00:00
+date: 2019-05 まだ-20 01:00:00
 categories: self-driving(自動運転)
 tags: self-driving Coursera
 ---

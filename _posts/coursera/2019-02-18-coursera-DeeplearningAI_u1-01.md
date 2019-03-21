@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Coursera-DeepLearning-U1-01-深度学习入门
-date: 2019-05-18 01:01:00
+date: 2019-05 まだ-18 01:01:00
 categories: DeepLearning
 tags: DeepLearning Coursera
 ---

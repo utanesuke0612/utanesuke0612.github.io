@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Coursera-DeepLearning-U4-01-卷积神经网络基础
-date: 2019-05-18 04:01:00
+date: 2019-05 まだ-18 04:01:00
 categories: DeepLearning
 tags: DeepLearning Coursera
 ---

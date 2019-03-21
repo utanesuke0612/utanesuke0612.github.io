@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Coursera-Self-Driving Cars-U1-05-Vehicle Longitudinal Control(车辆纵向控制)
-date: 2019-05-20 01:05:00
+date: 2019-05 まだ-20 01:05:00
 categories: self-driving(自動運転)
 tags: self-driving Coursera
 ---

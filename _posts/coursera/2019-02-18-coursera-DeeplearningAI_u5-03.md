@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Coursera-DeepLearning-U5-03-序列模型与注意机制
-date: 2019-05-18 05:03:00
+date: 2019-05 まだ-18 05:03:00
 categories: DeepLearning
 tags: DeepLearning Coursera
 ---
