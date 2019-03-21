@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Coursera-DeepLearning-U2-01-深度学习实践
-date: 2019-02-18 02:01:00
+date: 2019-05-18 02:01:00
 categories: DeepLearning
 tags: DeepLearning Coursera
 ---

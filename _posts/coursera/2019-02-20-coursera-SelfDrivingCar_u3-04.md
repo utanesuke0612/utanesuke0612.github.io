@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Coursera-Self-Driving Cars-U3-04-2D Object Detection 2D物体检测
-date: 2019-02-20 03:04:00
+date: 2019-05-20 03:04:00
 categories: self-driving(自動運転)
 tags: self-driving Coursera
 ---

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Coursera-DeepLearning-U3-01-机器学习策略-1
-date: 2019-02-18 03:01:00
+date: 2019-05-18 03:01:00
 categories: DeepLearning
 tags: DeepLearning Coursera
 ---

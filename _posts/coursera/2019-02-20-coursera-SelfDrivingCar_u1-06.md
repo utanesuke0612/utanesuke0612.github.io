@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Coursera-Self-Driving Cars-U1-06-Vehicle Lateral Control(车辆横向控制)
-date: 2019-02-20 01:06:00
+date: 2019-05-20 01:06:00
 categories: self-driving(自動運転)
 tags: self-driving Coursera
 ---

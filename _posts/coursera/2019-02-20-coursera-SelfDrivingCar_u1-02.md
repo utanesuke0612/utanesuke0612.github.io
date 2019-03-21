@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Coursera-Self-Driving Cars-U1-02-Self-Driving Hardware and Software Architectures(无人车软硬件架构)
-date: 2019-02-20 01:02:00
+date: 2019-05-20 01:02:00
 categories: self-driving(自動運転)
 tags: self-driving Coursera
 ---
