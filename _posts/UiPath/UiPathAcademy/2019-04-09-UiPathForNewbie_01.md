@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 小白学UiPath-01-RPA基础
+title: 小白学UiPath-01-RPA入门
 date: 2019-04-08 01:01:01
 categories: RPA
 tags: RPA
@@ -11,7 +11,7 @@ tags: RPA
 > 机缘巧合进入了UiPath工作，这个RPA领域的领头羊，冥冥之中注定的吧，自己这两年来一直为进一家自动驾驶工作而努力，结果一个星期的时间，就从第一次听说RPA，到签约这家公司，这就是缘分。自己的第一个小目标，就是一年内升为**RPA高级顾问**，成为RPA领域的专家。
 
 ![image](https://user-images.githubusercontent.com/18595935/55791438-7357c800-5af9-11e9-86c4-41ae0653c1a1.png)
-> <<小白学UiPath>>系列主要根据上面的书本整理而成。
+> <<小白学UiPath>>系列根据上书以及UiPath官网课程整理而成。
 
 本篇文章中，主要介绍：
 1. 什么是RPA？RPA有什么作用？
@@ -47,15 +47,15 @@ RPA给公司带来的主要好处在于能够降低成本、提高质量和缩�
 
 **UiPath主要具备如下特征：**
 
-1. 操作简单
+- 操作简单
 
 UiPath通过可视化的拖拽以及录像功能，使得其操作非常简单。
 
-2. 精度高
+- 精度高
 
 能精确定位每次操作的控件，比如button/Edit box等。
 
-3. 应用范围
+- 应用范围广泛
 
 UiPath既能进行简单的作业，也能应用到大规模的复杂作业上，有桌面版和服务器版两种版本，满足中小企业以及大型企业的需求。
 
@@ -127,14 +127,53 @@ UiPath既能进行简单的作业，也能应用到大规模的复杂作业上�
 5. 保存并终止basic controller，返回UiPath主界面，点击保存，这样就得到了一个自动录制的Project。
 
 ![image](https://user-images.githubusercontent.com/18595935/56077620-55e86e00-5e19-11e9-8c12-be62e57c62d9.png)
+> 上图就是一个录制的workflow，可以点击其中的activity进行修改。
+
 
 在主界面中按下`実行`后，能自动执行刚才的workflow，能在记事本中自动录入文字，录入后如下图：
 
 ![image](https://user-images.githubusercontent.com/18595935/56077651-b11a6080-5e19-11e9-9ee0-67e5fb6f34c0.png)
 
+> 执行button按下后，即使当时没有符合条件的软件，该robot貌似在后台监控，如果出现了上面workflow中的记事本文件，就会触发执行。
+
 ## 4.2 手动Recording与执行
 
+因为自动Recording只能记录简单的操作，对于软件的启动和终止，右键按下等操作只能通过手动Recording完成。
 
+例如上面的自动Recording的workflow，其记事本的启动，必须要手动完成。通过下面的方式完成自动Recording：
+
+- UiPath Studio的编辑主界面中，点击 recording → basic。
+- 打开记事本
+- Basic Recording中，点击 Start app 开始进行录制。
+  ![image](https://user-images.githubusercontent.com/18595935/56081143-eb4d2780-5e44-11e9-8a1f-0633fe3b326a.png)
+- 选取要录制的记事本，会记录下当前记事本的信息，如下图：
+  ![image](https://user-images.githubusercontent.com/18595935/56081112-82fe4600-5e44-11e9-88c3-74cd93b7b652.png)
+- Basic Recording中，点击 Type，然后输入要录入的文字
+- 保存并终止basic Recording，返回UiPath主界面，点击保存，这样就得到了一个手动录制的Project。
+
+运行上面录制的project后，能自动启动一个记事本文件，然后输入录入完毕的文字。
+
+## 4.3 编辑录制后的project
+
+可以将录制后的project进行修改，比如复制一个已有的activity，修改activity中的输入值等。
+
+![image](https://user-images.githubusercontent.com/18595935/56081263-46334e80-5e46-11e9-85bb-e3e7fb9620a3.png)
+
+
+# 5. 更多Recording选项
+
+## 5.1 时间差Recording
+
+## 5.2 使用hotkey
+
+## 5.3 获取文件名
+
+## 5.4 website检索
+
+## 5.5 recording与programing的差别
+
+
+# 6. Programing
 
 
 
