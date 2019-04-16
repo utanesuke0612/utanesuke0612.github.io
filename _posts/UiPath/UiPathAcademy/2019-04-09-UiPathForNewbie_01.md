@@ -20,6 +20,15 @@ tags: RPA
 
 # 0. 总结
 
+本篇根据上面的书整理而成，介绍RPA的组成，UiPath的基本操作，Project的作成方式(自动,手动,Programming)等，以及录制方法：
+1. 时间差Recording
+2. 使用Hotkey
+3. 获取文件名
+4. Website检索
+5. InputDialog及MessageBox，接收用户输入
+6. 使用变量
+7. 使用ActivityPackage自动化Excel/Word
+
 # 1. 什么是RPA？
 
 如果不是在相关领域工作的人，听到RPA估计也是一脸的懵逼，RPA是*Robotic Process Automation*的缩写，即机器人业务自动化，使用RPA的主要目的，是将人类中PC重复作业中解放出来，进行一些更有创造性的事情。
