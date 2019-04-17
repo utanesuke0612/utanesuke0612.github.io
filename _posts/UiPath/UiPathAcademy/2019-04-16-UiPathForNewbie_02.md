@@ -116,7 +116,7 @@ UiPath中通过team选项，可以连接各种[source管理系统](https://studi
 
 # 2. 入门知识
 
-# 2.1 变量与数据类型
+# 2.2 变量与数据类型
 
 - **変数の管理**
 
@@ -127,37 +127,168 @@ UiPath中通过team选项，可以连接各种[source管理系统](https://studi
 
 ![image](https://user-images.githubusercontent.com/18595935/56212527-25146d00-6095-11e9-8148-8b43112bfcd1.png)
 
-
 - **workflow设计**
 
+> 参考 [here](https://studio.uipath.com/lang-ja/docs/workflow-design)
 
+各种activity：
+
+1. 条件分支if
+2. If...Else If 多条件分支
+3. VB If函数
+4. Switch Activity
+5. Flow Switch
+
+关于数据，从使用范围来区分，可以分为参数(引数)和变量(変数)：
+- 参数：主要目的是将数据从一个workflow传递给别的workflow
+- 变量：在一个单一的workflow内，捆绑在一个容器上
+
+关于命名规则：
+1. 变量：使用大写字母开头的驼峰命名法，如FirstName
+2. 参数：添加表明参数类似的前缀，使用驼峰命名，例如in_FileName
+3. activity名：比如「Click the Save Button」将操作的动作作为关键词包含在标题中
+4. workflow名：所有的workflow名中，包含workflow要进行的操作，比如GetTransactionData。
 
 - **変数パネル**
 
-- **ジェネリック値変数**
+参考[here](https://studio.uipath.com/lang-ja/docs/the-variables-panel)
+
+- **ジェネリック値(GenericValue)変数**
+
+这是一种通用变量，根据执行的action，能自动变换成其他数据类型。
+
+![image](https://user-images.githubusercontent.com/18595935/56263297-56d11680-611d-11e9-9819-5fa74bff032b.png)
 
 - **テキスト変数**
 
+![image](https://user-images.githubusercontent.com/18595935/56263523-39507c80-611e-11e9-8ec3-560ce39dda13.png)
+
 - **True または False 変数**
 
+参考[here](https://studio.uipath.com/lang-ja/docs/true-or-false-variables)
+
+![image](https://user-images.githubusercontent.com/18595935/56264849-ba117780-6122-11e9-9a78-82b0774c47f0.png)
+
 - **数字変数**
-
 - **配列変数**
-
 - **日付および時刻変数**
-
 - **データテーブル変数**
-
 - **引数の管理**
-
 - **引数パネル**
-
 - **引数の使用**
-
 - **インポートした名前空間について**
-
 - **新しい Namespaces のインポート**
+> [here](https://academy.uipath.com/learn/course/457/play/4135/ressun2-xiang-xi-qing-bao;lp=21)
+> 
+> 
 
+## 2.3 控制flow
+
+- if / Then / Else
+- Decision
+- While / Do while / For Each
+- FlowChart内部的重复构造
+- workflow内部使用vb.net
+
+## 2.4 条件分支
+
+- Flow Decision，在FlowChart中使用
+
+![image](https://user-images.githubusercontent.com/18595935/56266358-f2b35000-6126-11e9-9316-c01800d8e2d8.png)
+
+- If，在Sequence中使用
+
+![image](https://user-images.githubusercontent.com/18595935/56266384-03fc5c80-6127-11e9-9fa3-933536619efa.png)
+
+1. 新建一个flowchart，命名masterflowchart
+2. 在start后面，上面的masterflowchart内部，再新建一个flowchart，命名为具体要做的操作，如"闰年check"
+3. 在闰年check flowchart中，添加变量year/int32
+4. 在start后添加input dialog，将result设置为year变量接收
+4. 添加flow decision，添加条件 year mod 4 = 0 ，即除以4是否为0
+5. 添加两个messagebox，分布连接到flow decision的true和false
+6. 在messagebox中，分布输入对应要显式的消息
+
+![image](https://user-images.githubusercontent.com/18595935/56267377-9aca1880-6129-11e9-8c05-f5fc6cd5701d.png)
+
+上面是flowchart,下面是sequence的情况：
+
+![image](https://user-images.githubusercontent.com/18595935/56267712-918d7b80-612a-11e9-979f-8808feb8bc6d.png)
+
+需要将上面的Flow Decision替换成If判断。
+
+## 2.5 循环loop
+
+- while():
+- do{}while():
+
+1. 添加Do While到Sequence中
+2. 按住Ctrl，将input Dialog和If加入到Do while中
+3. Do while中添加判断条件 **year mod 4 <> 0**
+
+如下图：
+
+![image](https://user-images.githubusercontent.com/18595935/56288322-7ede6b00-6159-11e9-8fd0-14ba48777f7f.png)
+
+如上就实现了do while的判断，只要符合上面的条件，就不断循环。
+
+- For...Each()循环
+
+![image](https://user-images.githubusercontent.com/18595935/56291164-b819d980-615f-11e9-8232-ea3a672ba702.png)
+
+下图是使用For Each循环：
+1. 先弹出文件选择对话框
+2. 选择文件夹后，将该文件夹内的文件列表打印出来
+
+![image](https://user-images.githubusercontent.com/18595935/56291663-a422a780-6160-11e9-946e-9b9869073670.png)
+
+## 2.6 实践篇(推测game)
+
+1. 在MasterFlowChart中添加一个推測Game FlowChart
+2. 添加Assign,添加RandomNumber = new Random().next(0,1000)
+3. 添加InputDialog, 将其输出设置为GuessNumber变量
+4. 添加FlowDecision, 条件是GuessNumber = RandomNumber
+5. Ture的情况下，指向MessageBox
+6. False的情况下，继续添加一个FlowDecision，条件是GuessNumber < RandomNumber
+7. 上面FlowDecision的True和False，分别指向对应的Assign，在Assign中使用Hint = "请输入更大的数字"和Hint = "请输入更小的数字"
+8. 将上述InputDiaglog中的Text修改为Hint
+9. 另外，将上面的两个Hint的Assign指向Input Dialog
+
+![image](https://user-images.githubusercontent.com/18595935/56293854-e3eb8e00-6164-11e9-9c55-4900dc4d5a1d.png)
+
+下面是执行过后的图：
+
+![image](https://user-images.githubusercontent.com/18595935/56293999-21e8b200-6165-11e9-9c3b-a0c6e6ec5a21.png)
+
+其中800-785，是inputDialog的Title，800表示GuessNumber，785表示RandomNumber，需要设置InputDialog的Title为`GuessNumber.ToString + "-" + RandomNumber.ToString`。
+
+
+## 2.7 小结
+
+- sequence
+- flowchart
+- 控制Flow
+- 代入Assign
+- 延迟Delay
+- Do While
+- If
+- Switch
+- While
+- For Each
+- Break 循环中断
+
+## 2.8 练习1
+
+完成如下的任务：
+1. 使用InputBox询问 "1+1=2?"
+2. 如果是Yes，则将打开NotePad.exe，并写入“正解”，否则写入"不正解"
+
+![image](https://user-images.githubusercontent.com/18595935/56297528-7000b400-616b-11e9-904f-44d9e0e1266f.png)
+
+写入内容到NotePad.exe作为一个子sequence：
+
+![image](https://user-images.githubusercontent.com/18595935/56297590-90307300-616b-11e9-8882-a07f49e44d85.png)
+
+## 2.9 练习2
 
 
 
