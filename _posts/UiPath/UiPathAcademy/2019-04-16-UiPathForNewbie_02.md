@@ -41,21 +41,18 @@ If UiPath is new to you, we strongly recommend completing **the RPA Developer Ad
 ## 1.2 快捷键
 
 - **文件管理：**
-
 1. Ctrl + Shift + N - 新建新的Process
 2. Ctrl + O - 打开以前作成的workflow
 3. Ctrl + L - 打开log文件所在的文件夹
 4. Ctrl + S - 保存当前的workflow
 5. Ctrl + Shift + S - 保存当前所有的workflow
 6. Ctrl + Tab - 当前所有打开的workflow之间移动
-   ![iamge](https://files.readme.io/9f12fbc-crtlTab.png)
 
-- **注释：**
+![iamge](https://files.readme.io/9f12fbc-crtlTab.png)
 
-通过Ctrl + D 将选中的activity注释掉，通过Ctrl + E 将注释去掉
+- **注释：**通过Ctrl + D 将选中的activity注释掉，通过Ctrl + E 将注释去掉
 
 - **调试：**
-
 1. F7 - 针对打开的workflow进行调试
 2. F8 - 检查当前的workflow是否有错误
 3. F9 - 给选中的workflow设置调试断点
@@ -64,7 +61,6 @@ If UiPath is new to you, we strongly recommend completing **the RPA Developer Ad
 6. Shift + F11 - 调试的时候，跳过某个activity
 
 - **录制：**
-
 1. Alt + Ctrl + W - 打开Web Recording工具栏
 2. Alt + Ctrl + B - 打开Basic Recording工具栏
 3. Alt + Ctrl + C - 打开Citrix Recording工具栏
@@ -74,20 +70,17 @@ If UiPath is new to you, we strongly recommend completing **the RPA Developer Ad
 7. F4 - 記録する UI フレームワークを 既定値、AA、および UIA から選択できます
 
 - **workflow的执行：**
-
 1. F5 - 开始执行当前的workflow
 2. Pause - 暂时中止
 3. F12 - 停止执行当前workflow
 
 - **選択したアクティビティ：**
-
 1. Ctrl + T - アクティビティを [トライキャッチ (Try Catch)] アクティビティの [Try] セクション内に配置します。
 2. Ctrl + N - 新しいシーケンスダイアグラムを現在のプロジェクトに作成します。
 3. Ctrl + C - 复制一个activity
 4. Ctrl + V - 粘贴一个activity
 
 - **其他：**
-
 1. F1 - 帮助
 2. Alt + Ctrl + F - 检索
 3. Ctrl + P - 启动Package管理
@@ -95,7 +88,6 @@ If UiPath is new to you, we strongly recommend completing **the RPA Developer Ad
 ## 1.3 automation project
 
 制作了一个简单的根据输入判断，然后显示messagebox的flowchart，如下：
-
 ![image](https://user-images.githubusercontent.com/18595935/56189060-021c9580-6062-11e9-8ccf-11f6f0dd855e.png)
 
 - inputdialog中的Output Result设置为变量name (使用ctrl+k按下)
@@ -125,7 +117,6 @@ UiPath中通过team选项，可以连接各种[source管理系统](https://studi
 # 2. 入门知识
 
 # 2.1 变量与数据类型
-
 
 - **変数の管理**
 
