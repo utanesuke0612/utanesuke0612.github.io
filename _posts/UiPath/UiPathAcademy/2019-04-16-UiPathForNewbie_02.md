@@ -377,5 +377,59 @@ CSV文件如下：
 
 # 4. recording概要
 
+本篇学习：
+1. 使用recorder添加UI的activity
+2. customize方法
+
+## 4.1 recording功能(basic,desktop基本)
+
+- recording可能的：
+1. 左键按下(button,checkbox,dropdown)
+2. 文字输入
+
+- recording不可的：
+1. shortkey
+2. 修饰key(ctrl+c,ctrl+a,など)
+3. 右键key
+
+下面分别使用basic和desktop的自动recording功能生成的workflow，用于在记事本中输入文字，并修改font：
+
+- basic的自动记录
+
+![image](https://user-images.githubusercontent.com/18595935/56425737-85ebb180-62f0-11e9-91d7-00fee671e977.png)
+
+- desktop的自动记录
+
+![image](https://user-images.githubusercontent.com/18595935/56425744-8edc8300-62f0-11e9-94de-74e4dd237748.png)
+
+
+- 关于basic与desktop的差异：
+
+![image](https://user-images.githubusercontent.com/18595935/56425895-16c28d00-62f1-11e9-98e4-b3820540de84.png)
+
+
+## 4.2 recording功能(basic,desktop应用)
+
+对上面的进行改造，可以根据inputdialog的内容，写入记事本：
+
+![image](https://user-images.githubusercontent.com/18595935/56426248-88e7a180-62f2-11e9-8d0b-233f1a88f0b2.png)
+
+## 4.3 recording功能(web)
+
+访问天气预报网站，检索东京的天气，计算第二天的温度差，如果差高于10°则给予报警。
+
+1. 选择web
+2. web recording中，选择Record，然后选择东京都
+3. 按下ESCkey，停止
+4. 使用Text，copy下最高气温
+5. 使用Text，copy下最低气温
+6. 添加Assign，设置等式`TempDiff = 0+MaxTemp-MinTemp`,这里0表示将结果转变为数值
+7. 使用If进行分支判断
+
+![image](https://user-images.githubusercontent.com/18595935/56429667-b5a1b600-62fe-11e9-8f18-22c936c0c2de.png)
+
+需要注意：OpenBrowser的Type设置为Chrome。
+
+
 
 

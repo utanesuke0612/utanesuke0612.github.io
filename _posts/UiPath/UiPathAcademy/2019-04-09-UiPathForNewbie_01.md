@@ -214,6 +214,7 @@ UiPath既能进行简单的作业，也能应用到大规模的复杂作业上�
 - 按下 Start App，选择文件夹，并在参数栏中输入文件夹路径。
 - 点击 Type→Send hotkey，选择该文件夹后，添加key，ctrl + a。
 - 点击 Click，选择文件夹的「パスのコーピ」。如下图：
+
   ![image](https://user-images.githubusercontent.com/18595935/56108556-77676800-5f87-11e9-881d-7035b6a7529b.png)
 - 启动word，按下 Start App，选择word，并在参数栏中输入`/w`。
 - 点击 Type→Send hotkey，选择word后，添加key，ctrl + v。
