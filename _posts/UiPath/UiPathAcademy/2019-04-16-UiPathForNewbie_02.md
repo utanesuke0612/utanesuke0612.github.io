@@ -290,5 +290,92 @@ UiPath中通过team选项，可以连接各种[source管理系统](https://studi
 
 ## 2.9 练习2
 
+将sequence中添加4个GenericValue，分别为A/B/C/D，计算这4个变量的和：
+
+![image](https://user-images.githubusercontent.com/18595935/56339557-b4329980-61e9-11e9-8e59-8153a0931d36.png)
+
+# 3. 数据操作
+
+本节包含：
+
+- 处理文字列：分割/格式化
+- 根据特定条件，取数据表中特定行
+
+## 3.1 关于数据类型
+
+- 单一型数据: Char / Boolean / Integer / Date
+- 集合型数据: Array / Queue / List / String / Dictionary
+- 表形式数据: DataTable
+
+关于GenericValue型，可以保存各种数据类型，比如String/Boolean/Integer/Date。
+
+GenericValue型能使用的method：
+
+![image](https://user-images.githubusercontent.com/18595935/56291164-b819d980-615f-11e9-8232-ea3a672ba702.png)
+
+**关于Array和List**：
+- Array：其中的元素(可变);元素的个数(不可变)
+- List ：其中的元素(可变);元素的个数(可变)
+
+使用定义的Array和List进行循环，输出到log:
+
+![image](https://user-images.githubusercontent.com/18595935/56341882-63bf3a00-61f1-11e9-94e3-32ebbe3bdf63.png)
+
+**Dictionary<TKey,TValue>:**
+
+![image](https://user-images.githubusercontent.com/18595935/56342342-b3eacc00-61f2-11e9-9c94-38a589478035.png)
+
+## 3.2 文字列操作方式
+
+![image](https://user-images.githubusercontent.com/18595935/56407847-79456a00-62ac-11e9-9b54-9c2b3544b93c.png)
+
+另外，通过`strInput.Split("：]".ToCharArray)(1)`可以将字符串分割，遇到`:`或`]`即断开字符串，存储为字符串的数组。
+
+## 3.3 数据收集与输出
+
+如果要组合一段字符串，输出当前时间：
+
+1. 添加strDate变量，默认值 **Today is **
+2. 添加MessageBox：“Good morning,” + strDate + Now.ToString
+3. 如果修改格式，则为“Good morning,” + strDate + Now.ToString("yyyy/MM/dd")
+> 也可以使用format函数，比如`String.Format(Filepath1,"ファイル")`，使用方式可以具体参考帮助文件，参考VB的帮助。
+
+下面是String的代表性方法：
+
+![image](https://user-images.githubusercontent.com/18595935/56409034-1c4cb280-62b2-11e9-830a-4c4ab58a39b8.png)
+
+**关于data table：**
+
+常用data table有csv,excel,web数据，下面通过两种方式将CSV输出：
+
+![image](https://user-images.githubusercontent.com/18595935/56409150-b6acf600-62b2-11e9-8e30-ec4e87d430c9.png)
+
+或是：
+
+![image](https://user-images.githubusercontent.com/18595935/56409201-ed830c00-62b2-11e9-93ed-f4f464fb6b6d.png)
+
+## 3.4 演習1
+
+1. 读取CSV文件，并将其保存到DataTable变量：Names
+2. 根据是否会员，对数据进行过滤
+3. 使用姓和名，根据简单的规则(姓的前面3个字母变成大写，名的前3个字母变成小写)，作成nickname
+4. 将生成的Nickname输出
+
+CSV文件如下：
+
+![image](https://user-images.githubusercontent.com/18595935/56409306-6c784480-62b3-11e9-95f8-29971b5ebcd4.png)
+
+作成workflow如下：
+
+1. 将CSV读取，并保存到DataTable
+2. 将DataTable代入到Member变量中，类型为DataRow[]
+3. 使用For..each循环，取出每一行，设为row
+3. 使用Assign取出姓和名
+3. 使用String的函数，作成NickName
+
+![image](https://user-images.githubusercontent.com/18595935/56411042-50c46c80-62ba-11e9-9d45-56238e3ce0f2.png)
+
+# 4. recording概要
+
 
 
