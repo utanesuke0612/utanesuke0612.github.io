@@ -430,6 +430,82 @@ CSV文件如下：
 
 需要注意：OpenBrowser的Type设置为Chrome。
 
+## 4.4 练习1
+
+1. 弹出对话框，用于输入写入记事本的文字
+2. 弹出对话框，用于输入记事本的文件名
+3. 打开记事本
+4. 将文字写入记事本
+5. 改成粗体，size变为16
+6. 以上面的文件名保存文件
+
+具体的workflow作成步骤：
+
+1. 作成两个inputdialog，分别用于保存记事本文字和文件名
+2. 然后使用自动recording，录制剩余的部分，首先打开计时班
+3. 选择recording -> desktop
+4. 在desktop的recording中，选择start app，并点击记事本
+5. 点击recording
+6. 输入"text"到记事本
+7. 点击修改格式，粗体和16，完毕后OK
+8. 点击file->使用名称保存，输入"filename"并保存文件
+9. esc退出recording，保存
+10. 查看录制的workflow，使用inputDialog中的文字和文件名的变量，替换上面临时的文字和文件名。
+
+## 4.5 练习2
+
+1. 弹出对话框，输入要查询的城市
+2. 进入google，输入该城市的天气，进行查询
+3. 将查询的气温输出
+
+具体的workflow作成步骤：
+1. 添加InputDialog，并保存输入的城市
+2. 在Chrome中打开google.com
+3. 打开web，在web recording中打开web浏览器
+4. 点击type,录入要检索的内容，内容随意，稍后会进行替换
+5. 点击type->hotkey按下，使用enter key
+6. 点击copy，将温度值copy下来
+7. web recording中，选择关闭浏览器
+8. 保存终止
+9. 替换文本为变量
+
+完毕后的workflow如下图：
+
+![image](https://user-images.githubusercontent.com/18595935/56454277-3907e980-6389-11e9-8186-b815563b9ffc.png)
+
+# 5. UI上的高级操作
+
+1. 3种input 方式的设定，以及各自的差别
+2. screen scraping wizard的使用方法
+3. 3种output方式的设定以及区别
+4. data scraping wizard的使用方法
+
+## 5.1 输入输出方法
+
+- 能recording的：
+	+ button按下
+	+ checkbox按下
+	+ dropdown
+	+ 文字shur
+
+- 不能recording的
+	+ shortkey
+	+ 修饰key,ctrl+c等
+	+ 右键按下
+	+ mousebar
+
+1. 选择basic
+2. recording 开始按下
+3. 选择记事本的空白区域，输入文字
+4. 然后最小化
+5. 再次点开记事本，继续输入
+6. 保存
+
+输入的方式有三种：
+1. default
+2. window message
+3. simulator
+
 
 
 
