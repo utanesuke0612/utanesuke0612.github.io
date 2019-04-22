@@ -552,5 +552,56 @@ CSV文件如下：
 
 workflow如下图：
 
+1. 打开chrome，访问ebay.com
+2. 使用web，自动录制
+3. 输入laptop，点击Search
+4. 保存退出
+5. 打开data scraping
+6. 按wizard提示操作
+7. 最后将录制的activity的输出设置为ExtractDataTable
+8. 添加system下写入excel的activity
+
 ![image](https://user-images.githubusercontent.com/18595935/56487640-ce84b400-6516-11e9-9a3b-c089d7796cee.png)
+
+# 6. Selector
+
+本章学习：
+1. 什么是稳定的selector
+2. 如何将wildcard插入selector
+3. 如何将变量插入selector中
+4. 如何作成相对selector
+
+## 6.1 Selector概要
+
+1. 打开basic
+2. 按下recording，选择记事本"filename.txt"的输入区域
+3. 输入文字
+
+可以看到这个workflow如下：
+
+![image](https://user-images.githubusercontent.com/18595935/56497948-a149fd00-653a-11e9-8ec2-9041d74b45ca.png)
+
+下面就是notepad的selector，其中checkbox是一系列约束条件，如果不满足这些条件，robot会弹出下面的错误，显示selector无法找到。
+
+![image](https://user-images.githubusercontent.com/18595935/56498071-246b5300-653b-11e9-9035-e7846c2f99fe.png)
+
+如果将title的checkbox去掉，就会发现在其他文件名的记事本中，也能运行该robot。
+
+## 6.2 Selector的结构/定制化/改善方法(1)
+
+- 完全selector (recording-basic)
+- 部分selector (recording-desktop)
+
+下面通过两种方式basic和desktop，录制计算器中按下7的操作，对比两种不同方式的workflow，以及selector：
+
+![image](https://user-images.githubusercontent.com/18595935/56501179-c9405d00-6548-11e9-885e-44bb978e0dc0.png)
+
+
+在basic中，针对按下7这个activity，其selector中包含了其app，以及按键等各个属性。
+而在desktop中，最上层有一个attach window，下面存储的按下7这个activity，其selector只包含部分属性。
+
+
+
+## 6.3 Selector的结构/定制化/改善方法(2)
+
 
