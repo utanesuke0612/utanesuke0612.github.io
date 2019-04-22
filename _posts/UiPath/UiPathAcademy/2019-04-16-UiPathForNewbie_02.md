@@ -482,6 +482,8 @@ CSV文件如下：
 
 ## 5.1 输入输出方法
 
+![image](https://user-images.githubusercontent.com/18595935/56466672-96666e00-644f-11e9-85ca-b4565362974f.png)
+
 - 能recording的：
 	+ button按下
 	+ checkbox按下
@@ -506,6 +508,8 @@ CSV文件如下：
 2. window message
 3. simulator
 
+## 5.2 画面scraping
 
+![image](https://user-images.githubusercontent.com/18595935/56466666-82227100-644f-11e9-8de2-2d84a8aee8b8.png)
 
 
