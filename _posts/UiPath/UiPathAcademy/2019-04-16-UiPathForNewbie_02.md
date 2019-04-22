@@ -510,6 +510,47 @@ CSV文件如下：
 
 ## 5.2 画面scraping
 
+关于数据的输出方式：
+
+> 默认的方式是第一种，FullText
+
 ![image](https://user-images.githubusercontent.com/18595935/56466666-82227100-644f-11e9-8de2-2d84a8aee8b8.png)
 
+看一下实际的例子：
+
+1. 选择画像scraping
+2. 准备打开记事本，IE，以及demo程序
+3. 获取IE上的文字串，点击后在Scrape Result Review中选择Scraping Method可以切换不同的方式(OCR,Native,FullText)，同时更新，可以看到结果将发生变化
+4. 最后用MessageBox输出
+
+自动的输出方式，与其对应的手动追加方式：
+
+|输出方法(自动)|activity(手动)|
+|:--|--:|
+|Basic Recording|GetText|
+|Full Text|GetFullText|
+|Native|GetVisibleText|
+|OCR|GetOCRText|
+
+然后，通过手动添加activity的方式添加了GetFullText：
+
+![image](https://user-images.githubusercontent.com/18595935/56485662-e442ab00-650f-11e9-8ef2-4d14700f8582.png)
+
+## 5.3 data scraping
+
+与前面两类不同，data scraping能够对应的是**结构化数据**，比如google的结果，都是固定的格式(title-url-details)。
+
+通过选择Data Scraping，选择结构化的数据后，根据wizard提示，抽出对应的数据的flow：
+
+![image](https://user-images.githubusercontent.com/18595935/56486750-b95a5600-6513-11e9-89c1-3827804f2996.png)
+
+## 5.4 练习1
+
+1. 打开浏览器，输入“https://www.ebay.com/”
+2. 检索 LapTop，将前100个项目的商品名和价格抽出
+3. 输入到excle文件
+
+workflow如下图：
+
+![image](https://user-images.githubusercontent.com/18595935/56487640-ce84b400-6516-11e9-9a3b-c089d7796cee.png)
 
