@@ -592,16 +592,85 @@ workflow如下图：
 - 完全selector (recording-basic)
 - 部分selector (recording-desktop)
 
+### 1. 两者之间的差别
+
 下面通过两种方式basic和desktop，录制计算器中按下7的操作，对比两种不同方式的workflow，以及selector：
 
 ![image](https://user-images.githubusercontent.com/18595935/56501179-c9405d00-6548-11e9-885e-44bb978e0dc0.png)
 
-
 在basic中，针对按下7这个activity，其selector中包含了其app，以及按键等各个属性。
 而在desktop中，最上层有一个attach window，下面存储的按下7这个activity，其selector只包含部分属性。
 
+### 2. 使用通配符
 
+`*` 和 `?` 分别表示多个文字，和 一个文字，比如如果某个workflow是针对文件`filename_0423.txt`的，要使得该workflow有通用性，可以将其selector
+中的文件名进行修改，如下：
+
+![image](https://user-images.githubusercontent.com/18595935/56551687-f8e07b00-65c3-11e9-9713-ccd9a6469e01.png)
 
 ## 6.3 Selector的结构/定制化/改善方法(2)
 
+下面的workflow实现：
+1. 弹出输入对话框，输入数字0-9
+2. 使用highlight activity，并按下计算器中的数字
 
+可以将输入框中的数字进行高亮显示：
+
+![image](https://user-images.githubusercontent.com/18595935/56554210-ecf8b700-65cb-11e9-88ea-93ea09ba6c17.png)
+
+## 6.4 Selector应用
+
+假定在下面的网页(http://rpachallenge.com/?lang=ja)中输入名字，如果位置变化的话，可能会造成错误：
+
+![image](https://user-images.githubusercontent.com/18595935/56557336-9001fe80-65d5-11e9-8884-da156b3df03b.png)
+
+
+### 1. 使用 anchor base
+
+1. 使用anchor base
+2. 左边选择 find element,选中输入框旁边的label
+3. 右边选择 type info，选中输入框，并输入文字
+
+如下：
+
+![image](https://user-images.githubusercontent.com/18595935/56557417-e5d6a680-65d5-11e9-9b30-0914e6798f7d.png)
+
+### 2. 使用相对selector
+
+1. 添加type info activity
+2. 选中输入框后输入文字
+
+会发现如果页面更新后，网页结构发生变化后，就无法正常工作了。
+
+下面使用相对selector方式，修改上面的selector：
+1. 使用Ui exploerer
+2. 使用indicatetor选中输入框
+3. 使用indicate anchor选中旁边的label
+
+取出selector内容(因为id受页面结构影响，故将id的checkbox去掉)：
+
+```html 
+<html app='chrome.exe' title='RPAチャレンジ' />
+<webctrl aaname='苗字' tag='LABEL' />
+<nav up='1' />
+<webctrl tag='INPUT' />
+```
+
+经过上面的修改后，发现即使发生页面变化，也能准备将文字输入到指定输入框。
+
+## 6.5 练习
+
+1. 使用 https://ja.fakenamegenerator.com 生成随机值，抽出姓名，电话号码，和公司名，并将姓名分割成LastName和FirstName
+2. 然后将上面的信息，输入到 http://rpachallenge.com/?lang=ja 中。
+3. 使用Ui Explorer作成selector
+
+参考 [here](http://seikyoukan.jp/res/uipath/aca/%E3%83%AC%E3%83%83%E3%82%B9%E3%83%B36_%E6%BC%94%E7%BF%921.pdf)
+
+1. `https://ja.fakenamegenerator.com `，选择成日本人的名字，其url为  `https://ja.fakenamegenerator.com/gen-random-jpja-us.php `
+2. 打开 `http://rpachallenge.com/?lang=ja`
+
+作成flow如下：
+
+1. 选取attach browser,选择上面的fakename的网站
+2. 查看selector，将其title修改为带有通配符的`<html app='chrome.exe' title='ランダムに名前を生成 - * - Fake Name Generator' />`
+3. 
