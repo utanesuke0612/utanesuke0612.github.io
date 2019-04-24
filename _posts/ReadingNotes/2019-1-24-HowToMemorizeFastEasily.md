@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 【全书】 一流的记忆方法(ing)
-date: 2020-12-2 04:04:00
+date: 2018-12-2 04:05:00
 categories: 读书笔记
 tags: 其他
 ---
