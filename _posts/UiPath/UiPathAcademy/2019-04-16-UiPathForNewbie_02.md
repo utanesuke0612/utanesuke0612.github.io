@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 小白学UiPath-02-Level01-Foundation基礎
+title: 小白学UiPath-02-Level01-Foundation基礎-Part01
 date: 2019-04-08 01:01:02
 categories: RPA
 tags: RPA
@@ -9,6 +9,15 @@ tags: RPA
 {:toc}
 
 # 0. 总结
+
+这部分是Level 1 Foundation (基礎)トレーニング 的1-6章，主要介绍了：
+1. UiPath的基本概念,构造,快捷键
+2. 关于UiPath中使用的变量与数据类型
+3. 控制flow/分支/循环 等程序设计中基本概念在UiPath的体现
+4. 文字列的处理，数据的收集与处理
+5. 各种recording的差异
+6. UI高级操作，data scraping,OCR等
+7. Selector的概念与操作
 
 # 0. 关于UiPath Academy Certifications
 
@@ -671,6 +680,39 @@ workflow如下图：
 
 作成flow如下：
 
-1. 选取attach browser,选择上面的fakename的网站
-2. 查看selector，将其title修改为带有通配符的`<html app='chrome.exe' title='ランダムに名前を生成 - * - Fake Name Generator' />`
-3. 
+- 选取attach browser,选择上面的fakename的网站
+- 查看selector，将其title修改为带有通配符的`<html app='chrome.exe' title='ランダムに名前を生成 - * - Fake Name Generator' />`
+- 在Attach Browser中添加Get Text 的activity
+- 使用indicate on screen选择生成的姓名
+- 选择其selector，使用UI exploerer打开
+- 追加其父要素，同时删除css-selector,处理前后：
+
+处理前：
+
+```python
+<webctrl idx='1' tag='H3' />
+```
+
+处理后：
+
+```python
+<webctrl parentid='details' tag='DIV' idx='10' />
+<webctrl tag='H3' />
+```
+
+- 将该activity的output设置为变量Name，因为这个Name变量在后续的Attach Browser会继续使用，需要修改其scope
+- 下面处理公司名，公司名旁边有label，所以适合使用Anchor base,将其加入到Attach Browser中
+- 左边使用Find element，点击网页上的label-社名
+- 打开其selector，将 `<webctrl tag='DT' aaname='Company'/>` 复制过去。(通过UI Explorer查询到的)
+- 右侧使用Get Text,将其output设置为变量CompanyName
+- 另外将anchor的位置设置为left
+- 同样的方式处理电话号码。(添加Anchor Base)
+- FirstName和LastName使用两个Assign的activity处理，分别使用 `Name.Split(""c).GetValue(1).ToString`
+- 下面处理文字输入，再加一个Attach Browser，将其指定为 `http://rpachallenge.com/?lang=ja `
+- 这里可以使用两种方式，使用Anchor base，或相对Selector，这里使用相对Selector
+- 使用UI Explorer，先使用IndicateElement选择姓名的输入框，再使用Indicate Anchor选择其label。
+- 在selector editor中，check上其父要素，将Id的checkbox删除(它属于变动的)
+- 添加Type Into到第二个AttachBrowser中，将上面得到的selector复制过去
+- 用上面相同的方式，继续处理其他要输入的要素
+
+> 上面的workflow没有执行成功，后续再修改，先赶进度。@2019年4月24日
