@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 【全书】 只要会呼吸就能做冥想ing
-date: 2018-12-2 05:01:00
+date: 2018-12-31 23:01:00
 categories: 读书笔记
 tags: 其他
 ---
