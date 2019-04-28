@@ -423,6 +423,12 @@ workflow如下图：
 
 ![image](https://user-images.githubusercontent.com/18595935/56866417-cbf0f580-6a13-11e9-8cc1-0d02ca062d73.png)
 
+## 5.4 练习1
+
+## 5.5 练习2
+
+## 5.6 总结
+
 # 6. Lesson12-Debug与例外处理
 
 # 7. Lesson13-Project构成概要
