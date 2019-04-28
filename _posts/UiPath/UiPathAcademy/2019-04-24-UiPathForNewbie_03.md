@@ -366,10 +366,62 @@ workflow如下图：
 6. 使用OCR容易出错，尽量考虑用Read PDF Text代替Read PDF With OCR
 7. 使用AnchorBase，即使文件内部的构造发生大的变化也能对应，所以能提高可靠性
 
-
-
-
 # 5. Lesson11-Mail自动化概要
+
+通过本章学习：
+1. mail专用的activity的使用
+2. message的发送与接收
+3. 过滤mail，并从mail从下载附件
+4. 使用maill的template
+
+## 5.1 邮件自动化-收信
+
+- 示例1：通过Get Outlook Mail Message，获取指定folder中的邮件，并输出标题：
+
+![image](https://user-images.githubusercontent.com/18595935/56865323-c55c8100-6a07-11e9-9339-8798a2bc77f4.png)
+
+> 如果Outlook中有多个账号，可以设置Get Outlook Mail Message 中Account为指定账号
+
+- 示例2：与上面类似，不过这里将指定title的邮件，其附件抽出并保存：
+
+![image](https://user-images.githubusercontent.com/18595935/56865352-03f23b80-6a08-11e9-9bb5-1faf8a38509f.png)
+
+## 5.2 邮件自动化-收信2
+
+完成的任务与上面类似，Get Outlook Mail Message中有个属性Filter，可以设置更加具体的Filter，详细可以参考Outlook中的Filter说明
+
+![image](https://user-images.githubusercontent.com/18595935/56865925-82ea7280-6a0e-11e9-8402-25dac450eb2e.png)
+
+## 5.3 邮件自动化-发信
+
+- 通过下面的workflow，发送邮件：
+
+![image](https://user-images.githubusercontent.com/18595935/56866133-d9f14700-6a10-11e9-9397-22bd3c254762.png)
+
+- robot运行出错后，自动截图，并作为附件发送邮件：
+
+比如如下，是一个click button的workflow，但是click button的程序并没有启动，出现了如下的错误：
+
+![image](https://user-images.githubusercontent.com/18595935/56866165-35233980-6a11-11e9-84fd-bcde030b5b59.png)
+
+通过下面的workflow，通过Try...Catch进行例外处理，这里分成两步完成：
+
+- 先做成截图，保存，并发送邮件的workflow：
+	+ 添加 Take Screenshot 的activity，其Output设置为Image变量
+	+ 添加 Save Image的activity，保存图片
+	+ 添加 Send Outlook Mail Message 的activity，发送邮件，其Attach Files中，最后一个value参数，设定为上面保存图片时的文件名
+
+单独运行上面的workflow的话，会在运行时截取屏幕，并发送邮件
+
+- 然后将需要监视的robot(业务robot)，与上面的截图workflow进行关联：
+	+ 添加Try...Catch的activity，将业务处理的sequence，移动到Try Part中
+	+ 使用左边的Project栏，将截图workflow的xaml文件，拖入到Catch部分
+
+这样，当业务robot发生异常时，触发截图workflow，上面的两个workflow如下图：
+
+![image](https://user-images.githubusercontent.com/18595935/56866406-ac59cd00-6a13-11e9-88f9-b4fec28d79dc.png)
+
+![image](https://user-images.githubusercontent.com/18595935/56866417-cbf0f580-6a13-11e9-8cc1-0d02ca062d73.png)
 
 # 6. Lesson12-Debug与例外处理
 
