@@ -202,6 +202,178 @@ workflow如下图：
 最后所有的workflow参考如下(第二个scope)：
 
 ![image](https://user-images.githubusercontent.com/18595935/56847316-3f134280-6914-11e9-83da-bbbe30421b9f.png)
+
 ![image](https://user-images.githubusercontent.com/18595935/56847332-594d2080-6914-11e9-8891-79751e1ea8eb.png)
 
 ## 3.3 实践-Excel与数据表的操作
+
+实践篇综合上面的两节：
+1. 将excel中的数据，通过条件过滤，最终输出
+2. 将excel中通过条件过滤的数据，最终写到另一个新建的excel中
+
+针对第一个任务：
+
+1. 添加Excel Application Scope，指定该excel文件
+2. 添加Read Range，指定sheet名
+3. 添加Filter Wizard，指定条件，住所为东京，部署为总务部
+4. 添加Output Table，将上面Filter过后的data table转换成String
+5. 通过MessageBox输出上面的String类型
+
+![image](https://user-images.githubusercontent.com/18595935/56858984-11370800-69bf-11e9-9d18-bf9c2d3dabce.png)
+
+针对第二个任务，
+1. 复制上面的workflow，将第四步以后的activity删除
+2. 添加BuildDataTable，添加四个字段，分别与之前的excel的header对应，名字/名前/部署/住所，其output设置为dt_NewClientInfo
+3. 添加For Each Row，设为row in dt_ClientInfo
+4. 添加四个Get Row Item，分别将上面字段取出来，ColumnName为“名字”，Output的Value设置为“LastName”，另外三个字段类似
+5. 添加Add Data Row的activity，DataTable设置为**dt_NewClientInfo**，ArrayRow设为**{LastName,FirstName,Department,Address}**，即上面通过For Each取出的字段
+6. 因为要处理新的excle，故再添加一个Excel的Scope
+7. 添加Write Range的activity，将`dt_NewClientInfo`设置为要写入的对象data table。
+
+![image](https://user-images.githubusercontent.com/18595935/56859038-0e88e280-69c0-11e9-89bc-83b139a7cb7a.png)
+
+## 3.4 练习1
+
+将下面A和B列中的值求和，写入C列中：
+
+![image](https://user-images.githubusercontent.com/18595935/56859083-c8804e80-69c0-11e9-8a2e-d6bc014576f0.png)
+
+通过三种方式实现：
+
+1. 打开Excel，将每一行的结果直接写入C列
+2. 关闭Excel，在DataTable中新建一个列，将该DataTable写入到Excel文件最后
+3. 使用Excel文件的公式进行计算
+
+### **方法1：**
+
+1. 添加Excel App Scope，并将visible选上
+2. 添加Read Range，去除Add Header选项，output输出为InputsTable
+3. 添加For Each Row，添加RowIndex的Int32参数
+4. 将Assign activity，添加到For Each的body内部，设置`RowIndex = InputsTable.Rows.IndexOf(row) +1`.
+5. 再下面添加两个Get Row Item，index分别为0和1，出力设置为ValueA和ValueB
+6. 添加Assign，设置为ValueC=ValueA+ValueB
+7. 添加Write Cell的activity，使用ValueC作为入力值，另外范围为`“C” + RowIndex.ToString`
+
+![image](https://user-images.githubusercontent.com/18595935/56859496-d1741e80-69c6-11e9-9dfa-1ad07e41d1c2.png)
+
+
+### **方法2：**
+
+1. 添加WorkBook下的ReadRange，去除Add Header选项，output输出为InputsTable
+2. 入力处，选择该excle的全路径
+3. 添加AddDataColumn，列名设为`“C”`，output为InputsTable，类型设为Int32
+4. 添加For Each Row，collection设为InputsTable
+5. 添加Assign，设为ValueA=row(0).ToString
+6. 添加另一个Assign，设为ValueB=row(1).ToString
+7. 添加Assign，左边row(2)，右边`Integer.Parse(ValueA) + Integer.Parse(ValueB) `
+8. 最后使用workBook下的WriteRange，写入原始的excel文件中。
+
+![image](https://user-images.githubusercontent.com/18595935/56859649-cd490080-69c8-11e9-9f4a-2d7674b457ff.png)
+
+### **方法3：**
+
+> 省略了部分说明，具体参考下面的workflow图，以及上面的表述
+
+下面直接将计算用的公式写入excel中：
+
+1. 使用Excel Scope
+2. 添加Read Range并设置Output
+3. 添加Assign，设置RowsCount = InputsTable.Rows.Count
+4. 添加Write Cell，范围为`“C1:C” + rowsCount`，值为`=SUM(A1,B1)`
+
+![image](https://user-images.githubusercontent.com/18595935/56859643-c3bf9880-69c8-11e9-853f-55f2e76ad113.png)
+
+## 3.5 总结
+
+1. Excel文件操作时，有两种方式：通过ExcelApplicationScope作为容器，在容器内操作；或是使用workbook中的activity。如果能使用后者的话推荐使用，不需要安装excel，在后台运行
+2. 通过Visible属性，可以决定操作在内部运行，还是使用Excel运行
+3. ReadRange activity，读取excel的一部分，将其存储为data table
+4. workbook是存储了多种不同类型数据的excel文件；data table是有行和列的table
+5. write range在之前的entry上覆盖写入，而AppendRange是在最后追加写入
+6. ReadRange和WriteRange中，通过Add Headers属性，决定是否读取或写入列的名字。
+7. 通过Build Data Table activity作成data table时，列的数据类型参考VB.net中的。
+8. 通过Sort Table或Filter Table activity，需要DataTable(内存中的表)作为输入
+9. 通过SelectRange Activity可以方便的操作Excel文件
+10. 操作data table时，使用For Each Row能简单的循环处理
+11. 如果有Header时，在使用GetRowItem的activity时，不要用index，可以使用列名作为索引条件。
+
+# 4. Lesson 10 - PDF自動化概要
+
+通过本章学习如何从PDF文档中抽出数据：
+1. Read PDF activity的使用方法
+2. Read PDF with OCR activity的使用方法
+3. 使用anchor，从PDF内的field中获取数据
+
+使用前需要如下的准备工作：
+1. 打开Acrobat，使用Ctrl+B，打开环境设定，在左边的読み上げ中，顺序设置为**印刷ストリーミングの読み上げ順序を使用**。这样就能确认每个PDF的要素了
+2. 然后左边的アクセシビリティ中，[その他のアクセシビリティオプション] セクション中前面两个checkbox去掉
+
+截图如下(中文)：
+
+![image](https://user-images.githubusercontent.com/18595935/56860133-f3bd6a80-69cd-11e9-8ef4-b85ef74034cf.png)
+
+## 4.1 PDF自动化-文档全体抽出方式
+
+三种方式可以抽出文档全体的文本：
+1. Read PDF Text
+2. Read PDF With OCR
+3. Screen Scraping
+
+三种的workflow如下图：
+
+![image](https://user-images.githubusercontent.com/18595935/56861127-1608b580-69d9-11e9-97c8-7673390e8e8c.png)
+
+![image](https://user-images.githubusercontent.com/18595935/56861129-1dc85a00-69d9-11e9-9bed-2777b2c557eb.png)
+
+![image](https://user-images.githubusercontent.com/18595935/56861136-26209500-69d9-11e9-9527-0f932551e441.png)
+
+## 4.2 PDF自动化-特定要素抽出方式
+
+通过Get Text，获取PDF中的文本，通过Get Text中的selector，修改其属性，使得其更通用。
+
+> 但是在本机上测试无法通过，无法取得PDF的Text
+
+## 4.3 PDF自动化-Anchor Base
+
+通过Anchor Base，能更灵活的定位，旁边的Find element 也可以用Find Image代替：
+
+![image](https://user-images.githubusercontent.com/18595935/56861501-5289e080-69dc-11e9-83ef-8b1a7be3c88e.png)
+
+> 但是在本机上测试无法通过，无法取得PDF的Text
+
+## 4.4 练习
+
+> 注意开始前要检查PDF的设置状况。
+
+1. 添加一个Attach window，将PDF file reader 关联起来
+2. 在Do中添加Anchor Base
+3. 使用Find element 添加到左边，选取作为anchor的对象，这里是请求日的label
+4. 右侧使用Get Text，选择对应的日期Text，输出设为InvoiceDate变量
+5. 另外，左边anchor的selector中，只保留Type属性，将id属性删除
+6. anchor base中的position从Auto修改为left
+7. 用上面相同的方式，再添加一个Anchor Base
+8. 将得到的变量，用MessageBox输出
+
+![image](https://user-images.githubusercontent.com/18595935/56861802-84e90d00-69df-11e9-9a91-3e3aabea65b3.png)
+
+## 4.5 总结
+
+1. PDF activity，分成两类，一类处理大的文本block及文档全体，另一类处理特定的文本要素。
+2. 从PDF中抽取数据时，根据使用的文件，从2个activity中选择一个，Read PDF Text和Read PDF with OCR
+3. 上面的两个activity都是在后台运行
+4. 通过Screen Scraping activity可以获取Text的block
+5. 从PDF文件中获取特定值时，可以使用Anchor Base
+6. 使用OCR容易出错，尽量考虑用Read PDF Text代替Read PDF With OCR
+7. 使用AnchorBase，即使文件内部的构造发生大的变化也能对应，所以能提高可靠性
+
+
+
+
+# 5. Lesson11-Mail自动化概要
+
+# 6. Lesson12-Debug与例外处理
+
+# 7. Lesson13-Project构成概要
+
+
+
