@@ -429,9 +429,94 @@ workflow如下图：
 
 ## 5.6 总结
 
+- 根据使用的不同的邮件协议，有多种关联的activity，有SMTP,POP3,IMAP,Exchange,Outlook等多种。
+- 邮件取得关联的activity中，主要有如下共同的activity：
+	+ 从特定的mail folder中获取email
+	+ 只获取未读的mail，将其标记为已读
+	+ 限定mail的收信数
+- MailMessage的Object中无法直接获取timestamp信息，需要从Headers dictionary的Date值中取得。
+- Outlook的activity中，为了根据Subject和ReceivedTime而接受邮件，有对应的Filter功能。
+- 从文件读取内容，作为邮件模板的时候，使用一定的格式`{0}`，可以动态改变邮件内容。
+- Outlook activity和Exchange activity，不需要设定连接参数，较易使用。
+
 # 6. Lesson12-Debug与例外处理
+
+使用Debug，能特定出不需要的动作和Error，将其从workflow中删除，本章学习：
+1. debug功能的使用方法
+2. 使用Find Element 或 Element Exists，与application同步的方法
+3. Try Catch activity的结构和使用方法
+
+## 6.1 debug与例外处理-debug功能
+
+在错误信息框中，弹出activity的名字，所以命名非常重要，能准确定位问题所在。
+
+在Execute页面中，使用Debug启动调试，调试过程中，可以通过Locals确认运行时变量的值
+
+## 6.2 debug与例外处理-意外操作的对应方法
+
+如果因为窗口重叠，导致元素无法检出的error时，可以通过修改该Activity的属性的来对应，使得隐藏状态也可以操作：
+- window message 送信
+- click simulate 
+
+输入activity的dubug顺序：
+1. application 表示确认
+2. 输入方法变更 动作确认
+3. 合适的selector 设定确认
+
+处理timing问题时，有如下三个activity：
+- Find Element
+- Element Exists - 对workflow的运行没有影响
+- Wait Element Vanish
+
+同样，处理图像也是上面的三个activity，不过对应的是Find Image，Image Exists，Wait Image Vanish。
+
+参考下面的例子：
+
+![image](https://user-images.githubusercontent.com/18595935/56904820-07ee8e00-6ada-11e9-97c7-39730ca83d53.png)
+
+## 6.3 debug与例外处理-TryCatch
+
+- Try：业务flow，即可能出现异常的workflow
+- Catch：异常出现时执行的workflow，其Exception有很多种
+- Finally：不管结果如何，肯定会执行的workflow
+
+下面的例子中，捕捉上面workflow中timeout的错误，并在catch中进行补救的workflow，如下图：
+
+![image](https://user-images.githubusercontent.com/18595935/56906311-eb078a00-6adc-11e9-972c-b67aa81f6fa7.png)
+
+- Try中是上面一节的workflow，因为将timeout设为了0，所以会引发一场
+- Catches中，添加了异常的处理，首先通过Log Message将异常信息输出了
+- Rethrow能再次抛出异常，如果没有这一步的话，异常信息的messagebox不会被显示出来
+- 第③不的sequence是补救措施，这个sequence与上面的Try Part类似，但是去掉了timeou为0秒，让你正常执行
+
+## 6.4 练习1
+
+## 6.5 练习2
+
+## 6.6 总结
+
+- 通过Execute页面的Start Debug按钮，开始Debug。
+- debug时会出现下面三种现象：
+	+ 现在执行中的action，会出现黄色的高亮，根据option的设定，该action影响到的要素，也会被红色高亮。
+	+ Local Panel中，能确认所有当前的变量值
+	+ 能取得所有workflow执行时action的详细log
+- 需要将执行速度延缓时，通过Slow Step按钮，或者是使用Toggle Breakpoint将其完全暂定，然后使用Step Over跳过该action，再继续执行后续步骤。
+- 等待application读取时，activity的默认timeout时间是30秒。Element Exists,Find Element,Wait Element Vanish等activity也可用于待机操作。
+- Element Exists不对workflow产生影响，单纯的返回一个blue值。
+- Try...Catch：将有可能发生异常的操作放在Try中，发生异常后的处理放在Catch中，最后无论如何都会执行的操作，放在Finally中。
+- 为了对应多种异常，可以用多个Catch
+- 即使检出了异常，想停止workflow的case也有，这时可以使用Rethrow。
+- 在一个workflow中使用其他的workflow，可以使用Invoke Workflow.
+- action/flowchart的命名要规范
+- 希望使用的window上，有别的window存在时，可能会导致问题，为了回避这种问题，建议不要使用默认的输入method。
+- selector有问题时，通过使用Indicate On Screen Option和Attach to live element Option，能刷新selector。
 
 # 7. Lesson13-Project构成概要
 
+## 7.1 workflow/process的构成方式-基础1
 
+## 7.2 workflow/process的构成方式-基础2
 
+## 7.3 workflow/process的构成方式-实践
+
+## 7.4 总结
