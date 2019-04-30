@@ -36,6 +36,40 @@ If UiPath is new to you, we strongly recommend completing **the RPA Developer Ad
 
 # 1. Lesson01-UiPath概要
 
+## 1.0 总结
+
+- 用语介绍
+
+|用语|解释|
+|:--|:--|
+|Orchestrator|用语执行robot，管理schedule|
+|workflow|robot处理flow|
+|UiPath studio|robot作成app|
+|activity|robot执行的操作|
+|webScraping|从website中抽取信息，爬虫|
+|recording Session|Scraping的结果|
+|process|robot的处理|
+|robot|作成的robot|
+|component|robot的一部分|
+|custom activity|自己作成的activity|
+
+- robot能完成的：
+	+ application的自动执行
+	+ excel读取写入
+	+ mail自动执行
+	+ database连接
+	+ web爬虫
+
+- UiPath Studio的作用：
+	+ 作成robot
+	+ activity/recoring/scraping，等robot的各个具体设定
+	+ 在UiPath Orchestrator中与robot关联
+
+- UiPath Orchestrator的作用：
+	+ robot管理
+	+ 多个robot的管理，监视和执行
+	+ 执行schedule的设定
+
 ## 1.1 简介
 
 一个业务流程称为Project，流程中的每个步骤称为Activity，Activity由button的按下，文件的读取等小的操作构成。
@@ -125,7 +159,31 @@ UiPath中通过team选项，可以连接各种[source管理系统](https://studi
 
 # 2. 入门知识
 
-# 2.2 变量与数据类型
+## 2.1 总结
+
+- 变量/类型
+	+ 文字列-string
+	+ 数值型-Integer
+	+ 布尔型-Boolean
+	+ 通用类型-Generic
+	+ 将数值型转换为文字列，使用.ToString
+
+- 控制flow
+	+ sequence适合处理单纯的执行性流程
+	+ flowchart适合处理带有判断的复杂流程
+	+ statemachine适合大规模Project
+
+- 条件判断
+	+ flow design 双分支判断
+	+ flow switch 多分支判断
+
+- roop循环
+	+ while
+	+ do...while
+	+ for each
+	+ for each row应用在data table中按行进行循环处理
+
+## 2.2 变量与数据类型
 
 - **変数の管理**
 
@@ -188,8 +246,6 @@ UiPath中通过team选项，可以连接各种[source管理系统](https://studi
 - **インポートした名前空間について**
 - **新しい Namespaces のインポート**
 > [here](https://academy.uipath.com/learn/course/457/play/4135/ressun2-xiang-xi-qing-bao;lp=21)
-> 
-> 
 
 ## 2.3 控制flow
 
@@ -310,6 +366,29 @@ UiPath中通过team选项，可以连接各种[source管理系统](https://studi
 - 处理文字列：分割/格式化
 - 根据特定条件，取数据表中特定行
 
+## 3.0 总结
+
+- 类型/变量
+	+ 文字列 String
+	+ 数值型 Integer
+	+ 时间 DateTime
+	+ 数组 Array
+	+ 数据表 DataTable
+	+ 数据表的行 DataRow
+	+ 数据表的列 DataColumn
+
+- 文字列操作
+	+ ToUpper
+	+ ToLower
+	+ Remove 删除
+	+ Contains 判断是否包含
+	+ Replace 替换文字
+
+- 关于DataTable
+	+ dtNewHires(0)(1): 第0行第1列
+	+ 要确认DataTable的内容，通过Output Data Table 的activity，将其转换为文字列
+	+ 循环处理for each row
+
 ## 3.1 关于数据类型
 
 - 单一型数据: Char / Boolean / Integer / Date
@@ -389,6 +468,20 @@ CSV文件如下：
 本篇学习：
 1. 使用recorder添加UI的activity
 2. customize方法
+
+## 4.0 小结
+
+- 自动recording操作
+	+ activity自动生成
+	+ 文字输入与click操作等
+	+ 通过F2能暂定，3秒倒计时
+	+ 通过esc停止
+
+- 容器コンテナ的生成
+	+ basic：✕ 无法生成
+	+ desktop：◯ Attach Window
+	+ web：◯ Attach Browser
+	+ Citrix：✕ 无法生成
 
 ## 4.1 recording功能(basic,desktop基本)
 
@@ -489,6 +582,16 @@ CSV文件如下：
 3. 3种output方式的设定以及区别
 4. data scraping wizard的使用方法
 
+## 5.0 小结
+
+- 三种文字抽取方式：
+	+ FullText：默认的输出method，高速且正确
+	+ Native：输出method，高速而且能抽出文字位置
+	+ OCR：抽取上面无法抽取的文字
+
+![image](https://user-images.githubusercontent.com/18595935/56938985-6ea69280-6b40-11e9-990c-dd1dc0b078fc.png)
+
+
 ## 5.1 输入输出方法
 
 ![image](https://user-images.githubusercontent.com/18595935/56466672-96666e00-644f-11e9-85ca-b4565362974f.png)
@@ -579,6 +682,26 @@ workflow如下图：
 2. 如何将wildcard插入selector
 3. 如何将变量插入selector中
 4. 如何作成相对selector
+
+## 6.0 总结
+
+- 用语：
+	+ selector：自动化操作所拥有的信息
+	+ UIExplorer：作成select，微调整
+	+ wildcard：即通配符，如*或？
+	+ 完全selector：没有省略的selector，在container中可以使用
+	+ 部分selector：一部分省略的selector，在container中可以使用
+	+ anchor base：anchor与target，利用其画面的位置定位
+	+ highlight：selector的确认，以及trouble shooting中使用
+
+- selector：
+	+ 从根要素到target要素的UI要素路径
+	+ selector是文字型
+	+ 通过使用wildcard，能使selector更安定
+
+- activity：
+	+ 通过Find Element在画面上查找要素
+	+ 查找所需要的时间，通过timeout设定
 
 ## 6.1 Selector概要
 

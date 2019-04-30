@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 小白学UiPath-02-Level01-Foundation基礎-Part02
+title: 小白学UiPath-03-Level01-Foundation基礎-Part02
 date: 2019-04-08 01:01:03
 categories: RPA
 tags: RPA
@@ -11,7 +11,13 @@ tags: RPA
 # 0. 总结
 
 这部分是Level 1 Foundation (基礎)トレーニング 的7-13章，主要介绍了：
-
+1. 图像与文本的自动化
+2. Citrix の自動化(图像)
+3. Excel与数据表的操作
+4. PDF自動化概要
+5. Mail自动化概要
+6. Debug与例外处理
+7. Project构成概要
 
 # 1. Lesson7 - 图像与文本的自动化
  
@@ -22,6 +28,14 @@ Citrix的自动化，一般都发生在虚拟环境中，虚拟环境中都是�
 4. 使用Scrape Relative抽出图像关联的数据
 
 参考 [画像とテキストの自動化について](https://studio.uipath.com/lang-ja/docs/about-image-and-text-automation)，可以了解更多图像与文本自动化的知识。
+
+## 1.0 总结
+
+- 提高OCR精度的方法：
+	+ 识别只有数字的情况时，使用Numbers Only，利用Google OCR
+	+ 抽取变动值的时候，先找到固定要素，再使用ScrapeRelative
+	+ 如果文本标签的font size变动时，使用Click OCR Text
+	+ Citrix环境下抽取文本最好的方式是，选取所有文本进行copy
 
 ## 1.1 图像base自动化-Citrix recording基础
 
@@ -122,6 +136,14 @@ Select/Copy最简单，但是只适用于这种TextBox，可以看如下的例�
 2. highlight activity的使用方法
 3. 使用icon的双击，快捷键，以及命令行，打开Citrix环境内的application
 
+## 2.0 小结
+
+1. 通过Select Item能将dropdown list中项目选取出来
+2. 通过Find Image能找到指定的画像，并返回UI要素的Object
+3. 通过Set Clipping Region能reset clip region的内存区域
+4. 通过break能中断loop
+5. Pick Branch不能单独使用
+
 ## 2.1 高度な Citrix の自動化 - より良い操作
 
 1. 打开一个[SAP网站](https://www.sap.com/japan/index.html)
@@ -160,6 +182,11 @@ workflow如下图：
 2. data table的操作
 3. Excel中定义表的过滤方式
 4. Append Range的使用方式
+
+## 3.0 小结
+
+![image](https://user-images.githubusercontent.com/18595935/56939553-f4780d00-6b43-11e9-9994-fee9c11268bf.png)
+
 
 ## 3.1 基础-Excel与数据表的操作
 
@@ -366,7 +393,7 @@ workflow如下图：
 6. 使用OCR容易出错，尽量考虑用Read PDF Text代替Read PDF With OCR
 7. 使用AnchorBase，即使文件内部的构造发生大的变化也能对应，所以能提高可靠性
 
-# 5. Lesson11-Mail自动化概要
+# 5. Lesson11-Mail自动化概要(练习未完成)
 
 通过本章学习：
 1. mail专用的activity的使用
@@ -439,7 +466,7 @@ workflow如下图：
 - 从文件读取内容，作为邮件模板的时候，使用一定的格式`{0}`，可以动态改变邮件内容。
 - Outlook activity和Exchange activity，不需要设定连接参数，较易使用。
 
-# 6. Lesson12-Debug与例外处理
+# 6. Lesson12-Debug与例外处理(练习未完成)
 
 使用Debug，能特定出不需要的动作和Error，将其从workflow中删除，本章学习：
 1. debug功能的使用方法
@@ -513,10 +540,76 @@ workflow如下图：
 
 # 7. Lesson13-Project构成概要
 
+本章介绍：
+1. Invoke Workflow activity的使用方法
+2. 有效率的Project的构成方法
+
 ## 7.1 workflow/process的构成方式-基础1
+
+- 信赖性
+	+ Workflow/Process稳定，异常处理
+- 效率性
+	+ 缩短时间
+	+ 容易导入
+- 可维护性
+	+ 其他的担当者容易理解
+	+ 易维护
+- 扩展性
+	+ 容易追加新的process
+
+1. sequence：顺序执行的Workflow
+2. flowchart：带有条件判断的业务Workflow
+3. state machine：复杂规模的Workflow
 
 ## 7.2 workflow/process的构成方式-基础2
 
+通过Invoke Workflow File，调用外部的Workflow文件，设定变量使其工作。
+
+![image](https://user-images.githubusercontent.com/18595935/56937679-0902d800-6b39-11e9-910a-0be57c5a354c.png)
+
 ## 7.3 workflow/process的构成方式-实践
 
+一个复杂的业务Workflow作成时，通过如下的步骤：
+1. 画出大致的流程图
+2. 在UiPath中将各个sequence/flowchart进行layout，并命名
+3. 各个模块详细化
+
+**图1:**
+
+![image](https://user-images.githubusercontent.com/18595935/56937774-89c1d400-6b39-11e9-9d7b-d0e2bf6110a3.png)
+
+**图2:**
+
+![image](https://user-images.githubusercontent.com/18595935/56937887-05bc1c00-6b3a-11e9-8896-eb7f7a54a7a3.png)
+
+如下是该Project的构成，Main是主Workflow，通过Invoke workflow调用其他的workflow：
+
+![image](https://user-images.githubusercontent.com/18595935/56937965-73684800-6b3a-11e9-8522-e6f286497ed0.png)
+
+
 ## 7.4 总结
+
+作为RPA Project，要考虑其信赖性，效率性，可维护性，扩展性、学习了Invoke Workflow使用方法，以及Process的构成方式：
+
+- 能选择任意一个sequence或flowchart，右键选择Extract as workflow，然后替换为Invoke Workflow，实现相同的效果，这里将该sequence或flowchart作为了程序参数，在主workflow中使用。
+- 花时间琢磨每个Workflow中最合适的layout
+	+ Main：flowchart
+	+ business logic：flowchart
+	+ UI Interface：sequence
+- 将Process分割成小的Workflow，这样方便单独开发和测试，以及Workflow的重复利用
+- 考虑异常处理，将可能发生异常的Workflow放入TryCatch中，同时考虑补救处理的Workflow
+- Workflow命名注意规则，同时使用comment，随时收集log，将跟随环境变化的设定，写入config文件，建议用excel配置
+- 将不需要使用application关闭，长期保持clean的状态
+
+
+# 8. 修了证明
+
+![image](https://user-images.githubusercontent.com/18595935/56941168-ab2cbb00-6b4d-11e9-9d8d-5e649a278ef4.png)
+
+# 9. 参考
+
+- [UiPath アカデミー Level 1基礎 問題&解答集　～Les.1-5～](https://mara-ashida.hatenablog.com/entry/2018/12/23/020616)
+- [UiPath アカデミー Level 1基礎 問題&解答集　～Les.6-9～](https://mara-ashida.hatenablog.com/entry/2018/12/23/075018)
+- [UiPath アカデミー Level 1基礎 問題&解答集　～Les.10-13～](https://mara-ashida.hatenablog.com/entry/2018/12/23/075735)
+- [【UiPath】Academyのテストを突破する(Lesson1)](http://zawaoo.com/uipath-academy-lesson1/)
+- 上記のその他Lesson01-Lesson10
