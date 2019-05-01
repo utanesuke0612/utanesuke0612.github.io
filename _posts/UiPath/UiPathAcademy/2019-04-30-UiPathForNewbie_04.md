@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 小白学UiPath-04-Level 2-Orchestrator
+title: 小白学UiPath-04-Level02-Orchestrator
 date: 2019-04-08 01:01:04
 categories: RPA
 tags: RPA
@@ -47,6 +47,30 @@ UiPath Orchestrator是一个web程序，实现robot的自动化，监视和管�
 
 ## 2.1 Process的导入与触发trigger方法
 
+**Robot与Orchestrator之间的连接：**
+- Provision Robot设定
+ + 将robot设置中的machine name复制到Provision Robot中，并设定Username和Password
+ + 同时复制Provision Robot中的Key
+2. 将Orchestrator中的信息，设定到Robot中
+ + 将上面的Key 设定到Robot的设置中
+ + 将Orchestrator Url设定，比如`https://demo.uipath.com/`
+
+现在最新的版本，与上面的手顺有差异，实际操作如下：
+- Robots -> 添加+ -> Standard Robots，将Robot设置中的Machine Key复制过来，创建一个robot。
+- Machine -> 选择一台，将其Machine key复制到Robot设置中，并设置URL。
+
+![image](https://user-images.githubusercontent.com/18595935/57003482-146e0600-6c02-11e9-87c2-b01bb99b7ad1.png)
+
+![image](https://user-images.githubusercontent.com/18595935/57003516-497a5880-6c02-11e9-87c2-616225d65c87.png)
+
+1. 将robot注册到Orchestrator中
+2. 通过UiPath Studio的publish
+3. 为要使用的robot构筑环境environment
+4. 使用publish的package，以及environment，创建Process
+5. 最后启动job
+
+
+
 ## 2.2 Robot的provisioning(预测)方法
 
 ## 2.3 バージョニングVersioning(版本)控制
@@ -60,3 +84,7 @@ UiPath Orchestrator是一个web程序，实现robot的自动化，监视和管�
 ## 2.7 什么是Asset
 
 ## 2.8 什么是Orchestrator queue
+
+
+- `%userprofile%\.nuget\packages`通过这个可以删除已经发布的robot
+- 意见：应该先搞清楚，robots/environments/process/job/schedules/assets的关系，然后再详细摄入，更好理解
