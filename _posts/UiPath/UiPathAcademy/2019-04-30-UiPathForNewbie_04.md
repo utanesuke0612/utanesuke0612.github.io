@@ -123,6 +123,8 @@ UiPath Orchestrator是一个web程序，实现robot的自动化，监视和管�
 
 有两种，分别为Standard Robot和a floating one.
 
+**创建一个floating的robot：**
+
 - Machine 页面中，选择Machine Template
 - Robot中添加一个新的floating robot，命名localFloatingRobot
 	+ 下面的字段`Domain\UserName`，通过cmd中输入命令`whoami`，得到`laptop-4kogtoiu\utane`，密码设为1107的密码，Type设为Attended
@@ -135,7 +137,9 @@ UiPath Orchestrator是一个web程序，实现robot的自动化，监视和管�
 
 通过上面的步骤，就将一台机器与Robot连接了。
 
-下面创建一个Standard的robot，先将上述的floating robot与Machine template删除。
+**创建一个Standard的robot：**
+
+先将上述的floating robot与Machine template删除。
 
 - 复制robot setting中的Machine name，粘贴到Orchestrator的Machine -> standard machine.
 - Robots页面-> Standard Robots
@@ -208,7 +212,42 @@ UiPath Orchestrator是一个web程序，实现robot的自动化，监视和管�
 
 ## 4.5 Orchestrator - Video Part 4
 
+本节讲述，如果在Orchestrator中显示LOG，在UiPath Studio中，添加了log message后，可以在JOB的View logs中确认。
 
+## 4.6 Orchestrator - Video Part 5
 
+### 1. **Assets and Credentials Practice:**
+
+Assets是Orchestrator中，Robot能访问的信息，通过Assets页面中的Add按钮可以添加，有四种Assets，Text/Bool/Integer/Credential，比如在Credentials中可以创建username和password。
+
+1. 在Orchestrator中，添加type为Text的asset，命名为**Message**。
+2. Value中设定初始值。
+3. 在Studio中，添加Get Asset的activity，在AssetName中填上面创建的asset，**Message**。
+4. 在Value字段中添加一个新的变量，并在MessageBox中设置该变量。
+
+同样的步骤可以设置Credentials，但它有两个字段，username和password，因为这里是密码，所以不能直接把解析的变量显示出来，需要用到TypeSecureText的activity。
+
+- 注意1：在Orchestrator中设置Assets和Credentials时，不需要给字符串加双引号。
+- 注意2：在UIStudio中，使用Assets和Credentials时，要设置AssetsName，这时要用引号将AssetsName包含起来。
+
+如下图：
+
+![image](https://user-images.githubusercontent.com/18595935/57120742-53d95580-6dae-11e9-923e-80ab20f7c1e3.png)
+
+另外，在Assets设置时，可以根据不同的Robot给该Assets设定不同的值。
+
+### 2. Queues
+
+Queues是Orchestrator中一个强大的工具，能简单的将一个工作分配到多个Robots上，Queues中的transaction item按照顺序被处理。
+
+**创建一个Queue：**
+- 在Queues页面中，点击Add
+- 命名为Queue1，在Max of retries section中为3
+
+然后创建两个Projects，一个用于添加Items到Queue，另一个处理这些Items，处理的可以运行在多个Robots上，加快处理速度。
+
+# 5. 修了证明
+
+![image](https://user-images.githubusercontent.com/18595935/57172085-3cee3e00-6e56-11e9-85f6-dbf6e2140093.png)
 
 
