@@ -30,6 +30,29 @@ tags: RPA
 
 ## 1.1 ReFramework入門
 
+Building productive robots requires:
+
+1. Proper exceptions handling
+2. Recovery abilities
+3. Effective logging
+4. Reporting functionalities
+5. High maintainability
+6. Extensibility
+7. Reusability
+8. Ease of development
+
+> 下载 ReFramework，在[here](https://github.com/UiPath/ReFrameWork)
+
+如下是Main的Workflow图，使用了StateMachine，四种status：
+1. Init，读取配置文件，初始化程序。成功执行的话，会迁移到下一个state；出错则进入End Process。
+2. Get Transaction Data
+3. Process Transaction
+4. End Process
+
+![image](https://user-images.githubusercontent.com/18595935/57180788-29c78680-6ec7-11e9-8590-4488b9edee2d.png)
+
+
+
 # 2. 业务流程-顾客secure hashで计算
 
 # 3. 业务流程-年报的生成
