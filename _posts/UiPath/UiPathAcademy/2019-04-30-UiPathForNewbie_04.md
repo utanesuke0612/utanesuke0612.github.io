@@ -43,7 +43,7 @@ UiPath Orchestrator是一个web程序，实现robot的自动化，监视和管�
 
 ![image](https://user-images.githubusercontent.com/18595935/56942150-02358e80-6b54-11e9-82d0-4ed4789bd211.png)
 
-# 2. Orchestrator详细
+# 2. 日文版-Orchestrator
 
 **Robot与Orchestrator之间的连接：**
 - Provision Robot设定
@@ -78,28 +78,18 @@ UiPath Orchestrator是一个web程序，实现robot的自动化，监视和管�
 
 > `%userprofile%\.nuget\packages`通过这个可以删除已经发布的robot
 > 意见：应该先搞清楚，robots/environments/process/job/schedules/assets的关系，然后再详细摄入，更好理解
-> 
 
-# 3. 练习
 
-## 3.1 练习1
-
-1. 创建一个新的Project，命名HelloWorld
-2. 添加MessageBox，输出为「Hello UiPath Orchestrator!」
-3. 使用Publish公开，公开成功后，会弹出Success的message，显示已经公开到了本地`C:\ProgramData\UiPath\Packages`
-
-> 注意Publish到本地时，Robot的设定中，要与远程的disconnect
-
-# 4. 英文版-Orchestrator2018.3
+# 3. 英文版-Orchestrator2018.3
 
 因为日文版视频以及练习中，使用的Orchestrator版本，与现状最新版本有差别，故使用英文版Orchestrator课程。
 
-## 4.1 前期准备
+## 3.1 前期准备
 
 在 [https://platform.uipath.com/](https://platform.uipath.com/)  上注册一个tenant.
 > 作成  `lijun_uipath_demo1`，`lijun.kawasaki@gmail.com` 1107的密码。 
 
-## 4.2 Orchestrator - Video Part 1
+## 3.2 Orchestrator - Video Part 1
 
 ![image](https://user-images.githubusercontent.com/18595935/57074459-e29e9180-6d1e-11e9-8220-b141e34c4ed8.png)
 
@@ -112,7 +102,7 @@ UiPath Orchestrator是一个web程序，实现robot的自动化，监视和管�
 4. 通过这个Process的创建，使得可以同时在已有的三个robot上执行该package。为了实现这个，需要创建一个新的job。
 5. 点击JOB页面的Play，可以创建job并执行。
 
-## 4.3 Orchestrator - Video Part 2
+## 3.3 Orchestrator - Video Part 2
 
 将Robot的instance连接到Orchestrator，有三步：
 1. Provisioning the Machine in Orchestrator
@@ -187,7 +177,7 @@ UiPath Orchestrator是一个web程序，实现robot的自动化，监视和管�
 
 ![image](https://user-images.githubusercontent.com/18595935/57074266-59875a80-6d1e-11e9-9681-11cb115e7862.png)
 
-## 4.4 Orchestrator - Video Part 3
+## 3.4 Orchestrator - Video Part 3
 
 ### 1. 重复执行Process
 
@@ -210,11 +200,11 @@ UiPath Orchestrator是一个web程序，实现robot的自动化，监视和管�
 1. 如果是stop的话，会使得上面的Workflow走True的flow，能做最终的处理
 2. 如果是kill的话，会直接杀死flow
 
-## 4.5 Orchestrator - Video Part 4
+## 3.5 Orchestrator - Video Part 4
 
 本节讲述，如果在Orchestrator中显示LOG，在UiPath Studio中，添加了log message后，可以在JOB的View logs中确认。
 
-## 4.6 Orchestrator - Video Part 5
+## 3.6 Orchestrator - Video Part 5
 
 ### 1. Assets and Credentials Practice
 
@@ -250,7 +240,7 @@ Queues是Orchestrator中一个强大的工具，能简单的将一个工作分�
 
 
 
-# 5. 修了证明
+# 4. 修了证明
 
 ![image](https://user-images.githubusercontent.com/18595935/57172085-3cee3e00-6e56-11e9-85f6-dbf6e2140093.png)
 
