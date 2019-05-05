@@ -216,7 +216,7 @@ UiPath Orchestrator是一个web程序，实现robot的自动化，监视和管�
 
 ## 4.6 Orchestrator - Video Part 5
 
-### 1. **Assets and Credentials Practice:**
+### 1. Assets and Credentials Practice
 
 Assets是Orchestrator中，Robot能访问的信息，通过Assets页面中的Add按钮可以添加，有四种Assets，Text/Bool/Integer/Credential，比如在Credentials中可以创建username和password。
 
@@ -236,7 +236,7 @@ Assets是Orchestrator中，Robot能访问的信息，通过Assets页面中的Add
 
 另外，在Assets设置时，可以根据不同的Robot给该Assets设定不同的值。
 
-### 2. Queues
+### 2. Queues-Practice
 
 Queues是Orchestrator中一个强大的工具，能简单的将一个工作分配到多个Robots上，Queues中的transaction item按照顺序被处理。
 
@@ -245,6 +245,10 @@ Queues是Orchestrator中一个强大的工具，能简单的将一个工作分�
 - 命名为Queue1，在Max of retries section中为3
 
 然后创建两个Projects，一个用于添加Items到Queue，另一个处理这些Items，处理的可以运行在多个Robots上，加快处理速度。
+
+### 3. Input and Output Arguments Practice
+
+
 
 # 5. 修了证明
 
