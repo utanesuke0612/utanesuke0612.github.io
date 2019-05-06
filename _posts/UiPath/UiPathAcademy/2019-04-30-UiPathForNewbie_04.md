@@ -230,14 +230,89 @@ Assets是Orchestrator中，Robot能访问的信息，通过Assets页面中的Add
 
 Queues是Orchestrator中一个强大的工具，能简单的将一个工作分配到多个Robots上，Queues中的transaction item按照顺序被处理。
 
-**创建一个Queue：**
+在Queues中的各个Item，能够被多个Robots并行处理。
+
+下面演示如何使用Queues，模拟一个简单的业务处理：计算多个transaction的和。输入数据包含在一个Excel文件中，有两列incomes和Payments，entries的确切数目未知。
+
+在Ui Studio中创建两个Project，一个用于填充队列，另一个处理队列中的Items。
+
+#### 1. 第一个Project：队列填充
+
+**Orchestrator中创建一个Queue：**
 - 在Queues页面中，点击Add
-- 命名为Queue1，在Max of retries section中为3
+- 命名为	queue1，并在Max of retries section中为3
 
 然后创建两个Projects，一个用于添加Items到Queue，另一个处理这些Items，处理的可以运行在多个Robots上，加快处理速度。
 
+**Ui Studio中创建Rroject**
+
+1. 创建一个Project，添加Excel Application Scope 的activity
+2. 上面activity的路径设置为上面要读取的excel文件
+3. 在上面的activity的do中添加Read Range，输出Result为"dt_practice8"的data table。
+4. 添加For each row的activity，并将Add Queue Item的activity添加进去。
+5. 在Add Queue Item activity的QueueName字段，能将Orchestrator中的queque与这个activity关联起来。在这里填入上面生成的"queue1"，注意有双引号。
+6. ItemInformation字段，是Transaction中的Value被添加到的地方，这个Process类似于将arguments传递给一个Invoked Workflow，点击后面的省略号。
+7. 继续点击Create Argument，给第一个argument命名 Income, Type为String，将其value设置为之前data table中的第一列`row(0).ToString`
+8. 重复上面的步骤，添加第二个field "Payment"。
+
+完成后的Workflow如下图：
+
+![image](https://user-images.githubusercontent.com/18595935/57221852-96639200-703b-11e9-9c5a-457b1d76cd92.png)
+
+
+执行上面的Workflow后，能发现在Orchestrator中，在对应的queue1中view Transactions，能发现从excel读取的数据：
+
+![image](https://user-images.githubusercontent.com/18595935/57221987-fce8b000-703b-11e9-9e14-2915aaccad74.png)
+
+#### 2. 第二个Project：处理队列中的Item
+
+第二个Project中，有两个相关的activity，**Get transaction item**和**Set transaction status**，前者从queue中获取Item，后者通知Orchestrator这个特定的Transaction Item是否成功处理了。
+
+1. Studio中，新建一个sequence，命名为ProcessTransactions
+2. 将Get Transaction Item activity添加进去，将之前的queue名填入QueueName字段
+3. 在TransactionItem字段中，按下Ctrl + K创建一个Transaction Item，命名为TransactionItem
+
+运行上面的Workflow后，可以看到orchestrator中，queue1中有transaction的Status从New变成了In Progress。
+
+上面的步骤只是取出了队列中的Item，还没有处理。
+
+1. 添加两个Assign activity，分别用来接收上面TransactionItem中的两个值。
+2. Assign中赋值：`Income = cint(TransactionItem.SpecificContent(“Income”))`，这里Income和Payment作为两个新增的变量，Type为Int32
+3. 再添加一个activity：Set Transaction Status，其字段TransactionItem，设置为之前新增的变量`TransactionItem`。
+4. 运行上面的Workflow，在Orchestrator中该Item变成了successful。
+
+![image](https://user-images.githubusercontent.com/18595935/57224759-5ef9e300-7045-11e9-8b2e-62b1bd0e8bb4.png)
+
+另外，上面将Status设置为了successfull，也可以设置为Failed，ErrorType设置为Business，Reason设置为`“The field cannot be identified.”`。
+
+重新运行后，Orchestrator中也能出现Failed的项目。
+
+同样，也可以设ErrorType为Application，重新运行后，在Queues的APP EXCEPTIONS中会发现次数增加了。查看其details，可以比较其retry次数，发现business没有retry，而application形式的有retry：
+
+![image](https://user-images.githubusercontent.com/18595935/57226104-23611800-7049-11e9-9b73-1b10db3a5671.png)
+
+最后，如果一个以Application Exception失败了多次(Queue定义时的Max of retries)后，上面的 “In Review”, “Retry Items”, “Mark as verified” , “Assign Reviewer” 这些Button就变成激活状态，reviewers就能手动处理：
+1. 选择 Retry Items的话，能将该Item放回队列稍后再处理。
+2. 选择 In Review，是告诉别的用户你正在review这个item
+3. reviewer可以通过已有的Orchestrator Users指定。
+
 ### 3. Input and Output Arguments Practice
 
+1. 创建一个新的Project，命名`CheckFileSize`，定义两个Argument，一个in和一个out，分别为`in_File`和`out_Size`
+2. 在Try...Catch中添加两个Assign
+3. 使用第一个Assign获取文件size，新建一个变量，类型为System.Double,`SizeInBytes = new System.IO.FileInfo(in_File).Length`,其中`in_File`是上面的in argument
+4. 第二个Assign Activity用于存储output，将前面的size转换为kb形式，`out_Size = (SizeInBytes / 1024).ToString + "KB"`
+5. 在Catch中捕获`System.IO.IOException`，以防输入文件不存在，对out argument赋值，提示说文件不存在。
+
+最后将该Project发布到Orchestrator上，生成一个Process，启动一个job(使用一个Project folder中存在的文件)，结束后，check其输出的size。
+
+其Workflow如下：
+
+![image](https://user-images.githubusercontent.com/18595935/57228817-ac7b4d80-704f-11e9-8500-159befd35882.png)
+
+运行后如下，如果文件名不存在，会触发异常；如果文件名存在，会输出文件size：
+
+![image](https://user-images.githubusercontent.com/18595935/57229026-1c89d380-7050-11e9-84ea-2fe4cd1327ae.png)
 
 
 # 4. 修了证明
