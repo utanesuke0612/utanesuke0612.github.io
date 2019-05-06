@@ -89,7 +89,7 @@ UiPath Orchestrator是一个web程序，实现robot的自动化，监视和管�
 在 [https://platform.uipath.com/](https://platform.uipath.com/)  上注册一个tenant.
 > 作成  `lijun_uipath_demo1`，`lijun.kawasaki@gmail.com` 1107的密码。 
 
-## 3.2 Orchestrator - Video Part 1
+## 3.2 概要-Part 1
 
 ![image](https://user-images.githubusercontent.com/18595935/57074459-e29e9180-6d1e-11e9-8220-b141e34c4ed8.png)
 
@@ -102,7 +102,7 @@ UiPath Orchestrator是一个web程序，实现robot的自动化，监视和管�
 4. 通过这个Process的创建，使得可以同时在已有的三个robot上执行该package。为了实现这个，需要创建一个新的job。
 5. 点击JOB页面的Play，可以创建job并执行。
 
-## 3.3 Orchestrator - Video Part 2
+## 3.3 Orchestrator连接-Part 2
 
 将Robot的instance连接到Orchestrator，有三步：
 1. Provisioning the Machine in Orchestrator
@@ -144,7 +144,6 @@ UiPath Orchestrator是一个web程序，实现robot的自动化，监视和管�
 
 同时，也可以在本地执行，通过Robot运行刚才的Process后，同时在Orchestrator的job中也有对应的执行记录。
 
-
 **在UiPath Studio中，将Package Publish到Orchestrator中：**
 
 在Publish中选择Orchestrator，publish后，在Orchestrator下显示如下：
@@ -177,7 +176,7 @@ UiPath Orchestrator是一个web程序，实现robot的自动化，监视和管�
 
 ![image](https://user-images.githubusercontent.com/18595935/57074266-59875a80-6d1e-11e9-9681-11cb115e7862.png)
 
-## 3.4 Orchestrator - Video Part 3
+## 3.4 Process/Schedules/kill/stop-Part 3
 
 ### 1. 重复执行Process
 
@@ -200,13 +199,13 @@ UiPath Orchestrator是一个web程序，实现robot的自动化，监视和管�
 1. 如果是stop的话，会使得上面的Workflow走True的flow，能做最终的处理
 2. 如果是kill的话，会直接杀死flow
 
-## 3.5 Orchestrator - Video Part 4
+## 3.5 Log表示-Part 4
 
 本节讲述，如果在Orchestrator中显示LOG，在UiPath Studio中，添加了log message后，可以在JOB的View logs中确认。
 
-## 3.6 Orchestrator - Video Part 5
+## 3.6 Assets/Queque-Part 5
 
-### 1. Assets and Credentials Practice
+### 1. Assets and Credentials
 
 Assets是Orchestrator中，Robot能访问的信息，通过Assets页面中的Add按钮可以添加，有四种Assets，Text/Bool/Integer/Credential，比如在Credentials中可以创建username和password。
 
