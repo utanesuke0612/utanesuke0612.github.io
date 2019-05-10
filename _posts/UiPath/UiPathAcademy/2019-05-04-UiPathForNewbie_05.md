@@ -55,7 +55,11 @@ Building productive robots requires:
 
 ![image](https://user-images.githubusercontent.com/18595935/57180788-29c78680-6ec7-11e9-8590-4488b9edee2d.png)
 
-### 1.2 UiDemo自動化-概要
+### 1.2 ReFramework詳細
+
+
+
+### 1.3 UiDemo自動化-概要
 
 下面使用UiDemo这个应用，完成transaction的自动化。输入用的数据(Transaction处理)保存在Excel文件中。
 
@@ -72,8 +76,24 @@ Building productive robots requires:
 7. Hint：要使用Orchestrator的queue和Reframewok
 8. UiDemo的登录名为admin，密码为password
 
-### 1.3 UiDemo自動化-详细
+### 1.4 UiDemo自動化-详细
 
+> UiDemo.exe这个用admin/password登录。
+
+#### **准备工作：**
+- 将上面下载的ReFramework文件夹作为template，修改其对应的文件夹名。
+- 修改project.json文件，修改为如下：
+
+```python
+...
+  "name": "UiPath_REFrameWork_UiDemo",
+  "description": "Demonstrating the REFramework with UiDemo",
+...
+```
+
+#### **Dispatcher作成：**
+
+> 2019年5月9日 流れに疑問が残っているので、後程整理
 
 
 # 2. 业务流程-顾客secure hashで计算
