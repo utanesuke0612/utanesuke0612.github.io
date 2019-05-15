@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 小白学UiPath-05-Level03-UiPath进阶
+title: 小白学UiPath-05-Level03-UiPath进阶(1)
 date: 2019-04-08 01:01:05
 categories: RPA
 tags: RPA
@@ -57,8 +57,6 @@ Building productive robots requires:
 
 ### 1.2 ReFramework詳細
 
-
-
 ### 1.3 UiDemo自動化-概要
 
 下面使用UiDemo这个应用，完成transaction的自动化。输入用的数据(Transaction处理)保存在Excel文件中。
@@ -94,8 +92,3 @@ Building productive robots requires:
 #### **Dispatcher作成：**
 
 > 2019年5月9日 流れに疑問が残っているので、後程整理
-
-
-# 2. 业务流程-顾客secure hashで计算
-
-# 3. 业务流程-年报的生成
