@@ -50,3 +50,67 @@ Q: What are the UiPath Platform Components and how do they work together?
 
 Q: What are the licensing options available for each of the UiPath Platform components?
 
+![image](https://user-images.githubusercontent.com/18595935/57822698-a879c900-77cf-11e9-9c69-f23af42e81e0.png)
+
+![image](https://user-images.githubusercontent.com/18595935/57822745-d8c16780-77cf-11e9-95a0-b3b17a2f3978.png)
+
+![image](https://user-images.githubusercontent.com/18595935/57827349-00213000-77e2-11e9-853e-ed5de0d7abf5.png)
+
+
+# 4. Recommended Setup and License Distribution
+
+Discuss the relation between the different environments of the automation and the available licensing options.
+
+1. In the Pre-Production environments(Development and Testing),**Development and NonProduciton Robot licenses are required.**
+2. In the Production Environment, the Attended and Unattended robots will be working to execute the automated processes.
+
+Please refer to the above, we have explained how it works.
+
+Tenants:
+1. Can be licensed individually.
+2. Can be licensed in a centralized manner through the Host Licensing option
+
+# 5. Standalone Licenses
+
+![image](https://user-images.githubusercontent.com/18595935/57829062-bb4cc780-77e8-11e9-9698-8c79ad434863.png)
+
+What are the available standalone licenses?
+- Named User
+- Node Locked
+
+# 6. Summary - Licensing Matrix
+
+![image](https://user-images.githubusercontent.com/18595935/57829165-14b4f680-77e9-11e9-8382-ce38e240f9b2.png)
+
+# 7. Demo Section - License Management in Orchestrator
+
+At the end of this section you will be able to:
+
+1. Activate your Orchestrator license
+2. Upload and manage your orchestrator license in both a Tenant and Host licensing scenario
+3. License a standard Robot and a Floating Robot in Orchestrator
+4. Set up and manage a named user,concurrent user and concurrent Runtime license in Orchestrator
+
+
+# 8. how does Tenant and host licensing work in Orchestrator?
+
+参考[Activating and Uploading your License](https://orchestrator.uipath.com/lang-ja/docs/activating-and-uploading-your-license)
+
+# 9. Demo Section
+
+**To be done**
+
+**Web Resources**
+1. [UiPath Studio Guide
+About Licensing](https://studio.uipath.com/docs/about-licensing)
+2. [UiPath Robot Guide
+About Licensing](https://robot.uipath.com/docs/about-licensing)
+3. [UiPath Orchestrator Guide
+About Licensing](https://orchestrator.uipath.com/docs/about-licensing)
+4. [The Ultimate RPA Glossary
+Definitions to Know](https://www.uipath.com/blog/ultimate-rpa-glossary-of-terms)
+
+
+# 12. DIPLOMA
+
+![image](https://user-images.githubusercontent.com/18595935/57830763-146b2a00-77ee-11e9-9703-540fd811d234.png)
