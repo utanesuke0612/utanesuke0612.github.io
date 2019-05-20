@@ -10,7 +10,7 @@ tags: RPA
 
 # 1. The basics of RPA
 
-参考 [Awareness-Lesson01.pdf](Attachments\Awareness-Lesson01.pdf) 
+参考 [Awareness-Lesson01.pdf](https://seikyoukan.jp/res/uipath/aca/Awareness-Lesson01.pdf) 
 
 ## What is RPA?
 
@@ -48,6 +48,8 @@ tags: RPA
 
 # 2. Processes fit for RPA
 
+参考 [Awareness-Lesson02.pdf](https://seikyoukan.jp/res/uipath/aca/Awareness-Lesson02.pdf) 
+
 ## The time for RPA Is Now!
 
 ## RPA Adoption Across Processes And Industries
@@ -57,6 +59,8 @@ tags: RPA
 ## Processes Every Company Should Automate 
 
 # 3. RPA Journey & COE Enablement
+
+参考 [Awareness-Lesson03.pdf](https://seikyoukan.jp/res/uipath/aca/Awareness-Lesson03.pdf) 
 
 ## Implementation scenarios
 
@@ -73,6 +77,8 @@ tags: RPA
 ## Main inhibitors of RPA Implementation
 
 # 4. Introduction to UiPath
+
+参考 [Awareness-Lesson04.pdf](https://seikyoukan.jp/res/uipath/aca/Awareness-Lesson04.pdf) 
 
 ## Our journey
 
