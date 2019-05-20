@@ -87,3 +87,7 @@ tags: RPA
 ## Attended and Unattended Robots
 
 ## Prerequisites: None
+
+# 5. Diploma
+
+![image](https://user-images.githubusercontent.com/18595935/58029656-fdaf3500-7b57-11e9-95ec-8f3714fb6cd8.png)
