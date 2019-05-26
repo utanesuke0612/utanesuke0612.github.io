@@ -10,6 +10,9 @@ tags: RPA
 
 > This information is applicable to 2018.4 and newer versions of the UiPath Platform.
 
+> 内部资料「Bootcamp_Day2_Licensing勉強会_20190410.pptx」有关于License很详细的介绍，可以参考。
+
+
 This course is divided into two sections:
 - UiPath Licensing Model
 - Demo Section,License Management in Orchestrator
@@ -96,9 +99,9 @@ At the end of this section you will be able to:
 
 参考[Activating and Uploading your License](https://orchestrator.uipath.com/lang-ja/docs/activating-and-uploading-your-license)
 
-# 9. Demo Section
+# 9. Orchestrator Licensing
 
-**To be done**
+## 
 
 **Web Resources**
 1. [UiPath Studio Guide
@@ -114,3 +117,6 @@ Definitions to Know](https://www.uipath.com/blog/ultimate-rpa-glossary-of-terms)
 # 12. DIPLOMA
 
 ![image](https://user-images.githubusercontent.com/18595935/57830763-146b2a00-77ee-11e9-9703-540fd811d234.png)
+
+
+
