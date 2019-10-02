@@ -1,7 +1,7 @@
 ---
 layout: post
-title: 【全书】 2019-02-快速阅读(克里斯蒂安)
-date: 2018-12-31 23:02:00
+title: 【全书】 快速阅读(克里斯蒂安) ★★★★
+date: 2019-10-01 01:01:03
 categories: 读书笔记
 tags: 其他
 ---
@@ -10,11 +10,19 @@ tags: 其他
 
 ![image](https://user-images.githubusercontent.com/18595935/56660911-895daf00-66db-11e9-8ee1-0bfe3dd39483.png)
 
+# 0. 读书档案
+
+## 01. 阅读本书的目的
+
+## 02. 阅读后的收获感受
+
+## 03. 阅读后采取的行动
+
+## 04. 3个月后有什么样的改变
+
 # 0. 全书结构
 
 ![image](https://user-images.githubusercontent.com/18595935/56708690-966cb380-6758-11e9-982c-ab835a4d8eeb.png)
-
-# 0. 全书总结
 
 # 0. 前言
 
