@@ -10,16 +10,16 @@ tags: 其他
 
 ## 1. 读书笔记
 
-- [读书笔记目录](https://mubu.com/doc/TufH7_pX-)
+### - [读书笔记目录](https://mubu.com/doc/TufH7_pX-)
 
 ## 2. 技术笔记
 
-- [技术笔记目录](https://mubu.com/doc/22iL0yVFP0)
+### - [技术笔记目录](https://mubu.com/doc/22iL0yVFP0)
 
 ## 3. 工作笔记
 
-- [工作笔记目录](https://mubu.com/doc/BZiKRyYE-)
+### - [工作笔记目录](https://mubu.com/doc/BZiKRyYE-)
 
 ## 4. 其他
 
-- [其他笔记目录](https://mubu.com/doc/2ygnMYHQF0)
+### - [其他笔记目录](https://mubu.com/doc/2ygnMYHQF0)
