@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 【全书】 快速阅读(克里斯蒂安) ★★★★
+title: 【全书】 快速阅读(克里斯蒂安)
 date: 2019-10-01 01:01:03
 categories: 读书笔记
 tags: 其他
