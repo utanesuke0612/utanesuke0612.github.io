@@ -237,7 +237,7 @@ print("4:",soup.body.contents[1])
 ```
 
 - **遍历儿子节点**
-- 
+ 
 ```python
 for child in soup.body.children:
     print(child)
@@ -256,6 +256,8 @@ for child in soup.body.children:
 ```
 
 - **遍历子孙节点**
+
+迭代输出，比如第一个`<p><b>×××</b></p>`，1.整体输出一次，2.b tag输出一次，3.×××输出一次。
 
 ```python
 for child in soup.body.descendants:
@@ -330,6 +332,9 @@ print("5:",soup.a.parent)
 
 输出如下：
 
+1. and，是下一个的平行节点
+2. Python is a wonder...，是其上一个的平行节点
+
 ```html
 1:  and 
 2: <a class="py2" href="http://www.icourse163.org/course/BIT-1001870001" id="link2">Advanced Python</a>
@@ -339,9 +344,6 @@ print("5:",soup.a.parent)
 5: <p class="course">Python is a wonderful general-purpose programming language. You can learn Python from novice to professional by tracking the following courses:
 <a class="py1" href="http://www.icourse163.org/course/BIT-268001" id="link1">Basic Python</a> and <a class="py2" href="http://www.icourse163.org/course/BIT-1001870001" id="link2">Advanced Python</a>.</p>
 ```
-
-![image](https://user-images.githubusercontent.com/18595935/79063167-fb5b4980-7cda-11ea-8087-e3f3d1458e42.png)
-
 
 - **遍历后续节点和遍历前序节点**： 
 
@@ -534,4 +536,65 @@ main()
     19    	 天津大学 	    天津    
     20    	华南理工大学	    广东    
 Suc20
+```
+
+# 4. 从指定网站抽取QA
+
+```python
+import requests
+from bs4 import BeautifulSoup
+import bs4
+import re
+
+def getHTMLText(url):
+    try:
+        r = requests.get(url,timeout = 30)
+        r.raise_for_status()
+        r.encoding = r.apparent_encoding
+        return r.text
+    except:
+        print("NG")
+    
+    return ""
+
+def fillQAList(ulist,html):
+    soup = BeautifulSoup(html,"html.parser")
+    
+    print("-----------------------------------------質問-------------------------------------------")
+    print("\n\n")
+    
+    for question in soup.find_all(class_="m-hdgLv3__hdg"):
+        if(question.text.startswith("問")):
+            print(question.text)
+    
+    print("\n\n")
+    print("------------------------------------------質問と回答--------------------------------------")
+    
+    for question in soup.find_all(class_="m-grid__col1"):
+        if(question.text.find("ページの先頭へ戻る")):
+            for answer in question.text.split("ページの先頭へ戻る")[:-1]:
+                print(answer.rstrip('\n'))
+        pass
+
+def main():
+    uinfo = []
+    url1 = {"name" : "よくあるお問い合わせをまとめました（FAQ）（２月21日版）","url" : "https://www.mhlw.go.jp/stf/seisakunitsuite/newpage_00017.html"}
+    url2 = {"name" : "一般の方向けQ&A（４月８日版）","url" : "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/dengue_fever_qa_00001.html"}
+    url3 = {"name" : "医療機関・検査機関向けQ&A（４月７日版）","url" : "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/dengue_fever_qa_00004.html"}
+    url4 = {"name" : "企業（労務）の方向けQ&A（４月６日版）","url" : "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/dengue_fever_qa_00007.html"}
+    url5 = {"name" : "労働者の方向けQ&A（３月25日版）","url" : "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/dengue_fever_qa_00018.html"}
+    url6 = {"name" : "関連業種の方向けQ&A（４月２日版）","url" : "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/covid19_qa_kanrenkigyou.html"}
+    url7 = {"name" : "水際対策の抜本的強化に関するQ&A（４月２日版）","url" : "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/covid19_qa_kanrenkigyou_00001.html"}
+    url8 = {"name" : "学校再開に関するQ&A（子供たち、保護者、一般の方へ）","url" : "https://www.mext.go.jp/a_menu/coronavirus/mext_00003.html"}
+    url9 = {"name" : "布マスクの全戸配布に関するQ&A","url" : "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/cloth_mask_qa_.html"}
+
+    urllist = [url1,url2,url3,url4,url5,url6,url7,url8,url9]
+    
+    for url in urllist:
+        print("\n\n\n")
+        print(url["name"])
+        html = getHTMLText(url["url"])
+        fillQAList(uinfo,html)
+    
+main()
 ```
