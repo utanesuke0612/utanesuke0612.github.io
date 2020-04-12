@@ -10,6 +10,7 @@ tags: Python
 
 1. 参考网络课程：[Python网络爬虫与信息提取](https://www.icourse163.org/course/BIT-1001870001)
 2. 关于beautiful soup库，更详细说明资料参考[Beautiful Soup 4.4.0 文档](https://www.crummy.com/software/BeautifulSoup/bs4/doc.zh/)
+3. [如何在uipath中使用python](https://qiita.com/RPAbot/items/05b3943f7362494ef496)
 
 Beautiful soup库与Requests库的功能分担如下图：
 
