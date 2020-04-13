@@ -235,21 +235,88 @@ print(match)
 BIT:zipcode TSU:zipcode
 ```
 
-
-
-
+## 2.7 Re库的另一种等价用法
 
 ```python
+regex = re.compile(pattern,flags=0)
+```
 
+将正则表达式的字符串形式编译成正则表达式对象。
+
+1. pattern: 正则表达式的字符串或原生字符串
+2. repl:替换匹配字符串的字符串
+
+- 函数式用法：
+
+```python
+rst = re.search(r'\d{5}','BIT10081 TSU10099')
+```
+
+- 面向对象用法，编译后的多次操作
+
+```python
+pat = re.compile(r'\d{5}')
+rst = pat.search('BIT10081 TSU10099')
+```
+
+![image](https://user-images.githubusercontent.com/18595935/79105348-72601300-7dab-11ea-85c8-f74b4eecc52c.png)
+
+# 3. Re库的Match对象
+
+- Match对象的属性
+- Match对象的方法
+
+![image](https://user-images.githubusercontent.com/18595935/79107062-a6890300-7dae-11ea-8bd0-ed0884bf5541.png)
+![image](https://user-images.githubusercontent.com/18595935/79107077-adb01100-7dae-11ea-9d54-bfbd033da6c3.png)
+
+```python
+import re
+m = re.search(r'\d{5}','ABCDE10081 F10099')
+print("1.string   :  ",m.string)
+print("2.pos      :  ",m.pos)
+print("3.endpos   :  ",m.endpos)
+print("4.group    :  ",m.group(0))
+print("5.start    :  ",m.start())
+print("6.end      :  ",m.end())
+print("7.span     :  ",m.span())
 ```
 
 输出：
 
 ```html
-
+1.string   :   ABCDE10081 F10099
+2.pos      :   0
+3.endpos   :   17
+4.group    :   10081
+5.start    :   5
+6.end      :   10
+7.span     :   (5, 10)
 ```
 
-# 3. 示例2，淘宝定向比价爬虫
+# 4. Re库的贪婪匹配和最小匹配
 
-# 4. 示例3，股票数据定向爬虫
+Re库默认采用贪婪匹配，即输出匹配最长的子串。
+
+![image](https://user-images.githubusercontent.com/18595935/79108003-6591ee00-7db0-11ea-9863-3c4c25111828.png)
+
+```python
+match1 = re.search(r'PY.*N','PYANBNCNDN')
+print("贪婪匹配:",match1.group(0))
+
+match2 = re.search(r'PY.*?N','PYANBNCNDN')
+print("最小匹配:",match2.group(0))
+```
+
+输出结果如下：
+
+```html
+贪婪匹配: PYANBNCNDN
+最小匹配: PYAN
+```
+
+
+
+# 4. 示例2，淘宝定向比价爬虫
+
+# 5. 示例3，股票数据定向爬虫
 
