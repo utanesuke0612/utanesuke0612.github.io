@@ -10,10 +10,246 @@ tags: Python
 
 1. 参考网络课程：[Python网络爬虫与信息提取](https://www.icourse163.org/course/BIT-1001870001)
 2. 关于正则表达式，在这里也有涉及：[正则表达式](http://road2ai.info/2017/10/08/Uda-DataAnalysis-RegExr/)
+3. 正则表达式online check工具 [https://regexr.com/](https://regexr.com/)
+
+# 0. 快速参考
+
+- 参考1：
+
+![image](https://user-images.githubusercontent.com/18595935/79087406-1d57d900-7d7a-11ea-923a-8a7f2d98a3c5.png)
+
+- 参考2：
+
+![image](https://user-images.githubusercontent.com/18595935/79098238-7b95b380-7d9c-11ea-99e3-b4b46b4439ea.png)
+
 
 # 1. Re(正则表达式)库入门
 
-# 2. 示例2，淘宝定向比价爬虫
+正则表达式是用来简洁表达一组字符串的表达式，比如有如下的一系列字符：
 
-# 3. 示例3，股票数据定向爬虫
+```html
+'PN'
+'PYN'
+'PYTN'
+'PYTHN'
+'PYTHON'
+```
+
+使用正则表达式`P(Y|YTH|YTHO)?N`，切换到Python代码：
+
+```python
+regex='P(Y|YTH|YTHO)?N'
+p=re.compile(regex)
+```
+
+## 1.1 正则表达式的常用操作符
+
+![image](https://user-images.githubusercontent.com/18595935/79087725-33b26480-7d7b-11ea-8e0d-102ab505a363.png)
+![image](https://user-images.githubusercontent.com/18595935/79087744-42008080-7d7b-11ea-87d4-ccc6b74bbe9e.png)
+
+- 基本语法示例
+
+![image](https://user-images.githubusercontent.com/18595935/79087894-c81cc700-7d7b-11ea-92ff-0e5c1dd6088c.png)
+
+- 经典的正则表达式示例
+
+![image](https://user-images.githubusercontent.com/18595935/79087905-ceab3e80-7d7b-11ea-9374-b908630a518d.png)
+
+
+# 2. Re库的基本使用
+
+Re库采用raw String原生字符串，书写为`r'text'`，通过这种方式会忽略掉转义符号。比如 `r'[1-9]\d{5}' `
+
+![image](https://user-images.githubusercontent.com/18595935/79090241-f1415580-7d83-11ea-84dd-c775d23c4057.png)
+
+## 2.1 search的使用
+
+```python
+re.search(pattern,string,flags=0)
+```
+
+在一个字符串中搜索匹配的正则表达式的第一个位置返回match对象。
+
+1. pattern: 正则表达式的字符串或原生字符串
+2. string：待匹配字符串
+3. flags：正则表达式使用时的控制标记
+   1. re.I,re.IGNORECASE: 忽略正则表达式的大小写，`[A-Z]`能够匹配小写字符
+   2. re.M,re.MULTILINE: 正则表达式中的`^`能够将给定字符串的每行当做匹配开始
+   3. re.S,re.DOTALL：正则表达式中的`.`能匹配所有字符，默认匹配换行外的所有字符
+
+```python
+import re
+match = re.search(r'\d{5}','BIT 10081')
+if match:
+    print(match.group(0))
+```
+
+输出：
+
+```html
+10081
+```
+
+## 2.2 match的使用
+
+```python
+re.match(pattern,string,flags=0)
+```
+
+在一个字符串的**开始位置**，匹配的正则表达式的第一个位置返回match对象。
+
+1. pattern: 正则表达式的字符串或原生字符串
+2. string：待匹配字符串
+3. flags：正则表达式使用时的控制标记
+   1. re.I,re.IGNORECASE: 忽略正则表达式的大小写，`[A-Z]`能够匹配小写字符
+   2. re.M,re.MULTILINE: 正则表达式中的`^`能够将给定字符串的每行当做匹配开始
+   3. re.S,re.DOTALL：正则表达式中的`.`能匹配所有字符，默认匹配换行外的所有字符
+
+```python
+import re
+match = re.match(r'\d{5}','10081 BIT ')
+if match:
+    print(match.group(0))
+```
+
+输出：
+
+```html
+10081
+```
+
+## 2.3 findall的使用
+
+```python
+re.findall(pattern,string,flags=0)
+```
+
+搜索字符串，以列表类型返回全部能匹配的子串。
+
+1. pattern: 正则表达式的字符串或原生字符串
+2. string：待匹配字符串
+3. flags：正则表达式使用时的控制标记
+   1. re.I,re.IGNORECASE: 忽略正则表达式的大小写，`[A-Z]`能够匹配小写字符
+   2. re.M,re.MULTILINE: 正则表达式中的`^`能够将给定字符串的每行当做匹配开始
+   3. re.S,re.DOTALL：正则表达式中的`.`能匹配所有字符，默认匹配换行外的所有字符
+
+```python
+import re
+match = re.findall(r'\d{5}','10081 BIT TSU10084')
+print("1:",match)
+```
+
+输出：
+
+```html
+1: ['10081', '10084']
+```
+
+## 2.4 split的使用
+
+```python
+re.split(pattern,string,maxsplit=0,flags=0)
+```
+
+将一个字符串按照正则表达式匹配结果，进行分割，返回列表类型
+
+1. pattern: 正则表达式的字符串或原生字符串
+2. string：待匹配字符串
+3. maxsplit: 最大分个数，剩余部分作为最后一个元素输出
+4. flags：正则表达式使用时的控制标记
+   1. re.I,re.IGNORECASE: 忽略正则表达式的大小写，`[A-Z]`能够匹配小写字符
+   2. re.M,re.MULTILINE: 正则表达式中的`^`能够将给定字符串的每行当做匹配开始
+   3. re.S,re.DOTALL：正则表达式中的`.`能匹配所有字符，默认匹配换行外的所有字符
+
+
+```python
+import re
+match1 = re.split(r'\d{5}','10081BIT 10084 TSU ')
+match2 = re.findall(r'\d{5}','10081 BIT TSU10084')
+print("1:",match1)
+print("2:",match2)
+```
+
+输出：
+
+```html
+1: ['', 'BIT ', ' TSU ']
+2: ['10081', '10084']
+```
+
+## 2.5 finditer的使用
+
+```python
+re.finditer(pattern,string,flags=0)
+```
+
+搜索字符串，返回一个匹配结果的迭代类型，每个迭代元素是match对象。
+
+1. pattern: 正则表达式的字符串或原生字符串
+2. string：待匹配字符串
+3. flags：正则表达式使用时的控制标记
+   1. re.I,re.IGNORECASE: 忽略正则表达式的大小写，`[A-Z]`能够匹配小写字符
+   2. re.M,re.MULTILINE: 正则表达式中的`^`能够将给定字符串的每行当做匹配开始
+   3. re.S,re.DOTALL：正则表达式中的`.`能匹配所有字符，默认匹配换行外的所有字符
+
+```python
+import re
+for m in re.finditer(r'\d{5}','BIT10081 TSU10099'):
+    if m:
+        print(m.group(0))
+```
+
+输出：
+
+```html
+10081
+10099
+```
+
+## 2.6 sub的使用
+
+```python
+re.sub(pattern,repl,string,count=0,flags=0)
+```
+
+搜索字符串，返回一个匹配结果的迭代类型，每个迭代元素是match对象。
+
+1. pattern: 正则表达式的字符串或原生字符串
+2. repl:替换匹配字符串的字符串
+3. string：待匹配字符串
+4. count：匹配最大替换次数
+5. flags：正则表达式使用时的控制标记
+   1. re.I,re.IGNORECASE: 忽略正则表达式的大小写，`[A-Z]`能够匹配小写字符
+   2. re.M,re.MULTILINE: 正则表达式中的`^`能够将给定字符串的每行当做匹配开始
+   3. re.S,re.DOTALL：正则表达式中的`.`能匹配所有字符，默认匹配换行外的所有字符
+
+```python
+import re
+match = re.sub(r'\d{5}',':zipcode','BIT10081 TSU10099')
+print(match)
+```
+
+输出：
+
+```html
+BIT:zipcode TSU:zipcode
+```
+
+
+
+
+
+```python
+
+```
+
+输出：
+
+```html
+
+```
+
+# 3. 示例2，淘宝定向比价爬虫
+
+# 4. 示例3，股票数据定向爬虫
 

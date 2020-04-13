@@ -11,6 +11,7 @@ tags: Python
 1. 参考网络课程：[Python网络爬虫与信息提取](https://www.icourse163.org/course/BIT-1001870001)
 2. 关于beautiful soup库，更详细说明资料参考[Beautiful Soup 4.4.0 文档](https://www.crummy.com/software/BeautifulSoup/bs4/doc.zh/)
 3. [如何在uipath中使用python](https://qiita.com/RPAbot/items/05b3943f7362494ef496)
+4. [井上さん：RPAにおけるインテグレーションのためのライブラリ開発](https://thinkit.co.jp/article/17318)
 
 Beautiful soup库与Requests库的功能分担如下图：
 
@@ -79,7 +80,7 @@ except:
 ## 1.2 Beautiful Soup库的基本元素
 
 |基本元素|说明|
-|:--|--:|
+|:--|:--|
 |Tag|标签，最基本的信息组织单元，分别用<>和</>标明开头和结尾|
 |Name|标签的名字，`<p>..</p>`的名字是p，格式`<tag>.name`|
 |Attributes|标签的属性，字典形式组织，格式`<tag>.attrs`|
