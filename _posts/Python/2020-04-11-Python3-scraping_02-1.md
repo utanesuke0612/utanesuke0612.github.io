@@ -8,7 +8,7 @@ tags: Python
 * content
 {:toc}
 
-关于beautiful soup库，更详细说明资料参考[Beautiful Soup 4.4.0 文档](https://www.crummy.com/software/BeautifulSoup/bs4/doc.zh/)
+关于beautiful soup库，更详细说明资料参考[Beautiful Soup 4.4.0 文档](https://www.crummy.com/software/BeautifulSoup/bs4/doc.zh/)和[文档日文版](http://kondou.com/BS4/)
 
 > **在接下来的工作中，估计会大量涉及HTML中内容的解析，所以对这个库务必做到非常熟悉！！**
 
