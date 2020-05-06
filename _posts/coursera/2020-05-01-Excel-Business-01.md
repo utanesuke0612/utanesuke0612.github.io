@@ -27,6 +27,20 @@ tags: 其他
 
 ## 1.2 Navigating and Selecting
 
+1. `ctrl + home`: 直接到A1单元格，对应的`ctrl + end`跳转到最后的一个单元格
+2. `ctrl →　/ ←`:　使用方向键，快速在一个sheet内移动
+3. `ctrl + click`: 复数个CELL区域的选择
+4. `ctrl + pageDown / pageOn`: 一个workbook中的不同sheet之间快速切换
+
+## 1.3 View Options
+
+1. [表示⇒分割]，能够分割画面，在数据对比的时候非常有用。
+2. `ctrl + F6`，如果当前有多个Excel文件，可以用这个快捷键快速跳转到不同的excel文件
+3. `F2`，快速进入编辑状态
+4. `esc`，取消当前编辑
+5. `auto sum`，这个按钮很有用，快速进行统计
+
+## 1.4 Data Entry
 
 
 
