@@ -1,7 +1,7 @@
 ---
 layout: post
 title: DjangoBasic-03-模板扩展-blog详情页面
-date: 2017-08-12 22:45:59
+date: 2020-05-02 00:01:03
 categories: Python
 tags: Django
 ---

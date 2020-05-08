@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 【扩展】Beautiful Soup 4.4.0 文档
+title: Python网络爬虫-【扩展】Beautiful Soup 4.4.0 文档
 date: 2020-04-11 03:00:03
 categories: Python
 tags: Python

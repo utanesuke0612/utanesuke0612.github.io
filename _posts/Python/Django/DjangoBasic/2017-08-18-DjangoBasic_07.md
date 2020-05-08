@@ -1,13 +1,12 @@
 ---
 layout: post
 title: DjangoBasic-07-重要-给网页添加评论
-date: 2017-08-18 23:50:59
+date: 2020-05-02 00:01:07
 categories: Python
 tags: Django
 ---
 * content
 {:toc}
-
 
 >[DjangoGirls tutorial](https://djangogirls.gitbooks.io/django-girls-tutorial-extensions/)的入门课程(扩展篇),这个课程非常浅显易懂，完全小白只要参考这个系列，也能做出自己的博客网站。
 

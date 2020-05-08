@@ -1,7 +1,7 @@
 ---
 layout: post
 title: DjangoBasic-01-环境部署
-date: 2017-08-11 11:45:59
+date: 2020-05-02 00:01:01
 categories: Python
 tags: Django Git
 ---
