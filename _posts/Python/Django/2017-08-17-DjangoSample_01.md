@@ -1,7 +1,7 @@
 ---
 layout: post
 title: DjangoSample-01-Models数据在html的显示
-date: 2017-08-16 22:45:59
+date: 2020-05-02 02:01:01
 categories: Python
 tags: Django总结
 ---
