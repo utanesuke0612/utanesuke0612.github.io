@@ -2,7 +2,7 @@
 layout: post
 title: cloudstack简介
 date: 2018-01-24 22:47:59
-categories: 虚拟化(网络/存储/vmware)
+categories: 虚拟化(网络/存储/Cloud)
 tags: vmware
 ---
 * content

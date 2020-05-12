@@ -2,7 +2,7 @@
 layout: post
 title: Linux中加载外部存储
 date: 2017-10-30 22:48:59
-categories: 虚拟化(网络/存储/vmware)
+categories: 虚拟化(网络/存储/Cloud)
 tags: vmware
 ---
 * content

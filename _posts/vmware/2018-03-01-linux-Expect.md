@@ -2,7 +2,7 @@
 layout: post
 title: linux中使用Expect Command 自动化运行脚本
 date: 2018-02-20 00:00:06
-categories: 虚拟化(网络/存储/vmware)
+categories: 虚拟化(网络/存储/Cloud)
 tags: linux
 ---
 * content

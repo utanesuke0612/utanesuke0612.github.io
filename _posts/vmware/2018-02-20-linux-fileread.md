@@ -2,7 +2,7 @@
 layout: post
 title: linux中逐行文件读取以及外部函数调用
 date: 2018-02-19 00:00:01
-categories: 虚拟化(网络/存储/vmware)
+categories: 虚拟化(网络/存储/Cloud)
 tags: linux
 ---
 * content

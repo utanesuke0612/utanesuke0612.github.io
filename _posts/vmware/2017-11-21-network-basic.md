@@ -2,7 +2,7 @@
 layout: post
 title: 网络基本概念
 date: 2017-11-20 22:49:59
-categories: 虚拟化(网络/存储/vmware)
+categories: 虚拟化(网络/存储/Cloud)
 tags: vmware
 ---
 * content

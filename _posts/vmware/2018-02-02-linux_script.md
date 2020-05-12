@@ -2,7 +2,7 @@
 layout: post
 title: linux-script应用01(SSH远程连接与执行等)
 date: 2018-01-15 00:00:09
-categories: 虚拟化(网络/存储/vmware)
+categories: 虚拟化(网络/存储/Cloud)
 tags: linux
 ---
 * content
