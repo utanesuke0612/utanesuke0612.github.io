@@ -3,7 +3,7 @@ layout: post
 title: DjangoSample-02-应用ACE模板(html/css/javascript)-01
 date: 2020-05-02 02:01:02
 categories: Python
-tags: Django总结
+tags: Django
 ---
 * content
 {:toc}

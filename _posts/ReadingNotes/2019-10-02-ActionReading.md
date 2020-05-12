@@ -3,7 +3,7 @@ layout: post
 title: 【全书】 为行动而读书 ★★★
 date: 2019-10-01 01:01:02
 categories: 读书笔记
-tags: 其他
+tags: 读书笔记
 ---
 * content
 {:toc}

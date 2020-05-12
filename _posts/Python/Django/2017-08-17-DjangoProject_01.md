@@ -3,7 +3,7 @@ layout: post
 title: DjangoProject-01-Models模型入门(1)( Introduction to models)
 date: 2020-05-02 02:01:02
 categories: Python
-tags: Django官方文档
+tags: Django
 ---
 * content
 {:toc}

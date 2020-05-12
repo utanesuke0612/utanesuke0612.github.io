@@ -3,7 +3,7 @@ layout: post
 title: 【全书】 2019-01-学习之道-芭芭拉
 date: 2018-12-31 23:01:00
 categories: 读书笔记
-tags: 其他
+tags: 读书笔记
 ---
 * content
 {:toc}

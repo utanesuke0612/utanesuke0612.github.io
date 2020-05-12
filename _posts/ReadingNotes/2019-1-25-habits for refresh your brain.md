@@ -3,7 +3,7 @@ layout: post
 title: 【全书】 提高大脑效率的15个习惯(ing)
 date: 2018-12-31 01:01:00
 categories: 读书笔记
-tags: 其他
+tags: 读书笔记
 ---
 * content
 {:toc}
