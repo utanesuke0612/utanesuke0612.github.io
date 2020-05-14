@@ -8,7 +8,8 @@ tags: Python
 * content
 {:toc}
 
-参考网络课程：[Python网络爬虫与信息提取](https://www.icourse163.org/course/BIT-1001870001)
+1. 参考网络课程：[Python网络爬虫与信息提取](https://www.icourse163.org/course/BIT-1001870001)
+2. [youtube-Python 6小时网络爬虫入门课程完整版(2020年）](https://www.youtube.com/watch?v=ZMjhBB17KVY)
 
 # 1. Requests库入门
 

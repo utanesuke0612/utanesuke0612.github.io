@@ -9,8 +9,10 @@ tags: Python
 {:toc}
 
 1. 参考网络课程：[Python网络爬虫与信息提取](https://www.icourse163.org/course/BIT-1001870001)
-2. 关于正则表达式，在这里也有涉及：[正则表达式](http://road2ai.info/2017/10/08/Uda-DataAnalysis-RegExr/)
-3. 正则表达式online check工具 [https://regexr.com/](https://regexr.com/)
+2. [youtube-Python 6小时网络爬虫入门课程完整版(2020年）](https://www.youtube.com/watch?v=ZMjhBB17KVY)
+3. 关于正则表达式，在这里也有涉及：[正则表达式](http://road2ai.info/2017/10/08/Uda-DataAnalysis-RegExr/)
+4. 正则表达式online check工具 [https://regexr.com/](https://regexr.com/)
+5. [莫烦python-正则表达式]（https://morvanzhou.github.io/tutorials/python-basic/basic/13-10-regular-expression/）
 
 # 0. 快速参考
 

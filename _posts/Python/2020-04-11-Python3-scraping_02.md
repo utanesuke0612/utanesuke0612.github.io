@@ -9,9 +9,10 @@ tags: Python
 {:toc}
 
 1. 参考网络课程：[Python网络爬虫与信息提取](https://www.icourse163.org/course/BIT-1001870001)
-2. 关于beautiful soup库，更详细说明资料参考[Beautiful Soup 4.4.0 文档](https://www.crummy.com/software/BeautifulSoup/bs4/doc.zh/)
-3. [如何在uipath中使用python](https://qiita.com/RPAbot/items/05b3943f7362494ef496)
-4. [井上さん：RPAにおけるインテグレーションのためのライブラリ開発](https://thinkit.co.jp/article/17318)
+2. [youtube-Python 6小时网络爬虫入门课程完整版(2020年）](https://www.youtube.com/watch?v=ZMjhBB17KVY)
+3. 关于beautiful soup库，更详细说明资料参考[Beautiful Soup 4.4.0 文档](https://www.crummy.com/software/BeautifulSoup/bs4/doc.zh/)
+4. [如何在uipath中使用python](https://qiita.com/RPAbot/items/05b3943f7362494ef496)
+5. [井上さん：RPAにおけるインテグレーションのためのライブラリ開発](https://thinkit.co.jp/article/17318)
 
 Beautiful soup库与Requests库的功能分担如下图：
 
@@ -603,9 +604,274 @@ main()
 
 # 5. 补充-爬虫与网页结构
 
-> 参考 [莫烦-python](https://morvanzhou.github.io/tutorials/data-manipulation/scraping/2-01-beautifulsoup-basic/)
+> 参考 [莫烦-python](https://morvanzhou.github.io/tutorials/data-manipulation/scraping/)
+
+
+非常简单的介绍，跳过！
 
 # 6. 补充-BeautifulSoup解析网页
+
+爬网页的流程：
+
+1. 选着要爬的网址 (url)
+2. 使用 python 登录上这个网址 (urlopen等)
+3. 读取网页信息 (read() 出来)
+4. **将读取的信息放入 BeautifulSoup **
+5. **使用 BeautifulSoup 选取 tag 信息等 (代替正则表达式) **
+
+示例如下：
+
+```python
+import requests
+from bs4 import BeautifulSoup
+
+# 1. 选着要爬的网址 (url)
+url = "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/cloth_mask_qa_.html"
+
+# 2. 使用 python 登录上这个网址 (urlopen等)
+# 3. 读取网页信息 (read() 出来)
+r = requests.get(url)
+r.encoding = r.apparent_encoding
+
+# 4. **将读取的信息放入 BeautifulSoup **
+soup = BeautifulSoup(r.text,"html.parser")
+
+# 5. **使用 BeautifulSoup 选取 tag 信息等 (代替正则表达式) **
+print("\n3:",soup.find_all('a'))
+print("\n4:",soup.find(id="link3")['href'])
+```
+
+## 6.1 基础
+
+```python
+import requests
+from bs4 import BeautifulSoup
+url = "https://morvanzhou.github.io/static/scraping/basic-structure.html"
+r = requests.get(url)
+r.encoding = r.apparent_encoding
+soup = BeautifulSoup(r.text,"html.parser")
+
+all_href = soup.find_all('a')
+print("1,",all_href)
+
+all_href = [l['href'] for l in all_href]
+print("2,",all_href)
+```
+
+输出如下：
+
+```html
+1, [<a href="https://morvanzhou.github.io/">莫烦Python</a>, <a href="https://morvanzhou.github.io/tutorials/data-manipulation/scraping/">爬虫教程</a>]
+2, ['https://morvanzhou.github.io/', 'https://morvanzhou.github.io/tutorials/data-manipulation/scraping/']
+```
+
+可以看出，上面1输出的是a tag的整理内容，下面用`l['href']`输出指定的href。
+
+## 6.2  CSS
+
+使用CSS中的class进行内容提取。先看看这个[示例网页](https://morvanzhou.github.io/static/scraping/list.html)的结构，非常简单的一个网页
+
+```html
+<html lang="cn"><head>
+	<meta charset="UTF-8">
+	<title>爬虫练习 列表 class | 莫烦 Python</title>
+	<style>
+	.jan {
+		background-color: yellow;
+	}
+	.feb {
+		font-size: 25px;
+	}
+	.month {
+		color: red;
+	}
+	</style>
+</head>
+
+<body>
+
+<h1>列表 爬虫练习</h1>
+
+<p>这是一个在 <a href="https://morvanzhou.github.io/">莫烦 Python</a> 的 <a href="https://morvanzhou.github.io/tutorials/data-manipulation/scraping/">爬虫教程</a>
+	里无敌简单的网页, 所有的 code 让你一目了然, 清晰无比.</p>
+
+<ul>
+	<li class="month">一月</li>
+	<ul class="jan">
+		<li>一月一号</li>
+		<li>一月二号</li>
+		<li>一月三号</li>
+	</ul>
+	<li class="feb month">二月</li>
+	<li class="month">三月</li>
+	<li class="month">四月</li>
+	<li class="month">五月</li>
+</ul>
+
+</body></html>
+```
+
+示例：
+
+```python
+import requests
+from bs4 import BeautifulSoup
+url = "https://morvanzhou.github.io/static/scraping/list.html"
+r = requests.get(url)
+r.encoding = r.apparent_encoding
+soup = BeautifulSoup(r.text,"html.parser")
+
+month = soup.find_all('li',{'class':'month'})
+
+for m in month:
+    print("1,",m)
+    print('----')
+    print('2,',m.string)
+    
+print('-----------------')
+
+jan = soup.find('ul',{'class':'jan'})
+
+d_jan = jan.find_all('li')
+
+for d in d_jan:
+    print("3,",d.string)
+```
+
+输出：
+
+```html
+1, <li class="month">一月</li>
+----
+2, 一月
+1, <li class="feb month">二月</li>
+----
+2, 二月
+1, <li class="month">三月</li>
+----
+2, 三月
+1, <li class="month">四月</li>
+----
+2, 四月
+1, <li class="month">五月</li>
+----
+2, 五月
+-----------------
+3, 一月一号
+3, 一月二号
+3, 一月三号
+```
+
+## 6.3 正则表达式
+
+测试网页html，比较简单，在body中有个table，其中包含了一些图片链接：
+
+```html
+<html lang="cn"><head>
+	<meta charset="UTF-8">
+	<title>爬虫练习 表格 table | 莫烦 Python</title>
+
+	<style>
+	img {
+		width: 250px;
+	}
+	table{
+		width:50%;
+	}
+	td{
+		margin:10px;
+		padding:15px;
+	}
+	</style>
+</head>
+<body>
+
+<h1>表格 爬虫练习</h1>
+
+<p>这是一个在 <a href="https://morvanzhou.github.io/">莫烦 Python</a> 的 <a href="https://morvanzhou.github.io/tutorials/data-manipulation/scraping/">爬虫教程</a>
+	里无敌简单的网页, 所有的 code 让你一目了然, 清晰无比.</p>
+
+<br>
+<table id="course-list">
+	<tbody><tr>
+		<th>
+			分类
+		</th><th>
+			名字
+		</th><th>
+			时长
+		</th><th>
+			预览
+		</th>
+	</tr>
+
+	<tr id="course1" class="ml">
+		<td>
+			机器学习
+		</td><td>
+			<a href="https://morvanzhou.github.io/tutorials/machine-learning/tensorflow/">
+				Tensorflow 神经网络</a>
+		</td><td>
+			2:00
+		</td><td>
+			<img src="https://morvanzhou.github.io/static/img/course_cover/tf.jpg">
+		</td>
+	</tr>
+
+	<tr id="course2" class="ml">
+		<td>
+			机器学习
+		</td><td>
+			<a href="https://morvanzhou.github.io/tutorials/machine-learning/reinforcement-learning/">
+				强化学习</a>
+		</td><td>
+			5:00
+		</td><td>
+			<img src="https://morvanzhou.github.io/static/img/course_cover/rl.jpg">
+		</td>
+	</tr>
+
+	<tr id="course3" class="data">
+		<td>
+			数据处理
+		</td><td>
+			<a href="https://morvanzhou.github.io/tutorials/data-manipulation/scraping/">
+				爬虫</a>
+		</td><td>
+			3:00
+		</td><td>
+			<img src="https://morvanzhou.github.io/static/img/course_cover/scraping.jpg">
+		</td>
+	</tr>
+
+</tbody></table>
+
+
+</body></html>
+```
+
+```python
+import requests
+import re
+from bs4 import BeautifulSoup
+url = "https://morvanzhou.github.io/static/scraping/table.html"
+r = requests.get(url)
+r.encoding = r.apparent_encoding
+soup = BeautifulSoup(r.text,"html.parser")
+
+img_links = soup.find_all('img',{'src':re.compile('.*?\.jpg')})
+
+for link in img_links:
+    print("1,",link['src'])
+```
+
+这样输出为：
+
+```python
+1, https://morvanzhou.github.io/static/img/course_cover/tf.jpg
+1, https://morvanzhou.github.io/static/img/course_cover/rl.jpg
+1, https://morvanzhou.github.io/static/img/course_cover/scraping.jpg
+```
 
 # 7. 补充-更多请求/下载方式
 
