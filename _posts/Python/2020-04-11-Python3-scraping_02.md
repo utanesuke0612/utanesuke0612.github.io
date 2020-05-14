@@ -601,98 +601,14 @@ def main():
 main()
 ```
 
-# 0. 练习
+# 5. 补充-爬虫与网页结构
 
-利用サイト：
-https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/cloth_mask_qa_.html
+> 参考 [莫烦-python](https://morvanzhou.github.io/tutorials/data-manipulation/scraping/2-01-beautifulsoup-basic/)
 
-- 見出しあり
-- Markdown確認用のリンクあり
+# 6. 补充-BeautifulSoup解析网页
 
-参考[Python网络爬虫-02-提取-Beautiful Soup库](http://road2ai.info/2020/04/11/Python3-scraping_02/)
+# 7. 补充-更多请求/下载方式
 
-# 1. 准备工作
+# 8. 补充-加速你的爬虫
 
-
-```python
-import requests
-from bs4 import BeautifulSoup
-url = "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/cloth_mask_qa_.html"
-r = requests.get(url)
-r.encoding = r.apparent_encoding
-soup = BeautifulSoup(r.text,"html.parser")
-```
-
-# 2. Soup库的基本元素
-- Tag / Name / Attributes / NavigableString / Comment, 从后面开始都是Tag的各种不同属性，比如name/Attributes等
-
-
-```python
-tag = soup.h2
-print("1:",tag)
-print("2:",tag.name)
-print("3:",tag.attrs)
-print("4:",tag.string)
-print("5:",tag.parent.name)
-```
-
-    1: <h2 class="m-hdgLv2__hdg">布マスクの全戸配布に関するQ&amp;A;（４月19日更新）</h2>
-    2: h2
-    3: {'class': ['m-hdgLv2__hdg']}
-    4: 布マスクの全戸配布に関するQ&A;（４月19日更新）
-    5: div
-    
-
-![image](https://user-images.githubusercontent.com/18595935/79754242-2f291580-8352-11ea-9803-ffa08dbe51c0.png)
-
-可以看出，这里的p标签，是整个html的第一个p标签。
-
-# 3. HTML内容遍历方法
-
-很重要，分为上行遍历，下行遍历，以及平行遍历。
-
-
-```python
-tag =soup.h2
-print("\n1:",tag)
-print("\n2:",tag.name)
-for xx in tag.children:
-    print("\n3:",type(xx))
-    print("\n3:",xx)
-print("\n4:",tag.parent)
-print("\n5:",tag.next)
-    
-print("\n7:",tag.parent)
-```
-
-    
-    1: <h2 class="m-hdgLv2__hdg">布マスクの全戸配布に関するQ&amp;A;（４月19日更新）</h2>
-    
-    2: h2
-    
-    3: <class 'bs4.element.NavigableString'>
-    
-    3: 布マスクの全戸配布に関するQ&A;（４月19日更新）
-    
-    4: <div class="m-hdgLv2">
-    <h2 class="m-hdgLv2__hdg">布マスクの全戸配布に関するQ&amp;A;（４月19日更新）</h2>
-    </div>
-    
-    5: 布マスクの全戸配布に関するQ&A;（４月19日更新）
-    
-    7: <div class="m-hdgLv2">
-    <h2 class="m-hdgLv2__hdg">布マスクの全戸配布に関するQ&amp;A;（４月19日更新）</h2>
-    </div>
-    
-
-# 4.  [重要]基于bs4库的HTML内容查找方法
-
-
-```python
-print("1:",soup.find_all('a')[:1])
-print("2:",soup.find_all(['a','b'])[:1])
-```
-
-    1: [<a href="https://www.mhlw.go.jp/"><img alt="厚生労働省" src="/content/000269503.png"/><img alt="" class="transparent" src="/common/img/transparent-header.png"/></a>]
-    2: [<a href="https://www.mhlw.go.jp/"><img alt="厚生労働省" src="/content/000269503.png"/><img alt="" class="transparent" src="/common/img/transparent-header.png"/></a>]
-    
+# 9. 补充-高级爬虫

@@ -10,13 +10,13 @@ tags: Python
 
 关于beautiful soup库，更详细说明资料参考[Beautiful Soup 4.4.0 文档](https://www.crummy.com/software/BeautifulSoup/bs4/doc.zh/)和[文档日文版](http://kondou.com/BS4/)
 
-参考：
-1. [](https://morvanzhou.github.io/tutorials/data-manipulation/scraping/2-01-beautifulsoup-basic/)
-2. [](https://geek-docs.com/python/python-tutorial/python-beautifulsoup.html#BeautifulSoup-4)
+**参考：**
+1. [莫烦Python-BeautifulSoup 解析](https://morvanzhou.github.io/tutorials/data-manipulation/scraping/2-01-beautifulsoup-basic/)
+2. [极客教程-BeautifulSoup 教程](https://geek-docs.com/python/python-tutorial/python-beautifulsoup.html#BeautifulSoup-4)
 
 > **在接下来的工作中，估计会大量涉及HTML中内容的解析，所以对这个库务必做到非常熟悉！！**
 
-> 考虑自己做一个Django的网站，用于抽取指定网站上的QA列表，并支持编辑和CSV下载，类似于DX suite这样的。
+> **考虑自己做一个Django的网站，用于抽取指定网站上的QA列表，并支持编辑和CSV下载，类似于DX suite这样的。**
 
 
 # 0. 准备工作
