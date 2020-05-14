@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Python网络爬虫-02-提取-Beautiful Soup库
+title: Python网络爬虫-02-提取-Beautiful Soup库(补充-莫烦Python)
 date: 2020-05-06 03:00:02
 categories: Python
 tags: Python
