@@ -873,8 +873,26 @@ for link in img_links:
 1, https://morvanzhou.github.io/static/img/course_cover/scraping.jpg
 ```
 
+## 6.4 练习：爬百度百科
+
+暂时跳过，这里没有具体解析网页构造，参考意义不大。
+
 # 7. 补充-更多请求/下载方式
+
+## 7.1 多功能的Requests
+
+## 7.2 下载文件
+
+## 7.3 下载美图
 
 # 8. 补充-加速你的爬虫
 
+## 8.1 加速爬虫：多进程分布式
+
+## 8.2 异步加载Asynico
+
 # 9. 补充-高级爬虫
+
+## 9.1 让Selenium控制浏览器
+
+## 9.2 高效无忧的Scrapy爬虫库

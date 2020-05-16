@@ -12,7 +12,7 @@ tags: Python
 
 **参考：**
 1. [莫烦Python-BeautifulSoup 解析](https://morvanzhou.github.io/tutorials/data-manipulation/scraping/2-01-beautifulsoup-basic/)
-2. [极客教程-BeautifulSoup 教程](https://geek-docs.com/python/python-tutorial/python-beautifulsoup.html#BeautifulSoup-4)
+
 
 > **在接下来的工作中，估计会大量涉及HTML中内容的解析，所以对这个库务必做到非常熟悉！！**
 
@@ -20,6 +20,11 @@ tags: Python
 
 
 # 0. 准备工作
+
+本篇官方文档内容较多，整理mindmap如下：
+
+![image](https://user-images.githubusercontent.com/18595935/82118940-48887a80-97b5-11ea-9100-d2afa48928bb.png)
+
 
 ```python
 import requests
