@@ -289,7 +289,7 @@ id_soup.p['id']
 ```
 输出：`'my id'`
 
-### 可以遍历的字符串
+## 2.2 可以遍历的字符串
 
 Beautiful Soup用 NavigableString 类来包装tag中的字符串:
 
@@ -315,7 +315,9 @@ print("1:",tag)
 1: <b class="boldest">No longer bold</b>
 ```
 
-### 注释及特殊字符串
+另外，NavigableString对象支持遍历文档树和搜索文档树中的大部分属性，但是一个字符串不能包含其他内容，字符串不支持`.contents`和`.string`属性，`find()`方法等。
+
+## 2.3 注释及特殊字符串
 
 ```python
 markup = "<b><!--Hey, buddy. Want to buy a used parser?--></b>"
@@ -327,6 +329,10 @@ print('1:',type(comment))
 ```html
 1: <class 'bs4.element.Comment'>
 ```
+
+## 2.4 BeautifulSoup
+
+Beautiful Soup对象表示的是一个文档的全部内容，大部分时候可以把它当做Tag对象，支持遍历文档树和搜索文档树的大部分方法。
 
 # 3. 遍历文档树
 
@@ -355,7 +361,7 @@ soup = BeautifulSoup(html_doc, 'html.parser')
 
 一个Tag可能包含多个字符串或其他的Tag。
 
-tag的名字：
+**tag的名字**，操作文档树最简单的方法就是告诉它想获取的tag的name，比如：
 
 ```python
 print("1:",soup.head)
@@ -366,6 +372,10 @@ print("2:",soup.title)
 1: <head><title>The Dormouse's story</title></head>
 2: <title>The Dormouse's story</title>
 ```
+
+可以在文档树的tag中多次调用这个方法，下面的代码可以获取body标签中的第一个b标签：
+
+**注意：** 通过这种点取得方式只能获得当前名字的第一个tag，如果想要得到所有的a标签，就要用到搜索树的方法，`soup.find_all('a')`.
 
 ```python
 # 下面的代码可以获取<body>标签中的第一个<b>标签:
@@ -416,7 +426,107 @@ The Dormouse's story
 
 ### .descendants
 
+上面的`.contents`和`.children`属性仅包含tag的直接子节点，如果要包含其孙节点，则需要用`.descendants`:
+
+```python
+import requests
+import re
+from bs4 import BeautifulSoup
+
+html_doc = """
+<html><head><title>The Dormouse's story</title></head>
+    <body>
+<p class="title"><b>The Dormouse's story</b></p>
+
+<p class="story">Once upon a time there were three little sisters; and their names were
+<a href="http://example.com/elsie" class="sister" id="link1">Elsie</a>,
+<a href="http://example.com/lacie" class="sister" id="link2">Lacie</a> and
+<a href="http://example.com/tillie" class="sister" id="link3">Tillie</a>;
+and they lived at the bottom of a well.</p>
+
+<p class="story">...</p>
+"""
+
+from bs4 import BeautifulSoup
+soup = BeautifulSoup(html_doc, 'html.parser')
+
+for child in soup.head.children:
+    print("1. **soup.head.children**: ",child)
+    
+for child in soup.head.descendants:
+    print("2. **soup.head.descendants**: ",child)
+```
+
+输出结果，可以看到第二类将孙节点也输出了：
+
+```html
+1. **soup.head.children**:  <title>The Dormouse's story</title>
+2. **soup.head.descendants**:  <title>The Dormouse's story</title>
+2. **soup.head.descendants**:  The Dormouse's story
+```
+
 ### .string
+
+下面tag可以使用.string：
+- 如果tag只有一个NavigableString类型的子节点
+- 如果一个tag仅有一个子节点，那么这个tag也可以使用.string
+
+注意`.text`与`.string`的区别，`.text`可以取出tag内所有的文字即所有的navigabable string。
+
+比如：
+
+```python
+import requests
+import re
+from bs4 import BeautifulSoup
+
+html_doc = """
+<html><head><title>The Dormouse's story</title></head>
+    <body>
+<p class="title"><b>The Dormouse's story</b></p>
+
+<p class="story">Once upon a time there were three little sisters; and their names were
+<a href="http://example.com/elsie" class="sister" id="link1">Elsie</a>,
+<a href="http://example.com/lacie" class="sister" id="link2">Lacie</a> and
+<a href="http://example.com/tillie" class="sister" id="link3">Tillie</a>;
+and they lived at the bottom of a well.</p>
+
+<p class="story">...</p>
+"""
+
+from bs4 import BeautifulSoup
+soup = BeautifulSoup(html_doc, 'html.parser')
+
+print("1. soup.head.text:\n",soup.text)
+print("2. soup.head.string:\n",soup.string)
+print("3. soup.head.string:\n",soup.head.string)
+print("4. soup.head.string:\n",soup.head.title.string)
+```
+
+输出结果：
+
+```html
+1. soup.head.text:
+ 
+The Dormouse's story
+
+The Dormouse's story
+Once upon a time there were three little sisters; and their names were
+Elsie,
+Lacie and
+Tillie;
+and they lived at the bottom of a well.
+...
+
+2. soup.head.string:
+ None
+
+3. soup.head.string:
+ The Dormouse's story
+4. soup.head.string:
+ The Dormouse's story
+
+```
 
 ### .strings 和 stripped_strings
 
