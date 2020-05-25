@@ -3,7 +3,7 @@ layout: post
 title: 利用Vim打造Python最强环境
 date: 2020-05-24 01:00:00
 categories: Python
-tags: Python
+tags: Python VIM
 ---
 * content
 {:toc}
