@@ -3,7 +3,7 @@ layout: post
 title: PythonSample-02-数据类型及操作
 date: 2020-05-02 00:02:02
 categories: Python
-tags: Python VIM
+tags: Python
 ---
 * content
 {:toc}
