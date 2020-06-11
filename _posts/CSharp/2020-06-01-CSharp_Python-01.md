@@ -17,4 +17,5 @@ tags: CSharp,Python
 3. [廖雪峰Python教程](https://www.liaoxuefeng.com/wiki/1016959663602400)
 4. [Python学习手册(第4版)](https://weread.qq.com/web/reader/c5832200597ce0c58bdd1a9)
 
-<i class="fa fa-cube" style="font-size:1em;"></i>本篇主题：C#和Python程序分别是如何运行起来的，
+<i class="fa fa-cubes" style="font-size:1em;"></i> **本篇主题：C#和Python程序分别是如何运行起来的**
+
