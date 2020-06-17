@@ -19,3 +19,5 @@ tags: CSharp,Python
 
 <i class="fa fa-cubes" style="font-size:1em;"></i> **本篇主题：C#和Python程序分别是如何运行起来的**
 
+[Why is C# so slow compared to Python?](https://www.quora.com/Why-is-C-so-slow-compared-to-Python)
+
