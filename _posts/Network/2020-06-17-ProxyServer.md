@@ -84,6 +84,12 @@ tags: 云服务,网络,RPA
 
 ![image](https://user-images.githubusercontent.com/18595935/84878388-ba115c80-b0c4-11ea-8ec6-f4c1ea16a79e.png)`
 
+然后cmd中启动即可：
+
+```python
+C:\该py所在目录\ > py pythonServerTester.py
+```
+
 # 6. 补足：在UiPath中进行ProxServer认证
 
 使用Vb.net Code，在进行WebAPI访问的时候，设定WebProxy：
