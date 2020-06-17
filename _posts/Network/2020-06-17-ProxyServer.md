@@ -82,7 +82,17 @@ tags: 云服务,网络,RPA
 
 该WebServer通过Python创建，只需要几行代码，非常方便：
 
-![image](https://user-images.githubusercontent.com/18595935/84878388-ba115c80-b0c4-11ea-8ec6-f4c1ea16a79e.png)`
+```python
+import http.server
+import socketserver
+
+PORT = 8000
+Handler = http.server.SimpleHTTPRequestHandler
+
+with socketserver.TCPServer(("", PORT), Handler) as httpd:
+    print("serving at port", PORT)
+    httpd.serve_forever()
+```
 
 然后cmd中启动即可：
 
