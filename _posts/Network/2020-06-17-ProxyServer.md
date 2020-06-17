@@ -51,4 +51,55 @@ tags: 云服务,网络,RPA
 
 # 4. 运行确认
 
+- 打开Firefox时，会弹出这样一个画面，要求输入ProxyServer的用户名和密码：
 
+![image](https://user-images.githubusercontent.com/18595935/84875299-c1366b80-b0c0-11ea-9e9d-6cde29347026.png)
+
+- 正确输入后，就可以访问自定网站了，比如访问百度，可以显示出百度网页
+
+![image](https://user-images.githubusercontent.com/18595935/84876917-ca283c80-b0c2-11ea-9701-12932353a968.png)
+
+另外，在Proxy Server中，也可以看到这个访问履历：
+
+![image](https://user-images.githubusercontent.com/18595935/84876764-8df4dc00-b0c2-11ea-9b9a-013218018665.png)
+
+上面的显示 `via 10.0.2.15`，这是proxy server的外网IP：
+
+![image](https://user-images.githubusercontent.com/18595935/84877311-4f135600-b0c3-11ea-99ae-65e9139cfbde.png)
+
+
+通过上述方式可以确认Proxy Server设定成功，也已经开始运行了。
+
+# 5. 补足：创建一个WebSever
+
+有时需要自己创建另一个WebServer，可以在Proxy Server上创建一个，环境结构如下：
+
+![image](https://user-images.githubusercontent.com/18595935/84878053-42dbc880-b0c4-11ea-8aaa-bdd1c6357986.png)
+
+在Client PC上访问`http://192.168.56.101:8000/`，可以显示：
+
+![image](https://user-images.githubusercontent.com/18595935/84878169-6e5eb300-b0c4-11ea-913a-7fbddfbf6a6c.png)
+
+该WebServer通过Python创建，只需要几行代码，非常方便：
+
+![image](https://user-images.githubusercontent.com/18595935/84878388-ba115c80-b0c4-11ea-8ec6-f4c1ea16a79e.png)`
+
+# 6. 补足：在UiPath中进行ProxServer认证
+
+使用Vb.net Code，在进行WebAPI访问的时候，设定WebProxy：
+
+```csharp
+Dim client As New RestSharp.RestClient(in_URL.TrimEnd("/"c, " "c, "　"c) + "/ConsoleWeb/api/v1/reading/units")
+Dim myProxy As New System.Net.WebProxy(in_ProxyURL)
+Dim myCredential As New System.Net.NetworkCredential(in_ProxyUserName, in_ProxyPassword)
+
+client.Proxy = myProxy
+client.Proxy.Credentials = myCredential
+
+Dim request As New RestSharp.RestRequest(RestSharp.Method.GET)
+request.AddHeader("X-ConsoleWeb-ApiKey", in_ApiKey)
+request.AddParameter("readingUnitId", in_UnitID.ToString)
+
+Dim response As RestSharp.IRestResponse = client.Execute(request)
+out_Response = response.Contentt
+```
