@@ -82,3 +82,7 @@ using System.ComponentModel;
 
 
 - 最后`File -> Save as...`，既可以保存为`nupkg`文件了。
+
+# 4. 在UiPath中使用该Activity
+
+![image](https://user-images.githubusercontent.com/18595935/84990097-9bbc6700-b17f-11ea-8ca8-b0980f5c45f4.png)
