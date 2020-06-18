@@ -3,7 +3,7 @@ layout: post
 title: C# and Python - 01.如何运行程序
 date: 2020-06-01 01:01:01
 categories: CSharp
-tags: CSharp,Python
+tags: CSharp Python
 ---
 * content
 {:toc}
