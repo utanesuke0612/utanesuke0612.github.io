@@ -3,7 +3,7 @@ layout: post
 title: ProxyServer构建与UiPath中的连接测试
 date: 2020-06-17 01:00:00
 categories: 虚拟化(网络/存储/Cloud)
-tags: 云服务,网络,RPA
+tags: 云服务 网络 RPA
 ---
 * content
 {:toc}
@@ -14,11 +14,11 @@ tags: 云服务,网络,RPA
 
 ![image](https://user-images.githubusercontent.com/18595935/84871282-4fa7ee80-b0bb-11ea-9cd9-e877e7375e54.png)
 
-1. Client PC
+- Client PC
 
 客户端PC，类似于客户内部网络中员工所用的机器，该机器的IE中的设定了ProxyServer的IP和Port之后，就可以通过ProxyServer连接到Internet了。
 
-2. Proxy Server
+- Proxy Server
 
 在客户端PC上创建了一个虚拟机，在该虚拟机上安装了一个ProxyServer的软件之后，用该虚拟机充当ProxyServer的角色。
 
