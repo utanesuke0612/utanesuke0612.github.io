@@ -1,6 +1,6 @@
 ---
 layout: post
-title: C#入门
+title: C#基础
 date: 2020-05-27 01:01:01
 categories: CSharp
 tags: CSharp
