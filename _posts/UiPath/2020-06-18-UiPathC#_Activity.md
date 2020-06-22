@@ -8,9 +8,9 @@ tags: RPA
 * content
 {:toc}
 
-关于如何在C#中编写Custom Acitivity，虽然在这里[Creating a Custom Activity
+1. 关于如何在C#中编写Custom Acitivity，虽然在这里[Creating a Custom Activity
 ](https://docs.uipath.com/activities/docs/creating-a-custom-activity)有非常详尽的描述，但自己再将作成过程记录一次的话，印象更深。
-
+2. [UiPath Studioで使用するカスタムアクティビティの作成方法](https://qiita.com/masatomix/items/1f63513e80313a99faeb)
 # 1. 使用的工具
 
 - [Microsoft Visual Studio](https://visualstudio.microsoft.com/ja/) 
