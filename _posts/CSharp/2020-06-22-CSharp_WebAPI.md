@@ -84,6 +84,58 @@ namespace ConsoleApp
 示例代码：
 
 ```csharp
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.ComponentModel;
+using System.Activities;
+using System.Net.Http;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
+using System.Net;
+using RestSharp;
+
+namespace DXSuiteCloud
+{
+    public abstract class DXSuiteCloudBase : CodeActivity
+    {
+        // 必須
+        [Category("Input")]
+        [RequiredArgument]
+        public InArgument<string> APIKey { get; set; }
+
+        [Category("Input")]
+        [RequiredArgument]
+        public InArgument<string> URL { get; set; }
+
+        // オプション-ProxyServer設定
+        [Category("ProxyServer")]
+        public InArgument<string> ProxyUserName { get; set; }
+
+        [Category("ProxyServer")]
+        public InArgument<string> ProxyPassword { get; set; }
+
+        [Category("ProxyServer")]
+        public InArgument<string> ProxyURL { get; set; }
+    }
+
+    public class ReadingUnits : CodeActivity
+    {
+        protected override void Execute(CodeActivityContext context)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class ReadingUnitsDelete : CodeActivity
+    {
+        protected override void Execute(CodeActivityContext context)
+        {
+            throw new NotImplementedException();
+        }
+    }
 
     public class ReadingUnitsExport : CodeActivity
     {
@@ -195,6 +247,7 @@ namespace ConsoleApp
         }
     }
 }
+
 ```
 
 按照 [使用C#编写UiPath中的Activity](http://road2ai.info/2020/06/18/UiPathC-_Activity/)中的方式，使用NuGet Package Explorer生成nupkg文件。
