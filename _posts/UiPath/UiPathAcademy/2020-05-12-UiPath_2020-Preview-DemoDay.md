@@ -15,6 +15,9 @@ tags: RPA
 
 # 1. Test Suite
 
+- [UiPath Test Suite](https://www.youtube.com/playlist?list=PLG3LgE4atuv8i18zQOf1o35D8U-GS3i0W)
+- [UiPath Test Suite: End-to-End Demonstration](https://www.youtube.com/watch?v=cLZNdAv2hPI)
+
 # 2. Chatbot
 
 # 3. Document Understanding
@@ -47,4 +50,3 @@ tags: RPA
 
 # 17. Browser Embedding
 
-# 18. 
