@@ -21,7 +21,7 @@ tags: CSharp
 > 数组,方法,类与对象,类-继承
 - [C#基础09-12(中国MooC-西安交大)](https://docs.google.com/document/d/e/2PACX-1vTvP_Dnu9GzkBYaZtAJaOxWlCa7P0k3MDlSEpjK-R3nnASs-8PpJmvWUpUyxHRf3IlmEG9KFAUI3wnw/pub)
 > 类-多态,异常,泛型和委托,Windows Form编程
-- [C#基础13-16(中国MooC-西安交大)]()
+- [C#基础13-16(中国MooC-西安交大)](https://docs.google.com/document/d/e/2PACX-1vQD5pT47BE-nTiaQEkVh1xSzFGHFP6GwVv-dNfZKQ2w6-eg7dvpxVIBYaSzAbzIjF5krPBcXCjEpM6h/pub)
 > GDI+绘图系统,窗体,对话框和菜单,文件,.NET与数据结构
 
 # 1. C#简介
