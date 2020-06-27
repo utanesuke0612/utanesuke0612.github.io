@@ -22,7 +22,7 @@ tags: 其他
 
 |分类|主题|内容|
 |:--|:--|:--|
-|a|[AWS：ゼロから実践するAmazon Web Services](https://docs.google.com/document/d/e/2PACX-1vTQHPfsfECM3qAt5btmEJvKpPJwzl7zTYpNI5tmZNtKEDmwncKUk07AyV4rVnPWekRJSeTxoz0-43Xw/pub) [编辑](https://docs.google.com/document/d/1i9O3MpDTvsnHMecQNQ7qxQdQIHOxLa4dNU9qGJ-To1A/edit)|[参照](http://road2ai.info/2020/05/11/AWS-01/)|
+|1.|[AWS：ゼロから実践するAmazon Web Services](https://docs.google.com/document/d/e/2PACX-1vTQHPfsfECM3qAt5btmEJvKpPJwzl7zTYpNI5tmZNtKEDmwncKUk07AyV4rVnPWekRJSeTxoz0-43Xw/pub) [编辑](https://docs.google.com/document/d/1i9O3MpDTvsnHMecQNQ7qxQdQIHOxLa4dNU9qGJ-To1A/edit)|[参照](http://road2ai.info/2020/05/11/AWS-01/)|
 |||
 
 # 3. Python笔记索引
