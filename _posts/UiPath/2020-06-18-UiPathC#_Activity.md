@@ -93,26 +93,25 @@ using System.ComponentModel;
 使用 [Activity Creator](https://connect.uipath.com/ja/marketplace/components/activity-set-creator)能更快的创建自定义Activity。
 参考使用方法：[DEMO: Build custom activities in minutes with the UiPath Activity Creator](https://www.youtube.com/watch?time_continue=43&v=p8GrdJHwHPw&feature=emb_logo)
 
-1. 在Visual Studio 2019中安装：
+- **在Visual Studio 2019中安装：**
 
 注意：在2019之前的版本中不能使用。
 
 ![image](https://user-images.githubusercontent.com/18595935/87009889-c50d6780-c200-11ea-9e2c-299307fce577.png)
 
-2. 安装完毕后，启动Visual Studio，创建一个Uipath Activity Project:
+- **安装完毕后，启动Visual Studio，创建一个Uipath Activity Project:**
 
 ![image](https://user-images.githubusercontent.com/18595935/87010193-2f260c80-c201-11ea-968d-f80c06b4129e.png)
 
-3. 创建一个Project后，通过Extension的UiPath可以追加Activities：
+- **创建一个Project后，通过Extension的UiPath可以追加Activities：**
 
 ![image](https://user-images.githubusercontent.com/18595935/87010707-eae73c00-c201-11ea-874e-8c79f8465f54.png)
 
-4. 创建Activity完毕后，publish：
+- **创建Activity完毕后，publish：**
 
 ![image](https://user-images.githubusercontent.com/18595935/87013215-423adb80-c205-11ea-8984-9cb41ff8f36e.png)
 
-
-5. 导入后，在UiPath中结果如下：
+- **导入后，在UiPath中结果如下：**
 
 ![image](https://user-images.githubusercontent.com/18595935/87013690-02282880-c206-11ea-8d78-c4483e869875.png)
 
