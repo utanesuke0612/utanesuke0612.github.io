@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 【Data Analyst】-01-Data Analyst-Data Science Math Skills
+title: 【Data Analyst】-01-Data Science Math Skills
 date: 2020-11-21 01:01:01
 categories: DataScientist(数据科学家)
 tags: DataAnalysis
