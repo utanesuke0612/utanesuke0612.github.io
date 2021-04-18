@@ -61,7 +61,7 @@ dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux 
 
 ![image](https://user-images.githubusercontent.com/18595935/115145190-4d237600-a08b-11eb-9b19-1de99244b781.png)
 
-## （任意）仮想環境の構築1
+## （任意）仮想環境の構築
 
 参考这里的Guide：[Installing packages using pip and virtual environments](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
 
