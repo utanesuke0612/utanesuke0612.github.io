@@ -119,8 +119,15 @@ Starting development server at http://127.0.0.1:8000/
 Quit the server with CONTROL-C.
 ```
 
-## 
+## startprojectでできるファイル
 
+![image](https://user-images.githubusercontent.com/18595935/115212851-e90cba80-a13b-11eb-8d8c-1a516edf879b.png)
+
+### settings.pyファイルの中身
+
+### urls.pyファイル
+
+### views.pyファイル
 
 
 
