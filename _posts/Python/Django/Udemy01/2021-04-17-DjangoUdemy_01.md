@@ -8,7 +8,9 @@ tags: Django
 * content
 {:toc}
 
-> Udemy Course: [【徹底的に解説！】Djangoの基礎をマスターして、3つのアプリを作ろう！](https://www.udemy.com/course/django-3app/learn/lecture/14152325#overview)
+> 本课Udemy Course: [【徹底的に解説！】Djangoの基礎をマスターして、3つのアプリを作ろう！](https://www.udemy.com/course/django-3app/learn/lecture/14152325#overview)
+
+> 参考Linux命令:[linux-01-Linux基础命令(1)](http://road2ai.info/2017/11/26/linux_01/)
 
 > 参考course: [Djangoスキルアップ講座](https://zeroichicollege.com/course/django-skillup)
 
@@ -61,7 +63,14 @@ dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux 
 
 ![image](https://user-images.githubusercontent.com/18595935/115145190-4d237600-a08b-11eb-9b19-1de99244b781.png)
 
-## （任意）仮想環境の構築
+安装完毕后确认版本：
+
+```python
+junli@LAPTOP-T3CVDQDD:~$ python3 -m django --version
+2.2.12
+```
+
+## [任意] 仮想環境の構築
 
 参考这里的Guide：[Installing packages using pip and virtual environments](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
 
@@ -80,6 +89,37 @@ pip 21.0.1 from /home/junli/.local/lib/python3.8/site-packages/pip (python 3.8)
 
 # 2. Hello worldアプリ(Django3)
 
+## 1. startproject 
+
+- 删除文件夹 `rmdir`，如果目录中有文件的话，使用`rm -r`进行删除
+- 新建文件夹 `mkdir`
+- 跳转目录 `cd`
+- 确认目录 `ls`
+
+```python
+# 创建新的Django project
+junli@LAPTOP-T3CVDQDD:~/DjangoStudy/UdemyPJ01$ django-admin startproject helloworldproject
+junli@LAPTOP-T3CVDQDD:~/DjangoStudy/UdemyPJ01$ ls
+helloworldproject
+junli@LAPTOP-T3CVDQDD:~/DjangoStudy/UdemyPJ01$ cd helloworldproject/
+
+# 启动Local WebServer
+junli@LAPTOP-T3CVDQDD:~/DjangoStudy/UdemyPJ01/helloworldproject$ python3 manage.py runserver
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+
+You have 17 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
+Run 'python manage.py migrate' to apply them.
+
+April 19, 2021 - 06:54:09
+Django version 2.2.12, using settings 'helloworldproject.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+```
+
+## 
 
 
 
