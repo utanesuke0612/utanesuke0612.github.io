@@ -32,9 +32,9 @@ tags: Django
 
 1. Microsoft storeでubuntuを検索し、ubuntuをインストールします。
 
-2. Microsoft storeでubuntuを検索し、ubuntuをインストールします。
+2. PowerShellを管理者権限で実行します。
 
-3. PowerShellのターミナル上で、以下のコマンドを実行して下さい
+3. PowerShellのターミナル上で、以下のコマンドを実行して下さい。
 
 ```python
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all
@@ -79,6 +79,8 @@ pip 21.0.1 from /home/junli/.local/lib/python3.8/site-packages/pip (python 3.8)
 - 后续参考 [Installing packages using pip and virtual environments](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
 
 # 2. Hello worldアプリ(Django3)
+
+
 
 
 
