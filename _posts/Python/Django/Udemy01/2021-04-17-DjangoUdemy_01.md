@@ -12,7 +12,7 @@ tags: Django
 
 > 参考course: [Djangoスキルアップ講座](https://zeroichicollege.com/course/django-skillup)
 
-> 难易度高点的:[Django Core | A Reference Guide to Core Django Concepts](https://www.udemy.com/course/django-core/)
+> 难易度高点的:[Django Core - A Reference Guide to Core Django Concepts](https://www.udemy.com/course/django-core/)
 
 # 1. 開発環境構築
 
