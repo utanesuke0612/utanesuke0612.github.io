@@ -18,6 +18,8 @@ tags: Django
 
 > 参考以前的blog: [DjangoBasic-01-环境部署](http://road2ai.info/2020/05/02/DjangoBasic_01/)
 
+> 参考以前的blog：[自强学堂-Django基础教程(1)-视图与URL](http://road2ai.info/2020/05/02/zqxt_django_01/)
+
 # 1. 開発環境構築
 
 ## 環境構築の全体像
@@ -126,10 +128,12 @@ Quit the server with CONTROL-C.
 ![image](https://user-images.githubusercontent.com/18595935/115212851-e90cba80-a13b-11eb-8d8c-1a516edf879b.png)
 
 ### settings.pyファイルの中身
+Django 的设置，配置文件，比如 DEBUG 的开关，静态文件的位置等。
 
 ### urls.pyファイル
+网址入口，关联到对应的views.py中的一个函数，访问网址就对应一个函数。
 
 ### views.pyファイル
-
+处理用户发出的请求，从urls.py中对应过来, 通过渲染templates中的网页可以将显示内容，比如登陆后的用户名，用户请求的数据，输出到网页。
 
 
