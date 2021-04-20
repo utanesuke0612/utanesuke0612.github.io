@@ -16,6 +16,8 @@ tags: Django
 
 > 难易度高点的:[Django Core - A Reference Guide to Core Django Concepts](https://www.udemy.com/course/django-core/)
 
+> 参考以前的blog: [DjangoBasic-01-环境部署](http://road2ai.info/2020/05/02/DjangoBasic_01/)
+
 # 1. 開発環境構築
 
 ## 環境構築の全体像

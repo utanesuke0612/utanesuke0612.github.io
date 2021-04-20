@@ -8,16 +8,18 @@ tags: Django
 * content
 {:toc}
 
->[DjangoGirls tutorial](https://djangogirls.gitbooks.io/django-girls-tutorial-extensions/)的入门课程(扩展篇),这个课程非常浅显易懂，完全小白只要参考这个系列，也能做出自己的博客网站。
+
+>[DjangoGirls tutorial](https://tutorial.djangogirls.org/zh/django_urls/)的入门课程,这个课程非常浅显易懂，完全小白只要参考这个系列，也能做出自己的博客网站。
 
 本系列参考上面的tutorial，进行了部分修改和增补，系列目录如下,代码参考 [here](https://github.com/utanesuke0612/pythonBlog)：
-1.  [运行环境部署](https://utanesuke0612.github.io/2017/08/11/DjangoBasic_01/)
-2.  [显示出你的第一个网页](https://utanesuke0612.github.io/2017/08/12/DjangoBasic_02/)
-3.  [模板扩展-blog详情页面](https://utanesuke0612.github.io/2017/08/12/DjangoBasic_03/)
-4.  [Django表单](https://utanesuke0612.github.io/2017/08/15/DjangoBasic_04/)
-5.  [添加草稿/发布/删除/编辑功能](https://utanesuke0612.github.io/2017/08/18/DjangoBasic_05/)
-6.  [让网站更安全](https://utanesuke0612.github.io/2017/08/18/DjangoBasic_06/)
-7.  [给网页添加评论](https://utanesuke0612.github.io/2017/08/18/DjangoBasic_07/)
+1.  [运行环境部署](https://utanesuke0612.github.io/2020/05/02/DjangoBasic_01/)
+2.  [显示出你的第一个网页](https://utanesuke0612.github.io/2020/05/02/DjangoBasic_02/)
+3.  [模板扩展-blog详情页面](https://utanesuke0612.github.io/2020/05/02/DjangoBasic_03/)
+4.  [Django表单](https://utanesuke0612.github.io/2020/05/02/DjangoBasic_04/)
+5.  [添加草稿/发布/删除/编辑功能](https://utanesuke0612.github.io/2020/05/02/DjangoBasic_05/)
+6.  [让网站更安全](https://utanesuke0612.github.io/2020/05/02/DjangoBasic_06/)
+7.  [给网页添加评论](https://utanesuke0612.github.io/2020/05/02/DjangoBasic_07/)
+
 
 ---
 # <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>**注意`本节非常重要`：**
