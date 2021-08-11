@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>dialog要素</title>
+<style>
+.mod-p { color: #ccc; }
+.mod-p > a { color: #7e7eed; }
+</style>
+</head>
+<body>
+
+
+<dialog>
+  <form method="dialog">
+    <p>これはモーダルダイアログです。本当によろしいですか？</p>
+    <button type="submit" value="yes">はい</button>
+    <button type="submit" value="no" autofocus>いいえ</button>
+  </form>
+</dialog>
+<button id="show">モーダルダイアログを開く</button>
+
+<p class="mod-p">
+The quick brown fox jumps over the lazy dog. <a href="#">The quick brown fox jumps over the lazy dog.</a> The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. 
+</p>
+
+<p class="mod-p">
+The quick brown fox jumps over the lazy dog. <a href="#">The quick brown fox jumps over the lazy dog.</a> The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. 
+</p>
+
+<script>
+var dialog = document.querySelector('dialog');
+var btn_show = document.getElementById('show');
+btn_show.addEventListener('click', function() {
+  dialog.showModal();
+}, false);
+dialog.addEventListener('cancel', function(event){
+  event.preventDefault();
+});
+dialog.addEventListener('close', function(event){
+  if (this.returnValue === 'yes') {
+    alert('はい をクリックしました。');
+  } else {
+    alert('いいえ をクリックしました。');
+  }
+});
+</script>
+
+
+</body>
+</html>
