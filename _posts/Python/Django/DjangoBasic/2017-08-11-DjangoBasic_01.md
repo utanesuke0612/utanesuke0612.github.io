@@ -3,7 +3,7 @@ layout: post
 title: DjangoBasic-01-环境部署
 date: 2020-05-02 00:01:01
 categories: Python
-tags: Django Git
+tags: Django
 ---
 * content
 {:toc}
