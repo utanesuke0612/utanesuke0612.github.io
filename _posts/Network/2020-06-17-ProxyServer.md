@@ -2,7 +2,7 @@
 layout: post
 title: ProxyServer构建与UiPath中的连接测试
 date: 2020-06-17 01:00:00
-categories: 虚拟化(网络/存储/Cloud)
+categories: Infra技术
 tags: 云服务 网络 RPA
 ---
 * content

@@ -2,7 +2,7 @@
 layout: post
 title: DNS服务器的转发及解析
 date: 2017-08-15 00:45:59
-categories: 虚拟化(网络/存储/Cloud)
+categories: Infra技术
 tags: 网络
 ---
 * content

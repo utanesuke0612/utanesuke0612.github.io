@@ -2,7 +2,7 @@
 layout: post
 title: Linux中网卡RingBufferSize的调整和确认
 date: 2017-08-15 00:46:00
-categories: 虚拟化(网络/存储/Cloud)
+categories: Infra技术
 tags: 网络
 ---
 * content

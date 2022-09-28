@@ -2,7 +2,7 @@
 layout: post
 title: 四. vMotion / HA / FT简介
 date: 2017-08-16 22:48:59
-categories: 虚拟化(网络/存储/Cloud)
+categories: Infra技术
 tags: vmware
 ---
 * content
