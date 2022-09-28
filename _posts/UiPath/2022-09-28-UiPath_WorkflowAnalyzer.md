@@ -1,7 +1,7 @@
 ---
 layout: post
-title: 使用C#编写UiPath中的Activity
-date: 2020-06-18 01:01:01
+title: 关于UiPath Studio中的workflow Analyzer的使用
+date: 2022-09-28 01:01:01
 categories: RPA
 tags: RPA-Dev
 ---

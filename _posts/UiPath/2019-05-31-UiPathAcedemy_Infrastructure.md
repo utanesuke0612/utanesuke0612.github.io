@@ -3,7 +3,7 @@ layout: post
 title: UiPath-Acedemy-Infrastructure
 date: 2019-05-31 01:01:01
 categories: RPA
-tags: RPA
+tags: RPA-Infra
 ---
 * content
 {:toc}
