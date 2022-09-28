@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 小白学UiPath-03-Level01-Foundation基礎-Part02
+title: UiPath-03-Level01-Foundation基礎-Part02
 date: 2019-04-08 01:01:03
 categories: RPA
 tags: RPA

@@ -1,14 +1,12 @@
 ---
 layout: post
-title: 小白学UiPath-01-RPA入门
+title: UiPath-01-RPA入门
 date: 2019-04-08 01:01:01
 categories: RPA
 tags: RPA
 ---
 * content
 {:toc}
-
-> 机缘巧合进入了UiPath工作，这个RPA领域的领头羊，冥冥之中注定的吧，自己这两年来一直为进一家自动驾驶工作而努力，结果一个星期的时间，就从第一次听说RPA，到签约这家公司，这就是缘分。自己的第一个小目标，就是一年内升为**RPA高级顾问**，成为RPA领域的专家。
 
 ![image](https://user-images.githubusercontent.com/18595935/55791438-7357c800-5af9-11e9-86c4-41ae0653c1a1.png)
 > <<小白学UiPath>>系列根据上书以及UiPath官网课程整理而成。
