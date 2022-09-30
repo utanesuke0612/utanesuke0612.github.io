@@ -13,3 +13,6 @@ tags: RPA-Dev
 
 # 2. 如何Customize Workflow Analyzer中的规则
 
+
+
+https://uipath-japan.slack.com/archives/CR2JQEW2Z/p1653300462570709
