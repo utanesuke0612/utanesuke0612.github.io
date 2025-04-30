@@ -83,8 +83,7 @@ tags: 日语
 という 控えめな自己主張 の表現です. 
 
 ### ☕️ Coffee Break
-![alt text](image-4.png)
-
+![image](https://github.com/user-attachments/assets/948af4a8-cddf-4aa9-bc61-b00389d89a58)
 
 ## 3 久しぶりに会った時の挨拶
 
@@ -152,8 +151,8 @@ tags: 日语
 どうもありがとう. 三上さんもね
 
 ### ☕️ Coffee Break
+![image](https://github.com/user-attachments/assets/34505b3a-2339-4e0a-a81a-f03e5ccd4ec8)
 
-![alt text](image-5.png)
 
 - **くれぐれも**：強調してお願いしたり、念を入れて注意を促したりする際に使われます。
   - 例えば、「くれぐれもお体によくしてください」のように、相手の健康を強く願う気持ちを伝えることもできます。
@@ -212,7 +211,8 @@ tags: 日语
 
 ### ☕️ Coffee Break
 
-![alt text](image-6.png)
+![image](https://github.com/user-attachments/assets/deceba29-16dd-4419-aa74-83f4df4daf0e)
+
 
 
 ## 6 喜んでもらう言葉
@@ -247,7 +247,8 @@ tags: 日语
 > 例：最近は気持ちが 緩みっぱなし で、集中できない. 
 “Staying completely relaxed or careless without returning to normal”
 
-![alt text](image-7.png)
+![image](https://github.com/user-attachments/assets/9147a301-eb6f-4a54-9fca-cf309e929f29)
+
 
 ### 実用会話3　社内会議の報告書を課長に提出する
 
@@ -302,9 +303,10 @@ tags: 日语
 
 ## 7 慰める言葉
 
-![alt text](image-8.png)
+![image](https://github.com/user-attachments/assets/26120cad-97d2-41a2-971a-e9cea460fdbc)
 
-![alt text](image-9.png)
+![image](https://github.com/user-attachments/assets/d0943687-7fad-4a70-9e30-2bd3bd4ecf25)
+
 
 ### 実用会話1 夜8時になってもまだ仕事をしている
 
@@ -395,7 +397,8 @@ tags: 日语
 
 ## 8.一日の別れの挨拶
 
-![alt text](image-10.png)
+![image](https://github.com/user-attachments/assets/294c665c-23f1-4b38-83d7-b3bc8599207d)
+
 
 ### 実用会話1 書類を届けに行く
 
@@ -419,13 +422,15 @@ tags: 日语
 
 ああ、気をつけて. 
 
-![alt text](image-11.png)
+![image](https://github.com/user-attachments/assets/c73c1074-d9f0-48f6-bd6c-fc639f67f29c)
+
 
 ## 9.しばらく会わない人への挨拶
 
-![alt text](image-12.png)
+![image](https://github.com/user-attachments/assets/5bf0e81f-dd8a-4bca-8daa-5191b5691281)
 
-![alt text](image-13.png)
+![image](https://github.com/user-attachments/assets/0851221f-4f14-498d-be27-62132ede79d5)
+
 
 ### 実用会話1. 大阪に栄転する上司に. 
 
@@ -455,7 +460,8 @@ tags: 日语
 
 どうもありがとうございます. 
 
-![alt text](image-14.png)
+![image](https://github.com/user-attachments/assets/5f5f9f6d-2919-48f1-a9c7-f9e4797f440d)
+
 
 ### 実用会話5. 退職時に. 
 
@@ -507,7 +513,8 @@ tags: 日语
 > かえって（＝逆に・むしろ）あなたに迷惑をかけてしまって、本当にすみません. 
 相手が自分に何かしてくれたのに、その結果、逆に負担をかけてしまった／気を使わせてしまったと感じるときに使います. 
 
-![alt text](image-15.png)
+![image](https://github.com/user-attachments/assets/87ae8158-d54c-4649-adca-43344faf42c6)
+
 
 ### 実用会話4. お客様が約束の時間に遅れてきた. 
 
@@ -1409,9 +1416,10 @@ TICトラベルの春日といいますが、大塚さんですか?
 はい
 
 ## 2、依頼を断る(/P93)
-![alt text](image.png)
+![image](https://github.com/user-attachments/assets/e2f911a9-a1a4-43fe-8095-8ab2130369d2)
 
-![alt text](image-1.png)
+![image](https://github.com/user-attachments/assets/b3c80418-0bba-45a5-9dcf-3aa88bdfac4c)
+
 
 ### 実用会話1 コピー取りの依頼を断る
 
@@ -1442,9 +1450,11 @@ TICトラベルの春日といいますが、大塚さんですか?
 友達にはよろしく言っといてよ. またの機会に,ということで
 
 ## 3 催促する(/P95)
-![alt text](image-2.png)
+![image](https://github.com/user-attachments/assets/a94005d4-25a2-4fe8-b60b-03d4dedf224f)
 
-![alt text](image-3.png)
+
+![image](https://github.com/user-attachments/assets/fddff71b-84e1-4160-a0cc-b8175bc63c13)
+
 
 ### 実用会話1　作成を約束した資料の催促をする
 
