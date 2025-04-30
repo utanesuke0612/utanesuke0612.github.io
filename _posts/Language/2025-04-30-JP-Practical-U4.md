@@ -110,10 +110,12 @@
 ## 2 誘いを断る
 
 > 基本会話：
-> ![alt text](image-16.png)
+> ![image](https://github.com/user-attachments/assets/942fee31-f358-42ea-a921-05fd64e6ffed)
 
-![alt text](image-17.png)
-![alt text](image-18.png)
+![image](https://github.com/user-attachments/assets/38348a6a-5319-416b-bb7b-4bff27e8dc4f)
+
+![image](https://github.com/user-attachments/assets/8caf5bf2-07a6-4914-baa2-0107cc778ded)
+
 
 ### 実用会話1 スポーツ大会に出場する誘いを断る
 
@@ -282,16 +284,17 @@
 
 はい、お願いします
 
-![alt text](image-19.png)
+![image](https://github.com/user-attachments/assets/bd418ca9-14ca-446c-90c6-30b00c4c9112)
+
 
 # 第7章、アドバイス
 
 
 ## 1、アドバイスする
 
-![alt text](image-20.png)
+![image](https://github.com/user-attachments/assets/b5533021-6c7f-4d51-9889-191aafa60179)
 
-![alt text](image-21.png)
+![image](https://github.com/user-attachments/assets/96cba2d8-8df9-43db-8710-118736c78469)
 
 
 ### 実用会話4、薬をすすめる
@@ -1571,56 +1574,6 @@ JRの乗り換え口の方に出てください
 この5名に思いっきりやらせてみたいので
 
 おめでとうございます
-
-はい、おめでとうございます
-
-はい、おめでとうございます
-
-はい、おめでとうございます
-
-はい、おめでとうございます
-
-はい、おめでとうございます
-
-はい、おめでとうございます
-
-はい、おめでとうございます
-
-はい、おめでとうございます
-
-はい、おめでとうございます
-
-はい、おめでとうございます
-
-はい、おめでとうございます
-
-はい、おめでとうございます
-
-はい、おめでとうございます
-
-はい、おめでとうございます
-
-はい、おめでとうございます
-
-はい、おめでとうございます
-
-はい、おめでとうございます
-
-はい、おめでとうございます
-
-はい、おめでとうございます
-
-はい、おめでとうございます
-
-はい、おめでとうございます
-
-はい、おめでとうございます
-
-はい、おめでとうございます
-
-はい、おめでとうございます
-
-はい、おめでとうございます
 
 はい、おめでとうございます
 
