@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 日本語ビジネス U4-U
+title: 日本語ビジネス U4-
 date: 2025-04-30 02:00:02
 categories: 语言学习
 tags: 日语
@@ -9,7 +9,6 @@ tags: 日语
 {:toc}
 
 [TOC]
-
 
 # 第4章 注文する(P97)
 
