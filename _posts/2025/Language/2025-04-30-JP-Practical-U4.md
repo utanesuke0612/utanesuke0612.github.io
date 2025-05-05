@@ -546,20 +546,19 @@ tags: 日语
 
 ### COFFEE BREAK
 
-![image](https://github.com/user-attachments/assets/6b875be6-ff50-49ad-81ef-0fa10701b4b3)
+![image](https://github.com/user-attachments/assets/dcf67afc-a80d-44de-b18a-ad5d1ef48afc)
 
 ## 2　報告する（重要！）
-![image](https://github.com/user-attachments/assets/78b87ff2-49cb-417b-87c7-9581be31c2ce)
 
-![image](https://github.com/user-attachments/assets/8864d388-0054-4785-a691-b8316887c508)
+![image](https://github.com/user-attachments/assets/7d3d086e-9812-43ac-b744-d1c468ec31ee)
 
-![image](https://github.com/user-attachments/assets/4ccf14eb-cd6e-4f9b-9ab1-528563ae6ceb)
+![image](https://github.com/user-attachments/assets/f269b206-61a0-40c4-bb9f-f9fe0b577746)
 
+![image](https://github.com/user-attachments/assets/ee0a0a40-7b05-461c-88a2-e6a71a98581d)
 
-![image](https://github.com/user-attachments/assets/7135f4c7-5fb8-4174-b240-4c6826156196)
+![image](https://github.com/user-attachments/assets/8af7ba1d-f26c-4bb2-8224-3fe0e6cfa150)
 
-
-### 実用会話1 出張の報告をする
+### 実用会話1 出張の報告をする(P131)
 
 昨日、出張から帰ってまいりました
 
